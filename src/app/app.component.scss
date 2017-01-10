@@ -1,25 +1,34 @@
-.example-sidenav-fab-container {
-  width: 500px;
-  height: 300px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
+.nav-bar {
+	box-shadow: 0 4px 4px #888888;
 }
 
-.example-sidenav-fab-container md-sidenav {
-  max-width: 200px;
+.title {
+	margin-left: 10px;
 }
 
-.example-sidenav-fab-container .md-sidenav-content,
-.example-sidenav-fab-container md-sidenav {
-  display: flex;
-  overflow: visible;
+md-button-toggle:checked {
+	background-color: transparent;
+}
+
+md-sidenav-container {
+	width: 100%;
+	min-height: 100vh;
+}
+
+md-sidenav-container md-sidenav {
+	max-width: 304px;
+}
+
+md-sidenav-container .md-sidenav-content,
+md-sidenav-container md-sidenav {
+	display: flex;
+	overflow: auto;
 }
 
 .example-scrolling-content {
-  overflow: auto;
+	overflow: auto;
 }
 
-.example-fab {
-  position: absolute;
-  right: 20px;
-  bottom: 10px;
+md-nav-list {
+	text-transform: uppercase;
 }
