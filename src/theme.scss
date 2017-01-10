@@ -1,0 +1,17 @@
+@import '~@angular/material/core/theming/all-theme';
+
+// Include non-theme styles for core.
+@include md-core();
+
+// Define a theme.
+$primary: md-palette($md-blue);
+$accent: md-palette($md-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$warn: md-palette($md-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$theme: md-light-theme($primary, $accent, $warn);
+
+// Include all theme styles for the components.
+@include angular-material-theme($theme);
