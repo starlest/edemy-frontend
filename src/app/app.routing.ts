@@ -9,7 +9,7 @@ export const appRoutes: Routes = [
   },
   {
     path: 'home',
-    redirectTo: ""
+    component: HomeComponent
   },
   {
     path: '**',
@@ -19,4 +19,4 @@ export const appRoutes: Routes = [
 
 export const AppRoutingProviders: any[] = [];
 
-export const AppRouting = RouterModule.forRoot(appRoutes);
+export const AppRouting = RouterModule.forRoot(appRoutes, {useHash: true});
