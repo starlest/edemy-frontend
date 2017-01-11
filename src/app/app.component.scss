@@ -12,20 +12,11 @@ md-button-toggle:checked {
 
 md-sidenav-container {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 md-sidenav-container md-sidenav {
   max-width: 304px;
-}
-
-md-sidenav-container .md-sidenav-content,
-md-sidenav-container md-sidenav {
-  overflow: auto;
-}
-
-.example-scrolling-content {
-  overflow: auto;
 }
 
 md-sidenav {
