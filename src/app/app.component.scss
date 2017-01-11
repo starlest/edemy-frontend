@@ -12,7 +12,7 @@ md-button-toggle:checked {
 
 md-sidenav-container {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 md-sidenav-container md-sidenav {
