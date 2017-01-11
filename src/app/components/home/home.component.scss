@@ -26,8 +26,6 @@
 	width: 200px;
 }
 
-@media (max-width: 755px){
-  .flex-item {
-    flex-basis: auto;
-  }
+.flex-item {
+  flex: 1 0 auto !important;
 }
