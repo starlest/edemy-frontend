@@ -12,12 +12,13 @@
 	background-size: cover;
 }
 
-.testimony-card {
-	margin: 0 auto 50px auto;
-	width: 200px;
+.testimony-list {
+  h3 {
+    text-align: center;
+  }
 }
 
-.example-testimony-image {
-	background-image: url('http://placehold.it/50x50');
-	background-size: cover;
+.testimony-card {
+	margin: 0 100px 50px auto;
+	width: 200px;
 }
