@@ -17,12 +17,14 @@ export class AppComponent implements OnInit {
 
   constructor(private store: Store<fromRoot.State>,
               private ngZone: NgZone) {
-    this.isSidenavLockedOpen$ = store.select(fromRoot.isSidenavLockedOpen);
     this.setUpWindowOnResizeListener()
   }
 
   ngOnInit() {
-    this.isSidenavLockedOpen$ = Observable.of(window.innerWidth > 1600 ? true : false);
+    if (window.innerWidth > 1600)
+      this.store.dispatch(new layout.OnLockedOpenSidenavAction());
+    else
+      this.store.dispatch(new layout.OffLockedOpenSidenavAction());
   }
 
   setUpWindowOnResizeListener() {
