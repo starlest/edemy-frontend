@@ -1,4 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
+import * as fromRoot from '../../reducers';
+import * as layout from '../../actions/layout';
 
 @Component({
   selector: "ed-page-not-found",
@@ -17,5 +20,11 @@ import {Component} from '@angular/core';
 `
   ]
 })
-export class PageNotFoundComponent {
+export class PageNotFoundComponent implements OnInit {
+  constructor(private store: Store<fromRoot.State>) {
+  }
+
+  ngOnInit() {
+    this.store.dispatch(new layout.ChangeTitleAction("404"));
+  }
 }

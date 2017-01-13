@@ -6,9 +6,10 @@ import {RouterModule} from '@angular/router';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {HomeComponent} from './home/home.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
-
+import {ToolbarComponent} from './toolbar/toolbar.component';
 
 export const COMPONENTS = [
+  ToolbarComponent,
   HomeComponent,
   PageNotFoundComponent
 ];

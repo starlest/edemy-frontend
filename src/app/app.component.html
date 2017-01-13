@@ -59,14 +59,7 @@
     </md-nav-list>
   </md-sidenav>
 
-  <md-toolbar color="primary" class="nav-bar">
-    <div [hidden]="shouldSideNavBeHidden()">
-      <button md-button (click)="sidenav.toggle()">
-        <md-icon>menu</md-icon>
-      </button>
-    </div>
-    <span class="title">{{title}}</span>
-  </md-toolbar>
+  <ed-toolbar (openMenu)="sidenav.toggle()"></ed-toolbar>
 
   <router-outlet></router-outlet>
 </md-sidenav-container>
