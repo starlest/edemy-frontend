@@ -1,5 +1,8 @@
 import {Component, NgZone, ChangeDetectionStrategy} from '@angular/core';
-import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
+import {Store} from '@ngrx/store';
+import * as fromRoot from './reducers';
+import * as layout from './actions/layout';
 
 @Component({
   selector: 'app-root',
@@ -8,23 +11,22 @@ import {Router} from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  windowWidth: any;
+  isSidenavLockedOpen$: Observable<boolean>;
 
-  constructor(private router: Router,
+  constructor(private store: Store<fromRoot.State>,
               private ngZone: NgZone) {
-    this.windowWidth = window.innerWidth;
+    this.isSidenavLockedOpen$ = store.select(fromRoot.isSidenavLockedOpen);
+    this.setUpWindowOnResizeListener()
+  }
+
+  setUpWindowOnResizeListener() {
     window.onresize = () => {
-      ngZone.run(() => {
-        this.windowWidth = window.innerWidth;
+      this.ngZone.run(() => {
+        if (window.innerWidth > 1600)
+          this.store.dispatch(new layout.OnLockedOpenSidenavAction());
+        else
+          this.store.dispatch(new layout.OffLockedOpenSidenavAction());
       });
     };
-  }
-
-  shouldSideNavBeHidden(): boolean {
-    return this.windowWidth > 1600;
-  }
-
-  currentSideNavMode(): string {
-    return this.windowWidth > 1600 ? 'side' : 'over';
   }
 }

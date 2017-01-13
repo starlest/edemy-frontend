@@ -1,14 +1,12 @@
-<md-sidenav-container>
+<md-sidenav-container fullscreen>
+  <md-sidenav #sidenav [mode]="(isSidenavLockedOpen$ | async) ? 'side' : 'over'"
+              [opened]="isSidenavLockedOpen$ | async">
 
-  <md-sidenav #sidenav [mode]="currentSideNavMode()"
-              [opened]="shouldSideNavBeHidden()">
-
-    <span><img src="../assets/img/edemy-logo.svg"></span>
+    <span><img src="../../../assets/img/edemy-logo.svg"></span>
 
     <md-divider></md-divider>
 
     <md-nav-list>
-
       <md-list-item routerLink="/home">
         <md-icon md-list-icon>home</md-icon>
         <h4 md-line>Home</h4>
@@ -27,9 +25,9 @@
       </md-list-item>
       <md-divider></md-divider>
 
-      <md-list-item routerLink="/online-tutorials">
+      <md-list-item routerLink="/onlinelessons">
         <md-icon md-list-icon>book</md-icon>
-        <h4 md-line>Online Tutorials</h4>
+        <h4 md-line>Online Lessons</h4>
       </md-list-item>
       <md-divider></md-divider>
 
@@ -46,20 +44,19 @@
               class="fa fa-facebook-official"></i></a>
           </li>
           <li>
-            <span mdTooltip="support@edemy.sg"
-                  mdTooltipPosition="above">
-              <i class="fa fa-envelope"></i>
-            </span>
+            <i class="fa fa-envelope"></i>
+            <span>support@edemy.sg</span>
+          </li>
+          <li>
+            <i class="fa fa-phone"></i>
+            <span>12345</span>
           </li>
         </ul>
-        <p class="copyright">Edemy 2017 ©</p>
+        <h4 class="copyright">Edemy 2017 ©</h4>
       </div>
-
-
     </md-nav-list>
   </md-sidenav>
-
-  <ed-toolbar (openMenu)="sidenav.toggle()"></ed-toolbar>
-
+  <ed-toolbar [menuButtonHidden]="isSidenavLockedOpen$ | async"
+              (openMenu)="sidenav.toggle()"></ed-toolbar>
   <router-outlet></router-outlet>
 </md-sidenav-container>

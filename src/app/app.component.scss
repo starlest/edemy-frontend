@@ -1,17 +1,12 @@
-.nav-bar {
-  box-shadow: 0 4px 4px #888888;
-}
-
 md-sidenav-container {
   width: 100vw;
-  min-height: 100vh;
-}
-
-md-sidenav-container md-sidenav {
-  max-width: 304px;
 }
 
 md-sidenav {
+  &.md-sidenav-opened {
+    box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+  }
+
   span {
     img {
       margin: 20px auto;
@@ -30,17 +25,16 @@ md-sidenav {
   .info {
     margin-top: 50px;
     ul {
+      margin: 20px;
       padding: 0;
       list-style: none;
-      text-align: center;
       li {
-        display: inline;
         margin: 10px;
       }
     }
     .copyright {
       text-align: center;
-      margin: 20px;
+      margin: 50px;
     }
   }
 }

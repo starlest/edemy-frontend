@@ -2,6 +2,10 @@
   margin-left: 10px;
 }
 
+.toolbar {
+  box-shadow: 0 4px 4px #888888;
+}
+
 md-button-toggle:checked {
   background-color: transparent;
 }

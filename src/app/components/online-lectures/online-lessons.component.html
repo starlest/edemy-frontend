@@ -1,0 +1,33 @@
+<div class="lessons-list">
+  <div class="filters">
+    <md-select placeholder="Subject">
+      <md-option #defaultSubjectFilter [value]="all">
+        All
+      </md-option>
+      <md-option *ngFor="let subject of subjects" [value]="subject.title">
+        {{subject.title}}
+      </md-option>
+    </md-select>
+
+    <md-select placeholder="Level">
+      <md-option #defaultLevelFilter [value]="all">
+        All
+      </md-option>
+      <md-option *ngFor="let food of foods" [value]="food.value">
+        {{ food.viewValue }}
+      </md-option>
+    </md-select>
+  </div>
+  <md-nav-list>
+    <div *ngFor="let subject of subjects">
+      <h3 md-subheader>{{subject.title}}</h3>
+      <md-list-item *ngFor="let lesson of getSubjectLessons(subject.title)">
+        <md-icon md-list-avatar>{{getSubjectSymbol(subject.title)}}</md-icon>
+        <h4 md-line>{{lesson.title}}</h4>
+        <h3 md-line>{{lesson.level}}</h3>
+        <span class="description">{{lesson.description}}</span>
+      </md-list-item>
+      <md-divider></md-divider>
+    </div>
+  </md-nav-list>
+</div>

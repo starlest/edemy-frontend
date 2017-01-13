@@ -70,3 +70,4 @@ export function reducer(state: any, action: any) {
  */
 export const getLayoutState = (state: State) => state.layout;
 export const getTitle = createSelector(getLayoutState, fromLayout.getTitle);
+export const isSidenavLockedOpen = createSelector(getLayoutState, fromLayout.isSidenavLockedOpen);

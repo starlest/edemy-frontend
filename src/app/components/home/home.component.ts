@@ -13,6 +13,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(new layout.ChangeTitleAction("Home"));
+    this.store.dispatch(new layout.ChangeTitleAction('Home'));
   }
 }
