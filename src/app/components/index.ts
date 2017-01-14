@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MaterialModule} from '@angular/material';
-import {ReactiveFormsModule} from '@angular/forms';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {HomeComponent} from './home/home.component';
@@ -21,6 +21,7 @@ export const COMPONENTS = [
     CommonModule,
     FlexLayoutModule,
     MaterialModule,
+    FormsModule,
     ReactiveFormsModule,
     RouterModule
   ],

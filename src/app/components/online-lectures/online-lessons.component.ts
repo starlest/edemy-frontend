@@ -1,28 +1,23 @@
-import {
-  Component, OnInit, AfterViewInit, ElementRef, ViewChild, Renderer
-} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
-import * as fromRoot from '../../reducers';
-import * as layout from '../../actions/layout';
 import {Lesson} from '../../models/lesson';
 import {Subject} from '../../models/subject';
-
+import * as fromRoot from '../../reducers';
+import * as layout from '../../actions/layout';
 @Component({
   selector: 'ed-online-lessons',
   templateUrl: 'online-lessons.component.html',
   styleUrls: ['online-lessons.component.scss']
 })
-export class OnlineLessonsComponent implements OnInit, AfterViewInit {
-  @ViewChild('defaultSubjectFilter') subjectFilterAllOption: ElementRef;
-  @ViewChild('defaultLevelFilter') levelFilterAllOption: ElementRef;
+export class OnlineLessonsComponent implements OnInit {
+  selectedSubjectFilter: string;
+  selectedLevelFilter: string;
 
-  foods = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
-  ];
-
-  subjects: [Subject] = [
+  subjects: Subject[] = [
+    {
+      id: 0,
+      title: 'All'
+    },
     {
       id: 1,
       title: 'English'
@@ -35,6 +30,14 @@ export class OnlineLessonsComponent implements OnInit, AfterViewInit {
       id: 3,
       title: 'Science'
     }
+  ];
+
+  levels = [
+    'All',
+    'Primary 3',
+    'Primary 4',
+    'Primary 5',
+    'Secondary 4'
   ];
 
   lessons: Lesson[] = [
@@ -53,7 +56,7 @@ export class OnlineLessonsComponent implements OnInit, AfterViewInit {
       title: 'Trigometry',
       level: 'Secondary 4',
       subject: 'Mathematics',
-      description: 'Advanced trigometry',
+      description: 'Advanced Trigometry',
       videoLink: 'https://www.youtube.com/embed/_UR-l3QI2nE',
       notes: '1 + 1 = 2',
       tutor: 'Aloysius Feng'
@@ -79,22 +82,20 @@ export class OnlineLessonsComponent implements OnInit, AfterViewInit {
       tutor: 'Aloysius Feng'
     }
   ];
+  displayedLessons: Lesson[];
 
-  constructor(private store: Store<fromRoot.State>,
-              private renderer: Renderer) {
+  constructor(private store: Store<fromRoot.State>) {
   }
 
   ngOnInit() {
+    this.displayedLessons = this.lessons;
+    this.selectedSubjectFilter = this.subjects[0].title;
+    this.selectedLevelFilter = this.levels[0];
     this.store.dispatch(new layout.ChangeTitleAction('Online Lessons'));
   }
 
-  ngAfterViewInit() {
-    this.renderer.invokeElementMethod(this.subjectFilterAllOption, 'select');
-    this.renderer.invokeElementMethod(this.levelFilterAllOption, 'select');
-  }
-
   getSubjectLessons(subject: string): Lesson[] {
-    return this.lessons.filter(lesson => lesson.subject === subject);
+    return this.displayedLessons.filter(lesson => lesson.subject === subject);
   }
 
   getSubjectSymbol(subject: string): string {
@@ -106,5 +107,14 @@ export class OnlineLessonsComponent implements OnInit, AfterViewInit {
       default:
         return 'exposure plus 1';
     }
+  }
+
+  onFilterSelectClose() {
+    this.displayedLessons = this.lessons.filter(lesson => {
+      return (this.selectedSubjectFilter === 'All' ? true :
+        lesson.subject === this.selectedSubjectFilter) &&
+        (this.selectedLevelFilter === 'All' ? true :
+        lesson.level === this.selectedLevelFilter);
+    });
   }
 }

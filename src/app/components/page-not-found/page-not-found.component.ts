@@ -25,6 +25,6 @@ export class PageNotFoundComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(new layout.ChangeTitleAction('404'));
+    this.store.dispatch(new layout.ChangeTitleAction('PAGE NOT FOUND'));
   }
 }

@@ -17,7 +17,8 @@ export class AppComponent implements OnInit {
 
   constructor(private store: Store<fromRoot.State>,
               private ngZone: NgZone) {
-    this.setUpWindowOnResizeListener()
+    this.setUpWindowOnResizeListener();
+    this.isSidenavLockedOpen$ = store.select(fromRoot.isSidenavLockedOpen);
   }
 
   ngOnInit() {
