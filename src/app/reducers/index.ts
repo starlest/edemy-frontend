@@ -54,7 +54,7 @@ export interface State {
  */
 const reducers = {
   layout: fromLayout.reducer,
-  collection: fromLessons.reducer,
+  lessons: fromLessons.reducer,
   router: fromRouter.routerReducer,
 };
 
@@ -74,7 +74,15 @@ export function reducer(state: any, action: any) {
 export const getLessonsState = (state: State) => state.lessons;
 export const getLessonsLoaded = createSelector(getLessonsState, fromLessons.getLoaded);
 export const getLessonsLoading = createSelector(getLessonsState, fromLessons.getLoading);
-export const getLessons = createSelector(getLessonsState, fromLessons.getLessons);
+export const getLessonEntities = createSelector(getLessonsState, fromLessons.getEntities);
+export const getLessonIds = createSelector(getLessonsState, fromLessons.getIds);
+export const getFilter = createSelector(getLessonsState, fromLessons.getFilter);
+export const getLessons = createSelector(getLessonEntities, getLessonIds, getFilter, (entities, ids, filter) => {
+  return ids.map(id => entities[id]).filter(filter);
+});
+export const getSubjectLessons = (subject: string) => createSelector(getLessons, lessons => {
+  return lessons.filter(lesson => lesson.subject === subject);
+});
 
 /**
  * Layout Reducers

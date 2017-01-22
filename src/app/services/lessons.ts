@@ -7,7 +7,7 @@ import {Lesson} from '../models/lesson';
 
 @Injectable()
 export class LessonsService {
-  private API_PATH: string = 'https://www.googleapis.com/books/v1/volumes';
+  private API_PATH: string = '';
 
   lessons: Lesson[] = [
     {

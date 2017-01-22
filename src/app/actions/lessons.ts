@@ -5,7 +5,9 @@ import {Lesson} from '../models/lesson';
 export const ActionTypes = {
   LOAD: type('[Lessons] Load'),
   LOAD_SUCCESS: type('[Lessons] Load Success'),
-  LOAD_FAIL: type('[Lessons] Load Fail')
+  LOAD_FAIL: type('[Lessons] Load Fail'),
+  SET_FILTER: type('[Lessons] Set Filter'),
+  REMOVE_FILTER: type('[Lessons] Remove Filter')
 };
 
 export class LoadAction implements Action {
@@ -15,15 +17,29 @@ export class LoadAction implements Action {
 export class LoadSuccessAction implements Action {
   type = ActionTypes.LOAD_SUCCESS;
 
-  constructor(public payload: Lesson[]) { }
+  constructor(public payload: Lesson[]) {
+  }
 }
 
 export class LoadFailAction implements Action {
   type = ActionTypes.LOAD_FAIL;
 
-  constructor(public payload: any) { }
+  constructor(public payload: any) {
+  }
+}
+
+export class SetFilter implements Action {
+  type = ActionTypes.SET_FILTER;
+
+  constructor(public payload: any) {
+  }
+}
+export class RemoveFilter implements Action {
+  type = ActionTypes.REMOVE_FILTER;
 }
 
 export type Actions = LoadAction |
   LoadSuccessAction |
-  LoadFailAction;
+  LoadFailAction |
+  SetFilter |
+  RemoveFilter;
