@@ -17,10 +17,13 @@
     <div *ngFor="let subject of subjects">
       <div *ngIf="getSubjectLessons(subject.title).length > 0">
         <h3 md-subheader>{{subject.title}}</h3>
-        <md-list-item *ngFor="let lesson of getSubjectLessons(subject.title)">
-          <md-icon md-list-avatar>{{getSubjectSymbol(subject.title)}}</md-icon>
+        <md-list-item *ngFor="let lesson of getSubjectLessons(subject.title)"
+                      routerLink="/onlinelessons/{{lesson.id}}">
+          <md-icon md-list-avatar>{{getSubjectSymbol(subject.title)
+                                  }}
+          </md-icon>
           <h4 md-line>{{lesson.title}}</h4>
-          <h3 md-line>{{lesson.description}}</h3>
+          <h3 md-line class="lesson-description">{{lesson.description}}</h3>
           <span class="lesson-level">{{lesson.level}}</span>
         </md-list-item>
         <md-divider></md-divider>

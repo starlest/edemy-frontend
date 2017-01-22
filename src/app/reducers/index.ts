@@ -33,12 +33,14 @@ import {storeFreeze} from 'ngrx-store-freeze';
  * notation packages up all of the exports into a single object.
  */
 import * as fromLayout from './layout';
+import * as fromLessons from './lessons';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
  * our top level state interface is just a map of keys to inner state types.
  */
 export interface State {
+  lessons: fromLessons.State,
   layout: fromLayout.State;
   router: fromRouter.RouterState;
 }
@@ -52,6 +54,7 @@ export interface State {
  */
 const reducers = {
   layout: fromLayout.reducer,
+  collection: fromLessons.reducer,
   router: fromRouter.routerReducer,
 };
 
@@ -64,6 +67,14 @@ export function reducer(state: any, action: any) {
     return productionReducer(state, action);
   return developmentReducer(state, action);
 }
+
+/**
+ * Lessons Reducers
+ */
+export const getLessonsState = (state: State) => state.lessons;
+export const getLessonsLoaded = createSelector(getLessonsState, fromLessons.getLoaded);
+export const getLessonsLoading = createSelector(getLessonsState, fromLessons.getLoading);
+export const getLessons = createSelector(getLessonsState, fromLessons.getLessons);
 
 /**
  * Layout Reducers

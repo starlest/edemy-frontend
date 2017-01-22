@@ -7,10 +7,12 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {HomeComponent} from './home/home.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {ToolbarComponent} from './toolbar/toolbar.component';
-import {OnlineLessonsComponent} from './online-lectures/online-lessons.component';
+import {OnlineLessonsComponent} from './online-lessons/online-lessons.component';
+import {OnlineLessonComponent} from './online-lesson/online-lesson.component';
 
 export const COMPONENTS = [
   OnlineLessonsComponent,
+  OnlineLessonComponent,
   ToolbarComponent,
   HomeComponent,
   PageNotFoundComponent

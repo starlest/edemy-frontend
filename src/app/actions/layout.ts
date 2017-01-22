@@ -1,5 +1,5 @@
 import {Action} from '@ngrx/store';
-import {type} from '../util';
+import {type} from './util';
 
 export const ActionTypes = {
   CHANGE_TITLE: type('[Layout] Change Title'),

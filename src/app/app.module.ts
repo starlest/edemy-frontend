@@ -13,6 +13,9 @@ import {AppComponent} from './app.component';
 import {ComponentsModule} from './components';
 import {reducer} from './reducers';
 import 'hammerjs';
+import {LessonsService} from './services/lessons';
+import {EffectsModule} from '@ngrx/effects';
+import {LessonsEffects} from './effects/lessons';
 
 @NgModule({
   declarations: [
@@ -51,8 +54,16 @@ import 'hammerjs';
      * See: https://github.com/zalmoxisus/redux-devtools-extension
      */
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
+
+    /**
+     * EffectsModule.run() sets up the effects class to be initialized
+     * immediately when the application starts.
+     *
+     * See: https://github.com/ngrx/effects/blob/master/docs/api.md#run
+     */
+    EffectsModule.run(LessonsEffects)
   ],
-  providers: [],
+  providers: [LessonsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

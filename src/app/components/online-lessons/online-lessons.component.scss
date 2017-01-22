@@ -10,15 +10,17 @@
   }
 }
 
-.md-list-text {
-  min-width: 150px;
-}
-
 .lesson-level {
-  min-width: 200px;
+  min-width: 100px;
   text-align: right;
 }
 
 .no-lessons-label {
   text-align: center;
+}
+
+@media (max-width: 550px) {
+  .lesson-description {
+    display: none;
+  }
 }

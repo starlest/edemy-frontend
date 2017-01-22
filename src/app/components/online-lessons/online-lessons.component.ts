@@ -4,6 +4,7 @@ import {Lesson} from '../../models/lesson';
 import {Subject} from '../../models/subject';
 import * as fromRoot from '../../reducers';
 import * as layout from '../../actions/layout';
+import * as lessons from '../../actions/lessons';
 @Component({
   selector: 'ed-online-lessons',
   templateUrl: 'online-lessons.component.html',
@@ -85,6 +86,8 @@ export class OnlineLessonsComponent implements OnInit {
   displayedLessons: Lesson[];
 
   constructor(private store: Store<fromRoot.State>) {
+
+    this.store.dispatch(new lessons.LoadAction());
   }
 
   ngOnInit() {
