@@ -11,44 +11,44 @@ export class LessonsService {
 
   lessons: Lesson[] = [
     {
-      id: 1,
-      title: 'Algebra',
-      level: 'Primary 4',
-      subject: 'Mathematics',
-      description: 'The basics of algebra',
-      videoLink: 'https://www.youtube.com/embed/_UR-l3QI2nE',
-      notes: '1 + 1 = 2',
-      tutor: 'Aloysius Feng'
+      Id: 1,
+      Title: 'Algebra',
+      Level: 'Primary 4',
+      Subject: 'Mathematics',
+      Description: 'The basics of algebra',
+      VideoLink: 'https://www.youtube.com/embed/_UR-l3QI2nE',
+      Notes: '1 + 1 = 2',
+      Tutor: 'Aloysius Feng'
     },
     {
-      id: 2,
-      title: 'Trigometry',
-      level: 'Secondary 4',
-      subject: 'Mathematics',
-      description: 'Advanced Trigometry',
-      videoLink: 'https://www.youtube.com/embed/_UR-l3QI2nE',
-      notes: '1 + 1 = 2',
-      tutor: 'Aloysius Feng'
+      Id: 2,
+      Title: 'Trigometry',
+      Level: 'Secondary 4',
+      Subject: 'Mathematics',
+      Description: 'Advanced Trigometry',
+      VideoLink: 'https://www.youtube.com/embed/_UR-l3QI2nE',
+      Notes: '1 + 1 = 2',
+      Tutor: 'Aloysius Feng'
     },
     {
-      id: 3,
-      title: 'Nouns',
-      level: 'Primary 3',
-      subject: 'English',
-      description: 'Mastery of nouns.',
-      videoLink: 'https://www.youtube.com/embed/_UR-l3QI2nE',
-      notes: '1 + 1 = 2',
-      tutor: 'Aloysius Feng'
+      Id: 3,
+      Title: 'Nouns',
+      Level: 'Primary 3',
+      Subject: 'English',
+      Description: 'Mastery of nouns.',
+      VideoLink: 'https://www.youtube.com/embed/_UR-l3QI2nE',
+      Notes: '1 + 1 = 2',
+      Tutor: 'Aloysius Feng'
     },
     {
-      id: 4,
-      title: 'Reproduction',
-      level: 'Primary 5',
-      subject: 'Science',
-      description: 'The reproduction system.',
-      videoLink: 'https://www.youtube.com/embed/_UR-l3QI2nE',
-      notes: '1 + 1 = 2',
-      tutor: 'Aloysius Feng'
+      Id: 4,
+      Title: 'Reproduction',
+      Level: 'Primary 5',
+      Subject: 'Science',
+      Description: 'The reproduction system.',
+      VideoLink: 'https://www.youtube.com/embed/_UR-l3QI2nE',
+      Notes: '1 + 1 = 2',
+      Tutor: 'Aloysius Feng'
     }
   ];
 

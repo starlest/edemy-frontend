@@ -16,6 +16,7 @@ import 'hammerjs';
 import {LessonsService} from './services/lessons';
 import {EffectsModule} from '@ngrx/effects';
 import {LessonsEffects} from './effects/lessons';
+import {SubjectsService} from './services/subjects';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,7 @@ import {LessonsEffects} from './effects/lessons';
      */
     EffectsModule.run(LessonsEffects)
   ],
-  providers: [LessonsService],
+  providers: [LessonsService, SubjectsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

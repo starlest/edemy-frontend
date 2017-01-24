@@ -34,28 +34,31 @@ import {storeFreeze} from 'ngrx-store-freeze';
  */
 import * as fromLayout from './layout';
 import * as fromLessons from './lessons';
+import * as fromSubjects from './subjects';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
- * our top level state interface is just a map of keys to inner state types.
+ * our top Level state interface is just a map of keys to inner state types.
  */
 export interface State {
-  lessons: fromLessons.State,
   layout: fromLayout.State;
   router: fromRouter.RouterState;
+  lessons: fromLessons.State,
+  subjects: fromSubjects.State,
 }
 
 /**
  * Because metareducers take a reducer function and return a new reducer,
  * we can use our compose helper to chain them together. Here we are
- * using combineReducers to make our top level reducer, and then
+ * using combineReducers to make our top Level reducer, and then
  * wrapping that in storeLogger. Remember that compose applies
  * the result from right to left.
  */
 const reducers = {
   layout: fromLayout.reducer,
-  lessons: fromLessons.reducer,
   router: fromRouter.routerReducer,
+  lessons: fromLessons.reducer,
+  subjects: fromSubjects.reducer,
 };
 
 const developmentReducer: ActionReducer<State> = compose(storeFreeze,
@@ -72,21 +75,42 @@ export function reducer(state: any, action: any) {
  * Lessons Reducers
  */
 export const getLessonsState = (state: State) => state.lessons;
-export const getLessonsLoaded = createSelector(getLessonsState, fromLessons.getLoaded);
-export const getLessonsLoading = createSelector(getLessonsState, fromLessons.getLoading);
-export const getLessonEntities = createSelector(getLessonsState, fromLessons.getEntities);
+export const getLessonsLoaded = createSelector(getLessonsState,
+  fromLessons.getLoaded);
+export const getLessonsLoading = createSelector(getLessonsState,
+  fromLessons.getLoading);
+export const getLessonEntities = createSelector(getLessonsState,
+  fromLessons.getEntities);
 export const getLessonIds = createSelector(getLessonsState, fromLessons.getIds);
 export const getFilter = createSelector(getLessonsState, fromLessons.getFilter);
-export const getLessons = createSelector(getLessonEntities, getLessonIds, getFilter, (entities, ids, filter) => {
-  return ids.map(id => entities[id]).filter(filter);
-});
-export const getSubjectLessons = (subject: string) => createSelector(getLessons, lessons => {
-  return lessons.filter(lesson => lesson.subject === subject);
-});
+export const getLessons = createSelector(getLessonEntities, getLessonIds,
+  getFilter, (entities, ids, filter) => {
+    return ids.map(id => entities[id]).filter(filter);
+  });
+export const getSubjectLessons = (subject: string) => createSelector(getLessons,
+  lessons => {
+    return lessons.filter(lesson => lesson.Subject === subject);
+  });
+
+/**
+ * Subjects Reducers
+ */
+export const getSubjectsState = (state: State) => state.subjects;
+export const getSubjectsLoaded = createSelector(getSubjectsState,
+  fromSubjects.getLoaded);
+export const getSubjectsLoading = createSelector(getSubjectsState,
+  fromSubjects.getLoading);
+export const getSubjectEntities = createSelector(getSubjectsState,
+  fromSubjects.getEntities);
+export const getSubjectIds = createSelector(getSubjectsState,
+  fromSubjects.getIds);
+export const getSubjects = createSelector(getSubjectEntities, getSubjectIds,
+  (entities, ids) => ids.map(id => entities[id]));
 
 /**
  * Layout Reducers
  */
 export const getLayoutState = (state: State) => state.layout;
 export const getTitle = createSelector(getLayoutState, fromLayout.getTitle);
-export const isSidenavLockedOpen = createSelector(getLayoutState, fromLayout.isSidenavLockedOpen);
+export const isSidenavLockedOpen = createSelector(getLayoutState,
+  fromLayout.isSidenavLockedOpen);

@@ -1,37 +1,35 @@
-import * as lessons from '../actions/lessons';
-import {Lesson} from '../models/lesson';
+import * as subjects from '../actions/subjects';
+import {Subject} from '../models/subject';
 
 export interface State {
   loaded: boolean;
   loading: boolean;
   ids: string[];
-  entities: { [id: string]: Lesson };
-  filter: (Lesson) => Lesson;
+  entities: { [id: string]: Subject };
 }
 
 const initialState: State = {
   loaded: false,
   loading: false,
   ids: [],
-  entities: {},
-  filter: lesson => lesson
+  entities: {}
 };
 
-export function reducer(state = initialState, action: lessons.Actions): State {
+export function reducer(state = initialState, action: subjects.Actions): State {
   switch (action.type) {
-    case lessons.ActionTypes.LOAD: {
+    case subjects.ActionTypes.LOAD: {
       return Object.assign({}, state, {
         loading: true
       });
     }
 
-    case lessons.ActionTypes.LOAD_SUCCESS: {
+    case subjects.ActionTypes.LOAD_SUCCESS: {
       const lessons = action.payload;
       const lessonIds = lessons.map(lesson => String(lesson.Id));
       const lessonEntities = lessons.reduce(
-        (entities: { [id: string]: Lesson }, lesson: Lesson) => {
+        (entities: { [id: string]: Subject }, subject: Subject) => {
           return Object.assign(entities, {
-            [lesson.Id]: lesson
+            [subject.Id]: subject
           });
         }, {});
 
@@ -39,20 +37,9 @@ export function reducer(state = initialState, action: lessons.Actions): State {
         loaded: true,
         loading: false,
         ids: lessonIds,
-        entities: lessonEntities,
-        filter: lesson => lesson
+        entities: lessonEntities
       };
     }
-
-    case lessons.ActionTypes.SET_FILTER:
-      return Object.assign({}, state, {
-        filter: action.payload
-      });
-
-    case lessons.ActionTypes.REMOVE_FILTER:
-      return Object.assign({}, state, {
-        filter: lesson => lesson
-      });
 
     default: {
       return state;
@@ -68,6 +55,4 @@ export const getLoading = (state: State) => state.loading;
 export const getIds = (state: State) => state.ids;
 
 export const getEntities = (state: State) => state.entities;
-
-export const getFilter = (state: State) => state.filter;
 

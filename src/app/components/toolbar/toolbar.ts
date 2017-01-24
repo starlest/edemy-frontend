@@ -8,8 +8,8 @@ import * as fromRoot from '../../reducers';
 @Component({
   selector: 'ed-toolbar',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.scss']
+  templateUrl: 'toolbar.html',
+  styleUrls: ['toolbar.scss']
 })
 export class ToolbarComponent {
   @Input() menuButtonHidden = false;

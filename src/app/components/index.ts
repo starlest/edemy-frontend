@@ -4,10 +4,10 @@ import {MaterialModule} from '@angular/material';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {HomeComponent} from './home/home.component';
-import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
-import {ToolbarComponent} from './toolbar/toolbar.component';
-import {OnlineLessonsComponent} from './online-lessons/online-lessons.component';
+import {HomeComponent} from './home/home';
+import {PageNotFoundComponent} from './page-not-found/page-not-found';
+import {ToolbarComponent} from './toolbar/toolbar';
+import {OnlineLessonsComponent} from './online-lessons/online-lessons';
 import {OnlineLessonComponent} from './online-lesson/online-lesson.component';
 
 export const COMPONENTS = [
