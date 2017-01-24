@@ -17,6 +17,7 @@ import {LessonsService} from './services/lessons';
 import {EffectsModule} from '@ngrx/effects';
 import {LessonsEffects} from './effects/lessons';
 import {SubjectsService} from './services/subjects';
+import {SubjectsEffects} from './effects/subjects';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import {SubjectsService} from './services/subjects';
      *
      * See: https://github.com/ngrx/effects/blob/master/docs/api.md#run
      */
-    EffectsModule.run(LessonsEffects)
+    EffectsModule.run(LessonsEffects),
+    EffectsModule.run(SubjectsEffects)
   ],
   providers: [LessonsService, SubjectsService],
   bootstrap: [AppComponent]

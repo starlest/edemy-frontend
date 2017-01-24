@@ -7,7 +7,7 @@ import * as layout from '../../actions/layout';
 import * as lessons from '../../actions/lessons';
 import * as subjects from '../../actions/subjects';
 import {Observable, Subscription} from 'rxjs';
-import {environment} from '../../../environments/environment';
+import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'ed-online-lessons',
@@ -45,8 +45,6 @@ export class OnlineLessonsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.selectedSubjectFilter = "All";
-    this.selectedLevelFilter = this.levels[0];
     this.store.dispatch(new layout.ChangeTitleAction('Online Lessons'));
   }
 
@@ -62,11 +60,14 @@ export class OnlineLessonsComponent implements OnInit, OnDestroy {
   }
 
   onFilterSelectClose() {
-    this.store.dispatch(
-      new lessons.SetFilter((lesson: Lesson) => (this.selectedSubjectFilter ===
-      'All' ? true : lesson.Subject === this.selectedSubjectFilter) &&
-      (this.selectedLevelFilter === 'All' ? true :
-      lesson.Level === this.selectedLevelFilter)));
+    const subjectFilterCondition: boolean = (this.selectedSubjectFilter ===
+    'All' || isNullOrUndefined(this.selectedSubjectFilter));
+    const levelFilterCondition: boolean = (this.selectedLevelFilter === 'All' ||
+    isNullOrUndefined(this.selectedLevelFilter));
+    this.store.dispatch(new lessons.SetFilter((lesson: Lesson) =>
+      (subjectFilterCondition ? true :
+      lesson.Subject === this.selectedSubjectFilter) &&
+      levelFilterCondition ? true : lesson.Level === this.selectedLevelFilter));
   }
 
   ngOnDestroy() {
