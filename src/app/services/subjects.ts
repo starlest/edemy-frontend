@@ -4,7 +4,6 @@ import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from '../models/subject';
 
-
 @Injectable()
 export class SubjectsService {
   private API_PATH: string = '';

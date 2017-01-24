@@ -7,6 +7,7 @@ import * as layout from '../../actions/layout';
 import * as lessons from '../../actions/lessons';
 import * as subjects from '../../actions/subjects';
 import {Observable, Subscription} from 'rxjs';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'ed-online-lessons',
