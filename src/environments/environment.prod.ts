@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiEndpoint: "localhost:4200/"
+  apiEndpoint: "http://edemywebapi20170125061058.azurewebsites.net/api/"
 };

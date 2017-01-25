@@ -4,7 +4,6 @@ import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from '../models/subject';
 import {environment} from '../../environments/environment';
-import {Lesson} from '../models/lesson';
 
 @Injectable()
 export class SubjectsService {
