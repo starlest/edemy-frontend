@@ -17,6 +17,7 @@ export class OnlineLessonComponent implements OnInit {
 
   ngOnInit() {
     const id = +this.activatedRoute.snapshot.params["Id"];
+    this.store.select()
     this.store.dispatch(new layout.ChangeTitleAction('Online Lessons' + id));
   }
 }

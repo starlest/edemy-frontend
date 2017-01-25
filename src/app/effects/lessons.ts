@@ -18,6 +18,7 @@ export class LessonsEffects {
   @Effect()
   loadLessons$: Observable<Action> = this.actions$
     .ofType(lessons.ActionTypes.LOAD)
+    .startWith(new lessons.LoadAction())
     .switchMap(() =>
       this.lessonsService.retrieveLessons()
         .map((results: Lesson[]) => new lessons.LoadSuccessAction(results))

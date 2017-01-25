@@ -16,6 +16,7 @@ export class SubjectsEffects {
   @Effect()
   loadSubjects$: Observable<Action> = this.actions$
     .ofType(subjects.ActionTypes.LOAD)
+    .startWith(new subjects.LoadAction())
     .switchMap(() =>
       this.subjectsService.get()
         .map((results: Subject[]) => {

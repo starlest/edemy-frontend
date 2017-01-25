@@ -16,6 +16,7 @@ export class LevelsEffects {
   @Effect()
   loadLevels$: Observable<Action> = this.actions$
     .ofType(levels.ActionTypes.LOAD)
+    .startWith(new levels.LoadAction())
     .switchMap(() =>
       this.levelsService.get()
         .map((results: Level[]) => {

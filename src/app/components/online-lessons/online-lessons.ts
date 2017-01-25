@@ -5,8 +5,6 @@ import {Subject} from '../../models/subject';
 import * as fromRoot from '../../reducers';
 import * as layout from '../../actions/layout';
 import * as lessons from '../../actions/lessons';
-import * as levels from '../../actions/levels';
-import * as subjects from '../../actions/subjects';
 import {Observable, Subscription} from 'rxjs';
 import {isNullOrUndefined} from 'util';
 import {Level} from '../../models/level';
@@ -26,9 +24,6 @@ export class OnlineLessonsComponent implements OnInit, OnDestroy {
   lessons$: { [subject: string]: Observable<Lesson[]> } = {};
 
   constructor(private store: Store<fromRoot.State>) {
-    this.store.dispatch(new lessons.LoadAction());
-    this.store.dispatch(new levels.LoadAction());
-    this.store.dispatch(new subjects.LoadAction());
     this.levels$ = this.store.select(fromRoot.getLevels);
     this.subjects$ = this.store.select(fromRoot.getSubjects);
     this.lessonsSubscription = this.subjects$.map(subjects => {

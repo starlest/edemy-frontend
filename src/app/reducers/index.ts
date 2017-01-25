@@ -87,13 +87,12 @@ export const getLessonEntities = createSelector(getLessonsState,
 export const getLessonIds = createSelector(getLessonsState, fromLessons.getIds);
 export const getFilter = createSelector(getLessonsState, fromLessons.getFilter);
 export const getLessons = createSelector(getLessonEntities, getLessonIds,
-  getFilter, (entities, ids, filter) => {
-    return ids.map(id => entities[id]).filter(filter);
-  });
+  getFilter,
+  (entities, ids, filter) => ids.map(id => entities[id]).filter(filter));
 export const getSubjectLessons = (subject: string) => createSelector(getLessons,
-  lessons => {
-    return lessons.filter(lesson => lesson.Subject === subject);
-  });
+  lessons => lessons.filter(lesson => lesson.Subject === subject));
+export const getLesson = (id: string) => createSelector(getLessonEntities,
+  (entities) => entities[id]);
 
 /**
  * Levels Reducers
