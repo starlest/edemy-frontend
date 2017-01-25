@@ -2,7 +2,8 @@ import {Routes, RouterModule} from '@angular/router';
 import {HomeComponent} from './components/home/home';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found';
 import {OnlineLessonsComponent} from './components/online-lessons/online-lessons';
-import {OnlineLessonComponent} from './components/online-lesson/online-lesson.component';
+import {OnlineLessonComponent} from './components/online-lesson/online-lesson';
+import {ViewLessonPageComponent} from './containers/view-lesson-page';
 
 export const appRoutes: Routes = [
   {
@@ -19,7 +20,7 @@ export const appRoutes: Routes = [
   },
   {
     path: 'onlinelessons/:Id',
-    component: OnlineLessonComponent
+    component: ViewLessonPageComponent
   },
   {
     path: '**',

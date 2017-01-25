@@ -1,5 +1,6 @@
 import * as levels from '../actions/levels';
 import {Level} from '../models/level';
+import {createSelector} from 'reselect';
 
 export interface State {
   loaded: boolean;
@@ -56,3 +57,5 @@ export const getIds = (state: State) => state.ids;
 
 export const getEntities = (state: State) => state.entities;
 
+export const getAll = createSelector(getEntities, getIds,
+  (entities, ids) => ids.map(id => entities[id]));

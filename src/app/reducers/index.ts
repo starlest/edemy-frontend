@@ -78,51 +78,26 @@ export function reducer(state: any, action: any) {
  * Lessons Reducers
  */
 export const getLessonsState = (state: State) => state.lessons;
-export const getLessonsLoaded = createSelector(getLessonsState,
-  fromLessons.getLoaded);
-export const getLessonsLoading = createSelector(getLessonsState,
-  fromLessons.getLoading);
-export const getLessonEntities = createSelector(getLessonsState,
-  fromLessons.getEntities);
-export const getLessonIds = createSelector(getLessonsState, fromLessons.getIds);
-export const getFilter = createSelector(getLessonsState, fromLessons.getFilter);
-export const getLessons = createSelector(getLessonEntities, getLessonIds,
-  getFilter,
-  (entities, ids, filter) => ids.map(id => entities[id]).filter(filter));
+export const getLessons = createSelector(getLessonsState,
+  fromLessons.getLessons);
 export const getSubjectLessons = (subject: string) => createSelector(getLessons,
   lessons => lessons.filter(lesson => lesson.Subject === subject));
-export const getLesson = (id: string) => createSelector(getLessonEntities,
-  (entities) => entities[id]);
+export const getSelectedLesson = createSelector(getLessonsState,
+  fromLessons.getSelected);
+
 
 /**
  * Levels Reducers
  */
 export const getLevelsState = (state: State) => state.levels;
-export const getLevelsLoaded = createSelector(getLevelsState,
-  fromSubjects.getLoaded);
-export const getLevelsLoading = createSelector(getLevelsState,
-  fromSubjects.getLoading);
-export const getLevelEntities = createSelector(getLevelsState,
-  fromSubjects.getEntities);
-export const getLevelIds = createSelector(getLevelsState,
-  fromSubjects.getIds);
-export const getLevels = createSelector(getLevelEntities, getLevelIds,
-  (entities, ids) => ids.map(id => entities[id]));
+export const getLevels = createSelector(getLevelsState, fromLevels.getAll);
 
 /**
  * Subjects Reducers
  */
 export const getSubjectsState = (state: State) => state.subjects;
-export const getSubjectsLoaded = createSelector(getSubjectsState,
-  fromSubjects.getLoaded);
-export const getSubjectsLoading = createSelector(getSubjectsState,
-  fromSubjects.getLoading);
-export const getSubjectEntities = createSelector(getSubjectsState,
-  fromSubjects.getEntities);
-export const getSubjectIds = createSelector(getSubjectsState,
-  fromSubjects.getIds);
-export const getSubjects = createSelector(getSubjectEntities, getSubjectIds,
-  (entities, ids) => ids.map(id => entities[id]));
+export const getSubjects = createSelector(getSubjectsState,
+  fromSubjects.getAll);
 
 /**
  * Layout Reducers

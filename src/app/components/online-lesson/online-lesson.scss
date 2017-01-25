@@ -1,0 +1,21 @@
+.video-card {
+  width: 600px;
+  max-width: 80vw;
+  margin: 50px auto;
+}
+
+.embed-wrapper {
+  margin: auto;
+  width: 100%;
+  padding-top: 56.25%;
+  position: relative;
+  .embed-video {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+}

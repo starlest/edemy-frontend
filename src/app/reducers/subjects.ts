@@ -1,5 +1,6 @@
 import * as subjects from '../actions/subjects';
 import {Subject} from '../models/subject';
+import {createSelector} from 'reselect';
 
 export interface State {
   loaded: boolean;
@@ -47,7 +48,6 @@ export function reducer(state = initialState, action: subjects.Actions): State {
   }
 }
 
-
 export const getLoaded = (state: State) => state.loaded;
 
 export const getLoading = (state: State) => state.loading;
@@ -56,3 +56,5 @@ export const getIds = (state: State) => state.ids;
 
 export const getEntities = (state: State) => state.entities;
 
+export const getAll = createSelector(getEntities, getIds,
+  (entities, ids) => ids.map(id => entities[id]));

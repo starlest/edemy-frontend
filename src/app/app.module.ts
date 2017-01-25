@@ -10,25 +10,35 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 // import { DBModule } from '@ngrx/db';
 import {RouterStoreModule} from '@ngrx/router-store';
 import {AppComponent} from './app.component';
-import {ComponentsModule} from './components';
 import {reducer} from './reducers';
 import 'hammerjs';
-import {LessonsService} from './services/lessons';
 import {EffectsModule} from '@ngrx/effects';
 import {LessonsEffects} from './effects/lessons';
-import {SubjectsService} from './services/subjects';
 import {SubjectsEffects} from './effects/subjects';
-import {LevelsService} from './services/levels';
 import {LevelsEffects} from './effects/levels';
+import {
+  HomeComponent, OnlineLessonComponent, OnlineLessonsComponent,
+  PageNotFoundComponent, ToolbarComponent
+} from './components';
+import {
+  SelectedLessonPageComponent, ViewLessonPageComponent
+} from './containers';
+import {LessonsService, SubjectsService, LevelsService} from './services';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    OnlineLessonComponent,
+    OnlineLessonsComponent,
+    PageNotFoundComponent,
+    ToolbarComponent,
+    SelectedLessonPageComponent,
+    ViewLessonPageComponent
   ],
   imports: [
     AppRouting,
     BrowserModule,
-    ComponentsModule,
     FormsModule,
     FlexLayoutModule.forRoot(),
     MaterialModule.forRoot(),

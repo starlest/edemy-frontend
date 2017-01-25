@@ -6,6 +6,7 @@ export const ActionTypes = {
   LOAD: type('[Lessons] Load'),
   LOAD_SUCCESS: type('[Lessons] Load Success'),
   LOAD_FAIL: type('[Lessons] Load Fail'),
+  SELECT: type('[Lessons] Select'),
   SET_FILTER: type('[Lessons] Set Filter'),
   REMOVE_FILTER: type('[Lessons] Remove Filter')
 };
@@ -28,6 +29,13 @@ export class LoadFailAction implements Action {
   }
 }
 
+export class SelectAction implements Action {
+  type = ActionTypes.SELECT;
+
+  constructor(public payload: string) {
+  }
+}
+
 export class SetFilter implements Action {
   type = ActionTypes.SET_FILTER;
 
@@ -41,5 +49,6 @@ export class RemoveFilter implements Action {
 export type Actions = LoadAction |
   LoadSuccessAction |
   LoadFailAction |
+  SelectAction |
   SetFilter |
   RemoveFilter;
