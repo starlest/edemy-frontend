@@ -31,7 +31,7 @@ export class SubjectsService {
   constructor(private http: Http) {
   }
 
-  // calls the [GET] /api/lessons Web API method to retrieve all lessons
+  // calls the [GET] /api/subjects Web API method to retrieve all lessons
   get() {
     return this.http.get(this.baseUrl)
       .map((response: Response) => response.json() as Subject[])

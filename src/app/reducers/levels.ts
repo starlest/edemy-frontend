@@ -1,11 +1,11 @@
-import * as subjects from '../actions/subjects';
-import {Subject} from '../models/subject';
+import * as levels from '../actions/levels';
+import {Level} from '../models/level';
 
 export interface State {
   loaded: boolean;
   loading: boolean;
   ids: string[];
-  entities: { [id: string]: Subject };
+  entities: { [id: string]: Level };
 }
 
 const initialState: State = {
@@ -15,29 +15,29 @@ const initialState: State = {
   entities: {}
 };
 
-export function reducer(state = initialState, action: subjects.Actions): State {
+export function reducer(state = initialState, action: levels.Actions): State {
   switch (action.type) {
-    case subjects.ActionTypes.LOAD: {
+    case levels.ActionTypes.LOAD: {
       return Object.assign({}, state, {
         loading: true
       });
     }
 
-    case subjects.ActionTypes.LOAD_SUCCESS: {
-      const subjects = action.payload;
-      const subjectIds = subjects.map(subject => String(subject.Id));
-      const subjectEntities = subjects.reduce(
-        (entities: { [id: string]: Subject }, subject: Subject) => {
+    case levels.ActionTypes.LOAD_SUCCESS: {
+      const levels = action.payload;
+      const levelIds = levels.map(level => String(level.Id));
+      const levelEntities = levels.reduce(
+        (entities: { [id: string]: Level }, level: Level) => {
           return Object.assign(entities, {
-            [subject.Id]: subject
+            [level.Id]: level
           });
         }, {});
 
       return {
         loaded: true,
         loading: false,
-        ids: subjectIds,
-        entities: subjectEntities
+        ids: levelIds,
+        entities: levelEntities
       };
     }
 

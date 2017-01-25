@@ -8,8 +8,8 @@
     </md-select>
     <md-select placeholder="Level" (onClose)="onFilterSelectClose()"
                [(ngModel)]="selectedLevelFilter">
-      <md-option *ngFor="let level of levels" [value]="level">
-        {{level}}
+      <md-option *ngFor="let level of levels$ | async" [value]="level.Title">
+        {{level.Title}}
       </md-option>
     </md-select>
   </div>

@@ -34,6 +34,7 @@ import {storeFreeze} from 'ngrx-store-freeze';
  */
 import * as fromLayout from './layout';
 import * as fromLessons from './lessons';
+import * as fromLevels from './levels';
 import * as fromSubjects from './subjects';
 
 /**
@@ -44,7 +45,8 @@ export interface State {
   layout: fromLayout.State;
   router: fromRouter.RouterState;
   lessons: fromLessons.State,
-  subjects: fromSubjects.State,
+  levels: fromLevels.State,
+  subjects: fromSubjects.State
 }
 
 /**
@@ -57,6 +59,7 @@ export interface State {
 const reducers = {
   layout: fromLayout.reducer,
   router: fromRouter.routerReducer,
+  levels: fromLevels.reducer,
   lessons: fromLessons.reducer,
   subjects: fromSubjects.reducer,
 };
@@ -91,6 +94,21 @@ export const getSubjectLessons = (subject: string) => createSelector(getLessons,
   lessons => {
     return lessons.filter(lesson => lesson.Subject === subject);
   });
+
+/**
+ * Levels Reducers
+ */
+export const getLevelsState = (state: State) => state.levels;
+export const getLevelsLoaded = createSelector(getLevelsState,
+  fromSubjects.getLoaded);
+export const getLevelsLoading = createSelector(getLevelsState,
+  fromSubjects.getLoading);
+export const getLevelEntities = createSelector(getLevelsState,
+  fromSubjects.getEntities);
+export const getLevelIds = createSelector(getLevelsState,
+  fromSubjects.getIds);
+export const getLevels = createSelector(getLevelEntities, getLevelIds,
+  (entities, ids) => ids.map(id => entities[id]));
 
 /**
  * Subjects Reducers
