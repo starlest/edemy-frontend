@@ -1,11 +1,11 @@
 .video-card {
-  width: 600px;
+  width: 800px;
   max-width: 80vw;
   margin: 50px auto;
 }
 
-.embed-wrapper {
-  margin: auto;
+.video-card-wrapper {
+  margin: 20px auto;
   width: 100%;
   padding-top: 56.25%;
   position: relative;
@@ -18,4 +18,24 @@
     bottom: 0;
     right: 0;
   }
+}
+
+.tutor {
+  font-size: 14px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  a {
+    color: #2196f3;
+    text-decoration: none;
+  }
+}
+
+.notes-card {
+  width: 1000px;
+  max-width: 85vw;
+  margin: 50px auto;
+}
+
+.notes-content {
+  margin: 20px;
 }
