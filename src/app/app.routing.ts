@@ -1,9 +1,8 @@
 import {Routes, RouterModule} from '@angular/router';
-import {HomeComponent} from './components/home/home';
-import {PageNotFoundComponent} from './components/page-not-found/page-not-found';
-import {OnlineLessonsComponent} from './components/online-lessons/online-lessons';
-import {OnlineLessonComponent} from './components/online-lesson/online-lesson';
-import {ViewLessonPageComponent} from './containers/view-lesson-page';
+import {
+  HomeComponent, PageNotFoundComponent, LoginComponent, OnlineLessonsComponent
+} from './components';
+import {ViewLessonPageComponent} from './containers';
 
 export const appRoutes: Routes = [
   {
@@ -13,6 +12,10 @@ export const appRoutes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'onlinelessons',

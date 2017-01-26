@@ -3,7 +3,9 @@ import {Store} from '@ngrx/store';
 import * as fromRoot from '../../reducers';
 import * as layout from '../../actions/layout';
 import {Lesson} from '../../models/lesson';
-import {SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';
+import {
+  SafeResourceUrl, DomSanitizer, SafeHtml
+} from '@angular/platform-browser';
 
 @Component({
   selector: 'ed-online-lesson',
@@ -25,5 +27,10 @@ export class OnlineLessonComponent implements OnInit {
 
   safeVideoUrl(): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(this.lesson.VideoLink);
+  }
+
+
+  safeNotes(): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(this.lesson.Notes);
   }
 }

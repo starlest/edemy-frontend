@@ -4,6 +4,7 @@ import {
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
 import * as fromRoot from '../../reducers';
+import {go} from '@ngrx/router-store';
 
 @Component({
   selector: 'ed-toolbar',
@@ -18,5 +19,9 @@ export class ToolbarComponent {
 
   constructor(private store: Store<fromRoot.State>) {
     this.title$ = store.select(fromRoot.getTitle);
+  }
+
+  goLoginPage() {
+    this.store.dispatch(go(['/login']));
   }
 }

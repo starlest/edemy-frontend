@@ -1,31 +1,40 @@
-<div class="lessons-list">
-  <div class="filters">
-    <md-select placeholder="Subject" (onClose)="onFilterSelectClose()"
-               [(ngModel)]="selectedSubjectFilter">
-      <md-option *ngFor="let subject of subjects$ | async" [value]="subject.Title">
-        {{subject.Title}}
-      </md-option>
-    </md-select>
-    <md-select placeholder="Level" (onClose)="onFilterSelectClose()"
-               [(ngModel)]="selectedLevelFilter">
-      <md-option *ngFor="let level of levels$ | async" [value]="level.Title">
-        {{level.Title}}
-      </md-option>
-    </md-select>
-  </div>
-  <md-nav-list>
-    <div *ngFor="let subject of subjects$ | async">
-      <div *ngIf="subject.Title !== 'All'">
-        <h3 md-subheader>{{subject.Title}}</h3>
-        <md-list-item *ngFor="let lesson of lessons$[subject.Title] | async"
-                      routerLink="/onlinelessons/{{lesson.Id}}">
-          <md-icon md-list-avatar>{{getSubjectSymbol(subject.Title)}}</md-icon>
-          <h4 md-line>{{lesson.Title}}</h4>
-          <h3 md-line class="lesson-description">{{lesson.Description}}</h3>
-          <span class="lesson-level">{{lesson.Level}}</span>
-        </md-list-item>
-        <md-divider></md-divider>
-      </div>
+<md-card class="lessons-card">
+  <md-card-header>
+    <div class="filters">
+      <md-select placeholder="Subject" (onClose)="onFilterSelectClose()"
+                 [(ngModel)]="selectedSubjectFilter">
+        <md-option *ngFor="let subject of subjects$ | async"
+                   [value]="subject.Title">
+          {{subject.Title}}
+        </md-option>
+      </md-select>
+      <md-select placeholder="Level" (onClose)="onFilterSelectClose()"
+                 [(ngModel)]="selectedLevelFilter">
+        <md-option *ngFor="let level of levels$ | async"
+                   [value]="level.Title">
+          {{level.Title}}
+        </md-option>
+      </md-select>
     </div>
-  </md-nav-list>
-</div>
+  </md-card-header>
+  <md-card-content>
+    <div class="lessons-list">
+      <md-nav-list>
+        <div *ngFor="let subject of subjects$ | async">
+          <div *ngIf="subject.Title !== 'All'">
+            <h3 md-subheader>{{subject.Title}}</h3>
+            <md-list-item *ngFor="let lesson of lessons$[subject.Title] | async"
+                          routerLink="/onlinelessons/{{lesson.Id}}">
+              <md-icon md-list-avatar>{{getSubjectSymbol(subject.Title)}}
+              </md-icon>
+              <h4 md-line>{{lesson.Title}}</h4>
+              <h3 md-line class="lesson-description">{{lesson.Description}}</h3>
+              <span class="lesson-level">{{lesson.Level}}</span>
+            </md-list-item>
+            <md-divider></md-divider>
+          </div>
+        </div>
+      </md-nav-list>
+    </div>
+  </md-card-content>
+</md-card>

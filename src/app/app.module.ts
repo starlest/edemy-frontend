@@ -1,29 +1,27 @@
+import {AppRouting} from './app.routing';
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
-import {MaterialModule} from '@angular/material';
 import {HttpModule} from '@angular/http';
-import {AppRouting} from './app.routing';
-import {StoreModule} from '@ngrx/store';
-import {StoreDevtoolsModule} from '@ngrx/store-devtools';
-// import { DBModule } from '@ngrx/db';
-import {RouterStoreModule} from '@ngrx/router-store';
+import {MaterialModule} from '@angular/material';
+import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
-import {reducer} from './reducers';
-import 'hammerjs';
-import {EffectsModule} from '@ngrx/effects';
-import {LessonsEffects} from './effects/lessons';
-import {SubjectsEffects} from './effects/subjects';
-import {LevelsEffects} from './effects/levels';
 import {
   HomeComponent, OnlineLessonComponent, OnlineLessonsComponent,
-  PageNotFoundComponent, ToolbarComponent
+  PageNotFoundComponent, ToolbarComponent, LoginComponent
 } from './components';
 import {
   SelectedLessonPageComponent, ViewLessonPageComponent
 } from './containers';
 import {LessonsService, SubjectsService, LevelsService} from './services';
+import {StoreModule} from '@ngrx/store';
+import {reducer} from './reducers';
+// import { DBModule } from '@ngrx/db';
+import {EffectsModule} from '@ngrx/effects';
+import {LessonsEffects, LevelsEffects, SubjectsEffects} from './effects';
+import {RouterStoreModule} from '@ngrx/router-store';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import 'hammerjs';
 
 @NgModule({
   declarations: [
@@ -32,6 +30,7 @@ import {LessonsService, SubjectsService, LevelsService} from './services';
     OnlineLessonComponent,
     OnlineLessonsComponent,
     PageNotFoundComponent,
+    LoginComponent,
     ToolbarComponent,
     SelectedLessonPageComponent,
     ViewLessonPageComponent
