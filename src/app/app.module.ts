@@ -1,7 +1,7 @@
 import {AppRouting} from './app.routing';
 import {BrowserModule} from '@angular/platform-browser';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {MaterialModule} from '@angular/material';
 import {NgModule} from '@angular/core';
@@ -13,7 +13,9 @@ import {
 import {
   SelectedLessonPageComponent, ViewLessonPageComponent
 } from './containers';
-import {LessonsService, SubjectsService, LevelsService} from './services';
+import {
+  AuthService, LessonsService, LevelsService, SubjectsService
+} from './services';
 import {StoreModule} from '@ngrx/store';
 import {reducer} from './reducers';
 // import { DBModule } from '@ngrx/db';
@@ -39,6 +41,7 @@ import 'hammerjs';
     AppRouting,
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule.forRoot(),
     MaterialModule.forRoot(),
     HttpModule,
@@ -78,7 +81,7 @@ import 'hammerjs';
     EffectsModule.run(LevelsEffects),
     EffectsModule.run(SubjectsEffects)
   ],
-  providers: [LessonsService, SubjectsService, LevelsService],
+  providers: [AuthService, LessonsService, LevelsService, SubjectsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

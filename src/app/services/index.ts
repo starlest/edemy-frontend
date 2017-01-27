@@ -1,3 +1,6 @@
+export {AuthService} from './auth';
 export {LessonsService} from './lessons';
-export {SubjectsService} from './subjects';
 export {LevelsService} from './levels';
+export {SubjectsService} from './subjects';
+
+

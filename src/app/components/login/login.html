@@ -1,18 +1,30 @@
-<md-card class="login-card">
+<md-card class="card-login">
   <md-card-header>
     <h3 align="center">Login</h3>
   </md-card-header>
   <md-card-content>
-    <form class="login-form">
+    <div class="alert-error" role="alert" *ngIf="loginError">
+      <strong>Warning:</strong> Username and Password mismatch
+    </div>
+    <form class="form-login" [formGroup]="loginForm"
+          (submit)="performLogin($event)">
       <md-input-container class="full-width">
-        <input md-input placeholder="Username">
+        <input md-input formControlName="username" placeholder="Username"
+               required autofocus>
       </md-input-container>
       <md-input-container class="full-width">
-        <input md-input placeholder="Password">
+        <input md-input type="password" formControlName="password"
+               placeholder="Password"
+               required autofocus>
       </md-input-container>
+      <div>
+        <label>
+          <input type="checkbox" value="remember-me">
+          Remember me
+        </label>
+      </div>
       <div class="buttons">
-        <button md-raised-button (click)="login()" color="primary">Login
-        </button>
+        <button md-raised-button type="submit" color="primary">Login</button>
       </div>
     </form>
   </md-card-content>
