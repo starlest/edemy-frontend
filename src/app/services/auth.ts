@@ -10,7 +10,9 @@ export class AuthService {
   constructor(private http: AuthHttp) {
   }
 
-  login(username: string, password: string): any {
+  // TODO: Implement remember user
+
+  login(username: string, password: string, rememberUser: boolean): any {
     const url = environment.apiEndpoint + 'connect/token'; // JwtProvider's
                                                            // LoginPath
     const data = {
@@ -41,9 +43,10 @@ export class AuthService {
   }
 
   logout(): boolean {
-   this.setAuth(null);
-   return true;
+    this.setAuth(null);
+    return true;
   }
+
   // Converts a Json object to urlencoded format
   toUrlEncodedString(data: any) {
     let body = "";

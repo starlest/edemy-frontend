@@ -16,6 +16,8 @@ import {AuthService} from '../../services/auth';
 export class ToolbarComponent {
   @Input() menuButtonHidden = false;
   @Output() openMenu = new EventEmitter();
+  @Output() openUserMenu = new EventEmitter();
+
   title$: Observable<string>;
 
   constructor(private store: Store<fromRoot.State>,

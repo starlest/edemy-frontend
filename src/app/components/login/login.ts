@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef, Input} from '@angular/core';
 import {Store} from '@ngrx/store';
 import * as fromRoot from '../../reducers';
 import * as layout from '../../actions/layout';
@@ -23,7 +23,8 @@ export class LoginComponent implements OnInit {
       this.store.dispatch(go(['']));
     this.loginForm = fb.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      rememberUser: [false]
     });
   }
 
@@ -35,7 +36,8 @@ export class LoginComponent implements OnInit {
     e.preventDefault();
     const username = this.loginForm.value.username;
     const password = this.loginForm.value.password;
-    this.authService.login(username, password).subscribe((data) => {
+    const rememberUser = this.loginForm.value.rememberUser;
+    this.authService.login(username, password, rememberUser).subscribe((data) => {
         // login successful
         this.loginError = false;
         const auth = this.authService.getAuth();

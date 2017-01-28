@@ -3,7 +3,7 @@ md-sidenav-container {
   width: 100vw;
 }
 
-md-sidenav {
+.main-sidenav {
   max-width: 320px;
   &.md-sidenav-opened {
     box-shadow: 3px 0 6px rgba(0,0,0,0.24);
@@ -25,7 +25,7 @@ md-sidenav {
   }
 
   .info {
-    margin-top: 50px;
+    margin-top: 80px;
     ul {
       margin: 20px;
       padding: 0;

@@ -1,5 +1,6 @@
 <md-sidenav-container fullscreen>
-  <md-sidenav #sidenav [mode]="(isSidenavLockedOpen$ | async) ? 'side' : 'over'"
+  <md-sidenav class="main-sidenav" #sidenav
+               [mode]="(isSidenavLockedOpen$ | async) ? 'side' : 'over'"
               [opened]="isSidenavLockedOpen$ | async">
 
     <span><img src="../../../assets/img/edemy-logo.svg"></span>
@@ -58,6 +59,7 @@
     </md-nav-list>
   </md-sidenav>
   <ed-toolbar [menuButtonHidden]="isSidenavLockedOpen$ | async"
-              (openMenu)="sidenav.toggle()"></ed-toolbar>
+              (openMenu)="sidenav.toggle()"
+              (openUserMenu)="usersidenav.toggle()"></ed-toolbar>
   <router-outlet></router-outlet>
 </md-sidenav-container>

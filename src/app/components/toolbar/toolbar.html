@@ -10,8 +10,20 @@
     <i class="fa fa-sign-in icon-color" aria-hidden="true"></i>
     <span class="icon-color">Login</span>
   </a>
-  <button md-button *ngIf="authService.isLoggedIn()" (click)="logout()">
-    <i class="fa fa-sign-out icon-color" aria-hidden="true"></i>
-    <span class="icon-color">Logout</span>
+  <button md-button *ngIf="authService.isLoggedIn()" [mdMenuTriggerFor]="userMenu">
+    <i class="fa fa-user icon-color" aria-hidden="true"></i>
+    <span class="icon-color">User</span>
+    <i class="fa fa-caret-down icon-color" aria-hidden="true"></i>
   </button>
 </md-toolbar>
+
+<md-menu #userMenu>
+  <button md-menu-item>
+    <md-icon>dialpad</md-icon>
+    <span>Feedback</span>
+  </button>
+  <button md-menu-item *ngIf="authService.isLoggedIn()" (click)="logout()">
+    <md-icon class="fa fa-sign-out"></md-icon>
+    <span>Logout</span>
+  </button>
+</md-menu>
