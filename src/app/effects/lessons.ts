@@ -6,13 +6,11 @@ import * as lessons from '../actions/lessons';
 import {Lesson} from '../models/lesson';
 import {of} from 'rxjs/observable/of';
 import {LessonsService} from '../services/lessons';
-import {SubjectsService} from '../services/subjects';
 
 @Injectable()
 export class LessonsEffects {
   constructor(private actions$: Actions,
-              private lessonsService: LessonsService,
-              private subjectsService: SubjectsService) {
+              private lessonsService: LessonsService) {
   }
 
   @Effect()
@@ -20,7 +18,7 @@ export class LessonsEffects {
     .ofType(lessons.ActionTypes.LOAD)
     .startWith(new lessons.LoadAction())
     .switchMap(() =>
-      this.lessonsService.retrieveLessons()
+      this.lessonsService.get()
         .map((results: Lesson[]) => new lessons.LoadSuccessAction(results))
         .catch(error => of(new lessons.LoadFailAction(error)))
     );

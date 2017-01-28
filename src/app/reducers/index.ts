@@ -33,6 +33,7 @@ import {storeFreeze} from 'ngrx-store-freeze';
  * notation packages up all of the exports into a single object.
  */
 import * as fromLayout from './layout';
+import * as fromAuth from './auth';
 import * as fromLessons from './lessons';
 import * as fromLevels from './levels';
 import * as fromSubjects from './subjects';
@@ -43,6 +44,7 @@ import * as fromSubjects from './subjects';
  */
 export interface State {
   layout: fromLayout.State;
+  auth: fromAuth.State;
   router: fromRouter.RouterState;
   lessons: fromLessons.State,
   levels: fromLevels.State,
@@ -58,6 +60,7 @@ export interface State {
  */
 const reducers = {
   layout: fromLayout.reducer,
+  auth: fromAuth.reducer,
   router: fromRouter.routerReducer,
   levels: fromLevels.reducer,
   lessons: fromLessons.reducer,
@@ -73,6 +76,23 @@ export function reducer(state: any, action: any) {
     return productionReducer(state, action);
   return developmentReducer(state, action);
 }
+
+/**
+ * Layout Reducers
+ */
+export const getLayoutState = (state: State) => state.layout;
+export const getTitle = createSelector(getLayoutState, fromLayout.getTitle);
+export const isSidenavLockedOpen = createSelector(getLayoutState,
+  fromLayout.isSidenavLockedOpen);
+
+/**
+ * Auth Reducers
+ */
+export const getAuthState = (state: State) => state.auth;
+export const getAuthEntity = createSelector(getAuthState, fromAuth.getEntity);
+export const getAuthError = createSelector(getAuthState, fromAuth.getError);
+export const getAuthLoaded = createSelector(getAuthState, fromAuth.getLoaded);
+export const getAuthLoading = createSelector(getAuthState, fromAuth.getLoading);
 
 /**
  * Lessons Reducers
@@ -102,11 +122,3 @@ export const getLevels = createSelector(getLevelsState, fromLevels.getAll);
 export const getSubjectsState = (state: State) => state.subjects;
 export const getSubjects = createSelector(getSubjectsState,
   fromSubjects.getAll);
-
-/**
- * Layout Reducers
- */
-export const getLayoutState = (state: State) => state.layout;
-export const getTitle = createSelector(getLayoutState, fromLayout.getTitle);
-export const isSidenavLockedOpen = createSelector(getLayoutState,
-  fromLayout.isSidenavLockedOpen);

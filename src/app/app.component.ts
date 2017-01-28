@@ -15,6 +15,8 @@ import * as layout from './actions/layout';
 export class AppComponent implements OnInit {
   isSidenavLockedOpen$: Observable<boolean>;
 
+  // TODO: Add global loading spinner
+
   constructor(private store: Store<fromRoot.State>,
               private ngZone: NgZone) {
     this.setUpWindowOnResizeListener();

@@ -20,7 +20,7 @@ import {StoreModule} from '@ngrx/store';
 import {reducer} from './reducers';
 // import { DBModule } from '@ngrx/db';
 import {EffectsModule} from '@ngrx/effects';
-import {LessonsEffects, LevelsEffects, SubjectsEffects} from './effects';
+import {AuthEffects, LessonsEffects, LevelsEffects, SubjectsEffects} from './effects';
 import {RouterStoreModule} from '@ngrx/router-store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import 'hammerjs';
@@ -80,6 +80,7 @@ import {LoggedInGuard} from './guards/logged-in';
      *
      * See: https://github.com/ngrx/effects/blob/master/docs/api.md#run
      */
+    EffectsModule.run(AuthEffects),
     EffectsModule.run(LessonsEffects),
     EffectsModule.run(LevelsEffects),
     EffectsModule.run(SubjectsEffects)

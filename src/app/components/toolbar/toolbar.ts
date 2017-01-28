@@ -6,6 +6,7 @@ import {Observable} from 'rxjs/Observable';
 import * as fromRoot from '../../reducers';
 import {go} from '@ngrx/router-store';
 import {AuthService} from '../../services/auth';
+import * as auth from '../../actions/auth';
 
 @Component({
   selector: 'ed-toolbar',
@@ -14,25 +15,27 @@ import {AuthService} from '../../services/auth';
   styleUrls: ['toolbar.scss']
 })
 export class ToolbarComponent {
+  title$: Observable<string>;
+  isLoggedIn$: Observable<boolean>;
+
   @Input() menuButtonHidden = false;
   @Output() openMenu = new EventEmitter();
   @Output() openUserMenu = new EventEmitter();
 
-  title$: Observable<string>;
-
   constructor(private store: Store<fromRoot.State>,
               private authService: AuthService) {
+    this.authService.setAuth(null);
     this.title$ = store.select(fromRoot.getTitle);
+    this.isLoggedIn$ =
+      store.select(fromRoot.getAuthEntity).map(entity => !!entity);
   }
 
   goLoginPage() {
     this.store.dispatch(go(['/login']));
   }
 
-  logout(): boolean {
-    // logs out the user, then redirects him to Welcome View.
-    if (this.authService.logout())
-      this.store.dispatch(go(['']));
-    return false;
+  performLogout() {
+    // logs out the user, then redirects him to Home View.
+    this.store.dispatch(new auth.RemoveAction);
   }
 }

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {RequestOptions, Headers} from '@angular/http';
 import {environment} from '../../environments/environment';
 import {AuthHttp} from '../auth.http';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class AuthService {
@@ -37,14 +38,17 @@ export class AuthService {
         const auth = response.json();
         console.log('The following auth JSON object has been received:');
         console.log(auth);
-        this.setAuth(auth);
+        if (rememberUser) this.setAuth(auth);
         return auth;
-      });
+      })
+      .catch(err => Observable.throw(err));
   }
 
-  logout(): boolean {
-    this.setAuth(null);
-    return true;
+  logout(): any {
+    const url = environment.apiEndpoint + 'Accounts/Logout'; // LogoutPath
+    return this.http.post(url, null)
+      .map(() => this.setAuth(null))
+      .catch(err => Observable.throw(err));
   }
 
   // Converts a Json object to urlencoded format

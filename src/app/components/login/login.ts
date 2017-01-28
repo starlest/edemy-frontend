@@ -1,24 +1,28 @@
-import {Component, OnInit, ChangeDetectorRef, Input} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {Store} from '@ngrx/store';
-import * as fromRoot from '../../reducers';
-import * as layout from '../../actions/layout';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth';
 import {go} from '@ngrx/router-store';
+import {Observable} from 'rxjs';
+import * as auth from '../../actions/auth';
+import * as layout from '../../actions/layout';
+import * as fromRoot from '../../reducers';
 
 @Component({
   selector: 'ed-login',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: 'login.html',
   styleUrls: ['login.scss']
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  loginError: boolean;
+  loginError$: Observable<boolean>;
 
   constructor(private store: Store<fromRoot.State>,
               private fb: FormBuilder,
-              private authService: AuthService,
-              private ref: ChangeDetectorRef) {
+              private authService: AuthService) {
+    this.loginError$ =
+      this.store.select(fromRoot.getAuthError).map(error => !!error);
     if (this.authService.isLoggedIn())
       this.store.dispatch(go(['']));
     this.loginForm = fb.group({
@@ -32,23 +36,13 @@ export class LoginComponent implements OnInit {
     this.store.dispatch(new layout.ChangeTitleAction('Login'));
   }
 
-  performLogin(e) {
-    e.preventDefault();
+  performLogin() {
     const username = this.loginForm.value.username;
     const password = this.loginForm.value.password;
     const rememberUser = this.loginForm.value.rememberUser;
-    this.authService.login(username, password, rememberUser).subscribe((data) => {
-        // login successful
-        this.loginError = false;
-        const auth = this.authService.getAuth();
-        alert('Our Token is: ' + auth.access_token);
-        this.store.dispatch(go(['']));
-      },
-      err => {
-        console.log(err);
-        // login failure
-        this.loginError = true;
-        this.ref.detectChanges();
-      });
+    this.store.dispatch(
+      new auth.LoadFromServerAction({
+        username: username, password: password, rememberUser: rememberUser
+      }));
   }
 }
