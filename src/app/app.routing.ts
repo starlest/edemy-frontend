@@ -1,13 +1,16 @@
 import {Routes, RouterModule} from '@angular/router';
 import {
-  HomeComponent, PageNotFoundComponent, LoginComponent, OnlineLessonsComponent
+  HomeComponent, NotFoundPageComponent, LoginComponent, OnlineLessonsComponent
 } from './components';
 import {ViewLessonPageComponent} from './containers';
+import {LessonExistsGuard} from './guards/lesson-exists';
+import {LoggedInGuard} from './guards/logged-in';
 
 export const appRoutes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    redirectTo: 'home',
+    pathMatch: 'full'
   },
   {
     path: 'home',
@@ -15,6 +18,7 @@ export const appRoutes: Routes = [
   },
   {
     path: 'login',
+    canActivate: [LoggedInGuard],
     component: LoginComponent
   },
   {
@@ -23,11 +27,17 @@ export const appRoutes: Routes = [
   },
   {
     path: 'onlinelessons/:Id',
+    canActivate: [LessonExistsGuard],
     component: ViewLessonPageComponent
   },
   {
+    path: '404',
+    component: NotFoundPageComponent
+  },
+  {
     path: '**',
-    component: PageNotFoundComponent
+    redirectTo: '404',
+    pathMatch: 'full'
   }
 ];
 

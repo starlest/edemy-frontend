@@ -4,7 +4,7 @@ import * as fromRoot from '../../reducers';
 import * as layout from '../../actions/layout';
 
 @Component({
-  selector: "ed-page-not-found",
+  selector: "ed-not-found-page",
   template: `
       <h1 class="error">
         ERROR 404: Ooops... There is nothing here! <i class="fa fa-frown-o"
@@ -20,11 +20,11 @@ import * as layout from '../../actions/layout';
 `
   ]
 })
-export class PageNotFoundComponent implements OnInit {
+export class NotFoundPageComponent implements OnInit {
   constructor(private store: Store<fromRoot.State>) {
   }
 
   ngOnInit() {
-    this.store.dispatch(new layout.ChangeTitleAction('PAGE NOT FOUND'));
+    this.store.dispatch(new layout.ChangeTitleAction('ERROR: 404'));
   }
 }

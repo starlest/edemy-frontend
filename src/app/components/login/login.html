@@ -3,7 +3,7 @@
     <h3 align="center">Login</h3>
   </md-card-header>
   <md-card-content>
-    <div class="alert-error" role="alert" *ngIf="loginError">
+    <div  *ngIf="loginError" class="alert-error" role="alert">
       <strong>Warning:</strong> Username and Password mismatch
     </div>
     <form class="form-login" [formGroup]="loginForm"

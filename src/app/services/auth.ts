@@ -1,16 +1,18 @@
 import {Injectable} from '@angular/core';
-import {Http, RequestOptions, Headers} from '@angular/http';
+import {RequestOptions, Headers} from '@angular/http';
 import {environment} from '../../environments/environment';
+import {AuthHttp} from '../auth.http';
 
 @Injectable()
 export class AuthService {
   authKey = 'auth';
 
-  constructor(private http: Http) {
+  constructor(private http: AuthHttp) {
   }
 
   login(username: string, password: string): any {
-    const url = environment.apiEndpoint + 'connect/token'; // JwtProvider's LoginPath
+    const url = environment.apiEndpoint + 'connect/token'; // JwtProvider's
+                                                           // LoginPath
     const data = {
       username: username,
       password: password,
@@ -20,6 +22,8 @@ export class AuthService {
       // space-separated list of scopes for which the token is issued
       scope: 'openid offline_access profile email'
     };
+
+    this.setAuth(null); // remove existing authKey
 
     return this.http.post(url, this.toUrlEncodedString(data),
       new RequestOptions({
@@ -36,6 +40,10 @@ export class AuthService {
       });
   }
 
+  logout(): boolean {
+   this.setAuth(null);
+   return true;
+  }
   // Converts a Json object to urlencoded format
   toUrlEncodedString(data: any) {
     let body = "";

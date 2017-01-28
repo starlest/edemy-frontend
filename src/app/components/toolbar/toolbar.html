@@ -6,8 +6,12 @@
   </div>
   <span class="title">{{title$ | async}}</span>
   <span class="spacer"></span>
-  <a md-button routerLink="login">
+  <a md-button routerLink="login" *ngIf="!authService.isLoggedIn()">
     <i class="fa fa-sign-in icon-color" aria-hidden="true"></i>
     <span class="icon-color">Login</span>
   </a>
+  <button md-button *ngIf="authService.isLoggedIn()" (click)="logout()">
+    <i class="fa fa-sign-out icon-color" aria-hidden="true"></i>
+    <span class="icon-color">Logout</span>
+  </button>
 </md-toolbar>

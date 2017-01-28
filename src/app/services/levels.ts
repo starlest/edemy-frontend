@@ -1,15 +1,16 @@
 import 'rxjs/add/operator/map';
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {environment} from '../../environments/environment';
 import {Level} from '../models/level';
+import {AuthHttp} from '../auth.http';
 
 @Injectable()
 export class LevelsService {
   private baseUrl: string = environment.apiEndpoint + 'levels';
 
-  constructor(private http: Http) {
+  constructor(private http: AuthHttp) {
   }
 
   // calls the [GET] /api/levels Web API method to retrieve all lessons

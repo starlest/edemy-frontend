@@ -8,7 +8,7 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {
   HomeComponent, OnlineLessonComponent, OnlineLessonsComponent,
-  PageNotFoundComponent, ToolbarComponent, LoginComponent
+  NotFoundPageComponent, ToolbarComponent, LoginComponent
 } from './components';
 import {
   SelectedLessonPageComponent, ViewLessonPageComponent
@@ -24,6 +24,9 @@ import {LessonsEffects, LevelsEffects, SubjectsEffects} from './effects';
 import {RouterStoreModule} from '@ngrx/router-store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import 'hammerjs';
+import {AuthHttp} from './auth.http';
+import {LessonExistsGuard} from './guards/lesson-exists';
+import {LoggedInGuard} from './guards/logged-in';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,7 @@ import 'hammerjs';
     HomeComponent,
     OnlineLessonComponent,
     OnlineLessonsComponent,
-    PageNotFoundComponent,
+    NotFoundPageComponent,
     LoginComponent,
     ToolbarComponent,
     SelectedLessonPageComponent,
@@ -81,7 +84,8 @@ import 'hammerjs';
     EffectsModule.run(LevelsEffects),
     EffectsModule.run(SubjectsEffects)
   ],
-  providers: [AuthService, LessonsService, LevelsService, SubjectsService],
+  providers: [AuthHttp, AuthService, LessonsService, LevelsService,
+    SubjectsService, LessonExistsGuard, LoggedInGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

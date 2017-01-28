@@ -1,9 +1,8 @@
 import 'rxjs/add/operator/map';
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {Lesson} from '../models/lesson';
-
+import {AuthHttp} from '../auth.http';
 
 @Injectable()
 export class LessonsService {
@@ -52,7 +51,7 @@ export class LessonsService {
     }
   ];
 
-  constructor(private http: Http) {
+  constructor(private http: AuthHttp) {
   }
 
   retrieveLessons(): Observable<Lesson[]> {

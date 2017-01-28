@@ -80,6 +80,10 @@ export function reducer(state: any, action: any) {
 export const getLessonsState = (state: State) => state.lessons;
 export const getLessons = createSelector(getLessonsState,
   fromLessons.getLessons);
+export const getLessonsLoaded = createSelector(getLessonsState,
+  fromLessons.getLoaded);
+export const getLessonEntities = createSelector(getLessonsState,
+  fromLessons.getEntities);
 export const getSubjectLessons = (subject: string) => createSelector(getLessons,
   lessons => lessons.filter(lesson => lesson.Subject === subject));
 export const getSelectedLesson = createSelector(getLessonsState,
