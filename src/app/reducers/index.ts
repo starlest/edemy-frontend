@@ -98,6 +98,16 @@ export const getAuthLoaded = createSelector(getAuthState, fromAuth.getLoaded);
 export const getAuthLoading = createSelector(getAuthState, fromAuth.getLoading);
 
 /**
+ * User Reducers
+ */
+export const getUserState = (state: State) => state.user;
+export const getUserEntity = createSelector(getUserState, fromUser.getEntity);
+export const getUserDisplayName = createSelector(getUserEntity, entity => {
+  const result = !entity ? '' : entity.DisplayName;
+  return result;
+});
+
+/**
  * Lessons Reducers
  */
 export const getLessonsState = (state: State) => state.lessons;

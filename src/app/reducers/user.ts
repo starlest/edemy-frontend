@@ -41,3 +41,4 @@ export const getEntity = (state: State) => state.entity;
 export const getLoaded = (state: State) => state.loaded;
 
 export const getLoading = (state: State) => state.loading;
+

@@ -1,5 +1,6 @@
 import {Action} from '@ngrx/store';
 import {type} from './util';
+import {User} from '../models/user';
 
 export const ActionTypes = {
   LOAD: type('[User] Load'),
@@ -17,7 +18,7 @@ export class LoadAction implements Action {
 export class LoadSuccessAction implements Action {
   type = ActionTypes.LOAD_SUCCESS;
 
-  constructor(public payload: String) {
+  constructor(public payload: User) {
   }
 }
 

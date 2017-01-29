@@ -54,12 +54,12 @@ export class AuthEffects {
       return this.authService.logout()
         .map(() => {
           this.store.dispatch(go(['/']));
-          this.refreshSubscription$.unsubscribe();
+          if (this.refreshSubscription$)
+            this.refreshSubscription$.unsubscribe();
           return new auth.RemoveSuccessAction();
         })
         .catch(err => {
-          const error = err.json();
-          console.log(error);
+          console.log(err);
           return of(new auth.RemoveFailAction());
         });
     });
@@ -112,6 +112,6 @@ export class AuthEffects {
     .ofType(auth.ActionTypes.REFRESH_FAIL)
     .map(() => {
       alert('Your session has expired. Please login again.');
-      return new auth.RemoveAction()
+      return new auth.RemoveAction();
     });
 }

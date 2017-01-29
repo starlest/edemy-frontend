@@ -14,7 +14,7 @@ import {
   SelectedLessonPageComponent, ViewLessonPageComponent
 } from './containers';
 import {
-  AuthService, LessonsService, LevelsService, SubjectsService
+  AuthService, UserService, LessonsService, LevelsService, SubjectsService
 } from './services';
 import {StoreModule} from '@ngrx/store';
 import {reducer} from './reducers';
@@ -88,7 +88,7 @@ import {LoggedInGuard} from './guards/logged-in';
     EffectsModule.run(LevelsEffects),
     EffectsModule.run(SubjectsEffects)
   ],
-  providers: [AuthHttp, AuthService, LessonsService, LevelsService,
+  providers: [AuthHttp, AuthService, UserService, LessonsService, LevelsService,
     SubjectsService, LessonExistsGuard, LoggedInGuard],
   bootstrap: [AppComponent]
 })

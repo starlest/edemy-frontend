@@ -17,6 +17,7 @@ import * as auth from '../../actions/auth';
 export class ToolbarComponent {
   title$: Observable<string>;
   isLoggedIn$: Observable<boolean>;
+  displayName$: Observable<string>;
 
   @Input() menuButtonHidden = false;
   @Output() openMenu = new EventEmitter();
@@ -27,6 +28,7 @@ export class ToolbarComponent {
     this.title$ = store.select(fromRoot.getTitle);
     this.isLoggedIn$ =
       store.select(fromRoot.getAuthEntity).map(entity => !!entity);
+    this.displayName$ = store.select(fromRoot.getUserDisplayName);
   }
 
   goLoginPage() {
