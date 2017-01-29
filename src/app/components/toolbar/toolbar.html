@@ -20,7 +20,7 @@
 <md-menu #userMenu>
   <button md-menu-item>
     <md-icon>dialpad</md-icon>
-    <span>Feedback   </span>
+    <span>Feedback</span>
   </button>
   <button md-menu-item *ngIf="isLoggedIn$ | async" (click)="performLogout()">
     <md-icon class="fa fa-sign-out"></md-icon>
