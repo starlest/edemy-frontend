@@ -34,6 +34,7 @@ import {storeFreeze} from 'ngrx-store-freeze';
  */
 import * as fromLayout from './layout';
 import * as fromAuth from './auth';
+import * as fromUser from './user';
 import * as fromLessons from './lessons';
 import * as fromLevels from './levels';
 import * as fromSubjects from './subjects';
@@ -45,6 +46,7 @@ import * as fromSubjects from './subjects';
 export interface State {
   layout: fromLayout.State;
   auth: fromAuth.State;
+  user: fromUser.State;
   router: fromRouter.RouterState;
   lessons: fromLessons.State,
   levels: fromLevels.State,
@@ -61,6 +63,7 @@ export interface State {
 const reducers = {
   layout: fromLayout.reducer,
   auth: fromAuth.reducer,
+  user: fromUser.reducer,
   router: fromRouter.routerReducer,
   levels: fromLevels.reducer,
   lessons: fromLessons.reducer,

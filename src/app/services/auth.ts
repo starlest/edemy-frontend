@@ -9,7 +9,7 @@ import * as fromRoot from '../reducers';
 
 @Injectable()
 export class AuthService {
-  authKey = 'auth';
+  authKey = environment.authKey;
 
   constructor(private store: Store<fromRoot.State>,
               private http: AuthHttp) {
@@ -31,7 +31,7 @@ export class AuthService {
       .catch(err => Observable.throw(err));
   }
 
-  // Persist auth into localStrage or removes it if a NULL argument is given
+  // Persist auth into localStorage or removes it if a NULL argument is given
   setAuthInLocalStorage(auth: AuthEntity) {
     if (auth)
       localStorage.setItem(this.authKey, JSON.stringify(auth));
@@ -70,22 +70,14 @@ export class AuthService {
         authToken.expiration_date =
           new Date(now.getTime() + authToken.expires_in * 1000).getTime()
             .toString();
-
-        console.log('The following auth JSON object has been received:');
-        console.log(authToken);
-
         if (storeInLocalStorage) this.setAuthInLocalStorage(authToken);
-
         return authToken;
-
-        // let profile = this.jwtHelper.decodeToken(tokens.id_token) as
-        // ProfileModel;
-        // this.store.dispatch(this.profileActions.load(profile));
       })
       .catch(err => Observable.throw(err));
   }
 
-  refreshTokens(): Observable<AuthEntity> {
+  // Refresh auth with the server
+  refreshAuth(): Observable<AuthEntity> {
     return this.store.select(fromRoot.getAuthEntity)
       .first()
       .switchMap((authEntity: AuthEntity) => {

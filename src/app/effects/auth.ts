@@ -4,9 +4,11 @@ import {AuthService} from '../services/auth';
 import {Observable, Subscription} from 'rxjs';
 import {Action, Store} from '@ngrx/store';
 import * as auth from '../actions/auth';
+import * as user from '../actions/user';
 import * as fromRoot from '../reducers';
 import {go, back} from '@ngrx/router-store';
 import {of} from 'rxjs/observable/of';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class AuthEffects {
@@ -65,7 +67,10 @@ export class AuthEffects {
   @Effect()
   loadSuccess$: Observable<Action> = this.actions$
     .ofType(auth.ActionTypes.LOAD_SUCCESS)
-    .map(() => new auth.ScheduleRefreshAction());
+    .map(() => {
+      this.store.dispatch(new auth.ScheduleRefreshAction());
+      return new user.LoadAction();
+    });
 
   @Effect()
   scheduleRefresh$: Observable<Action> = this.actions$
@@ -89,11 +94,10 @@ export class AuthEffects {
   refreshToken$: Observable<Action> = this.actions$
     .ofType(auth.ActionTypes.REFRESH)
     .switchMap(() => {
-      return this.authService.refreshTokens()
+      return this.authService.refreshAuth()
         .map(result => {
-          console.log('refresh success');
-          // update local storage's
-          if (localStorage.getItem('auth'))
+          // update local storage's auth
+          if (localStorage.getItem(environment.authKey))
             this.authService.setAuthInLocalStorage(result);
           return new auth.RefreshSuccessAction(result);
         })
