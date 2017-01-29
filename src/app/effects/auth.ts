@@ -22,7 +22,6 @@ export class AuthEffects {
     .ofType(auth.ActionTypes.LOAD_FROM_LOCAL_STORAGE)
     .startWith(new auth.LoadFromLocalStorageAction())
     .map(() => {
-      // localStorage.clear();
       const authToken = this.authService.getAuthInLocalStorage();
       if (authToken) return new auth.LoadSuccessAction(authToken);
       else return new auth.LoadNullAction();
@@ -77,7 +76,8 @@ export class AuthEffects {
           // the interval is how long in between token refreshes
           // here we are taking half of the time it takes to expired
           // you may want to change how this time interval is calculated
-          const interval = entity.expires_in / 2 * 1000;
+          const expiresIn = +entity.expiration_date - new Date().getTime();
+          const interval = expiresIn > 0 ? expiresIn / 2 * 1000 : 5000;
           return Observable.interval(interval);
         });
       this.refreshSubscription$ =
@@ -98,7 +98,7 @@ export class AuthEffects {
           return new auth.RefreshSuccessAction(result);
         })
         .catch(err => {
-          console.log(err.json());
+          console.log(err);
           return of(new auth.RefreshFailAction());
         });
     });
@@ -106,5 +106,8 @@ export class AuthEffects {
   @Effect()
   refreshFailToken$: Observable<Action> = this.actions$
     .ofType(auth.ActionTypes.REFRESH_FAIL)
-    .map(() => new auth.RemoveAction());
+    .map(() => {
+      alert('Your session has expired. Please login again.');
+      return new auth.RemoveAction()
+    });
 }
