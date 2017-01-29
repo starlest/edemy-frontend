@@ -1,12 +1,21 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {Http, Headers} from '@angular/http';
+import {Store} from '@ngrx/store';
+import * as fromRoot from './reducers';
+import {AuthEntity} from './models/auth-entity';
+import {Subscription} from 'rxjs';
 
 @Injectable()
-export class AuthHttp {
+export class AuthHttp implements OnDestroy {
   http: Http;
-  authKey: string = 'auth';
+  authEntity: AuthEntity;
+  authEntitySubscription$: Subscription;
 
-  constructor(http: Http) {
+  constructor(private store: Store<fromRoot.State>,
+              http: Http) {
+    this.authEntitySubscription$ =
+      this.store.select(fromRoot.getAuthEntity)
+        .map(entity => this.authEntity = entity).subscribe();
     this.http = http;
   }
 
@@ -16,7 +25,8 @@ export class AuthHttp {
   }
 
   post(url, data, opts = {}) {
-    this.configureAuth(opts);
+    if (!!data && !data.includes('refresh_token'))
+      this.configureAuth(opts);
     return this.http.post(url, data, opts);
   }
 
@@ -31,14 +41,17 @@ export class AuthHttp {
   }
 
   configureAuth(opts: any) {
-    const i = localStorage.getItem(this.authKey);
-    if (i != null) {
-      const auth = JSON.parse(i);
-      // console.log(auth);
-      if (auth.access_token != null) {
+    if (this.authEntity != null) {
+      if (this.authEntity.access_token != null) {
         if (opts.headers == null) opts.headers = new Headers();
-        opts.headers.set('Authorization', `Bearer ${auth.access_token}`);
+        opts.headers.set('Authorization',
+          `Bearer ${this.authEntity.access_token}`);
       }
     }
+  }
+
+  ngOnDestroy() {
+    if (this.authEntitySubscription$)
+      this.authEntitySubscription$.unsubscribe();
   }
 }

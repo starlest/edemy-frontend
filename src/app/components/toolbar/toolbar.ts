@@ -24,7 +24,6 @@ export class ToolbarComponent {
 
   constructor(private store: Store<fromRoot.State>,
               private authService: AuthService) {
-    this.authService.setAuth(null);
     this.title$ = store.select(fromRoot.getTitle);
     this.isLoggedIn$ =
       store.select(fromRoot.getAuthEntity).map(entity => !!entity);

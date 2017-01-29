@@ -2,7 +2,6 @@ import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth';
-import {go} from '@ngrx/router-store';
 import {Observable} from 'rxjs';
 import * as auth from '../../actions/auth';
 import * as layout from '../../actions/layout';
@@ -23,8 +22,6 @@ export class LoginComponent implements OnInit {
               private authService: AuthService) {
     this.loginError$ =
       this.store.select(fromRoot.getAuthError).map(error => !!error);
-    if (this.authService.isLoggedIn())
-      this.store.dispatch(go(['']));
     this.loginForm = fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],

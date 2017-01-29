@@ -1,8 +1,9 @@
 import * as auth from '../actions/auth';
+import {AuthEntity} from '../models/auth-entity';
 
 
 export interface State {
-  entity: any;
+  entity: AuthEntity;
   error: any;
   loaded: boolean;
   loading: boolean;
@@ -25,6 +26,7 @@ export function reducer(state = initialState, action: auth.Actions): State {
         loading: true
       });
 
+    case auth.ActionTypes.REFRESH_SUCCESS:
     case auth.ActionTypes.LOAD_SUCCESS:
       return Object.assign({}, state, {
         entity: action.payload,

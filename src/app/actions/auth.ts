@@ -1,5 +1,6 @@
 import {Action} from '@ngrx/store';
 import {type} from './util';
+import {AuthEntity} from '../models/auth-entity';
 
 export const ActionTypes = {
   LOAD_FROM_SERVER: type('[Auth] Load From Server'),
@@ -10,7 +11,12 @@ export const ActionTypes = {
   SET: type('[Auth] Set'),
   REMOVE: type('[Auth] Remove'),
   REMOVE_SUCCESS: type('[Auth] Remove Success'),
-  REMOVE_FAIL: type('[Auth] Remove Fail')
+  REMOVE_FAIL: type('[Auth] Remove Fail'),
+  SCHEDULE_REFRESH: type('[Auth] Schedule Refresh'),
+  SCHEDULE_REFRESH_SUCCESS: type('[Auth] Schedule Refresh Success'),
+  REFRESH: type('[Auth] Refresh'),
+  REFRESH_SUCCESS: type('[Auth] Refresh Success'),
+  REFRESH_FAIL: type('[Auth] Refresh Fail')
 };
 
 export class LoadFromServerAction implements Action {
@@ -27,7 +33,7 @@ export class LoadFromLocalStorageAction implements Action {
 export class LoadSuccessAction implements Action {
   type = ActionTypes.LOAD_SUCCESS;
 
-  constructor(public payload: any) {
+  constructor(public payload: AuthEntity) {
   }
 }
 
@@ -61,6 +67,29 @@ export class RemoveFailAction implements Action {
   type = ActionTypes.REMOVE_FAIL;
 }
 
+export class ScheduleRefreshAction implements Action {
+  type = ActionTypes.SCHEDULE_REFRESH;
+}
+
+export class ScheduleRefreshSuccessAction implements Action {
+  type = ActionTypes.SCHEDULE_REFRESH_SUCCESS;
+}
+
+export class RefreshAction implements Action {
+  type = ActionTypes.REFRESH;
+}
+
+export class RefreshSuccessAction implements Action {
+  type = ActionTypes.REFRESH_SUCCESS;
+
+  constructor(public payload: AuthEntity) {
+  }
+}
+
+export class RefreshFailAction implements Action {
+  type = ActionTypes.REFRESH_FAIL;
+}
+
 export type Actions = LoadFromServerAction
   | LoadFromLocalStorageAction
   | LoadSuccessAction
@@ -69,5 +98,10 @@ export type Actions = LoadFromServerAction
   | SetAction
   | RemoveAction
   | RemoveSuccessAction
-  | RemoveFailAction;
+  | RemoveFailAction
+  | ScheduleRefreshAction
+  | ScheduleRefreshSuccessAction
+  | RefreshAction
+  | RefreshSuccessAction
+  | RefreshFailAction;
 
