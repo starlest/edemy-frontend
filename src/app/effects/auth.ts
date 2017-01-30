@@ -67,21 +67,19 @@ export class AuthEffects {
   @Effect()
   loadSuccess$: Observable<Action> = this.actions$
     .ofType(auth.ActionTypes.LOAD_SUCCESS)
-    .map(() => {
-      this.store.dispatch(new auth.ScheduleRefreshAction());
-      return new user.LoadAction();
-    });
+    .map(() => new auth.ScheduleRefreshAction());
 
   @Effect()
   scheduleRefresh$: Observable<Action> = this.actions$
     .ofType(auth.ActionTypes.SCHEDULE_REFRESH)
     .map(() => {
       const source = this.store.select(fromRoot.getAuthEntity).take(1)
-        .flatMap(entity => {
+        .switchMap(entity => {
           // the interval is how long in between token refreshes
           // here we are taking half of the time it takes to expired
           // you may want to change how this time interval is calculated
           const expiresIn = +entity.expiration_date - new Date().getTime();
+          console.log('token expiring in (minutes):', expiresIn / 1000 / 60);
           const interval = expiresIn > 0 ? expiresIn / 2 * 1000 : 5000;
           return Observable.interval(interval);
         });
@@ -89,6 +87,11 @@ export class AuthEffects {
         source.subscribe(() => this.store.dispatch(new auth.RefreshAction()));
       return new auth.ScheduleRefreshSuccessAction();
     });
+
+  @Effect()
+  scheduleRefreshSuccess$: Observable<Action> = this.actions$
+    .ofType(auth.ActionTypes.SCHEDULE_REFRESH_SUCCESS)
+    .map(() => new user.LoadAction());
 
   @Effect()
   refreshToken$: Observable<Action> = this.actions$

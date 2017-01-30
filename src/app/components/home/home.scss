@@ -1,17 +1,43 @@
 .home-layout {
-	margin: 50px auto;
+  margin: 50px auto;
   min-height: 100%;
   width: 100%;
 }
 
-.main-card {
-	width: 800px;
-	max-width: 80vw;
-	margin: 0 auto 50px auto;
+.news-card {
+  width: 300px;
+  margin: 0 auto 50px auto;
+  text-align: center;
+  h3 {
+    width: 100%;
+    text-decoration: underline;
+  }
 }
 
+.main-card {
+  width: 800px;
+  max-width: 80vw;
+  margin: 0 auto 50px auto;
+  h2 {
+    width: 100%;
+    margin: auto;
+  }
+  img {
+    text-align: center;
+  }
+  md-card-actions {
+    text-align: center;
+    margin: 10px auto;
+    a {
+      background-color: #2196f3;
+      color: white;
+    }
+  }
+}
+
+
 .example-header-image {
-	background-size: cover;
+  background-size: cover;
 }
 
 .testimony-list {
@@ -21,8 +47,8 @@
 }
 
 .testimony-card {
-	margin: 0 auto 50px auto;
-	width: 200px;
+  margin: 0 auto 50px auto;
+  width: 200px;
 }
 
 .flex-item {

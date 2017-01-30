@@ -1,24 +1,34 @@
 <div fxLayout="column" fxLayout.gt-md="row"
      fxLayoutAlign="center stretch"
      class="home-layout">
-  <div class="flex-item" fxFlex="33"></div>
-  <div class="flex-item" fxFlex="66">
-    <md-card class="main-card">
-      <img md-card-image src="../../../assets/img/edemy-banner.jpg">
+  <div class="flex-item" fxFlex="33">
+    <md-card class="news-card">
+      <md-card-header>
+        <h3 align="center">News</h3>
+      </md-card-header>
       <md-card-content>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui dicta
-           minus
-           molestiae vel beatae natus eveniet ratione temporibus aperiam harum
-           alias
-           officiis assumenda officia quibusdam deleniti eos cupiditate dolore
-           doloribus!</p>
-        <p>Ad dolore dignissimos asperiores dicta facere optio quod commodi nam
-           tempore recusandae. Rerum sed nulla eum vero expedita ex delectus
-           voluptates rem at neque quos facere sequi unde optio aliquam!</p>
+        <span class="no-news">Currently no news.</span>
       </md-card-content>
     </md-card>
   </div>
-  <div fxFlex="33" class="testimony-list flex-item">
+  <div class="flex-item" fxFlex="66">
+    <md-card class="main-card">
+      <md-card-header>
+        <h2 align="center">Engage, Enrich, Enable</h2>
+      </md-card-header>
+      <img md-card-image src="assets/img/edemy-banner.jpg">
+      <md-card-content>
+        <p>We believe that every child is unique – our teaching styles and
+           enrichment material are individualized and specially catered to help
+           every student discover their potential and to meet their learning
+           needs.</p>
+      </md-card-content>
+      <md-card-actions>
+        <a md-raised-button class="apply-button" href="#">Apply Now</a>
+      </md-card-actions>
+    </md-card>
+  </div>
+  <div class="testimony-list flex-item" fxFlex="33">
     <md-card class="testimony-card">
       <md-card-header>
         <md-card-title>Model Student</md-card-title>
