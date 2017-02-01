@@ -1,6 +1,6 @@
-import {createSelector} from 'reselect';
+import { createSelector } from 'reselect';
 import * as fromRouter from '@ngrx/router-store';
-import {environment} from '../../environments/environment';
+import { environment } from '../../environments/environment';
 /**
  * combineReducers is another useful metareducer that takes a map of reducer
  * functions and creates a new reducer that stores the gathers the values
@@ -10,7 +10,7 @@ import {environment} from '../../environments/environment';
  * More:
  * https://egghead.io/lessons/javascript-redux-implementing-combinereducers-from-scratch
  */
-import {ActionReducer, combineReducers} from '@ngrx/store';
+import { ActionReducer, combineReducers } from '@ngrx/store';
 /**
  * The compose function is one of our most handy tools. In basic terms, you give
  * it any number of functions and it returns a function. This new function
@@ -19,13 +19,13 @@ import {ActionReducer, combineReducers} from '@ngrx/store';
  *
  * More: https://drboolean.gitbooks.io/mostly-adequate-guide/content/ch5.html
  */
-import {compose} from '@ngrx/core/compose';
+import { compose } from '@ngrx/core/compose';
 /**
  * storeFreeze prevents state from being mutated. When mutation occurs, an
  * exception will be thrown. This is useful during development mode to
  * ensure that none of the reducers accidentally mutates the state.
  */
-import {storeFreeze} from 'ngrx-store-freeze';
+import { storeFreeze } from 'ngrx-store-freeze';
 /**
  * Every reducer module's default export is the reducer function itself. In
  * addition, each module should export a type or interface that describes
@@ -44,13 +44,13 @@ import * as fromSubjects from './subjects';
  * our top Level state interface is just a map of keys to inner state types.
  */
 export interface State {
-  layout: fromLayout.State;
-  auth: fromAuth.State;
-  user: fromUser.State;
-  router: fromRouter.RouterState;
-  lessons: fromLessons.State,
-  levels: fromLevels.State,
-  subjects: fromSubjects.State
+	layout: fromLayout.State;
+	auth: fromAuth.State;
+	user: fromUser.State;
+	router: fromRouter.RouterState;
+	lessons: fromLessons.State,
+	levels: fromLevels.State,
+	subjects: fromSubjects.State
 }
 
 /**
@@ -61,13 +61,13 @@ export interface State {
  * the result from right to left.
  */
 const reducers = {
-  layout: fromLayout.reducer,
-  auth: fromAuth.reducer,
-  user: fromUser.reducer,
-  router: fromRouter.routerReducer,
-  levels: fromLevels.reducer,
-  lessons: fromLessons.reducer,
-  subjects: fromSubjects.reducer,
+	layout: fromLayout.reducer,
+	auth: fromAuth.reducer,
+	user: fromUser.reducer,
+	router: fromRouter.routerReducer,
+	levels: fromLevels.reducer,
+	lessons: fromLessons.reducer,
+	subjects: fromSubjects.reducer,
 };
 
 const developmentReducer: ActionReducer<State> = compose(storeFreeze,
@@ -75,9 +75,9 @@ const developmentReducer: ActionReducer<State> = compose(storeFreeze,
 const productionReducer: ActionReducer<State> = combineReducers(reducers);
 
 export function reducer(state: any, action: any) {
-  if (environment.production)
-    return productionReducer(state, action);
-  return developmentReducer(state, action);
+	if (environment.production)
+		return productionReducer(state, action);
+	return developmentReducer(state, action);
 }
 
 /**
@@ -103,8 +103,8 @@ export const getAuthLoading = createSelector(getAuthState, fromAuth.getLoading);
 export const getUserState = (state: State) => state.user;
 export const getUserEntity = createSelector(getUserState, fromUser.getEntity);
 export const getUserDisplayName = createSelector(getUserEntity, entity => {
-  const result = !entity ? '' : entity.DisplayName;
-  return result;
+	const result = !entity ? '' : entity.DisplayName;
+	return result;
 });
 
 /**

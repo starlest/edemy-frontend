@@ -10,8 +10,8 @@ import {
 @Component({
   selector: 'ed-online-lesson',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: 'online-lesson.html',
-  styleUrls: ['online-lesson.scss']
+  templateUrl: './online-lesson.html',
+  styleUrls: ['./online-lesson.scss']
 })
 export class OnlineLessonComponent implements OnInit {
   @Input() lesson: Lesson;

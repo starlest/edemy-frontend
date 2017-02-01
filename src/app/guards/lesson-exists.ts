@@ -19,7 +19,7 @@ export class LessonExistsGuard implements CanActivate {
    */
   waitForCollectionToLoad(): Observable<boolean> {
     return this.store.select(fromRoot.getLessonsLoaded)
-      .filter(loaded => loaded)
+      .filter((loaded: boolean) => loaded)
       .take(1);
   }
 

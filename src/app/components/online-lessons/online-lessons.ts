@@ -11,8 +11,8 @@ import {Level} from '../../models/level';
 
 @Component({
   selector: 'ed-online-lessons',
-  templateUrl: 'online-lessons.html',
-  styleUrls: ['online-lessons.scss']
+  templateUrl: './online-lessons.html',
+  styleUrls: ['./online-lessons.scss']
 })
 export class OnlineLessonsComponent implements OnInit, OnDestroy {
   selectedSubjectFilter: string;

@@ -10,8 +10,8 @@ import * as fromRoot from '../../reducers';
 @Component({
   selector: 'ed-login',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: 'login.html',
-  styleUrls: ['login.scss']
+  templateUrl: './login.html',
+  styleUrls: ['./login.scss']
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;

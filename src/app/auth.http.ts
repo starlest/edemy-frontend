@@ -15,7 +15,7 @@ export class AuthHttp implements OnDestroy {
               http: Http) {
     this.authEntitySubscription$ =
       this.store.select(fromRoot.getAuthEntity)
-        .map(entity => this.authEntity = entity).subscribe();
+        .map((entity: AuthEntity) => this.authEntity = entity).subscribe();
     this.http = http;
   }
 

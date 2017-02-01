@@ -5,8 +5,8 @@ import * as layout from '../../actions/layout';
 
 @Component({
   selector: 'ed-home',
-  templateUrl: 'home.html',
-  styleUrls: ['home.scss']
+  templateUrl: './home.html',
+  styleUrls: ['./home.scss']
 })
 export class HomeComponent implements OnInit {
   constructor(private store: Store<fromRoot.State>) {
