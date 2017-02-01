@@ -18,8 +18,7 @@ export class LoginComponent implements OnInit {
   loginError$: Observable<boolean>;
 
   constructor(private store: Store<fromRoot.State>,
-              private fb: FormBuilder,
-              private authService: AuthService) {
+              private fb: FormBuilder) {
     this.loginError$ =
       this.store.select(fromRoot.getAuthError).map(error => !!error);
     this.loginForm = fb.group({

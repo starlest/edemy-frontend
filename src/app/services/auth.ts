@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {RequestOptions, Headers} from '@angular/http';
-import {environment} from '../../environments/environment';
-import {AuthHttp} from '../auth.http';
-import {Observable} from 'rxjs';
-import {AuthEntity} from '../models/auth-entity';
-import {Store} from '@ngrx/store';
+import { Injectable } from '@angular/core';
+import { RequestOptions, Headers } from '@angular/http';
+import { environment } from '../../environments/environment';
+import { AuthHttp } from '../auth.http';
+import { Observable } from 'rxjs';
+import { AuthEntity } from '../models/auth-entity';
+import { Store } from '@ngrx/store';
 import * as fromRoot from '../reducers';
 
 @Injectable()
@@ -25,9 +25,9 @@ export class AuthService {
   }
 
   logout(): any {
+    this.setAuthInLocalStorage(null);
     const url = environment.apiEndpoint + 'Accounts/Logout'; // LogoutPath
     return this.http.post(url, null)
-      .map(() => this.setAuthInLocalStorage(null))
       .catch(err => Observable.throw(err));
   }
 

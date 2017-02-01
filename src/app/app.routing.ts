@@ -1,10 +1,11 @@
-import {Routes, RouterModule} from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import {
-  HomeComponent, NotFoundPageComponent, LoginComponent, OnlineLessonsComponent
+  AboutComponent, HomeComponent, NotFoundPageComponent, LoginComponent,
+  OnlineLessonsComponent
 } from './components';
-import {ViewLessonPageComponent} from './containers';
-import {LessonExistsGuard} from './guards/lesson-exists';
-import {LoggedInGuard} from './guards/logged-in';
+import { ViewLessonPageComponent } from './containers';
+import { LessonExistsGuard } from './guards/lesson-exists';
+import { LoggedInGuard } from './guards/logged-in';
 
 export const appRoutes: Routes = [
   {
@@ -15,6 +16,10 @@ export const appRoutes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'about',
+    component: AboutComponent
   },
   {
     path: 'login',

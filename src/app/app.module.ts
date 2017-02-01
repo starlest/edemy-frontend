@@ -1,14 +1,15 @@
-import {AppRouting} from './app.routing';
-import {BrowserModule} from '@angular/platform-browser';
-import {FlexLayoutModule} from '@angular/flex-layout';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
-import {MaterialModule} from '@angular/material';
-import {NgModule} from '@angular/core';
-import {AppComponent} from './app.component';
+import { AppRouting } from './app.routing';
+import { BrowserModule } from '@angular/platform-browser';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { MaterialModule } from '@angular/material';
+import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
 import {
-  HomeComponent, OnlineLessonComponent, OnlineLessonsComponent,
-  NotFoundPageComponent, ToolbarComponent, LoginComponent
+  AboutComponent, HomeComponent, OnlineLessonComponent,
+  OnlineLessonsComponent, NotFoundPageComponent, ToolbarComponent,
+  LoginComponent
 } from './components';
 import {
   SelectedLessonPageComponent, ViewLessonPageComponent
@@ -16,22 +17,23 @@ import {
 import {
   AuthService, UserService, LessonsService, LevelsService, SubjectsService
 } from './services';
-import {StoreModule} from '@ngrx/store';
-import {reducer} from './reducers';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './reducers';
 // import { DBModule } from '@ngrx/db';
-import {EffectsModule} from '@ngrx/effects';
+import { EffectsModule } from '@ngrx/effects';
 import {
   AuthEffects, UserEffects, LessonsEffects, LevelsEffects, SubjectsEffects
 } from './effects';
-import {RouterStoreModule} from '@ngrx/router-store';
-import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import { RouterStoreModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import 'hammerjs';
-import {AuthHttp} from './auth.http';
-import {LessonExistsGuard} from './guards/lesson-exists';
-import {LoggedInGuard} from './guards/logged-in';
+import { AuthHttp } from './auth.http';
+import { LessonExistsGuard } from './guards/lesson-exists';
+import { LoggedInGuard } from './guards/logged-in';
 
 @NgModule({
   declarations: [
+    AboutComponent,
     AppComponent,
     HomeComponent,
     OnlineLessonComponent,

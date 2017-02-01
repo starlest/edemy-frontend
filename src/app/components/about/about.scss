@@ -1,0 +1,41 @@
+.introduction-card {
+  width: 1024px;
+  max-width: 90vw;
+  margin: 30px auto;
+  .title {
+    margin: auto;
+  }
+  .mission {
+    margin: 30px auto;
+  }
+}
+
+.tutors-card {
+  width: 1024px;
+  max-width: 90vw;
+  margin: 50px auto;
+  background-color: #2196f3;
+  .title {
+    margin: auto;
+  }
+}
+
+.tutor-card {
+  height: 80%;
+  width: 350px;
+  max-width: 90%;
+  margin: 20px auto;
+  .tutor-img-wrapper {
+    text-align: center;
+    img {
+      margin: 10px auto;
+      width: 200px;
+      height: 200px;
+      border-radius: 200px;
+    }
+  }
+}
+
+.flex-item {
+  flex: 1 0 auto !important;
+}
