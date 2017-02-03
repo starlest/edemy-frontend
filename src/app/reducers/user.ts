@@ -1,4 +1,4 @@
-import * as user from '../actions/user';
+import * as user from '../actions/user.actions';
 import {AuthEntity} from '../models/auth-entity';
 import {User} from '../models/user';
 

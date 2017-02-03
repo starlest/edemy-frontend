@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var core_1 = require('@angular/core');
 var fromRoot = require('./reducers');
-var layout = require('./actions/layout');
+var layout = require('./actions/layout.actions');
 var AppComponent = (function () {
     function AppComponent(store, ngZone) {
         this.store = store;

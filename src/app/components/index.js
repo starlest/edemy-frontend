@@ -1,11 +1,11 @@
 "use strict";
-var home_1 = require('./home/home');
+var home_1 = require('./home/home.component');
 exports.HomeComponent = home_1.HomeComponent;
-var online_lesson_1 = require('./online-lesson/online-lesson');
+var online_lesson_1 = require('./online-lesson/online-lesson.component');
 exports.OnlineLessonComponent = online_lesson_1.OnlineLessonComponent;
-var online_lessons_1 = require('./online-lessons/online-lessons');
+var online_lessons_1 = require('./online-lessons/online-lessons.component');
 exports.OnlineLessonsComponent = online_lessons_1.OnlineLessonsComponent;
 var page_not_found_1 = require('./page-not-found/page-not-found');
 exports.PageNotFoundComponent = page_not_found_1.PageNotFoundComponent;
-var toolbar_1 = require('./toolbar/toolbar');
+var toolbar_1 = require('./toolbar/toolbar.component');
 exports.ToolbarComponent = toolbar_1.ToolbarComponent;

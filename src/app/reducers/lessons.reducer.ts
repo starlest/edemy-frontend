@@ -1,4 +1,4 @@
-import * as lessons from '../actions/lessons';
+import * as lessons from '../actions/lessons.actions';
 import {Lesson} from '../models/lesson';
 import {createSelector} from 'reselect';
 

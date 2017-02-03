@@ -1,9 +1,9 @@
 "use strict";
 var router_1 = require('@angular/router');
-var home_1 = require('./components/home/home');
+var home_1 = require('./components/home/home.component');
 var page_not_found_1 = require('./components/page-not-found/page-not-found');
-var online_lessons_1 = require('./components/online-lessons/online-lessons');
-var view_lesson_page_1 = require('./containers/view-lesson-page');
+var online_lessons_1 = require('./components/online-lessons/online-lessons.component');
+var view_lesson_page_1 = require('./containers/view-lesson-page.component');
 exports.appRoutes = [
     {
         path: '',

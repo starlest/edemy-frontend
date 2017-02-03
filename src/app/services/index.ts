@@ -1,7 +1,7 @@
-export {AuthService} from './auth';
-export {UserService} from './user';
-export {LessonsService} from './lessons';
-export {LevelsService} from './levels';
-export {SubjectsService} from './subjects';
+export {AuthService} from './auth.service';
+export {UserService} from './user.service';
+export {LessonsService} from './lessons.service';
+export {LevelsService} from './levels.service';
+export {SubjectsService} from './subjects.service';
 
 

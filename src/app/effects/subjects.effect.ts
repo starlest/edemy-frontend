@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {Actions, Effect} from '@ngrx/effects';
 import {Observable} from 'rxjs';
 import {Action} from '@ngrx/store';
-import * as subjects from '../actions/subjects';
+import * as subjects from '../actions/subjects.actions';
 import {of} from 'rxjs/observable/of';
-import {SubjectsService} from '../services/subjects';
+import {SubjectsService} from '../services/subjects.service';
 import {Subject} from '../models/subject';
 
 @Injectable()

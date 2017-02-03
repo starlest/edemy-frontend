@@ -32,12 +32,12 @@ import { storeFreeze } from 'ngrx-store-freeze';
  * the state of the reducer plus any selector functions. The `* as`
  * notation packages up all of the exports into a single object.
  */
-import * as fromLayout from './layout';
-import * as fromAuth from './auth';
+import * as fromLayout from './layout.reducer';
+import * as fromAuth from './auth.reducer';
 import * as fromUser from './user';
-import * as fromLessons from './lessons';
-import * as fromLevels from './levels';
-import * as fromSubjects from './subjects';
+import * as fromLessons from './lessons.reducer';
+import * as fromLevels from './levels.reducer';
+import * as fromSubjects from './subjects.reducer';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means

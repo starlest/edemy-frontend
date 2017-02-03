@@ -33,10 +33,10 @@ var ngrx_store_freeze_1 = require('ngrx-store-freeze');
  * the state of the reducer plus any selector functions. The `* as`
  * notation packages up all of the exports into a single object.
  */
-var fromLayout = require('./layout');
-var fromLessons = require('./lessons');
-var fromLevels = require('./levels');
-var fromSubjects = require('./subjects');
+var fromLayout = require('./layout.reducer');
+var fromLessons = require('./lessons.reducer');
+var fromLevels = require('./levels.reducer');
+var fromSubjects = require('./subjects.reducer');
 /**
  * Because metareducers take a reducer function and return a new reducer,
  * we can use our compose helper to chain them together. Here we are

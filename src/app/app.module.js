@@ -19,16 +19,16 @@ var router_store_1 = require('@ngrx/router-store');
 var app_component_1 = require('./app.component');
 var reducers_1 = require('./reducers');
 require('hammerjs');
-var lessons_1 = require('./services/lessons');
+var lessons_1 = require('./services/lessons.service');
 var effects_1 = require('@ngrx/effects');
-var lessons_2 = require('./effects/lessons');
-var subjects_1 = require('./services/subjects');
-var subjects_2 = require('./effects/subjects');
-var levels_1 = require('./services/levels');
-var levels_2 = require('./effects/levels');
+var lessons_2 = require('./effects/lessons.effect.ts');
+var subjects_1 = require('./services/subjects.service');
+var subjects_2 = require('./effects/subjects.effect.ts');
+var levels_1 = require('./services/levels.service');
+var levels_2 = require('./effects/levels.effect.ts');
 var components_1 = require('./components');
-var selected_lesson_page_1 = require('./containers/selected-lesson-page');
-var view_lesson_page_1 = require('./containers/view-lesson-page');
+var selected_lesson_page_1 = require('./containers/selected-lesson-page.component');
+var view_lesson_page_1 = require('./containers/view-lesson-page.component');
 var AppModule = (function () {
     function AppModule() {
     }

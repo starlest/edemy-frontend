@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
-import { AuthService } from '../services/auth';
+import { AuthService } from '../services/auth.service';
 import { Observable, Subscription } from 'rxjs';
 import { Action, Store } from '@ngrx/store';
-import * as auth from '../actions/auth';
-import * as user from '../actions/user';
+import * as auth from '../actions/auth.actions';
+import * as user from '../actions/user.actions';
 import * as fromRoot from '../reducers';
 import { go, back } from '@ngrx/router-store';
 import { of } from 'rxjs/observable/of';

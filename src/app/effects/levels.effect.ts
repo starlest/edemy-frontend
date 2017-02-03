@@ -2,10 +2,10 @@ import {Injectable} from '@angular/core';
 import {Actions, Effect} from '@ngrx/effects';
 import {Observable} from 'rxjs';
 import {Action} from '@ngrx/store';
-import * as levels from '../actions/levels';
+import * as levels from '../actions/levels.actions';
 import {of} from 'rxjs/observable/of';
 import {Level} from '../models/level';
-import {LevelsService} from '../services/levels';
+import {LevelsService} from '../services/levels.service';
 
 @Injectable()
 export class LevelsEffects {

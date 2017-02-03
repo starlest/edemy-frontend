@@ -5,14 +5,14 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import * as fromRoot from '../../reducers';
 import { go } from '@ngrx/router-store';
-import { AuthService } from '../../services/auth';
-import * as auth from '../../actions/auth';
+import { AuthService } from '../../services/auth.service';
+import * as auth from '../../actions/auth.actions';
 
 @Component({
 	selector: 'ed-toolbar',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	templateUrl: './toolbar.html',
-	styleUrls: ['./toolbar.scss']
+	templateUrl: './toolbar.component.html',
+	styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent {
 	title$: Observable<string>;

@@ -2,10 +2,10 @@ import {Injectable} from '@angular/core';
 import {Actions, Effect} from '@ngrx/effects';
 import {Observable} from 'rxjs';
 import {Action} from '@ngrx/store';
-import * as lessons from '../actions/lessons';
+import * as lessons from '../actions/lessons.actions';
 import {Lesson} from '../models/lesson';
 import {of} from 'rxjs/observable/of';
-import {LessonsService} from '../services/lessons';
+import {LessonsService} from '../services/lessons.service';
 
 @Injectable()
 export class LessonsEffects {

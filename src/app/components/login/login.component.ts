@@ -1,17 +1,17 @@
 import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {AuthService} from '../../services/auth';
+import {AuthService} from '../../services/auth.service';
 import {Observable} from 'rxjs';
-import * as auth from '../../actions/auth';
-import * as layout from '../../actions/layout';
+import * as auth from '../../actions/auth.actions';
+import * as layout from '../../actions/layout.actions';
 import * as fromRoot from '../../reducers';
 
 @Component({
   selector: 'ed-login',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './login.html',
-  styleUrls: ['./login.scss']
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;

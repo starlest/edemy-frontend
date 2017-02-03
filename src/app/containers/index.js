@@ -7,10 +7,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var selected_lesson_page_1 = require('./selected-lesson-page');
-var view_lesson_page_1 = require('./view-lesson-page');
+var selected_lesson_page_1 = require('./selected-lesson-page.component');
+var view_lesson_page_1 = require('./view-lesson-page.component');
 var common_1 = require('@angular/common');
-var online_lesson_1 = require('../components/online-lesson/online-lesson');
+var online_lesson_1 = require('../components/online-lesson/online-lesson.component');
 exports.CONTAINERS = [
     selected_lesson_page_1.SelectedLessonPageComponent,
     view_lesson_page_1.ViewLessonPageComponent,

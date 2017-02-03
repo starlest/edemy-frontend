@@ -3,16 +3,16 @@ import {Store} from '@ngrx/store';
 import {Lesson} from '../../models/lesson';
 import {Subject} from '../../models/subject';
 import * as fromRoot from '../../reducers';
-import * as layout from '../../actions/layout';
-import * as lessons from '../../actions/lessons';
+import * as layout from '../../actions/layout.actions';
+import * as lessons from '../../actions/lessons.actions';
 import {Observable, Subscription} from 'rxjs';
 import {isNullOrUndefined} from 'util';
 import {Level} from '../../models/level';
 
 @Component({
   selector: 'ed-online-lessons',
-  templateUrl: './online-lessons.html',
-  styleUrls: ['./online-lessons.scss']
+  templateUrl: './online-lessons.component.html',
+  styleUrls: ['./online-lessons.component.scss']
 })
 export class OnlineLessonsComponent implements OnInit, OnDestroy {
   selectedSubjectFilter: string;
