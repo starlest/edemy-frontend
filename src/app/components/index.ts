@@ -1,4 +1,5 @@
 export {AboutComponent} from './about/about.component';
+export {ContactComponent} from './contact/contact.component';
 export {HomeComponent} from './home/home.component';
 export {OnlineLessonComponent} from './online-lesson/online-lesson.component';
 export {OnlineLessonsComponent} from './online-lessons/online-lessons.component';
