@@ -1,12 +1,40 @@
-.home-layout {
-	margin: 50px auto;
-	min-height: 100%;
+.home-wrapper {
+	height: 100%;
+	background-color: #2196f3;
+}
+
+.home-header {
 	width: 100%;
+	height: 560px;
+	background-image: url('assets/img/home-banner.jpg');
+	background-size: cover;
+	text-align: center;
+	.header-content {
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+		margin: auto;
+		h1 {
+			margin: 0;
+		}
+		.edemy-logo {
+			margin: 40px auto;
+			width: 200px;
+			height: 200px;
+		}
+		.buttons {
+			.apply-button {
+				background-color: #2196f3;
+				color: white;
+			}
+		}
+	}
 }
 
 .news-card {
-	width: 250px;
-	margin: 0 auto 50px auto;
+	width: 1024px;
+	max-width: 80vw;
+	margin: 50px auto;
 	text-align: center;
 	h3 {
 		width: 100%;
@@ -18,42 +46,14 @@
 	}
 }
 
-.main-card {
-	width: 650px;
-	max-width: 70vw;
-	margin: 0 auto 50px auto;
-	h2 {
-		width: 100%;
-		margin: auto;
-	}
-	img {
-		text-align: center;
-	}
-	md-card-actions {
-		text-align: center;
-		margin: 10px auto;
-		a {
-			background-color: #2196f3;
-			color: white;
-		}
+@media (max-width: 1024px) {
+	.home-header {
+		background-image: url('assets/img/home-banner-sm.jpg');
 	}
 }
 
-.example-header-image {
-	background-size: cover;
-}
-
-.testimony-list {
-	h3 {
-		text-align: center;
+@media (min-width: 1024px) and (max-width: 1920px) {
+	.home-header {
+		background-image: url('assets/img/home-banner-xl.jpg');
 	}
-}
-
-.testimony-card {
-	margin: 0 auto 50px auto;
-	width: 200px;
-}
-
-.flex-item {
-	flex: 1 0 auto !important;
 }
