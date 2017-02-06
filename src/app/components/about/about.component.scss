@@ -1,25 +1,19 @@
-.introduction-card {
-	width: 1024px;
-	max-width: 80vw;
-	margin: 30px auto;
-	.title {
-		margin: auto;
-	}
-	.mission {
-		margin: 30px auto;
+.introduction {
+	margin: 50px auto;
+	text-align: center;
+	font-family: 'Open Sans', sans-serif;
+	.vision {
+		margin-top: 50px;
 	}
 }
 
-.tutors-card {
-	width: 1024px;
-	max-width: 80vw;
-	margin: 50px auto;
+.tutors {
+	width: 100%;
 	background-color: #2196f3;
-	h2 {
+	padding-top: 50px;
+	text-align: center;
+	h1 {
 		color: white;
-	}
-	.title {
-		margin: auto;
 	}
 }
 

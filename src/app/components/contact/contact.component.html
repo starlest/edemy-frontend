@@ -1,13 +1,32 @@
-<md-card class="contact-card">
-  <md-card-header>
-    <h3>Contact</h3>
-  </md-card-header>
-  <md-card-content>
-    <h4 align="center">We will respond within 24 hours.</h4>
+<iframe class="location"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.705273579726!2d103.83145851529184!3d1.3534052990129104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da173a98d9aff1%3A0x982934608ee5429b!2s261+Upper+Thomson+Rd%2C+Singapore+574388!5e0!3m2!1sen!2sid!4v1486146934938"
+        frameborder="0" allowfullscreen></iframe>
+
+<div class="content-wrapper" fxLayout="column" fxLayout.gt-md="row">
+  <div fxFlexOffset.gt-md="20" fxFlex="20"></div>
+
+  <div class="info" fxFlex="30">
+    <div class="contact-info">
+      <h2>Address</h2>
+      <span>261A Upper Thomson Road</span>
+    </div>
+    <div class="contact-info">
+      <h2>Telephone</h2>
+      <span>12345678</span>
+    </div>
+    <div class="contact-info">
+      <h2>Email</h2>
+      <span>support@edemy.sg</span>
+    </div>
+  </div>
+
+  <div class="contact-form-wrapper" fxFlex="30">
+    <h3>We'll get back to you as soon as possible.</h3>
     <md-card class="contact-form-card">
       <md-card-content>
         <form class="contact-form" [formGroup]="contactForm"
               (submit)="sendCustomerQuery()">
+          <h3>Contact Form</h3>
           <md-input-container class="full-width">
             <input md-input type="text" formControlName="name"
                    placeholder="Name"
@@ -29,21 +48,16 @@
                   required autofocus></textarea>
           </md-input-container>
           <div class="buttons">
-            <button md-raised-button type="submit" color="primary">Send</button>
+            <button class="full-width" md-raised-button type="submit"
+                    color="primary">Send
+            </button>
           </div>
         </form>
       </md-card-content>
     </md-card>
-  </md-card-content>
-</md-card>
+  </div>
 
-<md-card class="location-card">
-  <md-card-header>
-    <h3>Location</h3>
-  </md-card-header>
-  <md-card-content>
-    <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.705273579726!2d103.83145851529184!3d1.3534052990129104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da173a98d9aff1%3A0x982934608ee5429b!2s261+Upper+Thomson+Rd%2C+Singapore+574388!5e0!3m2!1sen!2sid!4v1486146934938"
-        frameborder="0" allowfullscreen></iframe>
-  </md-card-content>
-</md-card>
+  <div fxFlex fxShow.gt-md></div>
+</div>
+
+
