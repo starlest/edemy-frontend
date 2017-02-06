@@ -8,7 +8,6 @@
 }
 
 .tutors {
-	width: 100%;
 	background-color: #2196f3;
 	padding: 50px;
 	h1 {
@@ -20,7 +19,7 @@
 .tutor-card {
 	height: 80%;
 	width: 350px;
-	max-width: 80%;
+	max-width: 80vw;
 	margin: 20px auto;
 	.tutor-img-wrapper {
 		text-align: center;
