@@ -24,7 +24,7 @@
         </label>
       </div>
       <div class="buttons">
-        <button [disabled]="!loginForm.valid" md-raised-button type="submit"
+        <button [disabled]="submitted$ | async" md-raised-button type="submit"
                 color="primary">Login
         </button>
       </div>

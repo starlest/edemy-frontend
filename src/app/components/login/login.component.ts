@@ -16,10 +16,12 @@ import * as fromRoot from '../../reducers';
 })
 export class LoginComponent implements OnInit {
 	loginForm: FormGroup;
+	submitted$: Observable<boolean>;
 	loginError$: Observable<boolean>;
 
 	constructor(private store: Store<fromRoot.State>,
 	            private fb: FormBuilder) {
+		this.submitted$ = this.store.select(fromRoot.getAuthLoading);
 		this.loginError$ =
 		  this.store.select(fromRoot.getAuthError).map(error => !!error);
 		this.loginForm = fb.group({

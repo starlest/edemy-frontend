@@ -14,7 +14,7 @@ export class LessonsService {
   }
 
   // calls the [GET] /api/levels Web API method to retrieve all lessons
-  get() {
+  get(): any {
     return this.http.get(this.baseUrl)
       .map((response: Response) => response.json() as Level[])
       .catch(this.handleError);

@@ -7,19 +7,19 @@ import { MaterialModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {
-	AboutComponent, CurriculumComponent, ContactComponent, HomeComponent,
-	OnlineLessonComponent, OnlineLessonsComponent, NotFoundPageComponent,
-	ToolbarComponent, LoginComponent
+	AboutComponent, CurriculumComponent, ContactComponent,
+	HomeComponent, OnlineLessonComponent, OnlineLessonsComponent,
+	NotFoundPageComponent, ToolbarComponent, LoginComponent
 } from './components';
 import {
 	SelectedLessonPageComponent, ViewLessonPageComponent
 } from './containers';
 import {
-	AuthService, UserService, LessonsService, LevelsService, SubjectsService
+	AuthService, MessagesService, LessonsService, LevelsService,
+	SubjectsService, UserService
 } from './services';
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './reducers';
-// import { DBModule } from '@ngrx/db';
 import { EffectsModule } from '@ngrx/effects';
 import {
 	AuthEffects, UserEffects, LessonsEffects, LevelsEffects, SubjectsEffects
@@ -94,9 +94,9 @@ import { RecaptchaModule } from 'ng2-recaptcha';
 		EffectsModule.run(LevelsEffects),
 		EffectsModule.run(SubjectsEffects)
 	],
-	providers: [AuthHttp, AuthService, UserService, LessonsService,
-		LevelsService,
-		SubjectsService, LessonExistsGuard, LoggedInGuard],
+	providers: [AuthHttp, AuthService, MessagesService, LessonsService,
+		LevelsService, UserService, SubjectsService, LessonExistsGuard,
+		LoggedInGuard],
 	bootstrap: [AppComponent]
 })
 export class AppModule {
