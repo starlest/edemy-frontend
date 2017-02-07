@@ -7,7 +7,7 @@ import { MaterialModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {
-	AboutComponent, HomeComponent, OnlineLessonComponent,
+	AboutComponent, CurriculumComponent, HomeComponent, OnlineLessonComponent,
 	OnlineLessonsComponent, NotFoundPageComponent, ToolbarComponent,
 	LoginComponent
 } from './components';
@@ -36,6 +36,7 @@ import { ContactComponent } from './components/contact/contact.component';
 	declarations: [
 		AboutComponent,
 		ContactComponent,
+		CurriculumComponent,
 		AppComponent,
 		HomeComponent,
 		OnlineLessonComponent,

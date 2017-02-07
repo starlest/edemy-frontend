@@ -1,6 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import {
-	AboutComponent, ContactComponent, HomeComponent, NotFoundPageComponent,
+	AboutComponent, ContactComponent, CurriculumComponent, HomeComponent,
+	NotFoundPageComponent,
 	LoginComponent, OnlineLessonsComponent
 } from './components';
 import { ViewLessonPageComponent } from './containers';
@@ -24,6 +25,10 @@ export const appRoutes: Routes = [
 	{
 		path: 'contact',
 		component: ContactComponent
+	},
+	{
+		path: 'curriculum',
+		component: CurriculumComponent
 	},
 	{
 		path: 'login',
