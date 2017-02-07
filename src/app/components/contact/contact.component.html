@@ -23,31 +23,37 @@
   <div class="contact-form-wrapper" fxFlex="30">
     <md-card class="contact-form-card">
       <md-card-content>
-        <form class="contact-form" [formGroup]="contactForm"
+        <form class="contact-form"
+              [formGroup]="contactForm"
               (submit)="sendCustomerQuery()">
           <h3>Contact Form</h3>
           <md-input-container class="full-width">
             <input md-input type="text" formControlName="name"
-                   placeholder="Name"
-                   required autofocus>
+                   placeholder="Name" required>
           </md-input-container>
           <md-input-container class="full-width">
             <input md-input type="email" formControlName="email"
-                   placeholder="Email"
-                   required autofocus>
+                   placeholder="Email" required>
           </md-input-container>
           <md-input-container class="full-width">
             <input md-input type="tel" formControlName="phone"
-                   placeholder="Phone"
-                   required autofocus>
+                   placeholder="Phone" required>
           </md-input-container>
           <md-input-container class="full-width">
-        <textarea md-input rows="5" formControlName="query"
-                  placeholder="Query"
-                  required autofocus></textarea>
+            <textarea md-input rows="5" formControlName="query"
+                      placeholder="Query" required></textarea>
           </md-input-container>
+          <div class="captcha">
+            <recaptcha formControlName="captcha"
+                       siteKey="6LcffxQUAAAAABm03NR8yQ1eKfqQR3yjcWyXiFg5"
+                       required></recaptcha>
+            <div [hidden]="captchaControl.valid" role="alert"
+                 class="alert-error">Captcha must be solved.
+            </div>
+          </div>
           <div class="buttons">
-            <button class="full-width" md-raised-button type="submit"
+            <button [disabled]="!contactForm.valid" class="full-width"
+                    md-raised-button type="submit"
                     color="primary">Send
             </button>
           </div>

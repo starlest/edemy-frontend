@@ -3,7 +3,7 @@
     <h3 align="center">Login</h3>
   </md-card-header>
   <md-card-content>
-    <div  *ngIf="loginError$ | async" class="alert-error" role="alert">
+    <div *ngIf="loginError$ | async" class="alert-error" role="alert">
       <strong>Warning:</strong> Username and Password mismatch
     </div>
     <form class="form-login" [formGroup]="loginForm"
@@ -23,8 +23,18 @@
           Remember me
         </label>
       </div>
+      <div class="captcha">
+        <recaptcha formControlName="captcha"
+                   siteKey="6LcffxQUAAAAABm03NR8yQ1eKfqQR3yjcWyXiFg5"
+                   required></recaptcha>
+        <div [hidden]="captchaControl.valid" role="alert"
+             class="alert-error">Captcha must be solved.
+        </div>
+      </div>
       <div class="buttons">
-        <button md-raised-button type="submit" color="primary">Login</button>
+        <button [disabled]="!loginForm.valid" md-raised-button type="submit"
+                color="primary">Login
+        </button>
       </div>
     </form>
   </md-card-content>

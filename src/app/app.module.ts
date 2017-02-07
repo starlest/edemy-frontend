@@ -7,9 +7,9 @@ import { MaterialModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {
-	AboutComponent, CurriculumComponent, HomeComponent, OnlineLessonComponent,
-	OnlineLessonsComponent, NotFoundPageComponent, ToolbarComponent,
-	LoginComponent
+	AboutComponent, CurriculumComponent, ContactComponent, HomeComponent,
+	OnlineLessonComponent, OnlineLessonsComponent, NotFoundPageComponent,
+	ToolbarComponent, LoginComponent
 } from './components';
 import {
 	SelectedLessonPageComponent, ViewLessonPageComponent
@@ -30,7 +30,7 @@ import 'hammerjs';
 import { AuthHttp } from './auth.http';
 import { LessonExistsGuard } from './guards/lesson-exists';
 import { LoggedInGuard } from './guards/logged-in';
-import { ContactComponent } from './components/contact/contact.component';
+import { RecaptchaModule } from 'ng2-recaptcha';
 
 @NgModule({
 	declarations: [
@@ -52,9 +52,10 @@ import { ContactComponent } from './components/contact/contact.component';
 		BrowserModule,
 		FormsModule,
 		ReactiveFormsModule,
+		HttpModule,
 		FlexLayoutModule.forRoot(),
 		MaterialModule.forRoot(),
-		HttpModule,
+		RecaptchaModule.forRoot(),
 
 		/**
 		 * StoreModule.provideStore is imported once in the root module, accepting
