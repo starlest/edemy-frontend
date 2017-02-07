@@ -28,28 +28,25 @@
               (submit)="sendCustomerQuery()">
           <h3>Contact Form</h3>
           <md-input-container class="full-width">
-            <input md-input type="text" formControlName="name"
+            <input md-input type="text" formControlName="Name"
                    placeholder="Name" required>
           </md-input-container>
           <md-input-container class="full-width">
-            <input md-input type="email" formControlName="email"
+            <input md-input type="email" formControlName="Email"
                    placeholder="Email" required>
           </md-input-container>
           <md-input-container class="full-width">
-            <input md-input type="tel" formControlName="phone"
+            <input md-input type="tel" formControlName="Phone"
                    placeholder="Phone" required>
           </md-input-container>
           <md-input-container class="full-width">
-            <textarea md-input rows="5" formControlName="query"
+            <textarea md-input rows="5" formControlName="Query"
                       placeholder="Query" required></textarea>
           </md-input-container>
           <div class="captcha">
-            <recaptcha formControlName="captcha"
+            <recaptcha formControlName="Captcha"
                        siteKey="6LcffxQUAAAAABm03NR8yQ1eKfqQR3yjcWyXiFg5"
                        required></recaptcha>
-            <div [hidden]="captchaControl.valid" role="alert"
-                 class="alert-error">Captcha must be solved.
-            </div>
           </div>
           <div class="buttons">
             <button [disabled]="!contactForm.valid" class="full-width"

@@ -16,7 +16,6 @@ import * as fromRoot from '../../reducers';
 })
 export class LoginComponent implements OnInit {
 	loginForm: FormGroup;
-	captchaControl: AbstractControl;
 	loginError$: Observable<boolean>;
 
 	constructor(private store: Store<fromRoot.State>,
@@ -26,11 +25,8 @@ export class LoginComponent implements OnInit {
 		this.loginForm = fb.group({
 			username: ['', Validators.required],
 			password: ['', Validators.required],
-			captcha: ['', Validators.required],
 			rememberUser: [false]
 		});
-
-		this.captchaControl = this.loginForm.controls['captcha'];
 	}
 
 	ngOnInit() {

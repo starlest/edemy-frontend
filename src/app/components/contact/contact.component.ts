@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
 import * as layout from '../../actions/layout.actions';
-import {
-	FormGroup, FormBuilder, Validators, AbstractControl
-} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { environment } from '../../../environments/environment';
+import { Http, RequestOptions, Headers } from '@angular/http';
 
 @Component({
 	selector: 'ed-contact',
@@ -13,19 +13,18 @@ import {
 })
 export class ContactComponent implements OnInit {
 	contactForm: FormGroup;
-	captchaControl: AbstractControl;
+	url = environment.apiEndpoint + 'messages/query';
 
 	constructor(private store: Store<fromRoot.State>,
-	            private fb: FormBuilder) {
+	            private fb: FormBuilder,
+	            private http: Http) {
 		this.contactForm = fb.group({
-			name: ['', Validators.required],
-			email: ['', Validators.required],
-			phone: ['', Validators.required],
-			query: ['', Validators.required],
-			captcha: ['', Validators.required]
+			Name: ['', Validators.required],
+			Email: ['', Validators.required],
+			Phone: ['', Validators.required],
+			Query: ['', Validators.required],
+			Captcha: ['', Validators.required]
 		});
-
-		this.captchaControl = this.contactForm.controls['captcha'];
 	}
 
 	ngOnInit() {
@@ -33,6 +32,17 @@ export class ContactComponent implements OnInit {
 	}
 
 	sendCustomerQuery() {
-		console.log(this.contactForm.value.captcha);
+		console.log(this.contactForm.value.Captcha);
+		this.http.post(this.url, JSON.stringify(this.contactForm.value),
+		  this.getRequestOptions()).subscribe();
+	}
+
+	// returns a viable RequestOptions object to handle Json requests
+	private getRequestOptions() {
+		return new RequestOptions({
+			headers: new Headers({
+				"Content-Type": "application/json"
+			})
+		});
 	}
 }

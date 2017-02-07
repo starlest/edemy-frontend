@@ -23,14 +23,6 @@
           Remember me
         </label>
       </div>
-      <div class="captcha">
-        <recaptcha formControlName="captcha"
-                   siteKey="6LcffxQUAAAAABm03NR8yQ1eKfqQR3yjcWyXiFg5"
-                   required></recaptcha>
-        <div [hidden]="captchaControl.valid" role="alert"
-             class="alert-error">Captcha must be solved.
-        </div>
-      </div>
       <div class="buttons">
         <button [disabled]="!loginForm.valid" md-raised-button type="submit"
                 color="primary">Login
