@@ -1,7 +1,7 @@
 export interface Lesson {
   Id: number;
   Title: string;
-  Level: string;
+  Levels: string[];
   Subject: string;
   Description: string;
   VideoLink: string;

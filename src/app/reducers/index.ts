@@ -41,7 +41,7 @@ import * as fromSubjects from './subjects.reducer';
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
- * our top Level state interface is just a map of keys to inner state types.
+ * our top Levels state interface is just a map of keys to inner state types.
  */
 export interface State {
 	layout: fromLayout.State;
@@ -56,7 +56,7 @@ export interface State {
 /**
  * Because metareducers take a reducer function and return a new reducer,
  * we can use our compose helper to chain them together. Here we are
- * using combineReducers to make our top Level reducer, and then
+ * using combineReducers to make our top Levels reducer, and then
  * wrapping that in storeLogger. Remember that compose applies
  * the result from right to left.
  */
@@ -107,13 +107,15 @@ export const getUserLoaded = createSelector(getUserState, fromUser.getLoaded);
  * Lessons Reducers
  */
 export const getLessonsState = (state: State) => state.lessons;
-export const getLessons = createSelector(getLessonsState,
-  fromLessons.getLessons);
+export const getFilteredLessons = createSelector(getLessonsState,
+  fromLessons.getFilteredLessons);
 export const getLessonsLoaded = createSelector(getLessonsState,
   fromLessons.getLoaded);
 export const getLessonEntities = createSelector(getLessonsState,
   fromLessons.getEntities);
-export const getSubjectLessons = (subject: string) => createSelector(getLessons,
+export const getFilter = createSelector(getLessonsState,
+  fromLessons.getFilter);
+export const getFilteredSubjectLessons = (subject: string) => createSelector(getFilteredLessons,
   lessons => lessons.filter(lesson => lesson.Subject === subject));
 export const getSelectedLesson = createSelector(getLessonsState,
   fromLessons.getSelected);

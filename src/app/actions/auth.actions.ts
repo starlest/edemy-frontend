@@ -6,6 +6,7 @@ export const ActionTypes = {
 	LOAD_FROM_SERVER: type('[Auth] Load From Server'),
 	LOAD_FROM_LOCAL_STORAGE: type('[Auth] Load From Local Storage'),
 	LOAD_SUCCESS: type('[Auth] Load Success'),
+	STARTUP_LOAD_FAIL: type('[Auth] Startup Load Fail'),
 	LOAD_FAIL: type('[Auth] Load Fail'),
 	SET: type('[Auth] Set'),
 	REMOVE: type('[Auth] Remove'),
@@ -38,6 +39,10 @@ export class LoadSuccessAction implements Action {
 
 export class LoadFailAction implements Action {
 	type = ActionTypes.LOAD_FAIL;
+}
+
+export class StartupLoadFailAction implements Action {
+	type = ActionTypes.STARTUP_LOAD_FAIL;
 }
 
 export class SetAction implements Action {
@@ -89,6 +94,7 @@ export type Actions = LoadFromServerAction
   | LoadFromLocalStorageAction
   | LoadSuccessAction
   | LoadFailAction
+  | StartupLoadFailAction
   | SetAction
   | RemoveAction
   | RemoveSuccessAction

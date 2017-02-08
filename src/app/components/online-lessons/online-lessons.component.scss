@@ -1,28 +1,30 @@
 .lessons-card {
-  width: 1000px;
-  max-width: 80vw;
-  margin: 50px auto;
+	width: 1000px;
+	max-width: 80vw;
+	margin: 50px auto;
 }
 
 .lessons-list {
-  margin: 50px auto;
+	margin: 50px auto;
 }
 
 .filters {
-  margin: 20px 0;
+	margin: 20px 0;
 }
 
 .lesson-level {
-  min-width: 100px;
-  text-align: right;
+	min-width: 60px;
+	text-align: center;
+	font-size: x-small;
+	color: blue;
 }
 
 .no-lessons-label {
-  text-align: center;
+	text-align: center;
 }
 
 @media (max-width: 550px) {
-  .lesson-description {
-    display: none;
-  }
+	.lesson-description {
+		display: none;
+	}
 }

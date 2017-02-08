@@ -2,7 +2,9 @@
   <md-card-header>
     <md-card-title-group>
       <md-card-title>{{lesson.Description}}</md-card-title>
-      <md-card-subtitle>{{lesson.Level}}</md-card-subtitle>
+      <md-card-subtitle>
+       <span class="level" *ngFor="let level of lesson.Levels">{{level}}</span>
+      </md-card-subtitle>
     </md-card-title-group>
   </md-card-header>
   <md-card-content>
@@ -12,9 +14,6 @@
               frameborder="0" allowfullscreen></iframe>
     </div>
   </md-card-content>
-  <md-card-actions>
-    <button md-button>SHARE</button>
-  </md-card-actions>
   <md-card-footer>
     <div class="tutor">
       <h4>Tutor: <a href="" target="_blank">{{lesson.Tutor}}</a></h4>

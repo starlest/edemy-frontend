@@ -88,7 +88,7 @@ export const getSelected = createSelector(getEntities, getSelectedId,
     return entities[selectedId];
   });
 
-export const getLessons = createSelector(getEntities, getIds, getFilter,
+export const getFilteredLessons = createSelector(getEntities, getIds, getFilter,
   (entities, ids, filter) => {
     return ids.map(id => entities[id]).filter(filter);
   });

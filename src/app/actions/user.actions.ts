@@ -6,6 +6,7 @@ export const ActionTypes = {
 	LOAD: type('[User] Load'),
 	LOAD_SUCCESS: type('[User] Load Success'),
 	LOAD_FAIL: type('[User] Load Fail'),
+	STARTUP_LOAD_FAIL: type('[User] Startup Load Fail'),
 	REMOVE: type('[User] Remove'),
 	REMOVE_SUCCESS: type('[User] Remove Success'),
 	REMOVE_FAIL: type('[User] Remove Fail'),
@@ -26,6 +27,11 @@ export class LoadFailAction implements Action {
 	type = ActionTypes.LOAD_FAIL;
 }
 
+export class StartupLoadFailAction implements Action {
+	type = ActionTypes.STARTUP_LOAD_FAIL;
+}
+
+
 export class RemoveAction implements Action {
 	type = ActionTypes.REMOVE;
 }
@@ -41,6 +47,7 @@ export class RemoveFailAction implements Action {
 export type Actions = LoadAction
   | LoadSuccessAction
   | LoadFailAction
+  | StartupLoadFailAction
   | RemoveAction
   | RemoveSuccessAction
   | RemoveFailAction;

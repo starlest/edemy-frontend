@@ -30,6 +30,7 @@ export function reducer(state = initialState, action: user.Actions): State {
 				loading: false
 			});
 
+		case user.ActionTypes.STARTUP_LOAD_FAIL:
 		case user.ActionTypes.LOAD_FAIL:
 			return Object.assign({}, state, {
 				loaded: true,

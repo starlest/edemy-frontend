@@ -29,7 +29,8 @@
               </md-icon>
               <h4 md-line>{{lesson.Title}}</h4>
               <h3 md-line class="lesson-description">{{lesson.Description}}</h3>
-              <span class="lesson-level">{{lesson.Level}}</span>
+              <div *ngFor="let level of lesson.Levels" class="lesson-level">
+                {{level}}</div>
             </md-list-item>
             <md-divider></md-divider>
           </div>

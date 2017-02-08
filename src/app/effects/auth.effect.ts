@@ -26,7 +26,7 @@ export class AuthEffects {
 	  .startWith(new auth.LoadFromLocalStorageAction())
 	  .map(() => {
 		  const authEntity = this.authService.getAuthInLocalStorage();
-		  if (!authEntity) return new auth.LoadFailAction();
+		  if (!authEntity) return new auth.StartupLoadFailAction();
 
 		  // Refresh auth if it is expiring in 5 minutes
 		  const expiresIn = +authEntity.expiration_date - new Date().getTime();
@@ -35,6 +35,11 @@ export class AuthEffects {
 
 		  return new auth.LoadSuccessAction(authEntity);
 	  });
+
+	@Effect()
+	startupLoadFail$: Observable<Action> = this.actions$
+	  .ofType(auth.ActionTypes.STARTUP_LOAD_FAIL)
+	  .map(() => new user.StartupLoadFailAction());
 
 	@Effect()
 	loadFail$: Observable<Action> = this.actions$
