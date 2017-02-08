@@ -1,73 +1,79 @@
 import * as lessons from '../actions/lessons.actions';
-import {Lesson} from '../models/lesson';
-import {createSelector} from 'reselect';
+import { Lesson } from '../models/lesson';
+import { createSelector } from 'reselect';
 
 export interface State {
-  loaded: boolean;
-  loading: boolean;
-  ids: string[];
-  entities: { [id: string]: Lesson };
-  selectedLessonId: string;
-  filter: (Lesson) => Lesson;
+	loaded: boolean;
+	loading: boolean;
+	ids: string[];
+	entities: { [id: string]: Lesson };
+	selectedLessonId: string;
+	filter: (Lesson) => Lesson;
 }
 
 const initialState: State = {
-  loaded: false,
-  loading: false,
-  ids: [],
-  entities: {},
-  selectedLessonId: null,
-  filter: lesson => lesson
+	loaded: false,
+	loading: false,
+	ids: [],
+	entities: null,
+	selectedLessonId: null,
+	filter: lesson => lesson
 };
 
 export function reducer(state = initialState, action: lessons.Actions): State {
-  switch (action.type) {
-    case lessons.ActionTypes.LOAD: {
-      return Object.assign({}, state, {
-        loading: true
-      });
-    }
+	switch (action.type) {
+		case lessons.ActionTypes.LOAD: {
+			return Object.assign({}, state, {
+				loading: true
+			});
+		}
 
-    case lessons.ActionTypes.LOAD_SUCCESS: {
-      const lessons = action.payload;
-      const lessonIds = lessons.map(lesson => String(lesson.Id));
-      const lessonEntities = lessons.reduce(
-        (entities: { [id: string]: Lesson }, lesson: Lesson) => {
-          return Object.assign(entities, {
-            [lesson.Id]: lesson
-          });
-        }, {});
+		case lessons.ActionTypes.LOAD_SUCCESS: {
+			const lessons = action.payload;
+			const lessonIds = lessons.map(lesson => String(lesson.Id));
+			const lessonEntities = lessons.reduce(
+			  (entities: { [id: string]: Lesson }, lesson: Lesson) => {
+				  return Object.assign(entities, {
+					  [lesson.Id]: lesson
+				  });
+			  }, {});
 
-      return {
-        loaded: true,
-        loading: false,
-        ids: lessonIds,
-        entities: lessonEntities,
-        selectedLessonId: null,
-        filter: lesson => lesson
-      };
-    }
+			return {
+				loaded: true,
+				loading: false,
+				ids: lessonIds,
+				entities: lessonEntities,
+				selectedLessonId: null,
+				filter: lesson => lesson
+			};
+		}
 
-    case lessons.ActionTypes.SELECT: {
-      return Object.assign({}, state, {
-        selectedLessonId: action.payload
-      });
-    }
+		case lessons.ActionTypes.LOAD_FAIL:
+			return Object.assign({}, state, {
+				loaded: true,
+				loading: false
+			});
 
-    case lessons.ActionTypes.SET_FILTER:
-      return Object.assign({}, state, {
-        filter: action.payload
-      });
+		case lessons.ActionTypes.SELECT: {
+			return Object.assign({}, state, {
+				selectedLessonId: action.payload
+			});
+		}
 
-    case lessons.ActionTypes.REMOVE_FILTER:
-      return Object.assign({}, state, {
-        filter: lesson => lesson
-      });
+		case lessons.ActionTypes.SET_FILTER:
+			return Object.assign({}, state, {
+				filter: action.payload
+			});
 
-    default: {
-      return state;
-    }
-  }
+		case lessons.ActionTypes.REMOVE_FILTER:
+			return Object.assign({}, state, {
+				filter: lesson => lesson
+			});
+
+		default: {
+			return state;
+		}
+	}
 }
 
 
@@ -85,12 +91,12 @@ export const getSelectedId = (state: State) => state.selectedLessonId;
 
 export const getSelected = createSelector(getEntities, getSelectedId,
   (entities, selectedId) => {
-    return entities[selectedId];
+	  return entities[selectedId];
   });
 
 export const getFilteredLessons = createSelector(getEntities, getIds, getFilter,
   (entities, ids, filter) => {
-    return ids.map(id => entities[id]).filter(filter);
+	  return ids.map(id => entities[id]).filter(filter);
   });
 
 

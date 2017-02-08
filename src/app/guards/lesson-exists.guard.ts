@@ -30,9 +30,11 @@ export class LessonExistsGuard implements CanActivate {
 		return this.store.select(fromRoot.getLessonEntities)
 		  .take(1)
 		  .map(entities => {
-			  const lessonExists = !!entities[id];
-			  if (!lessonExists) this.store.dispatch(go(['404']));
-			  return lessonExists;
+			  if (!entities || !entities[id]) {
+				  this.store.dispatch(go(['404']));
+				  return false;
+			  }
+			  return true;
 		  });
 	}
 
