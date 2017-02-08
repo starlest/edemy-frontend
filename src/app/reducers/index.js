@@ -34,6 +34,8 @@ var ngrx_store_freeze_1 = require('ngrx-store-freeze');
  * notation packages up all of the exports into a single object.
  */
 var fromLayout = require('./layout.reducer');
+var fromAuth = require('./auth.reducer');
+var fromUser = require('./user-reducer');
 var fromLessons = require('./lessons.reducer');
 var fromLevels = require('./levels.reducer');
 var fromSubjects = require('./subjects.reducer');
@@ -46,6 +48,8 @@ var fromSubjects = require('./subjects.reducer');
  */
 var reducers = {
     layout: fromLayout.reducer,
+    auth: fromAuth.reducer,
+    user: fromUser.reducer,
     router: fromRouter.routerReducer,
     levels: fromLevels.reducer,
     lessons: fromLessons.reducer,
@@ -60,10 +64,31 @@ function reducer(state, action) {
 }
 exports.reducer = reducer;
 /**
+ * Layout Reducers
+ */
+exports.getLayoutState = function (state) { return state.layout; };
+exports.getTitle = reselect_1.createSelector(exports.getLayoutState, fromLayout.getTitle);
+exports.isSidenavLockedOpen = reselect_1.createSelector(exports.getLayoutState, fromLayout.isSidenavLockedOpen);
+/**
+ * Auth Reducers
+ */
+exports.getAuthState = function (state) { return state.auth; };
+exports.getAuthEntity = reselect_1.createSelector(exports.getAuthState, fromAuth.getEntity);
+exports.getAuthLoaded = reselect_1.createSelector(exports.getAuthState, fromAuth.getLoaded);
+exports.getAuthLoading = reselect_1.createSelector(exports.getAuthState, fromAuth.getLoading);
+/**
+ * User Reducers
+ */
+exports.getUserState = function (state) { return state.user; };
+exports.getUserEntity = reselect_1.createSelector(exports.getUserState, fromUser.getEntity);
+exports.getUserLoaded = reselect_1.createSelector(exports.getUserState, fromUser.getLoaded);
+/**
  * Lessons Reducers
  */
 exports.getLessonsState = function (state) { return state.lessons; };
 exports.getLessons = reselect_1.createSelector(exports.getLessonsState, fromLessons.getLessons);
+exports.getLessonsLoaded = reselect_1.createSelector(exports.getLessonsState, fromLessons.getLoaded);
+exports.getLessonEntities = reselect_1.createSelector(exports.getLessonsState, fromLessons.getEntities);
 exports.getSubjectLessons = function (subject) { return reselect_1.createSelector(exports.getLessons, function (lessons) { return lessons.filter(function (lesson) { return lesson.Subject === subject; }); }); };
 exports.getSelectedLesson = reselect_1.createSelector(exports.getLessonsState, fromLessons.getSelected);
 /**
@@ -76,9 +101,3 @@ exports.getLevels = reselect_1.createSelector(exports.getLevelsState, fromLevels
  */
 exports.getSubjectsState = function (state) { return state.subjects; };
 exports.getSubjects = reselect_1.createSelector(exports.getSubjectsState, fromSubjects.getAll);
-/**
- * Layout Reducers
- */
-exports.getLayoutState = function (state) { return state.layout; };
-exports.getTitle = reselect_1.createSelector(exports.getLayoutState, fromLayout.getTitle);
-exports.isSidenavLockedOpen = reselect_1.createSelector(exports.getLayoutState, fromLayout.isSidenavLockedOpen);

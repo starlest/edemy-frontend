@@ -1,8 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {
-	FormGroup, FormBuilder, Validators, AbstractControl
-} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import * as auth from '../../actions/auth.actions';
 import * as layout from '../../actions/layout.actions';
@@ -23,7 +21,12 @@ export class LoginComponent implements OnInit {
 	            private fb: FormBuilder) {
 		this.submitted$ = this.store.select(fromRoot.getAuthLoading);
 		this.loginError$ =
-		  this.store.select(fromRoot.getAuthError).map(error => !!error);
+		  this.store.select(fromRoot.getAuthLoaded)
+			.filter(loaded => loaded)
+			.switchMap(() => {
+				return this.store.select(fromRoot.getAuthEntity)
+				  .map(entity => !entity);
+			});
 		this.loginForm = fb.group({
 			username: ['', Validators.required],
 			password: ['', Validators.required],

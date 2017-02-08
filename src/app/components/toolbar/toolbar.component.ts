@@ -5,8 +5,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import * as fromRoot from '../../reducers';
 import { go } from '@ngrx/router-store';
-import { AuthService } from '../../services/auth.service';
 import * as auth from '../../actions/auth.actions';
+import { User } from '../../models/user';
 
 @Component({
 	selector: 'ed-toolbar',
@@ -17,18 +17,28 @@ import * as auth from '../../actions/auth.actions';
 export class ToolbarComponent {
 	title$: Observable<string>;
 	isLoggedIn$: Observable<boolean>;
-	displayName$: Observable<string>;
+	user$: Observable<User>;
 
 	@Input() menuButtonHidden = false;
 	@Output() openMenu = new EventEmitter();
 	@Output() openUserMenu = new EventEmitter();
 
-	constructor(private store: Store<fromRoot.State>,
-	            private authService: AuthService) {
+	constructor(private store: Store<fromRoot.State>) {
 		this.title$ = store.select(fromRoot.getTitle);
 		this.isLoggedIn$ =
 		  store.select(fromRoot.getAuthEntity).map(entity => !!entity);
-		this.displayName$ = store.select(fromRoot.getUserDisplayName);
+		this.user$ = store.select(fromRoot.getUserEntity).map(entity => {
+			if (entity == null) {
+				const emptyUser: User = {
+					Id: null,
+					UserName: '',
+					DisplayName: '',
+					Role: ''
+				};
+				return emptyUser;
+			}
+			return entity;
+		});
 	}
 
 	goLoginPage() {

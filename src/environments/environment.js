@@ -5,5 +5,6 @@
 "use strict";
 exports.environment = {
     production: false,
+    authKey: 'ed-auth',
     apiEndpoint: "http://localhost:5000/api/"
 };

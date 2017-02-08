@@ -1,12 +1,13 @@
 import { Routes, RouterModule } from '@angular/router';
 import {
 	AboutComponent, ContactComponent, CurriculumComponent, HomeComponent,
-	NotFoundPageComponent,
-	LoginComponent, OnlineLessonsComponent
+	LoginComponent, NotFoundPageComponent, OnlineLessonsComponent,
+	UploadComponent
 } from './components';
 import { ViewLessonPageComponent } from './containers';
-import { LessonExistsGuard } from './guards/lesson-exists';
-import { LoggedInGuard } from './guards/logged-in';
+import { LessonExistsGuard } from './guards/lesson-exists.guard';
+import { LoggedInGuard } from './guards/logged-in.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 export const appRoutes: Routes = [
 	{
@@ -43,6 +44,11 @@ export const appRoutes: Routes = [
 		path: 'onlinelessons/:Id',
 		canActivate: [LessonExistsGuard],
 		component: ViewLessonPageComponent
+	},
+	{
+		path: 'upload',
+		canActivate: [AdminGuard],
+		component: UploadComponent
 	},
 	{
 		path: '404',

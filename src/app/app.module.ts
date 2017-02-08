@@ -7,9 +7,9 @@ import { MaterialModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {
-	AboutComponent, CurriculumComponent, ContactComponent,
-	HomeComponent, OnlineLessonComponent, OnlineLessonsComponent,
-	NotFoundPageComponent, ToolbarComponent, LoginComponent
+	AboutComponent, CurriculumComponent, ContactComponent, HomeComponent,
+	LoginComponent, NotFoundPageComponent, OnlineLessonComponent,
+	OnlineLessonsComponent, ToolbarComponent, UploadComponent
 } from './components';
 import {
 	SelectedLessonPageComponent, ViewLessonPageComponent
@@ -28,23 +28,25 @@ import { RouterStoreModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import 'hammerjs';
 import { AuthHttp } from './auth.http';
-import { LessonExistsGuard } from './guards/lesson-exists';
-import { LoggedInGuard } from './guards/logged-in';
+import { LessonExistsGuard } from './guards/lesson-exists.guard';
+import { LoggedInGuard } from './guards/logged-in.guard';
 import { RecaptchaModule } from 'ng2-recaptcha';
+import { AdminGuard } from './guards/admin.guard';
 
 @NgModule({
 	declarations: [
 		AboutComponent,
+		AppComponent,
 		ContactComponent,
 		CurriculumComponent,
-		AppComponent,
 		HomeComponent,
+		LoginComponent,
+		NotFoundPageComponent,
 		OnlineLessonComponent,
 		OnlineLessonsComponent,
-		NotFoundPageComponent,
-		LoginComponent,
-		ToolbarComponent,
 		SelectedLessonPageComponent,
+		ToolbarComponent,
+		UploadComponent,
 		ViewLessonPageComponent
 	],
 	imports: [
@@ -95,7 +97,7 @@ import { RecaptchaModule } from 'ng2-recaptcha';
 		EffectsModule.run(SubjectsEffects)
 	],
 	providers: [AuthHttp, AuthService, MessagesService, LessonsService,
-		LevelsService, UserService, SubjectsService, LessonExistsGuard,
+		LevelsService, UserService, SubjectsService, AdminGuard, LessonExistsGuard,
 		LoggedInGuard],
 	bootstrap: [AppComponent]
 })

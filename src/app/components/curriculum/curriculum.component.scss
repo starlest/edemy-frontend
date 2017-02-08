@@ -1,0 +1,46 @@
+.wrapper {
+	width: 800px;
+	max-width: 80vw;
+	margin: 0 auto;
+}
+
+.subject {
+	margin: 50px auto;
+}
+
+.image, .info {
+	display: inline-block;
+}
+
+.image {
+	img {
+		width: 192px;
+		height: 192px;
+	}
+}
+
+.levels {
+	h4, .levels-list {
+		display: inline-block;
+	}
+}
+
+.extracurricular-divider {
+	margin-top: 100px;
+}
+
+.primary, .secondary, .pre-school {
+	color: white;
+}
+
+.primary {
+	background-color: lightblue;
+}
+
+.secondary {
+	background-color: lightcoral;
+}
+
+.pre-school {
+	background-color: lightgreen;
+}

@@ -7,7 +7,6 @@ export const ActionTypes = {
 	LOAD_FROM_LOCAL_STORAGE: type('[Auth] Load From Local Storage'),
 	LOAD_SUCCESS: type('[Auth] Load Success'),
 	LOAD_FAIL: type('[Auth] Load Fail'),
-	LOAD_NULL: type('[Auth] Load Null'),
 	SET: type('[Auth] Set'),
 	REMOVE: type('[Auth] Remove'),
 	REMOVE_SUCCESS: type('[Auth] Remove Success'),
@@ -39,13 +38,6 @@ export class LoadSuccessAction implements Action {
 
 export class LoadFailAction implements Action {
 	type = ActionTypes.LOAD_FAIL;
-
-	constructor(public payload: any) {
-	}
-}
-
-export class LoadNullAction implements Action {
-	type = ActionTypes.LOAD_NULL;
 }
 
 export class SetAction implements Action {
@@ -97,7 +89,6 @@ export type Actions = LoadFromServerAction
   | LoadFromLocalStorageAction
   | LoadSuccessAction
   | LoadFailAction
-  | LoadNullAction
   | SetAction
   | RemoveAction
   | RemoveSuccessAction

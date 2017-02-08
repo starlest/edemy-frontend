@@ -34,7 +34,7 @@ import { storeFreeze } from 'ngrx-store-freeze';
  */
 import * as fromLayout from './layout.reducer';
 import * as fromAuth from './auth.reducer';
-import * as fromUser from './user';
+import * as fromUser from './user-reducer';
 import * as fromLessons from './lessons.reducer';
 import * as fromLevels from './levels.reducer';
 import * as fromSubjects from './subjects.reducer';
@@ -93,7 +93,6 @@ export const isSidenavLockedOpen = createSelector(getLayoutState,
  */
 export const getAuthState = (state: State) => state.auth;
 export const getAuthEntity = createSelector(getAuthState, fromAuth.getEntity);
-export const getAuthError = createSelector(getAuthState, fromAuth.getError);
 export const getAuthLoaded = createSelector(getAuthState, fromAuth.getLoaded);
 export const getAuthLoading = createSelector(getAuthState, fromAuth.getLoading);
 
@@ -102,10 +101,7 @@ export const getAuthLoading = createSelector(getAuthState, fromAuth.getLoading);
  */
 export const getUserState = (state: State) => state.user;
 export const getUserEntity = createSelector(getUserState, fromUser.getEntity);
-export const getUserDisplayName = createSelector(getUserEntity, entity => {
-	const result = !entity ? '' : entity.DisplayName;
-	return result;
-});
+export const getUserLoaded = createSelector(getUserState, fromUser.getLoaded);
 
 /**
  * Lessons Reducers
