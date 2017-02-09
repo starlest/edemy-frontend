@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   authKey: 'ed-auth',
-  apiEndpoint: "https://api.edemy.sg/"
+  apiEndpoint: "https://edemywebapi20170208095959.azurewebsites.net/"
 };
