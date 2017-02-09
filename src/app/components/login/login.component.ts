@@ -20,13 +20,11 @@ export class LoginComponent implements OnInit {
 	constructor(private store: Store<fromRoot.State>,
 	            private fb: FormBuilder) {
 		this.submitted$ = this.store.select(fromRoot.getAuthLoading);
+
 		this.loginError$ =
-		  this.store.select(fromRoot.getAuthLoaded)
-			.filter(loaded => loaded)
-			.switchMap(() => {
-				return this.store.select(fromRoot.getAuthEntity)
-				  .map(entity => !entity);
-			});
+		  this.store.select(fromRoot.getAuthState)
+			.map(state => !state.entity && state.loaded);
+
 		this.loginForm = fb.group({
 			username: ['', Validators.required],
 			password: ['', Validators.required],

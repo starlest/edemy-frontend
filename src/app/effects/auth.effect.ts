@@ -36,15 +36,6 @@ export class AuthEffects {
 		  return new auth.LoadSuccessAction(authEntity);
 	  });
 
-	@Effect()
-	startupLoadFail$: Observable<Action> = this.actions$
-	  .ofType(auth.ActionTypes.STARTUP_LOAD_FAIL)
-	  .map(() => new user.StartupLoadFailAction());
-
-	@Effect()
-	loadFail$: Observable<Action> = this.actions$
-	  .ofType(auth.ActionTypes.LOAD_FAIL)
-	  .map(() => new user.LoadFailAction());
 
 	@Effect()
 	loadAuthFromServer$: Observable<Action> = this.actions$
@@ -65,11 +56,15 @@ export class AuthEffects {
 	  });
 
 	@Effect()
+	startupLoadFail$: Observable<Action> = this.actions$
+	  .ofType(auth.ActionTypes.STARTUP_LOAD_FAIL)
+	  .map(() => new user.StartupLoadFailAction());
+
+	@Effect()
 	removeAuth$: Observable<Action> = this.actions$
 	  .ofType(auth.ActionTypes.REMOVE)
 	  .switchMap(() => {
-		  if (this.refreshSubscription$)
-			  this.refreshSubscription$.unsubscribe();
+		  if (this.refreshSubscription$) this.refreshSubscription$.unsubscribe();
 		  return this.authService.logout()
 			.map(() => {
 				this.store.dispatch(go(['/']));
@@ -98,15 +93,17 @@ export class AuthEffects {
 				  new Date().getTime();
 				console.log('token expiring in (minutes):',
 				  expiresIn / 1000 / 60);
-				const interval = expiresIn / 2 * 1000;
-				console.log('refreshing in (minutes):',
-				  interval / 10000000 / 6);
-				return Observable.interval(interval);
+				const interval = expiresIn / 2;
+				console.log('refreshing in (seconds):',
+				  interval / 1000);
+				return Observable.interval(8000);
 			});
 
 		  // Start the scheduler
+		  if (this.refreshSubscription$) this.refreshSubscription$.unsubscribe();
 		  this.refreshSubscription$ =
 			source.subscribe(() => {
+				console.log('refreshing');
 				this.store.select(fromRoot.getAuthEntity)
 				  .take(1)
 				  .map(entity =>

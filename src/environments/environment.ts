@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   authKey: 'ed-auth',
-  apiEndpoint: "http://localhost:5000/api/"
+  apiEndpoint: "http://localhost:5000/"
 };

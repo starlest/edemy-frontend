@@ -31,7 +31,6 @@ export function reducer(state = initialState, action: auth.Actions): State {
 				loading: false
 			});
 
-		case auth.ActionTypes.STARTUP_LOAD_FAIL:
 		case auth.ActionTypes.LOAD_FAIL:
 			return Object.assign({}, state, {
 				entity: null,
@@ -39,6 +38,7 @@ export function reducer(state = initialState, action: auth.Actions): State {
 				loading: false
 			});
 
+		case auth.ActionTypes.REMOVE_FAIL:
 		case auth.ActionTypes.REMOVE_SUCCESS:
 			return Object.assign({}, state, {
 				entity: null,

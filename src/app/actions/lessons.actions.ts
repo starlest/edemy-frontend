@@ -24,9 +24,6 @@ export class LoadSuccessAction implements Action {
 
 export class LoadFailAction implements Action {
   type = ActionTypes.LOAD_FAIL;
-
-  constructor(public payload: any) {
-  }
 }
 
 export class SelectAction implements Action {

@@ -19,6 +19,7 @@ export class SelectedLessonPageComponent {
 
 	constructor(private store: Store<fromRoot.State>) {
 		this.lesson$ = store.select(fromRoot.getSelectedLesson).map(lesson => {
+			// Load a placeholder empty lesson first if no lesson is loaded yet
 			if (!lesson) {
 				const emptyLesson: Lesson = {
 					Id: -1,
