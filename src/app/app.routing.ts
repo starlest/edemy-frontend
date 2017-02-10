@@ -2,7 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {
 	AboutComponent, ContactComponent, CurriculumComponent, HomeComponent,
 	LoginComponent, NotFoundPageComponent, OnlineLessonsComponent,
-	UploadComponent
+	UploadComponent, WorksheetsComponent
 } from './components';
 import { ViewLessonPageComponent } from './containers';
 import { LessonExistsGuard } from './guards/lesson-exists.guard';
@@ -49,6 +49,10 @@ export const appRoutes: Routes = [
 		path: 'upload',
 		canActivate: [AdminGuard],
 		component: UploadComponent
+	},
+	{
+		path: 'worksheets',
+		component: WorksheetsComponent
 	},
 	{
 		path: '404',

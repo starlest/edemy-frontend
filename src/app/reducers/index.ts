@@ -73,13 +73,13 @@ export const getUserLoaded = createSelector(getUserState, fromUser.getLoaded);
  */
 export const getSubjectsState = (state: State) => state.subjects;
 export const getSubjects = createSelector(getSubjectsState,
-  fromSubjects.getAll);
+  fromSubjects.getSubjects);
 
 /**
  * Levels Reducers
  */
 export const getLevelsState = (state: State) => state.levels;
-export const getLevels = createSelector(getLevelsState, fromLevels.getAll);
+export const getLevels = createSelector(getLevelsState, fromLevels.getLevels);
 
 
 /**

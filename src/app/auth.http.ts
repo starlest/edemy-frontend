@@ -41,8 +41,8 @@ export class AuthHttp implements OnDestroy {
 	}
 
 	configureAuth(opts: any) {
-		if (this.authEntity != null && this.authEntity.access_token != null) {
-			if (opts.headers == null) opts.headers = new Headers();
+		if (this.authEntity && this.authEntity.access_token) {
+			if (!opts.headers) opts.headers = new Headers();
 			opts.headers.set('Authorization',
 			  `Bearer ${this.authEntity.access_token}`);
 		}

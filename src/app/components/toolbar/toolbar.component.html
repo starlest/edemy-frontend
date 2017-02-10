@@ -19,6 +19,11 @@
 </md-toolbar>
 
 <md-menu #userMenu>
+  <a *ngIf="isLoggedIn$ | async" md-menu-item
+     routerLink="worksheets">
+    <md-icon>insert_drive_file</md-icon>
+    <span>Worksheets</span>
+  </a>
   <a *ngIf="(user$ | async).Role === 'Administrators'" md-menu-item
      routerLink="upload">
     <md-icon>file_upload</md-icon>

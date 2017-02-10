@@ -24,13 +24,15 @@ export class OnlineLessonsComponent implements OnInit, OnDestroy {
 	lessons$: { [subject: string]: Observable<Lesson[]> } = {};
 
 	constructor(private store: Store<fromRoot.State>) {
-		this.levels$ = this.store.select(fromRoot.getLevels);
-		this.subjects$ = this.store.select(fromRoot.getSubjects);
+		this.levels$ = this.store.select(fromRoot.getLevels)
+		  .map(levels => [{ Id: -1, Title: 'All' }, ...levels]);
+		this.subjects$ = this.store.select(fromRoot.getSubjects)
+		  .map(subjects => [{ Id: -1, Title: 'All' }, ...subjects]);
 		this.lessonsSubscription = this.subjects$.map(subjects => {
 			subjects.forEach(subject => {
-				if (subject.Title === "All") return;
 				this.lessons$[subject.Title] =
-				  this.store.select(fromRoot.getFilteredSubjectLessons(subject.Title));
+				  this.store.select(
+					fromRoot.getFilteredSubjectLessons(subject.Title));
 			});
 		}).subscribe();
 	}
@@ -58,9 +60,9 @@ export class OnlineLessonsComponent implements OnInit, OnDestroy {
 		isNullOrUndefined(this.selectedLevelFilter));
 		this.store.dispatch(new lessons.SetFilter((lesson: Lesson) =>
 		  (subjectFilterCondition ? true :
-			lesson.Subject === this.selectedSubjectFilter) &&
+		  lesson.Subject === this.selectedSubjectFilter) &&
 		  levelFilterCondition ? true :
-			lesson.Levels.indexOf(this.selectedLevelFilter) >= 0));
+		  lesson.Levels.indexOf(this.selectedLevelFilter) >= 0));
 	}
 
 	ngOnDestroy() {

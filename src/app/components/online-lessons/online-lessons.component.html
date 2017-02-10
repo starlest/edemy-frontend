@@ -25,7 +25,8 @@
             <h3 md-subheader>{{subject.Title}}</h3>
             <md-list-item *ngFor="let lesson of lessons$[subject.Title] | async"
                           routerLink="/onlinelessons/{{lesson.Id}}">
-              <md-icon md-list-avatar>{{getSubjectSymbol(subject.Title)}}
+              <md-icon class="lesson-icon"
+                       md-list-avatar>{{getSubjectSymbol(subject.Title)}}
               </md-icon>
               <h4 md-line>{{lesson.Title}}</h4>
               <h3 md-line class="lesson-description">{{lesson.Description}}</h3>

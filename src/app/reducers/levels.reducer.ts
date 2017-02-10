@@ -57,5 +57,5 @@ export const getIds = (state: State) => state.ids;
 
 export const getEntities = (state: State) => state.entities;
 
-export const getAll = createSelector(getEntities, getIds,
+export const getLevels = createSelector(getEntities, getIds,
   (entities, ids) => ids.map(id => entities[id]));

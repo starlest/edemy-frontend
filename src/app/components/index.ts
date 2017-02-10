@@ -8,3 +8,4 @@ export { OnlineLessonComponent } from './online-lesson/online-lesson.component';
 export { OnlineLessonsComponent } from './online-lessons/online-lessons.component';
 export { ToolbarComponent } from './toolbar/toolbar.component';
 export { UploadComponent } from './upload/upload.component';
+export { WorksheetsComponent } from './worksheets/worksheets.component';
