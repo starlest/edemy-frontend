@@ -15,7 +15,9 @@
 .filters {
 	margin-top: 50px;
 	md-select {
-		margin-right: 20px;
+		&:first-child {
+			margin-right: 20px;
+		}
 	}
 }
 
@@ -49,22 +51,22 @@
 		margin: 10px 0;
 		font-size: 1.2em;
 	}
+	.lesson-description {
+		font-size: 1em;
+	}
+	.levels-label {
+		font-size: 0.8em;
+		margin: 10px 0 0 0;
+	}
+	.lesson-level {
+		margin: 10px 5px 10px 0;
+		font-size: 0.6em;
+	}
+	.lesson-description, .lesson-levels {
+		max-width: 35vw;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
 }
 
-.lesson-description {
-	font-size: 1em;
-	max-width: 35vw;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-.levels-label {
-	font-size: 0.8em;
-	margin: 10px 0 0 0;
-}
-
-.lesson-level {
-	margin: 10px 5px 10px 0;
-	font-size: 0.6em;
-}
