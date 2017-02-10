@@ -1,36 +1,27 @@
-import {Component, ChangeDetectionStrategy, Input, OnInit} from '@angular/core';
-import {Store} from '@ngrx/store';
-import * as fromRoot from '../../reducers';
-import * as layout from '../../actions/layout.actions';
-import {Lesson} from '../../models/lesson';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Lesson } from '../../models/lesson';
 import {
-  SafeResourceUrl, DomSanitizer, SafeHtml
+	SafeResourceUrl, DomSanitizer, SafeHtml
 } from '@angular/platform-browser';
 
 @Component({
-  selector: 'ed-online-lesson',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './online-lesson.component.html',
-  styleUrls: ['./online-lesson.component.scss']
+	selector: 'ed-online-lesson',
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	templateUrl: './online-lesson.component.html',
+	styleUrls: ['./online-lesson.component.scss']
 })
-export class OnlineLessonComponent implements OnInit {
-  @Input() lesson: Lesson;
+export class OnlineLessonComponent {
+	@Input() lesson: Lesson;
 
-  constructor(private store: Store<fromRoot.State>,
-              private sanitizer: DomSanitizer) {
-  }
+	constructor(private sanitizer: DomSanitizer) {
+	}
 
-  ngOnInit() {
-    this.store.dispatch(
-      new layout.ChangeTitleAction(this.lesson.Title));
-  }
-
-  safeVideoUrl(): SafeResourceUrl {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(this.lesson.VideoLink);
-  }
+	safeVideoUrl(videoLink: string): SafeResourceUrl {
+		return this.sanitizer.bypassSecurityTrustResourceUrl(videoLink);
+	}
 
 
-  safeNotes(): SafeHtml {
-    return this.sanitizer.bypassSecurityTrustHtml(this.lesson.Notes);
-  }
+	safeNotes(): SafeHtml {
+		return this.sanitizer.bypassSecurityTrustHtml(this.lesson.Notes);
+	}
 }
