@@ -1,30 +1,70 @@
-.lessons-card {
-	width: 1000px;
+.wrapper {
+	font-family: 'Open Sans', sans-serif;
+	width: 800px;
 	max-width: 80vw;
-	margin: 50px auto;
+	margin: auto;
 }
 
-.lessons-list {
-	margin: 50px auto;
+.subject {
+	margin-top: 50px;
+	h1 {
+		font-size: 1.5em;
+	}
 }
 
 .filters {
-	margin: 20px 0;
+	margin-top: 50px;
+	md-select {
+		margin-right: 20px;
+	}
+}
+
+.lesson {
+	margin-bottom: 50px;
+	height: 140px;
+	border: solid thin gray;
+	background-color: white;
+	a {
+		text-decoration: none;
+		display: block;
+		color: black;
+	}
+	a:hover {
+		background-color: lightgray;
+	}
+	img {
+		width: 192px;
+		height: 100px;
+		max-width: 25%;
+		vertical-align: middle;
+		margin: 20px 10px;
+	}
+}
+
+.lesson-info {
+	display: inline-block;
+	vertical-align: top;
+	margin: 0 20px;
+	h2 {
+		margin: 10px 0;
+		font-size: 1.2em;
+	}
+}
+
+.lesson-description {
+	font-size: 1em;
+	max-width: 35vw;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.levels-label {
+	font-size: 0.8em;
+	margin: 10px 0 0 0;
 }
 
 .lesson-level {
-	min-width: 60px;
-	text-align: center;
-	font-size: x-small;
-	color: blue;
-}
-
-.no-lessons-label {
-	text-align: center;
-}
-
-@media (max-width: 550px) {
-	.lesson-description, .lesson-icon {
-		display: none;
-	}
+	margin: 10px 5px 10px 0;
+	font-size: 0.6em;
 }

@@ -41,14 +41,14 @@ export class OnlineLessonsComponent implements OnInit, OnDestroy {
 		this.store.dispatch(new layout.ChangeTitleAction('Online Lessons'));
 	}
 
-	getSubjectSymbol(subject: string): string {
+	getSubjectIconPath(subject: string): string {
 		switch (subject) {
 			case 'English':
-				return 'text_format';
+				return 'assets/img/english.svg';
 			case 'Science':
-				return 'cloud';
+				return 'assets/img/light-bulb.svg';
 			default:
-				return 'exposure plus 1';
+				return 'assets/img/calculator.svg';
 		}
 	}
 
