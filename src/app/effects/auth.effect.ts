@@ -103,7 +103,6 @@ export class AuthEffects {
 		  if (this.refreshSubscription$) this.refreshSubscription$.unsubscribe();
 		  this.refreshSubscription$ =
 			source.subscribe(() => {
-				console.log('refreshing');
 				this.store.select(fromRoot.getAuthEntity)
 				  .take(1)
 				  .map(entity =>

@@ -3,4 +3,5 @@ export interface Video {
 	Title: string;
 	Description: string;
 	VideoLink: string;
+	Private: boolean;
 }

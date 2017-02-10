@@ -12,6 +12,7 @@ import {
 })
 export class OnlineLessonComponent {
 	@Input() lesson: Lesson;
+	@Input() isLoggedIn: boolean;
 
 	constructor(private sanitizer: DomSanitizer) {
 	}

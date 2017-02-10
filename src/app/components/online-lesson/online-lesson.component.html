@@ -14,10 +14,14 @@
         <h4>
           {{video.Description}}
         </h4>
-        <div class="video-card-wrapper">
+        <div *ngIf="!video.Private || isLoggedIn" class="video-card-wrapper">
           <iframe class="embed-video"
                   [src]="safeVideoUrl(video.VideoLink)"
                   frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div *ngIf="video.Private && !isLoggedIn" class="private-video-message">
+          Sorry, this content is only available to enrolled students. Click
+          <a routerLink="/contact">here</a> to apply now!
         </div>
       </md-tab>
     </md-tab-group>

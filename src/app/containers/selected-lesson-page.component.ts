@@ -11,12 +11,13 @@ import { Lesson } from '../models/lesson';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
     <ed-online-lesson
-      [lesson]="lesson$ | async">
+      [lesson]="lesson$ | async" [isLoggedIn]="isLoggedIn$ | async">
     </ed-online-lesson>
   `
 })
 export class SelectedLessonPageComponent {
 	lesson$: Observable<Lesson>;
+	isLoggedIn$: Observable<boolean>;
 
 	constructor(private store: Store<fromRoot.State>) {
 		this.lesson$ = store.select(fromRoot.getSelectedLesson).map(lesson => {
@@ -37,5 +38,8 @@ export class SelectedLessonPageComponent {
 			this.store.dispatch(new layout.ChangeTitleAction(lesson.Title));
 			return lesson;
 		});
+
+		this.isLoggedIn$ =
+		  store.select(fromRoot.getAuthEntity).map(entity => !!entity);
 	}
 }
