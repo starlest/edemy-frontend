@@ -18,8 +18,10 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "styles.css",
-        "theme.scss"
+        "assets/css/styles.css",
+        "assets/css/bootstrap.css",
+        "assets/css/glyphicon.css",
+        "assets/css/ng2-select.css"
       ],
       "scripts": [
       ],

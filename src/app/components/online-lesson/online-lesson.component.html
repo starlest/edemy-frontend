@@ -1,43 +1,111 @@
-<div class="header">
-  <h1>
-    {{lesson.Description}}
-  </h1>
-  <div class="levels">
-    <span class="level" *ngFor="let level of lesson.Levels">[{{level
-                                                                     }}]</span>
-  </div>
+<div class="page-header text-center">
+  <h1>{{lesson.Title}}</h1>
 </div>
-<md-card class="video-card">
-  <md-card-content>
-    <md-tab-group>
-      <md-tab *ngFor="let video of lesson.Videos" [label]="video.Title">
-        <h4>
-          {{video.Description}}
-        </h4>
-        <div *ngIf="!video.Private || isLoggedIn" class="video-card-wrapper">
-          <iframe class="embed-video"
-                  [src]="safeVideoUrl(video.VideoLink)"
-                  frameborder="0" allowfullscreen></iframe>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2 col-md-offset-1">
+      <div class="panel panel-default info">
+        <div class="panel-heading">Information</div>
+        <div class="panel-body">
+          <div>
+            <h4>Subject</h4>
+            <span>{{lesson.Subject}}</span>
+          </div>
+          <div>
+            <h4>Levels</h4>
+            <ul>
+              <li *ngFor="let level of lesson.Levels">
+                {{level}}
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4>Description</h4>
+            <span>{{lesson.Description}}</span>
+          </div>
+          <div>
+            <h4>Tutor</h4>
+            <span>{{lesson.Tutor}}</span>
+          </div>
         </div>
-        <div *ngIf="video.Private && !isLoggedIn" class="private-video-message">
-          Sorry, this content is only available to enrolled students. Click
-          <a routerLink="/contact">here</a> to apply now!
-        </div>
-      </md-tab>
-    </md-tab-group>
-  </md-card-content>
-  <md-card-footer>
-    <div class="tutor">
-      <h4>Tutor: <a href="" target="_blank">{{lesson.Tutor}}</a></h4>
+      </div>
     </div>
-  </md-card-footer>
-</md-card>
+    <div class="col-md-6">
+      <tabset [justified]="true">
+        <tab *ngFor="let video of lesson.Videos" [heading]="video.Title">
+          <div class="panel panel-default">
+            <div class="panel-heading">{{video.Description}}</div>
+            <div class="panel-body">
+              <div *ngIf="!video.Private || isLoggedIn"
+                   class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item"
+                        src="https://www.youtube.com/embed/zpOULjyy-n8"></iframe>
+              </div>
+              <div *ngIf="video.Private && !isLoggedIn"
+                   class="private-video-message">
+                Sorry, this content is only available to enrolled students.
+                Click
+                <a routerLink="/contact">here</a> to apply now!
+              </div>
+            </div>
+          </div>
+        </tab>
+      </tabset>
+    </div>
 
-<md-card class="notes-card">
-  <md-card-header>
-    <h3>Notes</h3>
-  </md-card-header>
-  <md-card-content>
-    <p class="notes-content">{{lesson.Notes}}</p>
-  </md-card-content>
-</md-card>
+    <div class="col-md-3">
+      <div class="panel panel-default info">
+        <div class="panel-heading">Notes</div>
+        <div class="panel-body">
+          {{lesson.Notes}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!--<div class="header">-->
+<!--<h1>-->
+<!--{{lesson.Description}}-->
+<!--</h1>-->
+<!--<div class="levels">-->
+<!--<span class="level" *ngFor="let level of lesson.Levels">[{{level-->
+<!--}}]</span>-->
+<!--</div>-->
+<!--</div>-->
+<!--<md-card class="video-card">-->
+<!--<md-card-content>-->
+<!--<md-tab-group>-->
+<!--<md-tab *ngFor="let video of lesson.Videos" [label]="video.Title">-->
+<!--<h4>-->
+<!--{{video.Description}}-->
+<!--</h4>-->
+<!--<div *ngIf="!video.Private || isLoggedIn" class="video-card-wrapper">-->
+<!--<iframe class="embed-video"-->
+<!--[src]="safeVideoUrl(video.VideoLink)"-->
+<!--frameborder="0" allowfullscreen></iframe>-->
+<!--</div>-->
+<!--<div *ngIf="video.Private && !isLoggedIn" class="private-video-message">-->
+<!--Sorry, this content is only available to enrolled students. Click-->
+<!--<a routerLink="/contact">here</a> to apply now!-->
+<!--</div>-->
+<!--</md-tab>-->
+<!--</md-tab-group>-->
+<!--</md-card-content>-->
+<!--<md-card-footer>-->
+<!--<div class="tutor">-->
+<!--<h4>Tutor: <a href="" target="_blank">{{lesson.Tutor}}</a></h4>-->
+<!--</div>-->
+<!--</md-card-footer>-->
+<!--</md-card>-->
+
+<!--<md-card class="notes-card">-->
+<!--<md-card-header>-->
+<!--<h3>Notes</h3>-->
+<!--</md-card-header>-->
+<!--<md-card-content>-->
+<!--<p class="notes-content">{{lesson.Notes}}</p>-->
+<!--</md-card-content>-->
+<!--</md-card>-->

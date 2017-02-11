@@ -1,21 +1,20 @@
 import {
-	Component, Output, EventEmitter, ChangeDetectionStrategy, Input
+	Component, Output, EventEmitter, ChangeDetectionStrategy, Input, ViewChild
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import * as fromRoot from '../../reducers';
-import { go } from '@ngrx/router-store';
 import * as auth from '../../actions/auth.actions';
 import { User } from '../../models/user';
+import { ModalDirective } from 'ng2-bootstrap/modal';
 
 @Component({
-	selector: 'ed-toolbar',
+	selector: 'ed-navbar',
 	changeDetection: ChangeDetectionStrategy.OnPush,
-	templateUrl: './toolbar.component.html',
-	styleUrls: ['./toolbar.component.scss']
+	templateUrl: './navbar.component.html',
+	styleUrls: ['./navbar.component.scss']
 })
-export class ToolbarComponent {
-	title$: Observable<string>;
+export class NavbarComponent {
 	isLoggedIn$: Observable<boolean>;
 	user$: Observable<User>;
 
@@ -23,10 +22,14 @@ export class ToolbarComponent {
 	@Output() openMenu = new EventEmitter();
 	@Output() openUserMenu = new EventEmitter();
 
+	@ViewChild('loginModal') loginModal: ModalDirective;
+
 	constructor(private store: Store<fromRoot.State>) {
-		this.title$ = store.select(fromRoot.getTitle);
 		this.isLoggedIn$ =
-		  store.select(fromRoot.getAuthEntity).map(entity => !!entity);
+		  store.select(fromRoot.getAuthEntity).map(entity => {
+			  this.loginModal.hide();
+			  return !!entity;
+		  });
 		this.user$ = store.select(fromRoot.getUserEntity).map(entity => {
 			if (entity == null) {
 				const emptyUser: User = {
@@ -41,12 +44,7 @@ export class ToolbarComponent {
 		});
 	}
 
-	goLoginPage() {
-		this.store.dispatch(go(['/login']));
-	}
-
-	performLogout() {
-		// logs out the user, then redirects him to Home View.
+	logout() {
 		this.store.dispatch(new auth.RemoveAction);
 	}
 }

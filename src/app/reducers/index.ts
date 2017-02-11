@@ -4,7 +4,6 @@ import { storeFreeze } from 'ngrx-store-freeze';
 import { ActionReducer, combineReducers } from '@ngrx/store';
 import { environment } from '../../environments/environment';
 import * as fromAuth from './auth.reducer';
-import * as fromLayout from './layout.reducer';
 import * as fromLevels from './levels.reducer';
 import * as fromLessons from './lessons.reducer';
 import * as fromRouter from '@ngrx/router-store';
@@ -13,7 +12,6 @@ import * as fromUser from './user-reducer';
 import * as fromWorksheets from './worksheets.reducer';
 
 export interface State {
-	layout: fromLayout.State;
 	auth: fromAuth.State;
 	user: fromUser.State;
 	router: fromRouter.RouterState;
@@ -24,7 +22,6 @@ export interface State {
 }
 
 const reducers = {
-	layout: fromLayout.reducer,
 	auth: fromAuth.reducer,
 	user: fromUser.reducer,
 	router: fromRouter.routerReducer,
@@ -43,14 +40,6 @@ export function reducer(state: any, action: any) {
 		return productionReducer(state, action);
 	return developmentReducer(state, action);
 }
-
-/**
- * Layout Reducers
- */
-export const getLayoutState = (state: State) => state.layout;
-export const getTitle = createSelector(getLayoutState, fromLayout.getTitle);
-export const isSidenavLockedOpen = createSelector(getLayoutState,
-  fromLayout.isSidenavLockedOpen);
 
 /**
  * Auth Reducers

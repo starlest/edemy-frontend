@@ -32,11 +32,6 @@ export const appRoutes: Routes = [
 		component: CurriculumComponent
 	},
 	{
-		path: 'login',
-		canActivate: [LoggedInGuard],
-		component: LoginComponent
-	},
-	{
 		path: 'onlinelessons',
 		component: OnlineLessonsComponent
 	},

@@ -2,7 +2,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import * as fromRoot from '../reducers';
-import * as layout from '../actions/layout.actions';
 import { Lesson } from '../models/lesson';
 
 
@@ -35,7 +34,6 @@ export class SelectedLessonPageComponent {
 				};
 				return emptyLesson;
 			}
-			this.store.dispatch(new layout.ChangeTitleAction(lesson.Title));
 			return lesson;
 		});
 

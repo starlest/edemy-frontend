@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
-import * as layout from '../../actions/layout.actions';
 import * as worksheets from '../../actions/worksheets.actions';
 
 @Component({
@@ -9,13 +8,12 @@ import * as worksheets from '../../actions/worksheets.actions';
 	templateUrl: './worksheets.component.html',
 	styleUrls: ['./worksheets.component.scss']
 })
-export class WorksheetsComponent implements OnInit {
+export class WorksheetsComponent {
 
 	constructor(private store: Store<fromRoot.State>) {
 	}
 
 	ngOnInit() {
-		this.store.dispatch(new layout.ChangeTitleAction('Worksheets'));
 		this.store.dispatch(new worksheets.LoadAction());
 	}
 }

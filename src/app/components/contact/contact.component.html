@@ -1,72 +1,105 @@
-<iframe class="location"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.705273579726!2d103.83145851529184!3d1.3534052990129104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da173a98d9aff1%3A0x982934608ee5429b!2s261+Upper+Thomson+Rd%2C+Singapore+574388!5e0!3m2!1sen!2sid!4v1486146934938"
-        frameborder="0" allowfullscreen></iframe>
-
-<div class="content-wrapper" fxLayout="column" fxLayout.gt-md="row">
-  <div fxFlexOffset.gt-md="20" fxFlex="20"></div>
-
-  <div class="info" fxFlex="30">
-    <div class="contact-info">
-      <h2>Address</h2>
-      <span>261A Upper Thomson Road</span>
-    </div>
-    <div class="contact-info">
-      <h2>Telephone</h2>
-      <span>12345678</span>
-    </div>
-    <div class="contact-info">
-      <h2>Email</h2>
-      <span>support@edemy.sg</span>
+<div class="content-wrapper container-fluid">
+  <div class="row location-wrapper">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-primary">
+        <div class="panel-heading"><i class="fa fa-map-marker"></i> Location
+        </div>
+        <div class="panel-body location">
+          <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.705273579726!2d103.83145851529184!3d1.3534052990129104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da173a98d9aff1%3A0x982934608ee5429b!2s261+Upper+Thomson+Rd%2C+Singapore+574388!5e0!3m2!1sen!2sid!4v1486146934938"
+              frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="contact-form-wrapper" fxFlex="30">
-    <md-card class="contact-form-card">
-      <md-card-content>
-        <form class="contact-form"
-              [formGroup]="contactForm"
-              (submit)="sendCustomerQuery()">
-          <div class="result" *ngIf="result">
-            {{result}}
-          </div>
-          <h3>Contact Form</h3>
-          <md-input-container class="full-width">
-            <input md-input type="text" formControlName="Name"
-                   placeholder="Name" required>
-          </md-input-container>
-          <md-input-container class="full-width">
-            <input md-input type="email" formControlName="Email"
-                   placeholder="Email" required>
-          </md-input-container>
-          <md-input-container class="full-width">
-            <input md-input type="tel" formControlName="Phone"
-                   placeholder="Phone" required>
-          </md-input-container>
-          <md-input-container class="full-width">
-            <textarea md-input rows="5" formControlName="Query"
-                      placeholder="Query" required></textarea>
-          </md-input-container>
-          <div class="captcha">
-            <recaptcha formControlName="Captcha"
-                       siteKey="6LcffxQUAAAAABm03NR8yQ1eKfqQR3yjcWyXiFg5"
-                       required></recaptcha>
-            <div *ngIf="!captchaControl.valid"
-                 class="alert-error" role="alert">
-              Captcha must be solved.
+  <div class="row">
+    <div class="col-md-3 col-md-offset-2 text-center">
+      <div class="panel panel-primary">
+        <div class="panel-heading"><i class="fa fa-thumb-tack"></i> Address
+        </div>
+        <div class="panel-body">
+          261A Upper Thomson Road
+        </div>
+      </div>
+      <div class="panel panel-primary">
+        <div class="panel-heading"><i class="fa fa-phone"></i> Telephone
+        </div>
+        <div class="panel-body">
+          +65 123456789
+        </div>
+      </div>
+      <div class="panel panel-primary">
+        <div class="panel-heading"><i class="fa fa-envelope"></i> Email
+        </div>
+        <div class="panel-body">
+          support@edemy.sg
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-md-offset-1">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <i class="fa fa-comment"></i> Contact Form
+        </div>
+        <div class="panel-body">
+          <form [formGroup]="contactForm" (submit)="sendCustomerQuery()">
+            <div class="form-group">
+              <label for="inputName">Name</label>
+              <input type="text" class="form-control" id="inputName"
+                     placeholder="Enter name" formControlName="Name" required>
             </div>
-          </div>
-          <div class="buttons">
-            <button [disabled]="submitted" class="full-width" md-raised-button
-                    type="submit"
-                    color="primary">Send
+            <div class="form-group">
+              <label for="inputEmail">Email address</label>
+              <input type="email" class="form-control" id="inputEmail"
+                     aria-describedby="emailHelp" placeholder="Enter email"
+                     formControlName="Email" required>
+              <small id="emailHelp" class="form-text text-muted">
+                We'll never share your email with anyone else.
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="inputPhone">Phone</label>
+              <input type="tel" class="form-control" id="inputPhone"
+                     aria-describedby="phoneHelp"
+                     placeholder="Enter phone number"
+                     formControlName="Phone" required>
+              <small id="phoneHelp" class="form-text text-muted">
+                We'll never share your phone number with anyone else.
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="inputQuery">Query</label>
+              <textarea class="form-control" id="inputQuery" rows="5"
+                        placeholder="Enter message" formControlName="Query"
+                        required></textarea>
+            </div>
+            <div class="form-group">
+              <recaptcha aria-describedby="captchaHelp"
+                         formControlName="Captcha"
+                         siteKey="6LcffxQUAAAAABm03NR8yQ1eKfqQR3yjcWyXiFg5"
+                         required></recaptcha>
+              <small id="captchaHelp" class="text-muted">
+                Captcha needs to be solved.
+              </small>
+            </div>
+            <button [disabled]="submitted" type="submit"
+                    class="btn btn-primary">Send
             </button>
-          </div>
-        </form>
-      </md-card-content>
-    </md-card>
-  </div>
+            <alert type="success" *ngIf="!!messageSent && messageSent">
+              <strong>Success!</strong> You message has been successfully sent.
+            </alert>
+            <alert type="danger" *ngIf="!!messageSent && !messageSent">
+              <strong>Failure!</strong> Failed to send message, please try
+                                        again later.
+            </alert>
+          </form>
+        </div>
+      </div>
 
-  <div fxFlex fxShow.gt-md></div>
+    </div>
+  </div>
 </div>
 
 

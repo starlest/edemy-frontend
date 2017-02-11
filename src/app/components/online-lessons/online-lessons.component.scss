@@ -5,19 +5,27 @@
 	margin: auto;
 }
 
-.subject {
-	margin-top: 50px;
-	h1 {
-		font-size: 1.5em;
-	}
-}
-
 .filters {
 	margin-top: 50px;
 	md-select {
 		&:first-child {
 			margin-right: 20px;
 		}
+	}
+}
+
+.filter {
+	width: 150px;
+	display: inline-block;
+	&:first-child {
+		margin-right: 20px;
+	}
+}
+
+.subject {
+	margin-top: 50px;
+	h1 {
+		font-size: 1.5em;
 	}
 }
 
@@ -46,27 +54,29 @@
 .lesson-info {
 	display: inline-block;
 	vertical-align: top;
-	margin: 0 20px;
+	margin: 10px;
 	h2 {
 		margin: 10px 0;
-		font-size: 1.2em;
+		font-size: 1.8em;
 	}
 	.lesson-description {
 		font-size: 1em;
 	}
-	.levels-label {
-		font-size: 0.8em;
-		margin: 10px 0 0 0;
-	}
-	.lesson-level {
-		margin: 10px 5px 10px 0;
-		font-size: 0.6em;
-	}
-	.lesson-description, .lesson-levels {
+	.lesson-description {
 		max-width: 35vw;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
+	.levels-list {
+		margin-top: 10px;
+		padding: 0;
+		list-style: none;
+		li {
+			display: inline;
+		}
+		.lesson-level {
+			margin: 10px 5px 10px 0;
+		}
+	}
 }
-

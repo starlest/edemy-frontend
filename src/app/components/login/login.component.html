@@ -1,34 +1,25 @@
-<md-card class="card-login">
-  <md-card-header>
-    <h3 align="center">Login</h3>
-  </md-card-header>
-  <md-card-content>
-    <div *ngIf="loginError$ | async" class="alert-error" role="alert">
-      <strong>Warning:</strong> Username and Password mismatch
-    </div>
-    <form class="form-login" [formGroup]="loginForm"
-          (submit)="performLogin()">
-      <md-input-container class="full-width">
-        <input md-input formControlName="username" placeholder="Username"
-               required autofocus>
-      </md-input-container>
-      <md-input-container class="full-width">
-        <input md-input type="password" formControlName="password"
-               placeholder="Password"
-               required autofocus>
-      </md-input-container>
-      <div>
-        <label>
-          <input type="checkbox" formControlName="rememberUser">
-          Remember me
-        </label>
-      </div>
-      <div class="buttons">
-        <button [disabled]="submitted$ | async" md-raised-button type="submit"
-                color="primary">Login
-        </button>
-      </div>
-    </form>
-  </md-card-content>
-</md-card>
-
+<alert type="danger" *ngIf="loginError$ | async">
+  <strong>Warning:</strong> Username and Password mismatch
+</alert>
+<form [formGroup]="loginForm" (submit)="login()">
+  <div class="form-group">
+    <label for="inputUsername">Name</label>
+    <input type="text" class="form-control" id="inputUsername"
+           placeholder="Enter username" formControlName="Username" required>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword">Password</label>
+    <input type="password" class="form-control" id="inputPassword"
+           placeholder="Enter password" formControlName="Password" required>
+  </div>
+  <div class="form-check">
+    <label class="form-check-label">
+      <input class="form-check-input" type="checkbox"
+             formControlName="RememberUser">
+      Remember me
+    </label>
+  </div>
+  <button type="submit" class="btn btn-primary"
+          [disabled]="submitted$ | async">Login
+  </button>
+</form>

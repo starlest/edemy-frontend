@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
-import * as layout from '../../actions/layout.actions';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subject } from '../../models/subject';
 import { Subscription } from 'rxjs';
@@ -12,7 +11,7 @@ import { Level } from '../../models/level';
 	templateUrl: './upload.component.html',
 	styleUrls: ['./upload.component.scss']
 })
-export class UploadComponent implements OnInit, OnDestroy {
+export class UploadComponent implements OnDestroy {
 	worksheetUploadForm: FormGroup;
 	result: string;
 
@@ -52,10 +51,6 @@ export class UploadComponent implements OnInit, OnDestroy {
 				  levels.filter(level => level.Title !== 'All');
 			})
 			.subscribe();
-	}
-
-	ngOnInit() {
-		this.store.dispatch(new layout.ChangeTitleAction('Upload'));
 	}
 
 	ngOnDestroy() {

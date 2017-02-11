@@ -1,57 +1,18 @@
-.header {
-	margin-top: 50px;
-	text-align: center;
-	font-family: 'Roboto', sans-serif;
-}
-
-.video-card {
-	width: 1024px;
-	max-width: 80vw;
-	margin: 50px auto;
-}
-
-.level {
-	margin-right: 5px;
-}
-
-.private-video-message {
-	margin-bottom: 20px;
-}
-
-.video-card-wrapper {
-	margin: 20px auto;
-	width: 100%;
-	padding-top: 56.25%;
-	position: relative;
-	.embed-video {
-		width: 100%;
-		height: 100%;
-		position: absolute;
-		top: 0;
-		left: 0;
-		bottom: 0;
-		right: 0;
-	}
-}
-
-.tutor {
-	font-size: 14px;
-	margin: 20px;
-	h4 {
+.page-header {
+	margin: 0;
+	padding: 20px;
+	font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	background-color: #0a6ebd;
+	h1 {
+		color: white;
 		margin: 0;
 	}
-	a {
-		color: #2196f3;
-		text-decoration: none;
-	}
 }
 
-.notes-card {
-	width: 1024px;
-	max-width: 80vw;
+.container-fluid {
 	margin: 50px auto;
 }
 
-.notes-content {
-	margin: 20px;
+.info {
+	margin: 50px auto;
 }

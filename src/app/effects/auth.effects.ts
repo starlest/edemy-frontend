@@ -6,7 +6,7 @@ import { Action, Store } from '@ngrx/store';
 import * as auth from '../actions/auth.actions';
 import * as user from '../actions/user.actions';
 import * as fromRoot from '../reducers';
-import { go, back } from '@ngrx/router-store';
+import { go } from '@ngrx/router-store';
 import { of } from 'rxjs/observable/of';
 import { environment } from '../../environments/environment';
 import { AuthEntity } from '../models/auth-entity';
@@ -44,10 +44,7 @@ export class AuthEffects {
 	  .switchMap(payload => {
 		  return this.authService.login(payload.username, payload.password,
 			payload.rememberUser)
-			.map(result => {
-				this.store.dispatch(back());
-				return new auth.LoadSuccessAction(result);
-			})
+			.map(result => new auth.LoadSuccessAction(result))
 			.catch(err => {
 				const error = err.json();
 				console.log(error);

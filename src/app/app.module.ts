@@ -8,8 +8,8 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {
 	AboutComponent, CurriculumComponent, ContactComponent, HomeComponent,
-	LoginComponent, NotFoundPageComponent, OnlineLessonComponent,
-	OnlineLessonsComponent, ToolbarComponent, UploadComponent,
+	LoginComponent, NavbarComponent, NotFoundPageComponent,
+	OnlineLessonComponent, OnlineLessonsComponent, UploadComponent,
 	WorksheetsComponent
 } from './components';
 import {
@@ -17,7 +17,7 @@ import {
 } from './containers';
 import {
 	AuthService, MessagesService, LessonsService, LevelsService,
-	SubjectsService, UserService
+	SubjectsService, UserService, WorksheetsService
 } from './services';
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './reducers';
@@ -34,7 +34,8 @@ import { LessonExistsGuard } from './guards/lesson-exists.guard';
 import { LoggedInGuard } from './guards/logged-in.guard';
 import { RecaptchaModule } from 'ng2-recaptcha';
 import { AdminGuard } from './guards/admin.guard';
-import { WorksheetsService } from './services/worksheets.service';
+import { AlertModule, ModalModule, DropdownModule, TabsModule } from 'ng2-bootstrap';
+import { SelectModule } from 'ng2-select';
 
 @NgModule({
 	declarations: [
@@ -44,11 +45,11 @@ import { WorksheetsService } from './services/worksheets.service';
 		CurriculumComponent,
 		HomeComponent,
 		LoginComponent,
+		NavbarComponent,
 		NotFoundPageComponent,
 		OnlineLessonComponent,
 		OnlineLessonsComponent,
 		SelectedLessonPageComponent,
-		ToolbarComponent,
 		UploadComponent,
 		ViewLessonPageComponent,
 		WorksheetsComponent
@@ -59,10 +60,20 @@ import { WorksheetsService } from './services/worksheets.service';
 		FormsModule,
 		ReactiveFormsModule,
 		HttpModule,
-		FlexLayoutModule.forRoot(),
-		MaterialModule.forRoot(),
 		RecaptchaModule.forRoot(),
 
+		/**
+		 * ng2-bootstrap
+		 */
+		AlertModule.forRoot(),
+		ModalModule.forRoot(),
+		DropdownModule.forRoot(),
+		SelectModule,
+		TabsModule.forRoot(),
+
+		/**
+		 * ngrx/store
+		 */
 		StoreModule.provideStore(reducer),
 		RouterStoreModule.connectRouter(),
 		EffectsModule.run(AuthEffects),

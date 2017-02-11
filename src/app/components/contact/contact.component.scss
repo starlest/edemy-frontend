@@ -1,44 +1,26 @@
-.location {
-	width: 100%;
-	height: 40vh;
-	margin: 0;
-}
-
 .content-wrapper {
-	margin: 50px auto;
+	margin: 80px auto;
 }
-
-.info {
-	margin: 0 auto 50px auto;
-	font-family: 'Roboto', sans-serif;
-	text-align: center;
-}
-
-.contact-form-wrapper {
-	text-align: center;
-	margin: auto;
-	.contact-form-card {
-		width: 400px;
-		max-width: 80vw;
-		margin: auto;
-	}
-	.result {
-		color: blue;
-		margin: 20px auto;
-	}
-	textarea {
-		resize: none;
-	}
-	.captcha {
-		margin: 20px auto;
-		width: 302px;
+.location {
+	height: 40vh;
+	iframe {
+		width: 100%;
+		height: 100%;
 	}
 }
 
-.alert-error {
+.location-wrapper {
+	margin-bottom: 50px;
+}
+
+textarea {
+	resize: none;
+}
+
+.alert {
+	margin-top: 20px;
+}
+
+#captchaHelp {
 	color: red;
-}
-
-.full-width {
-	width: 100%;
 }

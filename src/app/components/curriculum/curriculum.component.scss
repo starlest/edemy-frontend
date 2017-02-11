@@ -1,7 +1,7 @@
 .wrapper {
 	width: 800px;
 	max-width: 80vw;
-	margin: 0 auto;
+	margin: 80px auto;
 }
 
 .subject {
@@ -13,6 +13,7 @@
 }
 
 .image {
+	margin: 20px auto;
 	img {
 		width: 192px;
 		height: 192px;
@@ -20,13 +21,23 @@
 }
 
 .levels {
-	h4, .levels-list {
+	h4 {
 		display: inline-block;
+	}
+	.levels-list {
+		padding: 0;
+		list-style: none;
+		li {
+			display: inline;
+		}
 	}
 }
 
 .extracurricular-divider {
 	margin-top: 100px;
+	.divider {
+		border-bottom: 1px solid #ccc;
+	}
 }
 
 .primary, .secondary, .pre-school {

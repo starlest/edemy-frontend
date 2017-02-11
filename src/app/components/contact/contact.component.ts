@@ -1,11 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import * as fromRoot from '../../reducers';
-import * as layout from '../../actions/layout.actions';
+import { Component } from '@angular/core';
 import {
 	FormGroup, FormBuilder, Validators, AbstractControl
 } from '@angular/forms';
-import { environment } from '../../../environments/environment';
 import { MessagesService } from '../../services/';
 
 @Component({
@@ -13,15 +9,13 @@ import { MessagesService } from '../../services/';
 	templateUrl: './contact.component.html',
 	styleUrls: ['./contact.component.scss']
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent {
 	contactForm: FormGroup;
 	captchaControl: AbstractControl;
 	submitted: boolean = false;
-	result: string;
-	url = environment.apiEndpoint + 'messages/query';
+	messageSent: boolean = null;
 
-	constructor(private store: Store<fromRoot.State>,
-	            private fb: FormBuilder,
+	constructor(private fb: FormBuilder,
 	            private messagesService: MessagesService) {
 		this.contactForm = fb.group({
 			Name: ['', Validators.required],
@@ -33,24 +27,19 @@ export class ContactComponent implements OnInit {
 		this.captchaControl = this.contactForm.controls['Captcha'];
 	}
 
-	ngOnInit() {
-		this.store.dispatch(new layout.ChangeTitleAction('Contact'));
-	}
-
 	sendCustomerQuery() {
 		if (!this.contactForm.valid) return;
 		this.submitted = true;
 		this.messagesService.postQuery(this.contactForm.value)
-		  .map(result => {
-			  this.result = 'Your query has been sent successfully!';
+		  .map(() => {
+			  this.messageSent = true;
 			  this.contactForm.reset();
 		  })
 		  .catch(err => {
-			  this.result = 'Failed to send query, please try again.';
+			  this.messageSent = false;
 			  console.log(err)
 		  })
 		  .do(() => this.submitted = false)
 		  .subscribe();
 	}
-
 }

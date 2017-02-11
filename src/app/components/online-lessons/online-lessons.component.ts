@@ -1,44 +1,70 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Lesson } from '../../models/lesson';
-import { Subject } from '../../models/subject';
 import * as fromRoot from '../../reducers';
-import * as layout from '../../actions/layout.actions';
 import * as lessons from '../../actions/lessons.actions';
 import { Observable, Subscription } from 'rxjs';
 import { isNullOrUndefined } from 'util';
-import { Level } from '../../models/level';
+import { Subject } from '../../models/';
 
 @Component({
 	selector: 'ed-online-lessons',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './online-lessons.component.html',
 	styleUrls: ['./online-lessons.component.scss']
 })
-export class OnlineLessonsComponent implements OnInit, OnDestroy {
-	selectedSubjectFilter: string;
-	selectedLevelFilter: string;
+export class OnlineLessonsComponent implements OnDestroy {
+	subjectFilter: string;
+	levelFilter: string;
+	subjects: string[] = [];
+	levels: string[] = [];
 
-	lessonsSubscription: Subscription;
-	levels$: Observable<Level[]>;
+	levelsSubscription: Subscription;
 	subjects$: Observable<Subject[]>;
 	lessons$: { [subject: string]: Observable<Lesson[]> } = {};
 
 	constructor(private store: Store<fromRoot.State>) {
-		this.levels$ = this.store.select(fromRoot.getLevels)
-		  .map(levels => [{ Id: -1, Title: 'All' }, ...levels]);
 		this.subjects$ = this.store.select(fromRoot.getSubjects)
-		  .map(subjects => [{ Id: -1, Title: 'All' }, ...subjects]);
-		this.lessonsSubscription = this.subjects$.map(subjects => {
-			subjects.forEach(subject => {
-				this.lessons$[subject.Title] =
-				  this.store.select(
+		  .map(subjects => {
+			  this.subjects = [];
+			  this.subjects.push('All');
+			  subjects.forEach(subject => {
+				  this.lessons$[subject.Title] = this.store.select(
 					fromRoot.getFilteredSubjectLessons(subject.Title));
-			});
-		}).subscribe();
+				  this.subjects.push(subject.Title)
+			  });
+			  return subjects;
+		  });
+
+		this.levelsSubscription = this.store.select(fromRoot.getLevels)
+		  .map(levels => {
+			  this.levels = [];
+			  this.levels.push('All');
+			  levels.forEach(level => this.levels.push(level.Title));
+		  })
+		  .subscribe();
 	}
 
-	ngOnInit() {
-		this.store.dispatch(new layout.ChangeTitleAction('Online Lessons'));
+	selectedSubjectFilter(value: any): void {
+		this.subjectFilter = value.text;
+		this.updateDisplayedLessons();
+	}
+
+	selectedLevelFilter(value: any): void {
+		this.levelFilter = value.text;
+		this.updateDisplayedLessons();
+	}
+
+	updateDisplayedLessons() {
+		const subjectFilterCondition: boolean = (this.subjectFilter ===
+		'All' || isNullOrUndefined(this.subjectFilter));
+		const levelFilterCondition: boolean = (this.levelFilter ===
+		'All' || isNullOrUndefined(this.levelFilter));
+		this.store.dispatch(new lessons.SetFilter((lesson: Lesson) =>
+		  (subjectFilterCondition ? true :
+		  lesson.Subject === this.subjectFilter) &&
+		  levelFilterCondition ? true :
+		  lesson.Levels.indexOf(this.levelFilter) >= 0));
 	}
 
 	getSubjectIconPath(subject: string): string {
@@ -52,21 +78,9 @@ export class OnlineLessonsComponent implements OnInit, OnDestroy {
 		}
 	}
 
-	onFilterSelectClose() {
-		const subjectFilterCondition: boolean = (this.selectedSubjectFilter ===
-		'All' || isNullOrUndefined(this.selectedSubjectFilter));
-		const levelFilterCondition: boolean = (this.selectedLevelFilter ===
-		'All' ||
-		isNullOrUndefined(this.selectedLevelFilter));
-		this.store.dispatch(new lessons.SetFilter((lesson: Lesson) =>
-		  (subjectFilterCondition ? true :
-		  lesson.Subject === this.selectedSubjectFilter) &&
-		  levelFilterCondition ? true :
-		  lesson.Levels.indexOf(this.selectedLevelFilter) >= 0));
-	}
-
 	ngOnDestroy() {
 		this.store.dispatch(new lessons.RemoveFilter);
-		this.lessonsSubscription.unsubscribe();
+		if (this.levelsSubscription)
+			this.levelsSubscription.unsubscribe();
 	}
 }
