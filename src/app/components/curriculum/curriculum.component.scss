@@ -34,7 +34,8 @@
 }
 
 .extracurricular-divider {
-	margin-top: 100px;
+	margin: 100px auto 0 auto;
+	max-width: 80vw;
 	.divider {
 		border-bottom: 1px solid #ccc;
 	}
