@@ -15,6 +15,7 @@ import { ModalDirective } from 'ng2-bootstrap/modal';
 	styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+	isCollapsed: boolean = true;
 	isLoggedIn$: Observable<boolean>;
 	user$: Observable<User>;
 
@@ -46,5 +47,6 @@ export class NavbarComponent {
 
 	logout() {
 		this.store.dispatch(new auth.RemoveAction);
+		this.isCollapsed = true;
 	}
 }

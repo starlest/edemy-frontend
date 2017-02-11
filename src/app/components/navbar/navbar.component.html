@@ -1,81 +1,76 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
-    <input id="navbar-toggle-cbox" type="checkbox">
-    <div class="navbar-header">
-      <label aria-controls="navbar" aria-expanded="false"
-             class="collapsed navbar-toggle" for="navbar-toggle-cbox">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </label>
-      <a class="navbar-brand" routerLink="home">
-        <img alt="logo" src="assets/img/edemy-short-logo.svg"/>
-      </a>
-    </div>
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+                (click)="isCollapsed = !isCollapsed"
+                aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" routerLink="home">
+          <img alt="logo" src="assets/img/edemy-short-logo.svg"/>
+        </a>
+      </div>
 
-    <div class="collapse navbar-collapse">
+      <div class="navbar-collapse collapse" [collapse]="isCollapsed">
 
-      <ul class="nav navbar-nav">
-        <li>
-          <a routerLink="home">Home</a>
-        </li>
-        <li>
-          <a routerLink="about">About</a>
-        </li>
-        <li>
-          <a routerLink="curriculum">Curriculum</a>
-        </li>
-        <li>
-          <a routerLink="onlinelessons">Online Lessons</a>
-        </li>
-        <li>
-          <a routerLink="contact">Contact</a>
-        </li>
-      </ul>
+        <ul class="nav navbar-nav">
+          <li>
+            <a routerLink="home" (click)="isCollapsed = true">Home</a>
+          </li>
+          <li>
+            <a routerLink="about" (click)="isCollapsed = !isCollapsed">About</a>
+          </li>
+          <li>
+            <a routerLink="curriculum" (click)="isCollapsed = !isCollapsed">Curriculum</a>
+          </li>
+          <li>
+            <a routerLink="onlinelessons" (click)="isCollapsed = !isCollapsed">Online
+                                                                               Lessons</a>
+          </li>
+          <li>
+            <a routerLink="contact"
+               (click)="isCollapsed = !isCollapsed">Contact</a>
+          </li>
+        </ul>
 
-      <ul class="nav navbar-nav navbar-right">
-        <li *ngIf="!(isLoggedIn$ | async)">
-          <a class="login-button"
-                  (click)="loginModal.show()">
-            <i class="fa fa-sign-in" aria-hidden="true"></i>
-            Login
-          </a>
-        </li>
-        <li *ngIf="isLoggedIn$ | async">
-          <div class="btn-group" dropdown>
-            <button id="user-menu-button" type="button"
-                    class="btn btn-default btn-navbar"
-                    dropdownToggle>
-              <i class="fa fa-user"></i> {{(user$ | async).DisplayName}} <span
-                class="caret"></span>
-            </button>
-            <ul dropdownMenu role="menu" aria-labelledby="user-menu-button"
-                class="dropdown-menu-right">
-              <li role="menuitem"><a class="dropdown-item" href="#">Action</a>
-              </li>
-              <li role="menuitem"><a class="dropdown-item" href="#">Another
-                                                                    action</a>
-              </li>
-              <li role="menuitem"><a class="dropdown-item" href="#">Something
-                                                                    else
-                                                                    here</a>
-              </li>
-              <li class="divider dropdown-divider"></li>
+        <ul class="nav navbar-nav navbar-right">
+          <li *ngIf="!(isLoggedIn$ | async)">
+            <a class="login-button"
+               (click)="loginModal.show()">
+              <i class="fa fa-sign-in" aria-hidden="true"></i>
+              Login
+            </a>
+          </li>
+          <li *ngIf="isLoggedIn$ | async" dropdown>
+            <a role="button" aria-expanded="false" dropdownToggle>
+              <i class="fa fa-user"></i>
+              {{(user$ | async).DisplayName}}
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu" dropdownMenu>
               <li role="menuitem">
-                <a class="dropdown-item" (click)="logout()"><i
-                    class="fa fa-sign-out"></i>
-                  Logout
+                <a class="dropdown-item" routerLink="worksheets"
+                   (click)="isCollapsed = !isCollapsed">
+                  <i class="fa fa-file-text-o"></i> Worksheets
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li role="menuitem">
+                <a class="dropdown-item" (click)="logout()">
+                  <i class="fa fa-sign-out"></i> Logout
                 </a>
               </li>
             </ul>
-          </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </nav>
-
 
 <div bsModal #loginModal="bs-modal" class="modal fade" tabindex="-1"
      role="dialog" aria-labelledby="loginModal" aria-hidden="true">

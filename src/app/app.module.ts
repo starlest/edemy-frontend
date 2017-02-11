@@ -1,9 +1,7 @@
 import { AppRouting } from './app.routing';
 import { BrowserModule } from '@angular/platform-browser';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MaterialModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {
@@ -34,7 +32,9 @@ import { LessonExistsGuard } from './guards/lesson-exists.guard';
 import { LoggedInGuard } from './guards/logged-in.guard';
 import { RecaptchaModule } from 'ng2-recaptcha';
 import { AdminGuard } from './guards/admin.guard';
-import { AlertModule, ModalModule, DropdownModule, TabsModule } from 'ng2-bootstrap';
+import {
+	AlertModule, CollapseModule, ModalModule, DropdownModule, TabsModule
+} from 'ng2-bootstrap';
 import { SelectModule } from 'ng2-select';
 
 @NgModule({
@@ -66,6 +66,7 @@ import { SelectModule } from 'ng2-select';
 		 * ng2-bootstrap
 		 */
 		AlertModule.forRoot(),
+		CollapseModule.forRoot(),
 		ModalModule.forRoot(),
 		DropdownModule.forRoot(),
 		SelectModule,

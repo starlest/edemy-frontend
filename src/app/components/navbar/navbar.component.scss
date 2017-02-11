@@ -7,12 +7,6 @@
 		margin: -4px 0 0 0;
 		padding: 0;
 	}
-	#navbar-toggle-cbox {
-		display:none;
-		&:checked ~ .collapse {
-			display: block;
-		}
-	}
 }
 
 #user-menu-button {
@@ -23,6 +17,6 @@
 	cursor: pointer;
 }
 
-.divider {
-	border-bottom: thick black;
+.navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {
+	max-height: 60%;
 }

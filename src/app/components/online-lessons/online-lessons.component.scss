@@ -7,8 +7,9 @@
 
 .filters {
 	margin-top: 50px;
-	md-select {
+	.filter {
 		&:first-child {
+			margin-bottom: 20px;
 			margin-right: 20px;
 		}
 	}
