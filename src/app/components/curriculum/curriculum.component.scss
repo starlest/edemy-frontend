@@ -6,6 +6,10 @@
 
 .subject {
 	margin: 50px auto;
+	h2 {
+		font-weight: bold;
+		font-size: 2.5em;
+	}
 }
 
 .image, .info {
@@ -22,6 +26,7 @@
 
 .levels {
 	h4 {
+		font-size: 1.75em;
 		display: inline-block;
 	}
 	.levels-list {
@@ -36,6 +41,9 @@
 .extracurricular-divider {
 	margin: 100px auto 0 auto;
 	max-width: 80vw;
+	h1 {
+		font-size: 3em;
+	}
 	.divider {
 		border-bottom: 1px solid #ccc;
 	}
