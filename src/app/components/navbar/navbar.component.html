@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <input id="navbar-toggle-cbox" type="checkbox">
     <div class="navbar-header">
@@ -44,7 +44,8 @@
         </li>
         <li *ngIf="isLoggedIn$ | async">
           <div class="btn-group" dropdown>
-            <button id="user-menu-button" type="button" class="btn btn-primary btn-navbar"
+            <button id="user-menu-button" type="button"
+                    class="btn btn-default btn-navbar"
                     dropdownToggle>
               <i class="fa fa-user"></i> {{(user$ | async).DisplayName}} <span
                 class="caret"></span>
