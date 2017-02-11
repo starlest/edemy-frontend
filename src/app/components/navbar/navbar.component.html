@@ -10,7 +10,7 @@
         <span class="icon-bar"></span>
       </label>
       <a class="navbar-brand" routerLink="home">
-        <img alt="logo" src="/assets/img/edemy-short-logo.svg"/>
+        <img alt="logo" src="assets/img/edemy-short-logo.svg"/>
       </a>
     </div>
 
@@ -36,11 +36,11 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li *ngIf="!(isLoggedIn$ | async)">
-          <button class="btn btn-primary btn-navbar"
+          <a class="login-button"
                   (click)="loginModal.show()">
             <i class="fa fa-sign-in" aria-hidden="true"></i>
             Login
-          </button>
+          </a>
         </li>
         <li *ngIf="isLoggedIn$ | async">
           <div class="btn-group" dropdown>
@@ -71,9 +71,7 @@
           </div>
         </li>
       </ul>
-
     </div>
-
   </div>
 </nav>
 
