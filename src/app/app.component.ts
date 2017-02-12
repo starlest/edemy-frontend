@@ -10,9 +10,9 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 		</div>
 `,
 	styles: [`
-	.router-outlet-wrapper {
-		padding-top: 64px;
-	}
+	/*.router-outlet-wrapper {*/
+		/*padding-top: 64px;*/
+	/*}*/
 `]
 })
 export class AppComponent {

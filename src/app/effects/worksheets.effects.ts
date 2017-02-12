@@ -18,7 +18,14 @@ export class WorksheetsEffects {
 	  .ofType(worksheets.ActionTypes.LOAD)
 	  .switchMap(() =>
 		this.worksheetsService.get()
-		  .map((results: Worksheet[]) => new worksheets.LoadSuccessAction(results))
+		  .map((results: Worksheet[]) => {
+			  results.forEach(worksheet => {
+				  worksheet.DownloadButton =
+					`<a class="btn btn-sm btn-primary" href="${worksheet.DownloadLink}" target="_blank">
+Download</a>`
+			  });
+			  return new worksheets.LoadSuccessAction(results)
+		  })
 		  .catch(error => of(new worksheets.LoadFailAction()))
 	  );
 }

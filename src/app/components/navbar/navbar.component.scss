@@ -1,6 +1,5 @@
 .navbar {
-	margin-bottom: 0;
-	padding-right: 20px;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.24);
 	img {
 		width: 32px;
 		height: 32px;
@@ -9,14 +8,28 @@
 	}
 }
 
-#user-menu-button {
-	margin: 14px;
-}
-
-.login-button {
-	cursor: pointer;
-}
-
 .navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse {
 	max-height: 60%;
+}
+
+
+/**
+Fix for modal bug in Bootstrap 4.
+ */
+.fade.in {
+	opacity: 1;
+}
+
+.modal.in .modal-dialog {
+	-webkit-transform: translate(0, 0);
+	-o-transform: translate(0, 0);
+	transform: translate(0, 0);
+}
+
+.modal-backdrop .fade .in {
+	opacity: 0.5 !important;
+}
+
+.modal-backdrop.fade {
+	opacity: 0.5 !important;
 }

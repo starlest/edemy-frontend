@@ -5,8 +5,8 @@ import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {
-	AboutComponent, CurriculumComponent, ContactComponent, HomeComponent,
-	LoginComponent, NavbarComponent, NotFoundPageComponent,
+	AboutComponent, CurriculumComponent, ContactComponent, HeaderComponent,
+	HomeComponent, LoginComponent, NavbarComponent, NotFoundPageComponent,
 	OnlineLessonComponent, OnlineLessonsComponent, UploadComponent,
 	WorksheetsComponent
 } from './components';
@@ -26,16 +26,17 @@ import {
 } from './effects';
 import { RouterStoreModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import 'hammerjs';
 import { AuthHttp } from './auth.http';
+import { AdminGuard } from './guards/admin.guard';
 import { LessonExistsGuard } from './guards/lesson-exists.guard';
 import { LoggedInGuard } from './guards/logged-in.guard';
 import { RecaptchaModule } from 'ng2-recaptcha';
-import { AdminGuard } from './guards/admin.guard';
 import {
-	AlertModule, CollapseModule, ModalModule, DropdownModule, TabsModule
+	AlertModule, CollapseModule, ModalModule, DropdownModule, PaginationModule,
+	TabsModule
 } from 'ng2-bootstrap';
 import { SelectModule } from 'ng2-select';
+import { Ng2TableModule } from 'ng2-table';
 
 @NgModule({
 	declarations: [
@@ -43,6 +44,7 @@ import { SelectModule } from 'ng2-select';
 		AppComponent,
 		ContactComponent,
 		CurriculumComponent,
+		HeaderComponent,
 		HomeComponent,
 		LoginComponent,
 		NavbarComponent,
@@ -68,8 +70,10 @@ import { SelectModule } from 'ng2-select';
 		AlertModule.forRoot(),
 		CollapseModule.forRoot(),
 		ModalModule.forRoot(),
+		Ng2TableModule,
 		DropdownModule.forRoot(),
 		SelectModule,
+		PaginationModule.forRoot(),
 		TabsModule.forRoot(),
 
 		/**

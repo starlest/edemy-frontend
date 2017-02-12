@@ -19,9 +19,8 @@
       "mobile": false,
       "styles": [
         "assets/css/styles.css",
-        "assets/css/bootstrap.css",
-        "assets/css/glyphicon.css",
-        "assets/css/ng2-select.css"
+        "assets/css/ng2-select.css",
+        "assets/css/bootstrap.css"
       ],
       "scripts": [
       ],

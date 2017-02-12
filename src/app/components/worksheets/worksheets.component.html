@@ -1,0 +1,35 @@
+<ed-header title="Worksheets"></ed-header>
+
+<div class="row filter">
+  <div class="col-xs-6 col-md-2 col-md-offset-1">
+    <input *ngIf="config.filtering"
+           placeholder="Filter"
+           [ngTableFiltering]="config.filtering"
+           class="form-control"
+           (tableChanged)="onChangeTable(config)"/>
+  </div>
+</div>
+<br>
+
+<div class="row table">
+  <div class="col-xs-12 col-md-10 col-md-offset-1">
+    <ng-table [config]="config"
+              (tableChanged)="onChangeTable(config)"
+              [rows]="rows" [columns]="columns">
+    </ng-table>
+  </div>
+</div>
+
+<div class="text-center">
+  <pagination *ngIf="config.paging"
+              class="pagination-sm"
+              [(ngModel)]="page"
+              [totalItems]="length"
+              [itemsPerPage]="itemsPerPage"
+              [maxSize]="maxSize"
+              [boundaryLinks]="true"
+              [rotate]="false"
+              (pageChanged)="onChangeTable(config, $event)"
+              (numPages)="numPages = $event">
+  </pagination>
+</div>

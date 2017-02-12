@@ -1,12 +1,11 @@
 import { Routes, RouterModule } from '@angular/router';
 import {
 	AboutComponent, ContactComponent, CurriculumComponent, HomeComponent,
-	LoginComponent, NotFoundPageComponent, OnlineLessonsComponent,
-	UploadComponent, WorksheetsComponent
+	NotFoundPageComponent, OnlineLessonsComponent, UploadComponent,
+	WorksheetsComponent
 } from './components';
 import { ViewLessonPageComponent } from './containers';
 import { LessonExistsGuard } from './guards/lesson-exists.guard';
-import { LoggedInGuard } from './guards/logged-in.guard';
 import { AdminGuard } from './guards/admin.guard';
 
 export const appRoutes: Routes = [

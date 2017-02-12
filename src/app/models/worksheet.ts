@@ -5,5 +5,6 @@ export interface Worksheet {
 	Subject: string;
 	Description: string;
 	DownloadLink: string;
+	DownloadButton: string;
 	Tutor: string;
 }

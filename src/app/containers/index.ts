@@ -1,2 +1,3 @@
-export {SelectedLessonPageComponent} from './selected-lesson-page.component';
-export {ViewLessonPageComponent} from './view-lesson-page.component';
+export { SelectedLessonPageComponent } from './selected-lesson-page.component';
+export { ViewLessonPageComponent } from './view-lesson-page.component';
+export { WorksheetsPageComponent } from './worksheets-page.component';
