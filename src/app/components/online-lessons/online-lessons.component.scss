@@ -1,38 +1,10 @@
-.wrapper {
-	font-family: 'Open Sans', sans-serif;
-	width: 800px;
-	max-width: 80vw;
-	margin: auto;
-}
-
-.filters {
-	margin-top: 50px;
-	.filter {
-		&:first-child {
-			margin-bottom: 20px;
-			margin-right: 20px;
-		}
-	}
-}
-
-.filter {
-	width: 120px;
-	display: inline-block;
-	&:first-child {
-		margin-right: 20px;
-	}
-}
-
 .subject {
-	margin-top: 50px;
 	h1 {
 		font-size: 1.5em;
 	}
 }
 
 .lesson {
-	margin-bottom: 50px;
-	height: 140px;
 	border: solid thin gray;
 	background-color: white;
 	a {
@@ -44,40 +16,19 @@
 		background-color: lightgray;
 	}
 	img {
-		width: 192px;
-		height: 100px;
-		max-width: 25%;
-		vertical-align: middle;
-		margin: 20px 10px;
+		height: 100%;
+		display: block;
 	}
 }
 
-.lesson-info {
-	display: inline-block;
-	vertical-align: top;
-	margin: 10px;
-	h2 {
-		margin: 10px 0;
-		font-size: 1.8em;
+.levels-list {
+	margin-top: 10px;
+	padding: 0;
+	list-style: none;
+	li {
+		display: inline;
 	}
-	.lesson-description {
-		font-size: 1em;
-	}
-	.lesson-description {
-		max-width: 35vw;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
-	.levels-list {
-		margin-top: 10px;
-		padding: 0;
-		list-style: none;
-		li {
-			display: inline;
-		}
-		.lesson-level {
-			margin: 10px 5px 10px 0;
-		}
+	.lesson-level {
+		margin: 10px 5px 10px 0;
 	}
 }
