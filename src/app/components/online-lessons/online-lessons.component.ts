@@ -21,6 +21,8 @@ export class OnlineLessonsComponent implements OnDestroy {
 
 	levelsSubscription: Subscription;
 	subjects$: Observable<Subject[]>;
+	areThereLessons$: Observable<boolean>;
+
 	lessons$: { [subject: string]: Observable<Lesson[]> } = {};
 
 	constructor(private store: Store<fromRoot.State>) {
@@ -36,6 +38,9 @@ export class OnlineLessonsComponent implements OnDestroy {
 			  return subjects;
 		  });
 
+		this.areThereLessons$ = this.store.select(fromRoot.getFilteredLessons)
+		  .map(lessons => lessons.length > 0);
+
 		this.levelsSubscription = this.store.select(fromRoot.getLevels)
 		  .map(levels => {
 			  this.levels = [];
@@ -43,6 +48,7 @@ export class OnlineLessonsComponent implements OnDestroy {
 			  levels.forEach(level => this.levels.push(level.Title));
 		  })
 		  .subscribe();
+
 	}
 
 	selectedSubjectFilter(value: any): void {
@@ -60,11 +66,17 @@ export class OnlineLessonsComponent implements OnDestroy {
 		'All' || isNullOrUndefined(this.subjectFilter));
 		const levelFilterCondition: boolean = (this.levelFilter ===
 		'All' || isNullOrUndefined(this.levelFilter));
-		this.store.dispatch(new lessons.SetFilter((lesson: Lesson) =>
-		  (subjectFilterCondition ? true :
-		  lesson.Subject === this.subjectFilter) &&
-		  levelFilterCondition ? true :
-		  lesson.Levels.indexOf(this.levelFilter) >= 0));
+
+		this.store.dispatch(new lessons.SetFilter((lesson: Lesson) => {
+			const subjectFilter = subjectFilterCondition ? true :
+			lesson.Subject === this.subjectFilter;
+			const levelFilter = levelFilterCondition ? true :
+			lesson.Levels.indexOf(this.levelFilter) >= 0;
+			console.log(lesson.Title);
+			console.log('subject filter:', subjectFilter);
+			console.log('level filter:', levelFilter);
+			return subjectFilter && levelFilter;
+		}));
 	}
 
 	getSubjectIconPath(subject: string): string {

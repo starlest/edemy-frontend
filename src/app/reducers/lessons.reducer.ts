@@ -95,9 +95,7 @@ export const getSelected = createSelector(getEntities, getSelectedId,
   });
 
 export const getFilteredLessons = createSelector(getEntities, getIds, getFilter,
-  (entities, ids, filter) => {
-	  return ids.map(id => entities[id]).filter(filter);
-  });
+  (entities, ids, filter) => ids.map(id => entities[id]).filter(filter));
 
 
 
