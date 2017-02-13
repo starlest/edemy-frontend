@@ -1,22 +1,21 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Store } from '@ngrx/store';
 import * as fromRoot from './reducers';
 import { AuthEntity } from './models/auth-entity';
-import { Subscription } from 'rxjs';
 
 @Injectable()
-export class AuthHttp implements OnDestroy {
+export class AuthHttp {
 	http: Http;
 	authEntity: AuthEntity;
-	authEntitySubscription$: Subscription;
 
-	constructor(private store: Store<fromRoot.State>,
-	            http: Http) {
-		this.authEntitySubscription$ =
-		  this.store.select(fromRoot.getAuthEntity)
-			.map((entity: AuthEntity) => this.authEntity = entity).subscribe();
+	constructor(http: Http, private store: Store<fromRoot.State>) {
 		this.http = http;
+		this.store.select(fromRoot.getAuthEntity)
+		  .map(entity => {
+			  console.log('authHttp token:', entity);
+			  this.authEntity = entity;
+		  }).subscribe();
 	}
 
 	get(url, opts = {}) {
@@ -41,15 +40,11 @@ export class AuthHttp implements OnDestroy {
 	}
 
 	configureAuth(opts: any) {
-		if (this.authEntity && this.authEntity.access_token) {
+		const accessToken = this.authEntity ? this.authEntity.access_token : null;
+		if (accessToken && accessToken) {
 			if (!opts.headers) opts.headers = new Headers();
 			opts.headers.set('Authorization',
-			  `Bearer ${this.authEntity.access_token}`);
+			  `Bearer ${accessToken}`);
 		}
-	}
-
-	ngOnDestroy() {
-		if (this.authEntitySubscription$)
-			this.authEntitySubscription$.unsubscribe();
 	}
 }

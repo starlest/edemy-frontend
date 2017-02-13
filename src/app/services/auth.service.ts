@@ -4,15 +4,12 @@ import { environment } from '../../environments/environment';
 import { AuthHttp } from '../auth.http';
 import { Observable } from 'rxjs';
 import { AuthEntity } from '../models/auth-entity';
-import { Store } from '@ngrx/store';
-import * as fromRoot from '../reducers';
 
 @Injectable()
 export class AuthService {
 	authKey = environment.authKey;
 
-	constructor(private store: Store<fromRoot.State>,
-	            private http: AuthHttp) {
+	constructor(private http: AuthHttp) {
 	}
 
 	login(username: string, password: string, rememberUser: boolean): any {
@@ -42,8 +39,9 @@ export class AuthService {
 	// Retrieves the auth JSON object (or NULL if none)
 	getAuthInLocalStorage(): AuthEntity {
 		const i = localStorage.getItem(this.authKey);
-		if (i) return JSON.parse(i);
-		else return null;
+		if (!i) return null;
+		const authEntity = JSON.parse(i);
+		return authEntity;
 	}
 
 	getAuth(data: any, grantType: string,
@@ -62,16 +60,16 @@ export class AuthService {
 		// The request for tokens must be x-www-form-urlencoded
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		let options = new RequestOptions({ headers: headers });
-
+		if (grantType === 'refresh_token') console.log('refreshing');
 		return this.http.post(url, this.toUrlEncodedString(data), options)
 		  .map(res => res.json())
-		  .map((authToken: AuthEntity) => {
+		  .map((authEntity: AuthEntity) => {
 			  let now = new Date();
-			  authToken.expiration_date =
-				new Date(now.getTime() + authToken.expires_in * 1000).getTime()
+			  authEntity.expiration_date =
+				new Date(now.getTime() + authEntity.expires_in * 1000).getTime()
 				  .toString();
-			  if (storeInLocalStorage) this.setAuthInLocalStorage(authToken);
-			  return authToken;
+			  if (storeInLocalStorage) this.setAuthInLocalStorage(authEntity);
+			  return authEntity;
 		  })
 		  .catch(err => Observable.throw(err));
 	}
@@ -80,6 +78,7 @@ export class AuthService {
 	refreshAuth(entity: AuthEntity): Observable<AuthEntity> {
 		return this.getAuth({ refresh_token: entity.refresh_token },
 		  'refresh_token')
+		  .map(result => result)
 		  // This should only happen if the refresh token has expired
 		  .catch(error => {
 			  // let the app know that we cant refresh the token

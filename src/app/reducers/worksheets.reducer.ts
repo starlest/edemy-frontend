@@ -23,7 +23,11 @@ export function reducer(state = initialState,
 	switch (action.type) {
 		case worksheets.ActionTypes.LOAD: {
 			return Object.assign({}, state, {
-				loading: true
+				loading: true,
+				loaded: false,
+				ids: [],
+				entities: null,
+				filter: worksheet => worksheet
 			});
 		}
 
@@ -37,13 +41,12 @@ export function reducer(state = initialState,
 				  });
 			  }, {});
 
-			return {
+			return Object.assign({}, state, {
 				loaded: true,
 				loading: false,
 				ids: worksheetIds,
-				entities: worksheetEntities,
-				filter: worksheet => worksheet
-			};
+				entities: worksheetEntities
+			});
 		}
 
 		case worksheets.ActionTypes.LOAD_FAIL:

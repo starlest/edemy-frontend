@@ -31,8 +31,7 @@ export class AuthEffects {
 		  // Refresh auth if it is expiring in 5 minutes
 		  const expiresIn = +authEntity.expiration_date - new Date().getTime();
 		  const expiresInMinutes = expiresIn / 1000 / 60;
-		  if (expiresInMinutes < 5) return new auth.RefreshAction(authEntity);
-
+		  if (expiresInMinutes < 5) return new auth.RefreshAction();
 		  return new auth.LoadSuccessAction(authEntity);
 	  });
 
@@ -93,19 +92,14 @@ export class AuthEffects {
 				const interval = expiresIn / 2;
 				console.log('refreshing in (seconds):',
 				  interval / 1000);
-				return Observable.interval(interval);
+				return Observable.interval(10000);
 			});
 
 		  // Start the scheduler
 		  if (this.refreshSubscription$) this.refreshSubscription$.unsubscribe();
 		  this.refreshSubscription$ =
-			source.subscribe(() => {
-				this.store.select(fromRoot.getAuthEntity)
-				  .take(1)
-				  .map(entity =>
-					this.store.dispatch(new auth.RefreshAction(entity)))
-				  .subscribe()
-			});
+			source.subscribe(
+			  () => this.store.dispatch(new auth.RefreshAction()));
 
 		  return new auth.ScheduleRefreshSuccessAction();
 	  });
@@ -118,25 +112,27 @@ export class AuthEffects {
 	@Effect()
 	refreshToken$: Observable<Action> = this.actions$
 	  .ofType(auth.ActionTypes.REFRESH)
-	  .switchMap((action: auth.RefreshAction) => {
-		  return this.authService.refreshAuth(action.payload)
-			.map(result => {
-				// update local storage's auth
-				if (localStorage.getItem(environment.authKey))
-					this.authService.setAuthInLocalStorage(result);
-				return new auth.RefreshSuccessAction(result);
-			})
-			.catch(err => {
-				console.log(err);
-				return of(new auth.RefreshFailAction());
+	  .switchMap(() => {
+		  return this.store.select(fromRoot.getAuthEntity).take(1)
+			.switchMap(authEntity => {
+				return this.authService.refreshAuth(authEntity)
+				  .map(result => {
+					  // update local storage's auth
+					  if (localStorage.getItem(environment.authKey))
+						  this.authService.setAuthInLocalStorage(result);
+					  return new auth.RefreshSuccessAction(result);
+				  })
+				  .catch(err => {
+					  console.log(err);
+					  return of(new auth.RefreshFailAction());
+				  });
 			});
 	  });
 
 	@Effect()
 	refreshSuccessToken$: Observable<Action> = this.actions$
 	  .ofType(auth.ActionTypes.REFRESH_SUCCESS)
-	  .map(
-		(action: auth.RefreshSuccessAction) => new auth.LoadSuccessAction(action.payload));
+	  .map(() => new auth.ScheduleRefreshAction());
 
 	@Effect()
 	refreshFailToken$: Observable<Action> = this.actions$

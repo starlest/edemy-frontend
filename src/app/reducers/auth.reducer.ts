@@ -16,6 +16,7 @@ const initialState: State = {
 
 export function reducer(state = initialState, action: auth.Actions): State {
 	switch (action.type) {
+
 		case auth.ActionTypes.LOAD_FROM_LOCAL_STORAGE:
 		case auth.ActionTypes.LOAD_FROM_SERVER:
 			return Object.assign({}, state, {
@@ -24,6 +25,7 @@ export function reducer(state = initialState, action: auth.Actions): State {
 				loading: true
 			});
 
+		case auth.ActionTypes.REFRESH_SUCCESS:
 		case auth.ActionTypes.LOAD_SUCCESS:
 			return Object.assign({}, state, {
 				entity: action.payload,
@@ -33,9 +35,14 @@ export function reducer(state = initialState, action: auth.Actions): State {
 
 		case auth.ActionTypes.LOAD_FAIL:
 			return Object.assign({}, state, {
-				entity: null,
 				loaded: true,
 				loading: false
+			});
+
+		case auth.ActionTypes.REFRESH:
+			return Object.assign({}, state, {
+				loaded: false,
+				loading: true
 			});
 
 		case auth.ActionTypes.REMOVE_FAIL:

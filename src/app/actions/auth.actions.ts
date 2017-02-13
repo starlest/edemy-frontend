@@ -74,9 +74,6 @@ export class ScheduleRefreshSuccessAction implements Action {
 
 export class RefreshAction implements Action {
 	type = ActionTypes.REFRESH;
-
-	constructor(public payload: AuthEntity) {
-	}
 }
 
 export class RefreshSuccessAction implements Action {
