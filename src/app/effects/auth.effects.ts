@@ -93,7 +93,7 @@ export class AuthEffects {
 				const interval = expiresIn / 2;
 				console.log('refreshing in (seconds):',
 				  interval / 1000);
-				return Observable.interval(10000);
+				return Observable.interval(interval);
 			});
 
 		  // Start the scheduler
