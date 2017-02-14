@@ -27,11 +27,6 @@ export class AuthEffects {
 	  .map(() => {
 		  const authEntity = this.authService.getAuthInLocalStorage();
 		  if (!authEntity) return new auth.StartupLoadFailAction();
-
-		  // Refresh auth if it is expiring in 5 minutes
-		  const expiresIn = +authEntity.expiration_date - new Date().getTime();
-		  const expiresInMinutes = expiresIn / 1000 / 60;
-		  if (expiresInMinutes < 5) return new auth.RefreshAction();
 		  return new auth.LoadSuccessAction(authEntity);
 	  });
 
@@ -75,13 +70,19 @@ export class AuthEffects {
 	@Effect()
 	loadSuccess$: Observable<Action> = this.actions$
 	  .ofType(auth.ActionTypes.LOAD_SUCCESS)
-	  .map(() => new auth.ScheduleRefreshAction());
+	  .map((action: auth.LoadSuccessAction) => {
+		  const authEntity = action.payload;
+		  // Refresh auth if it is expiring in 5 minutes
+		  const expiresIn = +authEntity.expiration_date - new Date().getTime();
+		  const expiresInMinutes = expiresIn / 1000 / 60;
+		  if (expiresInMinutes < 5) return new auth.RefreshAction();
+		  return new auth.ScheduleRefreshAction()
+	  });
 
 	@Effect()
 	scheduleRefresh$: Observable<Action> = this.actions$
 	  .ofType(auth.ActionTypes.SCHEDULE_REFRESH)
 	  .map(() => {
-
 		  // Figure out the interval to refresh auth
 		  const source = this.store.select(fromRoot.getAuthEntity).take(1)
 			.switchMap((entity: AuthEntity) => {
