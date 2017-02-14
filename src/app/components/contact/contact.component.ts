@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import {
 	FormGroup, FormBuilder, Validators, AbstractControl
 } from '@angular/forms';
 import { MessagesService } from '../../services/';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'ed-contact',
@@ -16,11 +17,13 @@ export class ContactComponent {
 	messageSent: boolean = null;
 
 	constructor(private fb: FormBuilder,
-	            private messagesService: MessagesService) {
+	            private messagesService: MessagesService,
+	            private ref: ChangeDetectorRef) {
 		this.contactForm = fb.group({
 			Name: ['', Validators.required],
 			Email: ['', Validators.required],
 			Phone: ['', Validators.required],
+			Subject: ['', Validators.required],
 			Query: ['', Validators.required],
 			Captcha: ['', Validators.required]
 		});
@@ -30,16 +33,17 @@ export class ContactComponent {
 	sendCustomerQuery() {
 		if (!this.contactForm.valid) return;
 		this.submitted = true;
+		this.messageSent = null;
 		this.messagesService.postQuery(this.contactForm.value)
-		  .map(() => {
-			  this.messageSent = true;
+		  .subscribe(() => {
 			  this.contactForm.reset();
-		  })
-		  .catch(err => {
+			  this.messageSent = true;
+			  this.submitted = false;
+		  }, err => {
 			  this.messageSent = false;
-			  console.log(err)
-		  })
-		  .do(() => this.submitted = false)
-		  .subscribe();
+			  this.submitted = false;
+			  this.ref.detectChanges();
+			  console.log(err);
+		  });
 	}
 }

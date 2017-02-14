@@ -39,10 +39,10 @@
           <i class="fa fa-comment"></i> Contact Form
         </div>
         <div class="card-block">
-          <alert type="success" *ngIf="!!messageSent && messageSent">
+          <alert type="success" *ngIf="!!messageSent">
             <strong>Success!</strong> You message has been successfully sent.
           </alert>
-          <alert type="danger" *ngIf="!!messageSent && !messageSent">
+          <alert type="danger" *ngIf="messageSent === false">
             <strong>Failure!</strong> Failed to send message, please try
                                       again later.
           </alert>
@@ -70,6 +70,12 @@
               <small id="phoneHelp" class="form-text text-muted">
                 We'll never share your phone number with anyone else.
               </small>
+            </div>
+            <div class="form-group">
+              <label for="inputSubject">Subject</label>
+              <input type="text" class="form-control" id="inputSubject"
+                     placeholder="Enter subject"
+                     formControlName="Subject" required>
             </div>
             <div class="form-group">
               <label for="inputQuery">Query</label>

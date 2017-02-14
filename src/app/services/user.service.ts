@@ -17,7 +17,6 @@ export class UserService {
 	 * @returns {Observable<User>}
 	 */
 	get(): Observable<User> {
-		console.log('getting user:', this.http.authEntity.access_token);
 		return this.http.get(this.baseUrl)
 		  .map((response: Response) => response.json() as User)
 		  .catch(err => Observable.throw(err));

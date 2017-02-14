@@ -33,15 +33,15 @@
                    class="embed-responsive embed-responsive-16by9">
                 <iframe class="embed-responsive-item"
                         src="https://www.youtube.com/embed/zpOULjyy-n8"></iframe>
+                <h4 class="card-title mt-5">Description</h4>
+                <p class="card-text mb-2">{{video.Description}}</p>
               </div>
-              <div *ngIf="video.Private && !isLoggedIn"
-                   class="private-video-message">
+              <alert class="m-5" type="danger"
+                     *ngIf="video.Private && !isLoggedIn">
                 Sorry, this content is only available to enrolled students.
                 Click
                 <a routerLink="/contact">here</a> to apply now!
-              </div>
-              <h4 class="card-title mt-5">Description</h4>
-              <p class="card-text mb-2">{{video.Description}}</p>
+              </alert>
             </div>
           </div>
         </tab>

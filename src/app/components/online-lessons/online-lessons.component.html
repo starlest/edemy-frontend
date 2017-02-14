@@ -3,13 +3,13 @@
 <div class="container-fluid my-5">
   <div class="row">
     <div
-        class="col-6 col-sm-4 col-md-3 col-lg-2 offset-md-3 offset-sm-2 mb-3 mb-sm-0">
+        class="col-6 col-sm-4 offset-sm-2 col-lg-3 offset-lg-3 col-xl-2 offset-xl-4  mb-3 mb-sm-0">
       <ng-select [items]="subjects"
                  (selected)="selectedSubjectFilter($event)"
                  placeholder="Subject">
       </ng-select>
     </div>
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+    <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
       <ng-select [items]="levels"
                  (selected)="selectedLevelFilter($event)"
                  placeholder="Level">
@@ -20,7 +20,8 @@
   <div *ngFor="let subject of subjects$ | async">
 
     <div class="row">
-      <div class="col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+      <div
+          class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
         <div class="subject mt-5"
              *ngIf="subject.Title !== 'All' && (lessons$[subject.Title] | async).length > 0">
           <h1>{{subject.Title}}</h1>
@@ -30,10 +31,11 @@
              *ngFor="let lesson of lessons$[subject.Title] | async">
           <a routerLink="/onlinelessons/{{lesson.Id}}">
             <div class="row p-2">
-              <div class="col-4 col-lg-3">
-                <img class="m-auto" [src]="getSubjectIconPath(subject.Title)">
+              <div class="col-4">
+                <img class="m-auto p-3 mr-3"
+                     [src]="getSubjectIconPath(subject.Title)">
               </div>
-              <div class="col-8 col-lg-9">
+              <div class="col-8">
                 <h4 class="card-title">{{lesson.Title}}</h4>
                 <p class="card-text">
                   {{lesson.Description}}

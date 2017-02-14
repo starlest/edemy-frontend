@@ -32,8 +32,6 @@ export class MessagesService {
 	}
 
 	private handleError(error: Response) {
-		// output errors to the console.
-		console.error(error);
 		return Observable.throw(error.json().error || "Server error");
 	}
 }
