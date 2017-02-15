@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
 		`
       .error {
           text-align: center;
-          margin-top: 50px;
+          margin: 50px auto;
       }
 `
 	]
