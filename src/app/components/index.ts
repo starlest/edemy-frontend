@@ -1,6 +1,7 @@
 export { AboutComponent } from './about/about.component';
 export { ContactComponent } from './contact/contact.component';
 export { CurriculumComponent } from './curriculum/curriculum.component';
+export { FooterComponent } from './footer/footer.component';
 export { HeaderComponent } from './header/header.component'
 export { HomeComponent } from './home/home.component'
 export { LoginComponent } from './login/login.component'

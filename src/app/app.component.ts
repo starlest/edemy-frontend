@@ -7,6 +7,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 		<ed-navbar></ed-navbar>
 		<div class="router-outlet-wrapper">
 		<router-outlet></router-outlet>
+		<ed-footer></ed-footer>
 		</div>
 `,
 	styles: [`

@@ -1,14 +1,15 @@
+import { NgModule } from '@angular/core';
 import { AppRouting } from './app.routing';
+import { AuthHttp } from './auth.http';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {
-	AboutComponent, CurriculumComponent, ContactComponent, HeaderComponent,
-	HomeComponent, LoginComponent, NavbarComponent, NotFoundPageComponent,
-	OnlineLessonComponent, OnlineLessonsComponent, UploadComponent,
-	WorksheetsComponent
+	AboutComponent, CurriculumComponent, ContactComponent, FooterComponent,
+	HeaderComponent, HomeComponent, LoginComponent, NavbarComponent,
+	NotFoundPageComponent, OnlineLessonComponent, OnlineLessonsComponent,
+	UploadComponent, WorksheetsComponent
 } from './components';
 import {
 	SelectedLessonPageComponent, ViewLessonPageComponent
@@ -18,15 +19,14 @@ import {
 	SubjectsService, UserService, WorksheetsService
 } from './services';
 import { StoreModule } from '@ngrx/store';
-import { reducer } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import {
 	AuthEffects, UserEffects, LessonsEffects, LevelsEffects, SubjectsEffects,
 	WorksheetsEffects
 } from './effects';
+import { reducer } from './reducers';
 import { RouterStoreModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { AuthHttp } from './auth.http';
 import { AdminGuard } from './guards/admin.guard';
 import { LessonExistsGuard } from './guards/lesson-exists.guard';
 import { LoggedInGuard } from './guards/logged-in.guard';
@@ -44,6 +44,7 @@ import { Ng2TableModule } from 'ng2-table';
 		AppComponent,
 		ContactComponent,
 		CurriculumComponent,
+		FooterComponent,
 		HeaderComponent,
 		HomeComponent,
 		LoginComponent,
