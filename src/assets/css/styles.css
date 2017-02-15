@@ -14,3 +14,8 @@ body {
 .btn {
     cursor: pointer;
 }
+
+.content-wrapper {
+    max-width: 80vw;
+    margin: auto;
+}

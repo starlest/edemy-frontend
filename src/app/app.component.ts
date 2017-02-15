@@ -4,7 +4,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 	selector: 'app-root',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
-		<div class="wrapper">
+		<div class="site-wrapper">
 			<ed-navbar></ed-navbar>
 			<div class="outlet-wrapper container-fluid">
 				<router-outlet></router-outlet>
@@ -14,9 +14,9 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 `,
 	styles: [`
 			.outlet-wrapper {
-				padding: 56px 0 0 0;
+				padding: 55px 0 0 0;
 			}
-			.wrapper {
+			.site-wrapper {
 				min-height: 100%;
 			}
 `]
