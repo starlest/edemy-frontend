@@ -14,9 +14,3 @@ body {
 .btn {
     cursor: pointer;
 }
-
-.content-wrapper {
-    max-width: 80vw;
-    width: 1024px;
-    margin: auto;
-}

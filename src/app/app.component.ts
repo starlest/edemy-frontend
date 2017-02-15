@@ -6,7 +6,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 	template: `
 		<div class="site-wrapper">
 			<ed-navbar></ed-navbar>
-			<div class="outlet-wrapper container-fluid">
+			<div class="outlet-wrapper">
 				<router-outlet></router-outlet>
 			</div>
 		</div>
