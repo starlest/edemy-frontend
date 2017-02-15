@@ -1,48 +1,46 @@
 <ed-header title="Online Lessons"></ed-header>
 
-<div class="container-fluid my-5">
+<div class="row mt-5">
+  <div
+      class="col-6 col-sm-4 offset-sm-2 col-lg-3 offset-lg-3 col-xl-2 offset-xl-4  mb-3 mb-sm-0">
+    <ng-select [items]="subjects"
+               (selected)="selectedSubjectFilter($event)"
+               placeholder="Subject">
+    </ng-select>
+  </div>
+  <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+    <ng-select [items]="levels"
+               (selected)="selectedLevelFilter($event)"
+               placeholder="Level">
+    </ng-select>
+  </div>
+</div>
+
+<div *ngFor="let subject of subjects$ | async">
   <div class="row">
     <div
-        class="col-6 col-sm-4 offset-sm-2 col-lg-3 offset-lg-3 col-xl-2 offset-xl-4  mb-3 mb-sm-0">
-      <ng-select [items]="subjects"
-                 (selected)="selectedSubjectFilter($event)"
-                 placeholder="Subject">
-      </ng-select>
-    </div>
-    <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
-      <ng-select [items]="levels"
-                 (selected)="selectedLevelFilter($event)"
-                 placeholder="Level">
-      </ng-select>
-    </div>
-  </div>
+        class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+      <div class="subject mt-5"
+           *ngIf="subject.Title !== 'All' && (lessons$[subject.Title] | async).length > 0">
+        <h1>{{subject.Title}}</h1>
+      </div>
 
-  <div *ngFor="let subject of subjects$ | async">
-
-    <div class="row">
-      <div
-          class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
-        <div class="subject mt-5"
-             *ngIf="subject.Title !== 'All' && (lessons$[subject.Title] | async).length > 0">
-          <h1>{{subject.Title}}</h1>
-        </div>
-
-        <div class="lesson mb-5"
-             *ngFor="let lesson of lessons$[subject.Title] | async">
-          <a routerLink="/onlinelessons/{{lesson.Id}}">
-            <div class="row p-2">
-              <div class="col-4">
-                <img class="m-auto p-3 mr-3"
-                     [src]="getSubjectIconPath(subject.Title)">
-              </div>
-              <div class="col-8">
-                <h4 class="card-title">{{lesson.Title}}</h4>
-                <p class="card-text">
-                  {{lesson.Description}}
-                </p>
-                <ul class="levels-list">
-                  <li *ngFor="let level of lesson.Levels"
-                      class="lesson-level">
+      <div class="lesson mb-5"
+           *ngFor="let lesson of lessons$[subject.Title] | async">
+        <a routerLink="/onlinelessons/{{lesson.Id}}">
+          <div class="row p-2">
+            <div class="col-4">
+              <img class="m-auto p-3 mr-3"
+                   [src]="getSubjectIconPath(subject.Title)">
+            </div>
+            <div class="col-8">
+              <h4 class="card-title">{{lesson.Title}}</h4>
+              <p class="card-text">
+                {{lesson.Description}}
+              </p>
+              <ul class="levels-list">
+                <li *ngFor="let level of lesson.Levels"
+                    class="lesson-level">
                       <span class="badge"
                             [ngClass]="{
                         'badge-info': level.includes('Primary'),
@@ -51,21 +49,21 @@
                         }">
                         {{level}}
                       </span>
-                  </li>
-                </ul>
-              </div>
+                </li>
+              </ul>
             </div>
-          </a>
-        </div>
+          </div>
+        </a>
       </div>
     </div>
   </div>
+</div>
 
-  <div *ngIf="!(areThereLessons$ | async)" class="row my-5">
-    <div class="col-sm-8 offset-sm-2 col-md-6 offset-md-3">
-      <alert type="danger">
-        There are no lessons to show!
-      </alert>
-    </div>
+<div *ngIf="!(areThereLessons$ | async)" class="row my-5">
+  <div class="col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+    <alert type="danger">
+      There are no lessons to show!
+    </alert>
   </div>
 </div>
+

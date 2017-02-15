@@ -4,16 +4,21 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 	selector: 'app-root',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	template: `
-		<ed-navbar></ed-navbar>
-		<div class="router-outlet-wrapper">
-		<router-outlet></router-outlet>
-		<ed-footer></ed-footer>
+		<div class="wrapper">
+			<ed-navbar></ed-navbar>
+			<div class="outlet-wrapper container-fluid">
+				<router-outlet></router-outlet>
+			</div>
 		</div>
+		<ed-footer></ed-footer>
 `,
 	styles: [`
-	/*.router-outlet-wrapper {*/
-		/*padding-top: 64px;*/
-	/*}*/
+			.outlet-wrapper {
+				padding: 56px 0 0 0;
+			}
+			.wrapper {
+				min-height: 100%;
+			}
 `]
 })
 export class AppComponent {

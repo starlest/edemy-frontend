@@ -1,61 +1,58 @@
 <ed-header title="{{lesson.Title}}"></ed-header>
 
-<div class="container-fluid my-5">
-  <div class="row">
+<div class="wrapper mx-auto row my-5">
 
-    <div class="col-md-3 mb-5">
-      <div class="card">
-        <div class="card-header">Information</div>
-        <div class="card-block">
-          <h4 class="card-title">Subject</h4>
-          <p class="card-text">{{lesson.Subject}}</p>
-          <h4 class="card-title">Levels</h4>
-          <ul>
-            <li *ngFor="let level of lesson.Levels">
-              {{level}}
-            </li>
-          </ul>
-          <h4 class="card-title">Description</h4>
-          <p class="card-text">{{lesson.Description}}</p>
-          <h4 class="card-title">Tutor</h4>
-          <p class="card-text">{{lesson.Tutor}}</p>
+  <div class="col-md-3 mb-5">
+    <div class="card">
+      <div class="card-header">Information</div>
+      <div class="card-block">
+        <h4 class="card-title">Subject</h4>
+        <p class="card-text">{{lesson.Subject}}</p>
+        <h4 class="card-title">Levels</h4>
+        <ul>
+          <li *ngFor="let level of lesson.Levels">
+            {{level}}
+          </li>
+        </ul>
+        <h4 class="card-title">Description</h4>
+        <p class="card-text">{{lesson.Description}}</p>
+        <h4 class="card-title">Tutor</h4>
+        <p class="card-text">{{lesson.Tutor}}</p>
 
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6 mb-5">
-      <tabset [justified]="true">
-        <tab *ngFor="let video of lesson.Videos" [heading]="video.Title">
-          <div class="card">
-            <div class="card-block">
-              <div *ngIf="!video.Private || isLoggedIn"
-                   class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item"
-                        src="https://www.youtube.com/embed/zpOULjyy-n8"></iframe>
-                <h4 class="card-title mt-5">Description</h4>
-                <p class="card-text mb-2">{{video.Description}}</p>
-              </div>
-              <alert class="m-5" type="danger"
-                     *ngIf="video.Private && !isLoggedIn">
-                Sorry, this content is only available to enrolled students.
-                Click
-                <a routerLink="/contact">here</a> to apply now!
-              </alert>
-            </div>
-          </div>
-        </tab>
-      </tabset>
-    </div>
-
-    <div class="col-md-3">
-      <div class="card">
-        <div class="card-header">Notes</div>
-        <div class="card-block">
-          {{lesson.Notes}}
-        </div>
       </div>
     </div>
   </div>
 
+  <div class="col-md-6 mb-5 mb-md-0">
+    <tabset [justified]="true">
+      <tab *ngFor="let video of lesson.Videos" [heading]="video.Title">
+        <div class="card">
+          <div class="card-block">
+            <div *ngIf="!video.Private || isLoggedIn"
+                 class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item"
+                      src="https://www.youtube.com/embed/zpOULjyy-n8"></iframe>
+              <h4 class="card-title mt-5">Description</h4>
+              <p class="card-text mb-2">{{video.Description}}</p>
+            </div>
+            <alert class="m-5" type="danger"
+                   *ngIf="video.Private && !isLoggedIn">
+              Sorry, this content is only available to enrolled students.
+              Click
+              <a routerLink="/contact">here</a> to apply now!
+            </alert>
+          </div>
+        </div>
+      </tab>
+    </tabset>
+  </div>
+
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-header">Notes</div>
+      <div class="card-block">
+        {{lesson.Notes}}
+      </div>
+    </div>
+  </div>
 </div>
