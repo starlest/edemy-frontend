@@ -3,16 +3,11 @@
 	height: 560px;
 	background-image: url('assets/img/home-banner.jpg');
 	background-size: cover;
-	text-align: center;
 	.header-content {
 		position: relative;
 		top: 50%;
 		transform: translateY(-50%);
 		margin: auto;
-		h1 {
-			margin: 0;
-			text-transform: uppercase;
-		}
 		.edemy-logo {
 			width: 200px;
 			height: 200px;
