@@ -1,4 +1,5 @@
 import { Video } from './video';
+
 export interface Lesson {
 	Id: number;
 	Title: string;
