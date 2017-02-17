@@ -1,8 +1,8 @@
 <ed-header title="Worksheets"></ed-header>
 
-<div class="container-fluid my-5">
+<div class="container my-5">
   <div class="row filter">
-    <div class="col-sm-6 col-md-2 offset-md-1">
+    <div class="col-md-6">
       <input *ngIf="config.filtering"
              placeholder="Filter"
              [ngTableFiltering]="config.filtering"
@@ -13,7 +13,7 @@
   <br>
 
   <div class="row">
-    <div class="col-md-10 offset-md-1">
+    <div class="col">
       <ng-table class="table-responsive" [config]="config"
                 (tableChanged)="onChangeTable(config)"
                 [rows]="rows" [columns]="columns">

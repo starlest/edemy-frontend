@@ -2,7 +2,7 @@
 
 <div class="container-fluid mx-auto row my-5">
 
-  <div class="col-md-3 mb-5">
+  <div class="col-md-4 col-lg-3 col-xl-2 mb-5 mb-md-0">
     <div class="card">
       <div class="card-header">Information</div>
       <div class="card-block">
@@ -23,8 +23,8 @@
     </div>
   </div>
 
-  <div class="col-md-6 mb-5 mb-md-0">
-    <tabset [justified]="true">
+  <div class="col-md-8 mb-5">
+    <tabset [justified]="true" type="pills">
       <tab *ngFor="let video of lesson.Videos" [heading]="video.Title">
         <div class="card">
           <div class="card-block">
@@ -47,7 +47,8 @@
     </tabset>
   </div>
 
-  <div class="col-md-3">
+
+  <div class="col-md-10 offset-md-1">
     <div class="card">
       <div class="card-header">Notes</div>
       <div class="card-block">
