@@ -1,51 +1,61 @@
 import * as levels from '../actions/levels.actions';
-import {Level} from '../models/level';
-import {createSelector} from 'reselect';
+import { Level } from '../models/level';
+import { createSelector } from 'reselect';
 
 export interface State {
-  loaded: boolean;
-  loading: boolean;
-  ids: string[];
-  entities: { [id: string]: Level };
+	loaded: boolean;
+	loading: boolean;
+	ids: string[];
+	entities: { [id: string]: Level };
 }
 
 const initialState: State = {
-  loaded: false,
-  loading: false,
-  ids: [],
-  entities: {}
+	loaded: false,
+	loading: false,
+	ids: [],
+	entities: null
 };
 
 export function reducer(state = initialState, action: levels.Actions): State {
-  switch (action.type) {
-    case levels.ActionTypes.LOAD: {
-      return Object.assign({}, state, {
-        loading: true
-      });
-    }
+	switch (action.type) {
+		case levels.ActionTypes.LOAD: {
+			return Object.assign({}, state, {
+				loaded: true,
+				loading: true,
+				ids: [],
+				entities: {}
+			});
+		}
 
-    case levels.ActionTypes.LOAD_SUCCESS: {
-      const levels = action.payload;
-      const levelIds = levels.map(level => String(level.Id));
-      const levelEntities = levels.reduce(
-        (entities: { [id: string]: Level }, level: Level) => {
-          return Object.assign(entities, {
-            [level.Id]: level
-          });
-        }, {});
+		case levels.ActionTypes.LOAD_SUCCESS: {
+			const levels = action.payload;
+			const levelIds = levels.map(level => String(level.Id));
+			const levelEntities = levels.reduce(
+			  (entities: { [id: string]: Level }, level: Level) => {
+				  return Object.assign(entities, {
+					  [level.Id]: level
+				  });
+			  }, {});
 
-      return {
-        loaded: true,
-        loading: false,
-        ids: levelIds,
-        entities: levelEntities
-      };
-    }
+			return Object.assign({}, state, {
+				loaded: true,
+				loading: false,
+				ids: levelIds,
+				entities: levelEntities
+			});
+		}
 
-    default: {
-      return state;
-    }
-  }
+		case levels.ActionTypes.LOAD_FAIL: {
+			return Object.assign({}, state, {
+				loaded: true,
+				loading: false
+			});
+		}
+
+		default: {
+			return state;
+		}
+	}
 }
 
 

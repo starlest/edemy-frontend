@@ -15,7 +15,7 @@
       <li *ngFor="let link of links" class="nav-item">
         <a class="nav-link" [routerLink]="link.Route"
            (click)="closeAllCollapses()">{{link
-                                            .Title}}</a>
+                                         .Title}}</a>
       </li>
     </ul>
 
@@ -35,8 +35,15 @@
           {{(user$ | async).DisplayName}}
           <span class="caret"></span>
         </button>
-        <ul role="menu" class="dropdown-menu-right" dropdownMenu aria-labelledby="user-menu-button"
+        <ul role="menu" class="dropdown-menu-right" dropdownMenu
+            aria-labelledby="user-menu-button"
             [collapse]="isUserMenuCollapsed">
+          <li role="menuitem">
+            <a class="dropdown-item" routerLink="quizzes"
+               (click)="closeAllCollapses()">
+              <i class="fa fa-book"></i> Quizzes
+            </a>
+          </li>
           <li role="menuitem">
             <a class="dropdown-item" routerLink="worksheets"
                (click)="closeAllCollapses()">

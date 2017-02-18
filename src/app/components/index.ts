@@ -9,5 +9,5 @@ export { NavbarComponent } from './navbar/navbar.component';
 export { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 export { OnlineLessonComponent } from './online-lesson/online-lesson.component';
 export { OnlineLessonsComponent } from './online-lessons/online-lessons.component';
-export { UploadComponent } from './upload/upload.component';
+export { QuizzesComponent } from './quizzes/quizzes.component';
 export { WorksheetsComponent } from './worksheets/worksheets.component';

@@ -9,20 +9,20 @@ import {
 	AboutComponent, CurriculumComponent, ContactComponent, FooterComponent,
 	HeaderComponent, HomeComponent, LoginComponent, NavbarComponent,
 	NotFoundPageComponent, OnlineLessonComponent, OnlineLessonsComponent,
-	UploadComponent, WorksheetsComponent
+	QuizzesComponent, WorksheetsComponent
 } from './components';
 import {
 	SelectedLessonPageComponent, ViewLessonPageComponent
 } from './containers';
 import {
-	AuthService, MessagesService, LessonsService, LevelsService,
+	AuthService, MessagesService, LessonsService, LevelsService, QuizzesService,
 	SubjectsService, UserService, WorksheetsService
 } from './services';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import {
-	AuthEffects, UserEffects, LessonsEffects, LevelsEffects, SubjectsEffects,
-	WorksheetsEffects
+	AuthEffects, UserEffects, LessonsEffects, LevelsEffects, QuizzesEffects,
+	SubjectsEffects, WorksheetsEffects
 } from './effects';
 import { reducer } from './reducers';
 import { RouterStoreModule } from '@ngrx/router-store';
@@ -53,7 +53,7 @@ import { Ng2TableModule } from 'ng2-table';
 		OnlineLessonComponent,
 		OnlineLessonsComponent,
 		SelectedLessonPageComponent,
-		UploadComponent,
+		QuizzesComponent,
 		ViewLessonPageComponent,
 		WorksheetsComponent
 	],
@@ -86,14 +86,15 @@ import { Ng2TableModule } from 'ng2-table';
 		EffectsModule.run(UserEffects),
 		EffectsModule.run(LessonsEffects),
 		EffectsModule.run(LevelsEffects),
+		EffectsModule.run(QuizzesEffects),
 		EffectsModule.run(SubjectsEffects),
 		EffectsModule.run(WorksheetsEffects),
 
 		StoreDevtoolsModule.instrumentOnlyWithExtension()
 	],
 	providers: [AuthHttp, AuthService, MessagesService, LessonsService,
-		LevelsService, UserService, SubjectsService, WorksheetsService,
-		AdminGuard, LessonExistsGuard, LoggedInGuard],
+		LevelsService, QuizzesService, UserService, SubjectsService,
+		WorksheetsService, AdminGuard, LessonExistsGuard, LoggedInGuard],
 	bootstrap: [AppComponent]
 })
 export class AppModule {

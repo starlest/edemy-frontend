@@ -14,7 +14,7 @@ const initialState: State = {
 	loaded: false,
 	loading: false,
 	ids: [],
-	entities: null,
+	entities: {},
 	filter: worksheet => worksheet
 };
 
@@ -26,7 +26,7 @@ export function reducer(state = initialState,
 				loading: true,
 				loaded: false,
 				ids: [],
-				entities: null,
+				entities: {},
 				filter: worksheet => worksheet
 			});
 		}

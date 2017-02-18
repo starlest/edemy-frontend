@@ -1,18 +1,18 @@
-import { Component, OnDestroy, ChangeDetectorRef, OnInit } from '@angular/core';
-import { Worksheet } from '../../models';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
-import * as ws from '../../actions/worksheets.actions';
+import * as quizzes from '../../actions/quizzes.actions';
+import { Subscription } from 'rxjs';
+import { Quiz } from '../../models';
 
 @Component({
-	selector: 'ed-worksheets',
-	templateUrl: './worksheets.component.html',
-	styleUrls: ['./worksheets.component.scss']
+	selector: 'ed-quizzes',
+	templateUrl: './quizzes.component.html',
+	styleUrls: ['./quizzes.component.scss']
 })
-export class WorksheetsComponent implements OnInit, OnDestroy {
-	worksheetsSubscription: Subscription;
-	data: Array<Worksheet> = [];
+export class QuizzesComponent implements OnInit, OnDestroy {
+	quizzesSubscription: Subscription;
+	data: Array<Quiz> = [];
 
 	rows: Array<any> = [];
 	columns: Array<any> = [
@@ -24,12 +24,7 @@ export class WorksheetsComponent implements OnInit, OnDestroy {
 			name: 'Description',
 			sort: false
 		},
-		{ title: 'Tutor', name: 'Tutor' },
-		{
-			title: '',
-			name: 'DownloadButton',
-			sort: false
-		}
+		{ title: 'Tutor', name: 'Tutor' }
 	];
 
 	tableConfig: any = {
@@ -49,15 +44,15 @@ export class WorksheetsComponent implements OnInit, OnDestroy {
 
 	constructor(private store: Store<fromRoot.State>,
 	            private ref: ChangeDetectorRef) {
-		this.store.dispatch(new ws.LoadAction);
+		this.store.dispatch(new quizzes.LoadAction);
 	}
 
 	ngOnInit() {
-		this.worksheetsSubscription =
-		  this.store.select(fromRoot.getFilteredWorksheets)
-			.map(worksheets => {
-				this.data = worksheets;
-				this.paginationConfig.length = worksheets.length;
+		this.quizzesSubscription =
+		  this.store.select(fromRoot.getFilteredQuizzes)
+			.map(quizzes => {
+				this.data = quizzes;
+				this.paginationConfig.length = quizzes.length;
 				this.onChangeTable(this.tableConfig);
 				this.ref.detectChanges();
 			})
@@ -65,8 +60,8 @@ export class WorksheetsComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
-		if (this.worksheetsSubscription)
-			this.worksheetsSubscription.unsubscribe();
+		if (this.quizzesSubscription)
+			this.quizzesSubscription.unsubscribe();
 	}
 
 	changePage(page: any, data: Array<any> = this.data): Array<any> {

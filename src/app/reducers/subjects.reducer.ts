@@ -20,7 +20,10 @@ export function reducer(state = initialState, action: subjects.Actions): State {
 	switch (action.type) {
 		case subjects.ActionTypes.LOAD: {
 			return Object.assign({}, state, {
-				loading: true
+				loaded: false,
+				loading: true,
+				ids: [],
+				entities: {}
 			});
 		}
 
@@ -34,12 +37,19 @@ export function reducer(state = initialState, action: subjects.Actions): State {
 				  });
 			  }, {});
 
-			return {
+			return Object.assign({}, state, {
 				loaded: true,
 				loading: false,
 				ids: subjectIds,
 				entities: subjectEntities
-			};
+			});
+		}
+
+		case subjects.ActionTypes.LOAD_FAIL: {
+			return Object.assign({}, state, {
+				loaded: true,
+				loading: false
+			})
 		}
 
 		default: {

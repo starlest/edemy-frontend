@@ -1,14 +1,14 @@
-import * as lessons from '../actions/lessons.actions';
-import { Lesson } from '../models/lesson';
+import * as quizzes from '../actions/quizzes.actions';
 import { createSelector } from 'reselect';
+import { Quiz } from '../models/quiz/quiz';
 
 export interface State {
 	loaded: boolean;
 	loading: boolean;
 	ids: string[];
-	entities: { [id: string]: Lesson };
-	selectedLessonId: string;
-	filter: (Lesson) => Lesson;
+	entities: { [id: string]: Quiz };
+	selectedQuizId: string;
+	filter: (Quiz) => Quiz;
 }
 
 const initialState: State = {
@@ -16,59 +16,61 @@ const initialState: State = {
 	loading: false,
 	ids: [],
 	entities: {},
-	selectedLessonId: null,
-	filter: lesson => lesson
+	selectedQuizId: null,
+	filter: quiz => quiz
 };
 
-export function reducer(state = initialState, action: lessons.Actions): State {
+export function reducer(state = initialState, action: quizzes.Actions): State {
 	switch (action.type) {
-		case lessons.ActionTypes.LOAD: {
+		case quizzes.ActionTypes.LOAD: {
 			return Object.assign({}, state, {
 				loaded: false,
 				loading: true,
 				ids: [],
 				entities: {},
-				selectedLessonId: null,
-				filter: lesson => lesson
+				selectedQuizId: null,
+				filter: quiz => quiz
 			});
 		}
 
-		case lessons.ActionTypes.LOAD_SUCCESS: {
-			const lessons = action.payload;
-			const lessonIds = lessons.map(lesson => String(lesson.Id));
-			const lessonEntities = lessons.reduce(
-			  (entities: { [id: string]: Lesson }, lesson: Lesson) => {
+		case quizzes.ActionTypes.LOAD_SUCCESS: {
+			const quizzes = action.payload;
+			const quizIds = quizzes.map(lesson => String(lesson.Id));
+			const quizEntities = quizzes.reduce(
+			  (entities: { [id: string]: Quiz }, quiz: Quiz) => {
 				  return Object.assign(entities, {
-					  [lesson.Id]: lesson
+					  [quiz.Id]: quiz
 				  });
 			  }, {});
 
 			return Object.assign({}, state, {
 				loaded: true,
 				loading: false,
-				ids: lessonIds,
-				entities: lessonEntities
+				ids: quizIds,
+				entities: quizEntities,
+				selectedQuizId: null,
+				filter: quiz => quiz
 			});
 		}
 
-		case lessons.ActionTypes.LOAD_FAIL:
+		case quizzes.ActionTypes.LOAD_FAIL:
 			return Object.assign({}, state, {
 				loaded: true,
 				loading: false
 			});
 
-		case lessons.ActionTypes.SELECT: {
+		case quizzes.ActionTypes.SELECT: {
 			return Object.assign({}, state, {
 				selectedLessonId: action.payload
 			});
 		}
 
-		case lessons.ActionTypes.SET_FILTER:
+		case quizzes.ActionTypes.SET_FILTER:
 			return Object.assign({}, state, {
 				filter: action.payload
 			});
 
-		case lessons.ActionTypes.REMOVE_FILTER:
+		case quizzes.ActionTypes.REMOVE_FILTER:
 			return Object.assign({}, state, {
 				filter: lesson => lesson
 			});
@@ -89,14 +91,14 @@ export const getIds = (state: State) => state.ids;
 
 export const getEntities = (state: State) => state.entities;
 
-export const getSelectedId = (state: State) => state.selectedLessonId;
+export const getSelectedId = (state: State) => state.selectedQuizId;
 
 export const getSelected = createSelector(getEntities, getSelectedId,
   (entities, selectedId) => {
 	  return entities[selectedId];
   });
 
-export const getFilteredLessons = createSelector(getEntities, getIds, getFilter,
+export const getFilteredQuizzes = createSelector(getEntities, getIds, getFilter,
   (entities, ids, filter) => ids.map(id => entities[id]).filter(filter));
 
 

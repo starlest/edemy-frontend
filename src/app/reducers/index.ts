@@ -8,26 +8,29 @@ import * as fromLevels from './levels.reducer';
 import * as fromLessons from './lessons.reducer';
 import * as fromRouter from '@ngrx/router-store';
 import * as fromSubjects from './subjects.reducer';
+import * as fromQuizzes from './quizzes.reducer';
 import * as fromUser from './user-reducer';
 import * as fromWorksheets from './worksheets.reducer';
 
 export interface State {
 	auth: fromAuth.State;
-	user: fromUser.State;
-	router: fromRouter.RouterState;
-	levels: fromLevels.State;
-	subjects: fromSubjects.State;
 	lessons: fromLessons.State;
+	levels: fromLevels.State;
+	quizzes: fromQuizzes.State;
+	router: fromRouter.RouterState;
+	subjects: fromSubjects.State;
+	user: fromUser.State;
 	worksheets: fromWorksheets.State;
 }
 
 const reducers = {
 	auth: fromAuth.reducer,
-	user: fromUser.reducer,
-	router: fromRouter.routerReducer,
-	levels: fromLevels.reducer,
 	lessons: fromLessons.reducer,
+	levels: fromLevels.reducer,
+	quizzes: fromQuizzes.reducer,
+	router: fromRouter.routerReducer,
 	subjects: fromSubjects.reducer,
+	user: fromUser.reducer,
 	worksheets: fromWorksheets.reducer
 };
 
@@ -50,12 +53,39 @@ export const getAuthLoaded = createSelector(getAuthState, fromAuth.getLoaded);
 export const getAuthLoading = createSelector(getAuthState, fromAuth.getLoading);
 
 /**
- * User Reducers
+ * Lessons Reducers
  */
-export const getUserState = (state: State) => state.user;
-export const getUserEntity = createSelector(getUserState, fromUser.getEntity);
-export const getUserLoaded = createSelector(getUserState, fromUser.getLoaded);
+export const getLessonsState = (state: State) => state.lessons;
+export const getLessonsLoaded = createSelector(getLessonsState,
+  fromLessons.getLoaded);
+export const getLessonEntities = createSelector(getLessonsState,
+  fromLessons.getEntities);
+export const getFilteredLessons = createSelector(getLessonsState,
+  fromLessons.getFilteredLessons);
+export const getSelectedLesson = createSelector(getLessonsState,
+  fromLessons.getSelected);
+export const getFilteredSubjectLessons = (subject: string) => createSelector(
+  getFilteredLessons,
+  lessons => lessons.filter(lesson => lesson.Subject === subject));
 
+/**
+ * Levels Reducers
+ */
+export const getLevelsState = (state: State) => state.levels;
+export const getLevels = createSelector(getLevelsState, fromLevels.getLevels);
+
+/**
+ * Quizzes Reducers
+ */
+export const getQuizzesState = (state: State) => state.quizzes;
+export const getQuizzesLoaded = createSelector(getQuizzesState,
+  fromQuizzes.getLoaded);
+export const getQuizEntities = createSelector(getQuizzesState,
+  fromQuizzes.getEntities);
+export const getFilteredQuizzes = createSelector(getQuizzesState,
+  fromQuizzes.getFilteredQuizzes);
+export const getSelectedQuiz = createSelector(getQuizzesState,
+  fromQuizzes.getSelected);
 
 /**
  * Subjects Reducers
@@ -65,27 +95,11 @@ export const getSubjects = createSelector(getSubjectsState,
   fromSubjects.getSubjects);
 
 /**
- * Levels Reducers
+ * User Reducers
  */
-export const getLevelsState = (state: State) => state.levels;
-export const getLevels = createSelector(getLevelsState, fromLevels.getLevels);
-
-
-/**
- * Lessons Reducers
- */
-export const getLessonsState = (state: State) => state.lessons;
-export const getFilteredLessons = createSelector(getLessonsState,
-  fromLessons.getFilteredLessons);
-export const getLessonsLoaded = createSelector(getLessonsState,
-  fromLessons.getLoaded);
-export const getLessonEntities = createSelector(getLessonsState,
-  fromLessons.getEntities);
-export const getFilteredSubjectLessons = (subject: string) => createSelector(
-  getFilteredLessons,
-  lessons => lessons.filter(lesson => lesson.Subject === subject));
-export const getSelectedLesson = createSelector(getLessonsState,
-  fromLessons.getSelected);
+export const getUserState = (state: State) => state.user;
+export const getUserEntity = createSelector(getUserState, fromUser.getEntity);
+export const getUserLoaded = createSelector(getUserState, fromUser.getLoaded);
 
 /**
  * Worksheets Reducers
