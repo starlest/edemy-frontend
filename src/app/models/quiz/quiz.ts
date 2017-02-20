@@ -7,4 +7,5 @@ export interface Quiz {
 	Tutor: string;
 	Levels: string[];
 	Questions: QuizQuestion[];
+	StartButton: string;
 }

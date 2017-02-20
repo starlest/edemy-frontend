@@ -1,11 +1,11 @@
 import { Routes, RouterModule } from '@angular/router';
 import {
 	AboutComponent, ContactComponent, CurriculumComponent, HomeComponent,
-	NotFoundPageComponent, OnlineLessonsComponent, QuizzesComponent, WorksheetsComponent
+	NotFoundPageComponent, OnlineLessonsComponent, QuizzesComponent,
+	WorksheetsComponent
 } from './components';
-import { ViewLessonPageComponent } from './containers';
-import { LessonExistsGuard } from './guards/lesson-exists.guard';
-import { LoggedInGuard } from './guards/logged-in.guard';
+import { ViewLessonPageComponent, ViewQuizPageComponent } from './containers';
+import { LessonExistsGuard, NotLoggedInGuard, QuizExistsGuard } from './guards';
 
 export const appRoutes: Routes = [
 	{
@@ -40,13 +40,18 @@ export const appRoutes: Routes = [
 	},
 	{
 		path: 'worksheets',
-		canActivate: [LoggedInGuard],
+		canActivate: [NotLoggedInGuard],
 		component: WorksheetsComponent
 	},
 	{
 		path: 'quizzes',
-		canActivate: [LoggedInGuard],
+		canActivate: [NotLoggedInGuard],
 		component: QuizzesComponent
+	},
+	{
+		path: 'quizzes/:Id',
+		canActivate: [QuizExistsGuard],
+		component: ViewQuizPageComponent
 	},
 	{
 		path: '404',

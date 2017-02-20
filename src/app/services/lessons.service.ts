@@ -5,6 +5,7 @@ import {AuthHttp} from '../auth.http';
 import {Response} from '@angular/http';
 import {Level} from '../models/level';
 import {environment} from '../../environments/environment';
+import { handleError } from './util';
 
 @Injectable()
 export class LessonsService {
@@ -17,12 +18,6 @@ export class LessonsService {
   get(): any {
     return this.http.get(this.baseUrl)
       .map((response: Response) => response.json() as Level[])
-      .catch(this.handleError);
-  }
-
-  private handleError(error: Response) {
-    // output errors to the console.
-    console.error(error);
-    return Observable.throw(error.json().error || "Server error");
+      .catch(handleError);
   }
 }

@@ -9,15 +9,19 @@ import {
 	AboutComponent, CurriculumComponent, ContactComponent, FooterComponent,
 	HeaderComponent, HomeComponent, LoginComponent, NavbarComponent,
 	NotFoundPageComponent, OnlineLessonComponent, OnlineLessonsComponent,
-	QuizzesComponent, WorksheetsComponent
+	QuizComponent, QuizzesComponent, WorksheetsComponent
 } from './components';
 import {
-	SelectedLessonPageComponent, ViewLessonPageComponent
+	SelectedLessonPageComponent, ViewLessonPageComponent,
+	SelectedQuizPageComponent, ViewQuizPageComponent
 } from './containers';
 import {
 	AuthService, MessagesService, LessonsService, LevelsService, QuizzesService,
 	SubjectsService, UserService, WorksheetsService
 } from './services';
+import {
+	AdminGuard, LessonExistsGuard, NotLoggedInGuard, QuizExistsGuard
+} from './guards';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import {
@@ -27,9 +31,6 @@ import {
 import { reducer } from './reducers';
 import { RouterStoreModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { AdminGuard } from './guards/admin.guard';
-import { LessonExistsGuard } from './guards/lesson-exists.guard';
-import { LoggedInGuard } from './guards/logged-in.guard';
 import { RecaptchaModule } from 'ng2-recaptcha';
 import {
 	AlertModule, CollapseModule, ModalModule, DropdownModule, PaginationModule,
@@ -53,6 +54,9 @@ import { Ng2TableModule } from 'ng2-table';
 		OnlineLessonComponent,
 		OnlineLessonsComponent,
 		SelectedLessonPageComponent,
+		SelectedQuizPageComponent,
+		ViewQuizPageComponent,
+		QuizComponent,
 		QuizzesComponent,
 		ViewLessonPageComponent,
 		WorksheetsComponent
@@ -94,7 +98,8 @@ import { Ng2TableModule } from 'ng2-table';
 	],
 	providers: [AuthHttp, AuthService, MessagesService, LessonsService,
 		LevelsService, QuizzesService, UserService, SubjectsService,
-		WorksheetsService, AdminGuard, LessonExistsGuard, LoggedInGuard],
+		WorksheetsService, AdminGuard, LessonExistsGuard, NotLoggedInGuard,
+		QuizExistsGuard],
 	bootstrap: [AppComponent]
 })
 export class AppModule {

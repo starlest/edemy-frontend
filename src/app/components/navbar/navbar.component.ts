@@ -17,6 +17,8 @@ export class NavbarComponent {
 
 	isNavbarCollapsed: boolean = true;
 	isUserMenuCollapsed: boolean = true;
+
+	routerPath$: Observable<string>;
 	isLoggedIn$: Observable<boolean>;
 	user$: Observable<User>;
 
@@ -44,6 +46,7 @@ export class NavbarComponent {
 	];
 
 	constructor(private store: Store<fromRoot.State>) {
+		this.routerPath$ = store.select(fromRoot.getRouterPath).map(path => path.split('/')[1]);
 		this.isLoggedIn$ =
 		  store.select(fromRoot.getAuthEntity).map(entity => {
 			  if (!!entity) this.loginModal.hide();

@@ -24,14 +24,19 @@ export class QuizzesComponent implements OnInit, OnDestroy {
 			name: 'Description',
 			sort: false
 		},
-		{ title: 'Tutor', name: 'Tutor' }
+		{ title: 'Tutor', name: 'Tutor' },
+		{
+			title: '',
+			name: 'StartButton',
+			sort: false
+		}
 	];
 
 	tableConfig: any = {
 		paging: true,
 		sorting: { columns: this.columns },
 		filtering: { filterString: '' },
-		className: ['table-striped', 'table-bordered', 'thead-inverse']
+		className: ['table-striped', 'table-bordered', 'table-hover', 'thead-inverse']
 	};
 
 	paginationConfig: any = {
@@ -44,7 +49,6 @@ export class QuizzesComponent implements OnInit, OnDestroy {
 
 	constructor(private store: Store<fromRoot.State>,
 	            private ref: ChangeDetectorRef) {
-		this.store.dispatch(new quizzes.LoadAction);
 	}
 
 	ngOnInit() {
@@ -58,6 +62,8 @@ export class QuizzesComponent implements OnInit, OnDestroy {
 			})
 			.subscribe();
 	}
+
+	ng
 
 	ngOnDestroy() {
 		if (this.quizzesSubscription)

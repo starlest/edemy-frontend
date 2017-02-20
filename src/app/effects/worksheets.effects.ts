@@ -21,8 +21,12 @@ export class WorksheetsEffects {
 		  .map((results: Worksheet[]) => {
 			  results.forEach(worksheet => {
 				  worksheet.DownloadButton =
-					`<a class="btn btn-sm btn-primary" href="${worksheet.DownloadLink}" target="_blank">
-Download</a>`
+					`<div class="text-center text-white">
+						<a class="btn btn-sm btn-primary" href="${worksheet.DownloadLink}" target="_blank">
+							Download
+						</a>
+					</div>
+`
 			  });
 			  return new worksheets.LoadSuccessAction(results)
 		  })

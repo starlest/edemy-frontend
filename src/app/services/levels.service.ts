@@ -1,10 +1,10 @@
 import 'rxjs/add/operator/map';
 import {Injectable} from '@angular/core';
 import {Response} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
 import {environment} from '../../environments/environment';
 import {Level} from '../models/level';
 import {AuthHttp} from '../auth.http';
+import { handleError } from './util';
 
 @Injectable()
 export class LevelsService {
@@ -17,12 +17,6 @@ export class LevelsService {
   get() {
     return this.http.get(this.baseUrl)
       .map((response: Response) => response.json() as Level[])
-      .catch(this.handleError);
-  }
-
-  private handleError(error: Response) {
-    // output errors to the console.
-    console.error(error);
-    return Observable.throw(error.json().error || "Server error");
+      .catch(handleError);
   }
 }

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { AuthHttp } from '../auth.http';
 import { Response, RequestOptions, Headers } from '@angular/http';
 import { environment } from '../../environments/environment';
+import { handleError } from './util';
 
 @Injectable()
 export class MessagesService {
@@ -19,7 +20,7 @@ export class MessagesService {
 		return this.http.post(url, JSON.stringify(query),
 		  this.getRequestOptions())
 		  .map(result => result)
-		  .catch(this.handleError)
+		  .catch(handleError)
 	}
 
 	// returns a viable RequestOptions object to handle Json requests
@@ -29,9 +30,5 @@ export class MessagesService {
 				"Content-Type": "application/json"
 			})
 		});
-	}
-
-	private handleError(error: Response) {
-		return Observable.throw(error.json().error || "Server error");
 	}
 }

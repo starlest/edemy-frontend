@@ -88,6 +88,11 @@ export const getSelectedQuiz = createSelector(getQuizzesState,
   fromQuizzes.getSelected);
 
 /**
+ * Router Reducers
+ */
+export const getRouterPath = (state: State) => state.router.path;
+
+/**
  * Subjects Reducers
  */
 export const getSubjectsState = (state: State) => state.subjects;

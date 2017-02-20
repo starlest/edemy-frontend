@@ -17,7 +17,18 @@ export class QuizzesEffects {
 	  .ofType(quizzes.ActionTypes.LOAD)
 	  .switchMap(() =>
 		this.quizzesService.get()
-		  .map((results: Quiz[]) => new quizzes.LoadSuccessAction(results))
+		  .map((results: Quiz[]) => {
+			  results.forEach(quiz => {
+				  quiz.StartButton =
+					`<div class="text-center text-white">
+						<a class="btn btn-sm btn-primary" routerLink="/quizzes/${quiz.Id}">
+							Start
+						</a>
+					</div>
+`
+			  });
+			  return new quizzes.LoadSuccessAction(results);
+		  })
 		  .catch(error => {
 			  console.log(error);
 			  return Observable.of(new quizzes.LoadFailAction())

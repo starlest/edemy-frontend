@@ -1,9 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import * as fromRoot from '../reducers';
-import { Lesson } from '../models/lesson';
-
+import { Lesson } from '../../models/lesson';
+import * as fromRoot from '../../reducers';
 
 @Component({
 	selector: 'ed-selected-lesson-page',

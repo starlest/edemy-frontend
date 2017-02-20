@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { AuthHttp } from '../auth.http';
 import { Observable } from 'rxjs';
 import { AuthEntity } from '../models/auth-entity';
+import { toUrlEncodedString } from './util';
 
 @Injectable()
 export class AuthService {
@@ -61,7 +62,7 @@ export class AuthService {
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		let options = new RequestOptions({ headers: headers });
 		if (grantType === 'refresh_token') console.log('refreshing');
-		return this.http.post(url, this.toUrlEncodedString(data), options)
+		return this.http.post(url, toUrlEncodedString(data), options)
 		  .map(res => res.json())
 		  .map((authEntity: AuthEntity) => {
 			  let now = new Date();
@@ -88,16 +89,5 @@ export class AuthService {
 		  });
 	}
 
-	// Converts a Json object to urlencoded format
-	toUrlEncodedString(data: any) {
-		let body = "";
-		for (let key in data) {
-			if (data.hasOwnProperty(key)) {
-				if (body.length) body += "&";
-				body += key + "=";
-				body += encodeURIComponent(data[key]);
-			}
-		}
-		return body;
-	}
+
 }

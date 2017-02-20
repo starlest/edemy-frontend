@@ -7,8 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var selected_lesson_page_1 = require('./selected-lesson-page.component');
-var view_lesson_page_1 = require('./view-lesson-page.component');
+var selected_lesson_page_1 = require('./lesson/selected-lesson-page.component.ts');
+var view_lesson_page_1 = require('./lesson/view-lesson-page.component.ts');
 var common_1 = require('@angular/common');
 var online_lesson_1 = require('../components/online-lesson/online-lesson.component');
 exports.CONTAINERS = [

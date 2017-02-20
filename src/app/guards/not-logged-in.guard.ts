@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { go } from '@ngrx/router-store';
 
 @Injectable()
-export class LoggedInGuard implements CanActivate {
+export class NotLoggedInGuard implements CanActivate {
 
 	constructor(private store: Store<fromRoot.State>) {
 	}

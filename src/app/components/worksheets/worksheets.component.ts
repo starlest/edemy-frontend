@@ -49,7 +49,6 @@ export class WorksheetsComponent implements OnInit, OnDestroy {
 
 	constructor(private store: Store<fromRoot.State>,
 	            private ref: ChangeDetectorRef) {
-		this.store.dispatch(new ws.LoadAction);
 	}
 
 	ngOnInit() {

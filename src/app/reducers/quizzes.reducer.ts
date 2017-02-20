@@ -28,7 +28,6 @@ export function reducer(state = initialState, action: quizzes.Actions): State {
 				loading: true,
 				ids: [],
 				entities: {},
-				selectedQuizId: null,
 				filter: quiz => quiz
 			});
 		}
@@ -48,7 +47,6 @@ export function reducer(state = initialState, action: quizzes.Actions): State {
 				loading: false,
 				ids: quizIds,
 				entities: quizEntities,
-				selectedQuizId: null,
 				filter: quiz => quiz
 			});
 		}
@@ -61,7 +59,7 @@ export function reducer(state = initialState, action: quizzes.Actions): State {
 
 		case quizzes.ActionTypes.SELECT: {
 			return Object.assign({}, state, {
-				selectedLessonId: action.payload
+				selectedQuizId: action.payload
 			});
 		}
 

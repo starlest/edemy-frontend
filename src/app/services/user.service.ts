@@ -4,6 +4,7 @@ import { AuthHttp } from '../auth.http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { Response } from '@angular/http';
+import { handleError } from './util';
 
 @Injectable()
 export class UserService {
@@ -19,6 +20,6 @@ export class UserService {
 	get(): Observable<User> {
 		return this.http.get(this.baseUrl)
 		  .map((response: Response) => response.json() as User)
-		  .catch(err => Observable.throw(err));
+		  .catch(handleError);
 	}
 }
