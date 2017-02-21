@@ -26,6 +26,10 @@ export class QuizComponent {
 		console.log(questionID, choiceID, checked);
 	}
 
+	onTextInputChange(questionID, value) {
+		console.log(questionID, value);
+	}
+
 	onSubmit(value: any) {
 		console.log('submitted', value);
 		console.log(this.userSelections);

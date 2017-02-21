@@ -1,11 +1,11 @@
+<ed-header [title]="quiz.Title"></ed-header>
+
 <div class="container my-5">
+  <button class="btn btn-danger mb-3" (click)="goBack()">
+    Back
+  </button>
+
   <div class="card">
-    <div class="card-header text-center">
-      <button class="btn btn-warning float-left" (click)="goBack()">
-        Back
-      </button>
-      <h5 class="font-weight-bold">{{quiz.Title}}</h5>
-    </div>
     <div class="card-block">
 
       <form #quizForm="ngForm" (submit)="onSubmit(quizForm.value)">
@@ -13,7 +13,7 @@
         <ol class="my-5">
           <li *ngFor="let question of quiz.Questions" class="mt-5">
 
-            <p class="font-weight-bold d-inline">{{question.Question}}</p>
+            <p class="d-inline">{{question.Question}}</p>
 
             <div *ngIf="question.Type === 'Multiple Choice Single Answer'"
                  class="multiple-choice-single-answer">
@@ -44,11 +44,27 @@
                         <input type="checkbox" [id]="choice.Id"
                                class="form-check-input"
                                [name]="question.Id" [value]="choice"
-                               (change)="onCheckBoxChoiceChange(question.Id, choice, cb.checked)" #cb>
+                               (change)="onCheckBoxChoiceChange(question.Id, choice, cb.checked)"
+                               #cb>
                         {{choice.Choice}}
                       </label>
                     </div>
                   </li>
+                </div>
+              </ul>
+            </div>
+
+            <div *ngIf="question.Type === 'Open Ended'"
+                 class="multiple-choice-single-answer">
+              <ul class="list-unstyled p-0 mt-3">
+                <div class="form-group">
+                  <label [for]="question.Id">
+                    <input type="text" [id]="question.Id"
+                           class="form-control"
+                           placeholder="Enter your answer here."
+                           (keyup)="onTextInputChange(question.Id, tb.value)"
+                           #tb>
+                  </label>
                 </div>
               </ul>
             </div>
