@@ -50,7 +50,6 @@ export const appRoutes: Routes = [
 	},
 	{
 		path: 'quizzes/:Id',
-		canActivate: [QuizExistsGuard],
 		component: ViewQuizPageComponent
 	},
 	{

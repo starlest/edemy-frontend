@@ -1,17 +1,3 @@
-.question-list {
-	ol {
-		counter-reset: item;
-		li {
-			display: block;
-		}
-		li:before {
-			content: counter(item) ". ";
-			counter-increment: item;
-			font-weight: bold;
-		}
-	}
-
-	ul {
-		list-style: none;
-	}
+.hr-divider:before {
+	background-color: gray;
 }

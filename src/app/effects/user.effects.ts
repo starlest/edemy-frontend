@@ -23,7 +23,6 @@ export class UserEffects {
 	  .switchMap(() => {
 		  return this.userService.get()
 			.map(result => {
-				this.store.dispatch(new quizzes.LoadAction());
 				this.store.dispatch(new worksheets.LoadAction());
 				return new user.LoadSuccessAction(result);
 			})
@@ -34,10 +33,10 @@ export class UserEffects {
 	  });
 
 
-	@Effect()
-	loadUserSuccess$: Observable<Action> = this.actions$
-	  .ofType(user.ActionTypes.LOAD_SUCCESS)
-	  .map(() => new auth.ScheduleRefreshAction);
+	// @Effect()
+	// loadUserSuccess$: Observable<Action> = this.actions$
+	//   .ofType(user.ActionTypes.LOAD_SUCCESS)
+	//   .map(() => new auth.ScheduleRefreshAction);
 
 	@Effect()
 	loadUserFail$: Observable<Action> = this.actions$

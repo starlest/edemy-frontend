@@ -37,6 +37,9 @@ export function reducer(state = initialState, action: user.Actions): State {
 				loading: false
 			});
 
+		case user.ActionTypes.REMOVE:
+			return initialState;
+
 		default:
 			return state;
 	}

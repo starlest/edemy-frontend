@@ -68,6 +68,11 @@ export class AuthEffects {
 	  });
 
 	@Effect()
+	removeAuthAfter$: Observable<Action> = this.actions$
+	  .ofType(auth.ActionTypes.REMOVE_SUCCESS || auth.ActionTypes.REMOVE_FAIL)
+	  .map(() => new user.RemoveAction);
+
+	@Effect()
 	loadSuccess$: Observable<Action> = this.actions$
 	  .ofType(auth.ActionTypes.LOAD_SUCCESS)
 	  .map((action: auth.LoadSuccessAction) => {
@@ -76,7 +81,7 @@ export class AuthEffects {
 		  const expiresIn = +authEntity.expiration_date - new Date().getTime();
 		  const expiresInMinutes = expiresIn / 1000 / 60;
 		  if (expiresInMinutes < 5) return new auth.RefreshAction();
-		  return new user.LoadAction();
+		  return new auth.ScheduleRefreshAction();
 	  });
 
 	@Effect()
@@ -103,6 +108,18 @@ export class AuthEffects {
 			  () => this.store.dispatch(new auth.RefreshAction()));
 
 		  return new auth.ScheduleRefreshSuccessAction();
+	  });
+
+	@Effect()
+	scheduleRefreshSuccess$: Observable<Action> = this.actions$
+	  .ofType(auth.ActionTypes.SCHEDULE_REFRESH_SUCCESS)
+	  .switchMap(() => {
+		  // load user only if the user has not been loaded before.
+		  return this.store.select(fromRoot.getUserEntity).take(1)
+			.map(entity => {
+				if (!entity) return new user.LoadAction();
+				return null;
+			});
 	  });
 
 	@Effect()

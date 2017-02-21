@@ -24,8 +24,7 @@ export class SelectedQuizPageComponent {
 					Levels: [],
 					Subject: '',
 					Tutor: '',
-					Questions: [],
-					StartButton: ''
+					Questions: []
 				};
 				return emptyQuiz;
 			}

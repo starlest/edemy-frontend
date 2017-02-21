@@ -22,6 +22,10 @@ export class QuizComponent {
 		console.log(questionID, choiceID);
 	}
 
+	onCheckBoxChoiceChange(questionID, choiceID, checked) {
+		console.log(questionID, choiceID, checked);
+	}
+
 	onSubmit(value: any) {
 		console.log('submitted', value);
 		console.log(this.userSelections);

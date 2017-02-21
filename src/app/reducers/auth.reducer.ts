@@ -48,11 +48,8 @@ export function reducer(state = initialState, action: auth.Actions): State {
 
 		case auth.ActionTypes.REMOVE_FAIL:
 		case auth.ActionTypes.REMOVE_SUCCESS:
-			return Object.assign({}, state, {
-				entity: null,
-				loaded: false,
-				loading: false
-			});
+			return initialState;
+
 		default:
 			return state;
 	}

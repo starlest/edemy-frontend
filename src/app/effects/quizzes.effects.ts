@@ -15,6 +15,7 @@ export class QuizzesEffects {
 	@Effect()
 	loadQuizzes$: Observable<Action> = this.actions$
 	  .ofType(quizzes.ActionTypes.LOAD)
+	  .startWith(new quizzes.LoadAction)
 	  .switchMap(() =>
 		this.quizzesService.get()
 		  .map((results: Quiz[]) => {
