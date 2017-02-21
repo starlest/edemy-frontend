@@ -1,1 +1,39 @@
-{{quiz.Title}}
+<div class="container my-5">
+  <div class="card">
+    <div class="card-header text-center">
+      <button class="btn btn-default btn-primary float-left" (click)="goBack()">
+        Back
+      </button>
+      <h5 class="font-weight-bold">{{quiz.Title}}</h5>
+    </div>
+    <form #quizForm="ngForm"
+          (submit)="onSubmit(quizForm.value)">
+      <div class="card-block">
+
+        <ol class="question-list my-5">
+          <li *ngFor="let question of quiz.Questions" class="mb-5">
+            <p class="font-weight-bold d-inline">{{question.Question}}</p>
+            <ul class="p-0 mt-3">
+              <fieldset class="form-group">
+                <li *ngFor="let choice of question.Choices">
+                  <div class="form-check">
+                    <label class="form-check-label" [for]="choice.Id">
+                      <input type="radio" [id]="choice.Id"
+                             class="form-check-input"
+                             [name]="question.Id" [value]="choice"
+                             (change)="onRadioChoiceChange(question.Id, choice)">
+                      {{choice.Choice}}
+                    </label>
+                  </div>
+                </li>
+              </fieldset>
+            </ul>
+          </li>
+        </ol>
+      </div>
+      <div class="card-footer text-right">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

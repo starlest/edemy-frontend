@@ -76,7 +76,7 @@ export class AuthEffects {
 		  const expiresIn = +authEntity.expiration_date - new Date().getTime();
 		  const expiresInMinutes = expiresIn / 1000 / 60;
 		  if (expiresInMinutes < 5) return new auth.RefreshAction();
-		  return new auth.ScheduleRefreshAction()
+		  return new user.LoadAction();
 	  });
 
 	@Effect()
@@ -104,11 +104,6 @@ export class AuthEffects {
 
 		  return new auth.ScheduleRefreshSuccessAction();
 	  });
-
-	@Effect()
-	scheduleRefreshSuccess$: Observable<Action> = this.actions$
-	  .ofType(auth.ActionTypes.SCHEDULE_REFRESH_SUCCESS)
-	  .map(() => new user.LoadAction());
 
 	@Effect()
 	refreshToken$: Observable<Action> = this.actions$

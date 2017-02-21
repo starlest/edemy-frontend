@@ -1,9 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as fromRoot from '../../reducers';
-import * as quizzes from '../../actions/quizzes.actions';
 import { Subscription } from 'rxjs';
 import { Quiz } from '../../models';
+import { go } from '@ngrx/router-store';
+import * as fromRoot from '../../reducers';
 
 @Component({
 	selector: 'ed-quizzes',
@@ -24,12 +24,7 @@ export class QuizzesComponent implements OnInit, OnDestroy {
 			name: 'Description',
 			sort: false
 		},
-		{ title: 'Tutor', name: 'Tutor' },
-		{
-			title: '',
-			name: 'StartButton',
-			sort: false
-		}
+		{ title: 'Tutor', name: 'Tutor' }
 	];
 
 	tableConfig: any = {
@@ -160,5 +155,9 @@ export class QuizzesComponent implements OnInit, OnDestroy {
 		this.rows = page && config.paging ? this.changePage(page, sortedData) :
 		  sortedData;
 		this.paginationConfig.length = sortedData.length;
+	}
+
+	public onCellClick(data: any): any {
+		this.store.dispatch(go(['/quizzes', data.row.Id]));
 	}
 }

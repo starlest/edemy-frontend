@@ -33,6 +33,7 @@ export function reducer(state = initialState, action: auth.Actions): State {
 				loading: false
 			});
 
+		case auth.ActionTypes.STARTUP_LOAD_FAIL:
 		case auth.ActionTypes.LOAD_FAIL:
 			return Object.assign({}, state, {
 				loaded: true,

@@ -22,7 +22,7 @@ export class WorksheetsEffects {
 			  results.forEach(worksheet => {
 				  worksheet.DownloadButton =
 					`<div class="text-center text-white">
-						<a class="btn btn-sm btn-primary" href="${worksheet.DownloadLink}" target="_blank">
+						<a class="btn btn-sm btn-primary btn-pill" href="${worksheet.DownloadLink}" target="_blank">
 							Download
 						</a>
 					</div>

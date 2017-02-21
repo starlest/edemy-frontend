@@ -22,7 +22,7 @@ export class LoginComponent {
 
 		this.loginError$ =
 		  this.store.select(fromRoot.getAuthState)
-			.map(state => !state.entity && state.loaded);
+			.map(state => !state.entity && state.loaded && !this.loginForm.pristine);
 
 		this.loginForm = fb.group({
 			Username: ['', Validators.required],

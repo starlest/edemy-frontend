@@ -18,15 +18,16 @@ export class QuizzesEffects {
 	  .switchMap(() =>
 		this.quizzesService.get()
 		  .map((results: Quiz[]) => {
-			  results.forEach(quiz => {
-				  quiz.StartButton =
-					`<div class="text-center text-white">
-						<a class="btn btn-sm btn-primary" routerLink="/quizzes/${quiz.Id}">
-							Start
-						</a>
-					</div>
-`
-			  });
+// 			  results.forEach(quiz => {
+// 				  quiz.StartButton =
+// 					`<div class="text-center text-white">
+// 						<a class="btn btn-sm btn-primary btn-pill"
+// 						href="/quizzes/${quiz.Id}" target="_blank">
+// 							Start
+// 						</a>
+// 					</div>
+// `
+// 			  });
 			  return new quizzes.LoadSuccessAction(results);
 		  })
 		  .catch(error => {

@@ -33,6 +33,12 @@ export class UserEffects {
 			})
 	  });
 
+
+	@Effect()
+	loadUserSuccess$: Observable<Action> = this.actions$
+	  .ofType(user.ActionTypes.LOAD_SUCCESS)
+	  .map(() => new auth.ScheduleRefreshAction);
+
 	@Effect()
 	loadUserFail$: Observable<Action> = this.actions$
 	  .ofType(user.ActionTypes.LOAD_FAIL)

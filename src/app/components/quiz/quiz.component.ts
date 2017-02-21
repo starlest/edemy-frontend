@@ -1,5 +1,8 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Quiz } from '../../models/quiz/quiz';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../reducers';
+import { back } from '@ngrx/router-store';
 
 @Component({
 	selector: 'ed-quiz',
@@ -10,6 +13,21 @@ import { Quiz } from '../../models/quiz/quiz';
 export class QuizComponent {
 	@Input() quiz: Quiz;
 
-	constructor() {
+	userSelections: any;
+
+	constructor(private store: Store<fromRoot.State>) {
+	}
+
+	onRadioChoiceChange(questionID, choiceID) {
+		console.log(questionID, choiceID);
+	}
+
+	onSubmit(value: any) {
+		console.log('submitted', value);
+		console.log(this.userSelections);
+	}
+
+	goBack() {
+		this.store.dispatch(back());
 	}
 }
