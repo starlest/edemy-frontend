@@ -5,15 +5,29 @@
     Back
   </button>
 
+  <alert *ngIf="submitted" type="success mb-3 text-center">
+    You scored {{totalCorrect}}/{{quiz.Questions.length}}!
+    Click
+    <button class="btn-link p-0"
+            (click)="resetQuiz()">here
+    </button>
+    to try again.
+  </alert>
+
   <div class="card">
     <div class="card-block">
 
-      <form #quizForm="ngForm" (submit)="onSubmit(quizForm.value)">
+      <form #quizForm="ngForm" (submit)="markQuiz()">
 
         <ol class="my-5">
           <li *ngFor="let question of quiz.Questions" class="mt-5">
 
-            <p class="d-inline">{{question.Question}}</p>
+            <span>{{question.Question}}</span>
+
+            <span *ngIf="results[question.Id] === false"
+                  class="icon icon-cross float-right text-danger lead"></span>
+            <span *ngIf="results[question.Id] === true"
+                  class="float-right text-success lead">&#10004;</span>
 
             <div *ngIf="question.Type === 'Multiple Choice Single Answer'"
                  class="multiple-choice-single-answer">
@@ -22,10 +36,11 @@
                   <li *ngFor="let choice of question.Choices">
                     <div class="form-check">
                       <label class="form-check-label" [for]="choice.Id">
-                        <input type="radio" [id]="choice.Id"
+                        <input [disabled]="submitted" type="radio"
+                               [id]="choice.Id"
                                class="form-check-input"
                                [name]="question.Id" [value]="choice"
-                               (change)="onRadioChoiceChange(question.Id, choice)">
+                               (change)="onRadioChoiceChange(question.Id, choice.Id)">
                         {{choice.Choice}}
                       </label>
                     </div>
@@ -41,10 +56,11 @@
                   <li *ngFor="let choice of question.Choices">
                     <div class="form-check">
                       <label class="form-check-label" [for]="choice.Id">
-                        <input type="checkbox" [id]="choice.Id"
+                        <input [disabled]="submitted" type="checkbox"
+                               [id]="choice.Id"
                                class="form-check-input"
                                [name]="question.Id" [value]="choice"
-                               (change)="onCheckBoxChoiceChange(question.Id, choice, cb.checked)"
+                               (change)="onCheckBoxChoiceChange(question.Id, choice.Id, cb.checked)"
                                #cb>
                         {{choice.Choice}}
                       </label>
@@ -59,7 +75,7 @@
               <ul class="list-unstyled p-0 mt-3">
                 <div class="form-group">
                   <label [for]="question.Id">
-                    <input type="text" [id]="question.Id"
+                    <input [disabled]="submitted" type="text" [id]="question.Id"
                            class="form-control"
                            placeholder="Enter your answer here."
                            (keyup)="onTextInputChange(question.Id, tb.value)"
@@ -69,14 +85,15 @@
               </ul>
             </div>
 
-
             <div class="hr-divider"></div>
 
           </li>
         </ol>
 
         <div class="text-right">
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" [disabled]="submitted" class="btn btn-primary">
+            Submit
+          </button>
         </div>
 
       </form>
