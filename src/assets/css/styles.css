@@ -18,3 +18,63 @@ body {
 .btn-raised {
     box-shadow: 0 3px 0 0 #bbc;
 }
+
+.btn-link {
+    cursor: pointer;
+}
+
+.fix-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+/* Spinner */
+/*https://github.com/webkul/csspin/blob/master/css/csspin-round.css*/
+.cp-spinner {
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    box-sizing: border-box;
+    position: relative
+}
+
+.cp-round:before {
+    border-radius: 50%;
+    content: " ";
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    box-sizing: border-box;
+    border-top: solid 6px #bababa;
+    border-right: solid 6px #bababa;
+    border-bottom: solid 6px #bababa;
+    border-left: solid 6px #bababa;
+    position: absolute;
+    top: 0;
+    left: 0
+}
+
+.cp-round:after {
+    border-radius: 50%;
+    content: " ";
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    box-sizing: border-box;
+    border: 6px solid transparent;
+    border-top-color: #007FBB;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: cp-round-animate 1s ease-in-out infinite
+}
+
+@keyframes cp-round-animate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -22,12 +22,14 @@
         <ol class="my-5">
           <li *ngFor="let question of quiz.Questions" class="mt-5">
 
-            <span>{{question.Question}}</span>
+            <span [mathjax]="question.Question"></span>
 
             <span *ngIf="results[question.Id] === false"
-                  class="icon icon-cross float-right text-danger lead"></span>
+                  class="icon icon-cross float-right text-danger lead"
+                  aria-label="Wrong"></span>
             <span *ngIf="results[question.Id] === true"
-                  class="float-right text-success lead">&#10004;</span>
+                  class="float-right text-success lead" aria-label="Correct">
+              &#10004;</span>
 
             <div *ngIf="question.Type === 'Multiple Choice Single Answer'"
                  class="multiple-choice-single-answer">
@@ -41,7 +43,7 @@
                                class="form-check-input"
                                [name]="question.Id" [value]="choice"
                                (change)="onRadioChoiceChange(question.Id, choice.Id)">
-                        {{choice.Choice}}
+                        <div [mathjax]="choice.Choice"></div>
                       </label>
                     </div>
                   </li>
@@ -62,7 +64,7 @@
                                [name]="question.Id" [value]="choice"
                                (change)="onCheckBoxChoiceChange(question.Id, choice.Id, cb.checked)"
                                #cb>
-                        {{choice.Choice}}
+                        <div [mathjax]="choice.Choice"></div>
                       </label>
                     </div>
                   </li>

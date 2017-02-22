@@ -24,7 +24,8 @@
     <ul class="nav navbar-nav navbar-right">
       <li *ngIf="!(isLoggedIn$ | async)">
         <button class="btn btn-success my-2 my-sm-0 login-btn"
-                (click)="loginModal.show()">Login
+                (click)="loginModal.show()">
+          <span class="icon icon-login" aria-hidden="true"></span> Login
         </button>
       </li>
 
@@ -43,20 +44,20 @@
           <li role="menuitem">
             <a class="dropdown-item" routerLink="quizzes"
                (click)="closeAllCollapses()">
-              <i class="fa fa-book"></i> Quizzes
+              <span class="icon icon-book" aria-hidden="true"></span> Quizzes
             </a>
           </li>
           <li role="menuitem">
             <a class="dropdown-item" routerLink="worksheets"
                (click)="closeAllCollapses()">
-              <i class="fa fa-file-text-o"></i> Worksheets
+              <span class="icon icon-folder" aria-hidden="true"></span> Worksheets
             </a>
           </li>
           <li class="dropdown-divider"></li>
           <li role="menuitem">
-            <a class="dropdown-item logout-btn" (click)="logout()">
-              <i class="fa fa-sign-out"></i> Logout
-            </a>
+            <button class="dropdown-item btn-link" (click)="logout()">
+              <span class="icon icon-log-out" aria-hidden="true"></span> Logout
+            </button>
           </li>
         </ul>
       </li>

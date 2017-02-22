@@ -15,6 +15,7 @@ import {
 	SelectedLessonPageComponent, ViewLessonPageComponent,
 	SelectedQuizPageComponent, ViewQuizPageComponent
 } from './containers';
+import { MathJaxDirective } from './directives/mathjax.directive';
 import {
 	AuthService, MessagesService, LessonsService, LevelsService, QuizzesService,
 	SubjectsService, UserService, WorksheetsService
@@ -39,6 +40,7 @@ import {
 import { SelectModule } from 'ng2-select';
 import { Ng2TableModule } from 'ng2-table';
 
+
 @NgModule({
 	declarations: [
 		AboutComponent,
@@ -59,7 +61,12 @@ import { Ng2TableModule } from 'ng2-table';
 		QuizComponent,
 		QuizzesComponent,
 		ViewLessonPageComponent,
-		WorksheetsComponent
+		WorksheetsComponent,
+
+		/**
+		 * Directives
+		 */
+		MathJaxDirective
 	],
 	imports: [
 		AppRouting,

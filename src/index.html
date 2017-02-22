@@ -9,13 +9,26 @@
 
     <!-- Stylesheets -->
     <!--<link-->
-        <!--href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto|Lato|Lora:400,400italic|Work+Sans:300,400,500,600"-->
-        <!--rel="stylesheet">-->
+    <!--href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto|Lato|Lora:400,400italic|Work+Sans:300,400,500,600"-->
+    <!--rel="stylesheet">-->
     <!--<link rel="stylesheet"-->
-          <!--href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
+    <!--href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Load MathJax -->
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
   </head>
   <body>
-    <app-root></app-root>
+    <app-root>
+      <div class="fix-center">
+        <div class="cp-spinner cp-round"></div>
+      </div>
+    </app-root>
   </body>
 </html>
