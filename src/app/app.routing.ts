@@ -1,11 +1,11 @@
 import { Routes, RouterModule } from '@angular/router';
 import {
-	AboutComponent, ContactComponent, CurriculumComponent, HomeComponent,
-	NotFoundPageComponent, OnlineLessonsComponent, QuizzesComponent,
-	WorksheetsComponent
+	AboutComponent, AdminDashboardComponent, ContactComponent,
+	CurriculumComponent, HomeComponent, NotFoundPageComponent,
+	OnlineLessonsComponent, QuizzesComponent, WorksheetsComponent
 } from './components';
 import { ViewLessonPageComponent, ViewQuizPageComponent } from './containers';
-import { LessonExistsGuard, NotLoggedInGuard, QuizExistsGuard } from './guards';
+import { LessonExistsGuard, NotLoggedInGuard } from './guards';
 
 export const appRoutes: Routes = [
 	{
@@ -28,6 +28,11 @@ export const appRoutes: Routes = [
 	{
 		path: 'curriculum',
 		component: CurriculumComponent
+	},
+	{
+		path: 'admin-dashboard',
+		canActivate: [NotLoggedInGuard],
+		component: AdminDashboardComponent
 	},
 	{
 		path: 'onlinelessons',

@@ -1,0 +1,43 @@
+<nav class="sidebar-nav">
+
+  <div class="sidebar-header">
+    <button class="nav-toggler nav-toggler-md sidebar-toggler"
+            type="button" data-toggle="collapse"
+            data-target="#nav-toggleable-md">
+      <span class="sr-only">Toggle nav</span>
+    </button>
+  </div>
+
+  <div class="collapse nav-toggleable-md" id="nav-toggleable-md">
+    <ul class="nav nav-pills nav-stacked flex-column">
+      <li class="nav-header">Dashboards</li>
+      <li class="nav-item">
+        <a class="nav-link active" href="../index-light/index.html">Overview</a>
+      </li>
+      <!--<li class="nav-item">-->
+        <!--<a class="nav-link" routerLink="/students">Students</a>-->
+      <!--</li>-->
+      <li class="nav-item">
+        <a class="nav-link " href="../fluid-light/index.html">Quizzes
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link "
+           href="../icon-nav-light/index.html">Worksheets
+        </a>
+      </li>
+
+      <li class="nav-header">Actions</li>
+
+      <li class="nav-item">
+        <a class="nav-link " (click)="logout()" href="#" target="_self">
+          Logout
+        </a>
+      </li>
+
+    </ul>
+
+    <hr class="visible-xs mt-3">
+
+  </div>
+</nav>

@@ -1,4 +1,6 @@
 export { AboutComponent } from './about/about.component';
+export { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+export { AdminSidebarNavComponent } from './admin-sidebar-nav/admin-sidebar-nav.component';
 export { ContactComponent } from './contact/contact.component';
 export { CurriculumComponent } from './curriculum/curriculum.component';
 export { FooterComponent } from './footer/footer.component';

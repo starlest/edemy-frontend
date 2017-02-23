@@ -22,6 +22,7 @@
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
+
       <li *ngIf="!(isLoggedIn$ | async)">
         <button class="btn btn-success my-2 my-sm-0 login-btn"
                 (click)="loginModal.show()">
@@ -30,6 +31,7 @@
       </li>
 
       <li *ngIf="isLoggedIn$ | async" dropdown>
+
         <button id="user-menu-button"
                 class="btn btn-secondary my-2 my-sm-0"
                 type="button" aria-expanded="false" (click)="toggleUserMenu()"
@@ -38,27 +40,47 @@
           {{(user$ | async).DisplayName}}
           <span class="caret"></span>
         </button>
+
         <ul role="menu" class="dropdown-menu-right" dropdownMenu
             aria-labelledby="user-menu-button"
             [collapse]="isUserMenuCollapsed">
+
+          <div class="admin-menu-items"
+               *ngIf="(user$ | async).Role === 'Administrators'">
+            <li role="menuitem">
+              <a class="dropdown-item" routerLink="admin-dashboard"
+                 (click)="closeAllCollapses()">
+                <span class="icon icon-database" aria-hidden="true"></span>
+                Dashboard
+              </a>
+            </li>
+
+            <li class="dropdown-divider"></li>
+          </div>
+
           <li role="menuitem">
             <a class="dropdown-item" routerLink="quizzes"
                (click)="closeAllCollapses()">
               <span class="icon icon-book" aria-hidden="true"></span> Quizzes
             </a>
           </li>
+
           <li role="menuitem">
             <a class="dropdown-item" routerLink="worksheets"
                (click)="closeAllCollapses()">
-              <span class="icon icon-folder" aria-hidden="true"></span> Worksheets
+              <span class="icon icon-folder" aria-hidden="true"></span>
+              Worksheets
             </a>
           </li>
+
           <li class="dropdown-divider"></li>
+
           <li role="menuitem">
             <button class="dropdown-item btn-link" (click)="logout()">
               <span class="icon icon-log-out" aria-hidden="true"></span> Logout
             </button>
           </li>
+
         </ul>
       </li>
     </ul>
