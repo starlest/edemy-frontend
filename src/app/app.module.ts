@@ -7,10 +7,10 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import {
 	AboutComponent, AdminDashboardComponent, AdminSidebarNavComponent,
-	CurriculumComponent, ContactComponent, FooterComponent, HeaderComponent,
-	HomeComponent, LoginComponent, NavbarComponent, NotFoundPageComponent,
-	OnlineLessonComponent, OnlineLessonsComponent, QuizComponent,
-	QuizzesComponent, WorksheetsComponent
+	AdminStudentsComponent, CurriculumComponent, ContactComponent,
+	FooterComponent, HeaderComponent, HomeComponent, LoginComponent,
+	NavbarComponent, NotFoundPageComponent, OnlineLessonComponent,
+	OnlineLessonsComponent, QuizComponent, QuizzesComponent, WorksheetsComponent
 } from './components';
 import {
 	SelectedLessonPageComponent, ViewLessonPageComponent,
@@ -47,6 +47,7 @@ import { Ng2TableModule } from 'ng2-table';
 		AboutComponent,
 		AdminDashboardComponent,
 		AdminSidebarNavComponent,
+		AdminStudentsComponent,
 		AppComponent,
 		ContactComponent,
 		CurriculumComponent,

@@ -1,7 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import {
-	AboutComponent, AdminDashboardComponent, ContactComponent,
-	CurriculumComponent, HomeComponent, NotFoundPageComponent,
+	AboutComponent, AdminDashboardComponent, AdminStudentsComponent,
+	ContactComponent, CurriculumComponent, HomeComponent, NotFoundPageComponent,
 	OnlineLessonsComponent, QuizzesComponent, WorksheetsComponent
 } from './components';
 import { ViewLessonPageComponent, ViewQuizPageComponent } from './containers';
@@ -32,7 +32,22 @@ export const appRoutes: Routes = [
 	{
 		path: 'admin-dashboard',
 		canActivate: [NotLoggedInGuard],
-		component: AdminDashboardComponent
+		component: AdminDashboardComponent,
+		children: [
+			{
+				path: '',
+				redirectTo: 'overview',
+				pathMatch: 'full'
+			},
+			{
+				path: 'overview',
+				component: AdminStudentsComponent
+			},
+			{
+				path: 'students',
+				component: AdminStudentsComponent
+			}
+		]
 	},
 	{
 		path: 'onlinelessons',

@@ -11,20 +11,9 @@
   <div class="collapse nav-toggleable-md" id="nav-toggleable-md">
     <ul class="nav nav-pills nav-stacked flex-column">
       <li class="nav-header">Dashboards</li>
-      <li class="nav-item">
-        <a class="nav-link active" href="../index-light/index.html">Overview</a>
-      </li>
-      <!--<li class="nav-item">-->
-        <!--<a class="nav-link" routerLink="/students">Students</a>-->
-      <!--</li>-->
-      <li class="nav-item">
-        <a class="nav-link " href="../fluid-light/index.html">Quizzes
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link "
-           href="../icon-nav-light/index.html">Worksheets
-        </a>
+      <li *ngFor="let link of links" class="nav-item">
+        <a class="nav-link" [routerLink]="link.Route"
+           [class.active]="(routerPath$ | async) == link.Route">{{link.Title}}</a>
       </li>
 
       <li class="nav-header">Actions</li>
