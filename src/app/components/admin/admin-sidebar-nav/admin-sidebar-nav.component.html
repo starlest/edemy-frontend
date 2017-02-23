@@ -2,28 +2,24 @@
 
   <div class="sidebar-header">
     <button class="nav-toggler nav-toggler-md sidebar-toggler"
-            type="button" data-toggle="collapse"
-            data-target="#nav-toggleable-md">
+            type="button"
+            aria-controls="adminNavToggleable" aria-expanded="false"
+            aria-label="Toggle Admin Navigation"
+            (click)="toggleAdminNavbarCollapse()">
       <span class="sr-only">Toggle nav</span>
     </button>
   </div>
 
-  <div class="collapse nav-toggleable-md" id="nav-toggleable-md">
+  <div class="collapse nav-toggleable-md" id="adminNavToggleable"
+       [collapse]="isAdminNavbarCollapsed">
     <ul class="nav nav-pills nav-stacked flex-column">
       <li class="nav-header">Dashboards</li>
       <li *ngFor="let link of links" class="nav-item">
-        <a class="nav-link" [routerLink]="link.Route"
-           [class.active]="(routerPath$ | async) == link.Route">{{link.Title}}</a>
-      </li>
-
-      <li class="nav-header">Actions</li>
-
-      <li class="nav-item">
-        <a class="nav-link " (click)="logout()" href="#" target="_self">
-          Logout
+        <a class="nav-link" [routerLink]="link.Route" (click)="closeAdminNavbar()"
+           [class.active]="(routerPath$ | async) == link.Route">
+          {{link.Title}}
         </a>
       </li>
-
     </ul>
 
     <hr class="visible-xs mt-3">

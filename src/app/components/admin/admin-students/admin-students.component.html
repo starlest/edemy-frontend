@@ -1,1 +1,28 @@
-test
+<div class="container my-5">
+  <div class="row">
+    <div class="col">
+      <ng-table class="table-responsive"
+                [config]="tableConfig"
+                (tableChanged)="onChangeTable(tableConfig)"
+                (cellClicked)="onCellClick($event)"
+                [rows]="rows" [columns]="columns">
+      </ng-table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6 offset-3 mt-3">
+      <pagination *ngIf="tableConfig.paging"
+                  class="justify-content-center"
+                  [(ngModel)]="paginationConfig.page"
+                  [totalItems]="paginationConfig.length"
+                  [itemsPerPage]="paginationConfig.itemsPerPage"
+                  [maxSize]="paginationConfig.maxSize"
+                  [boundaryLinks]="true"
+                  [rotate]="false"
+                  (pageChanged)="onChangeTable(tableConfig, $event)"
+                  (numPages)="paginationConfig.numPages = $event">
+      </pagination>
+    </div>
+  </div>
+</div>

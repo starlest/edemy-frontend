@@ -58,8 +58,6 @@ export class QuizzesComponent implements OnInit, OnDestroy {
 			.subscribe();
 	}
 
-	ng
-
 	ngOnDestroy() {
 		if (this.quizzesSubscription)
 			this.quizzesSubscription.unsubscribe();

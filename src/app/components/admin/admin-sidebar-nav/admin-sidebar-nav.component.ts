@@ -11,6 +11,8 @@ import * as fromRoot from '../../../reducers';
 export class AdminSidebarNavComponent {
 	routerPath$: Observable<string>;
 
+	isAdminNavbarCollapsed: boolean = true;
+
 	links: Array<any> = [
 		{
 			Title: 'Overview',
@@ -24,5 +26,13 @@ export class AdminSidebarNavComponent {
 
 	constructor(private store: Store<fromRoot.State>) {
 		this.routerPath$ = store.select(fromRoot.getRouterPath).map(path => path.split('/')[2]);
+	}
+
+	toggleAdminNavbarCollapse() {
+		this.isAdminNavbarCollapsed = !this.isAdminNavbarCollapsed;
+	}
+
+	closeAdminNavbar() {
+		this.isAdminNavbarCollapsed = true;
 	}
 }

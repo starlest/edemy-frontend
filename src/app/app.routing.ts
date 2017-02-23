@@ -1,6 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import {
-	AboutComponent, AdminDashboardComponent, AdminStudentsComponent,
+	AboutComponent, AdminDashboardComponent, AdminOverviewComponent,
+	AdminStudentsComponent,
 	ContactComponent, CurriculumComponent, HomeComponent, NotFoundPageComponent,
 	OnlineLessonsComponent, QuizzesComponent, WorksheetsComponent
 } from './components';
@@ -41,7 +42,7 @@ export const appRoutes: Routes = [
 			},
 			{
 				path: 'overview',
-				component: AdminStudentsComponent
+				component: AdminOverviewComponent
 			},
 			{
 				path: 'students',

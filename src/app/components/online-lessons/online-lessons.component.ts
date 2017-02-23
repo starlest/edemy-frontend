@@ -1,4 +1,6 @@
-import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import {
+	Component, ChangeDetectionStrategy, OnDestroy, OnInit, ChangeDetectorRef
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Lesson } from '../../models/lesson';
 import * as fromRoot from '../../reducers';
@@ -13,7 +15,7 @@ import { Subject } from '../../models/';
 	templateUrl: './online-lessons.component.html',
 	styleUrls: ['./online-lessons.component.scss']
 })
-export class OnlineLessonsComponent implements OnDestroy {
+export class OnlineLessonsComponent implements OnInit, OnDestroy {
 	subjectFilter: string;
 	levelFilter: string;
 	subjects: string[] = [];
@@ -25,7 +27,11 @@ export class OnlineLessonsComponent implements OnDestroy {
 
 	lessons$: { [subject: string]: Observable<Lesson[]> } = {};
 
-	constructor(private store: Store<fromRoot.State>) {
+	constructor(private store: Store<fromRoot.State>,
+	            private ref: ChangeDetectorRef) {
+	}
+
+	ngOnInit() {
 		this.subjects$ = this.store.select(fromRoot.getSubjects)
 		  .map(subjects => {
 			  this.subjects = [];
@@ -35,6 +41,7 @@ export class OnlineLessonsComponent implements OnDestroy {
 					fromRoot.getFilteredSubjectLessons(subject.Title));
 				  this.subjects.push(subject.Title)
 			  });
+			  this.ref.detectChanges();
 			  return subjects;
 		  });
 
@@ -48,7 +55,6 @@ export class OnlineLessonsComponent implements OnDestroy {
 			  levels.forEach(level => this.levels.push(level.Title));
 		  })
 		  .subscribe();
-
 	}
 
 	selectedSubjectFilter(value: any): void {
@@ -69,12 +75,9 @@ export class OnlineLessonsComponent implements OnDestroy {
 
 		this.store.dispatch(new lessons.SetFilter((lesson: Lesson) => {
 			const subjectFilter = subjectFilterCondition ? true :
-			lesson.Subject === this.subjectFilter;
+			  lesson.Subject === this.subjectFilter;
 			const levelFilter = levelFilterCondition ? true :
-			lesson.Levels.indexOf(this.levelFilter) >= 0;
-			console.log(lesson.Title);
-			console.log('subject filter:', subjectFilter);
-			console.log('level filter:', levelFilter);
+			  lesson.Levels.indexOf(this.levelFilter) >= 0;
 			return subjectFilter && levelFilter;
 		}));
 	}

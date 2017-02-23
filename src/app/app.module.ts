@@ -6,11 +6,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import {
-	AboutComponent, AdminDashboardComponent, AdminSidebarNavComponent,
-	AdminStudentsComponent, CurriculumComponent, ContactComponent,
-	FooterComponent, HeaderComponent, HomeComponent, LoginComponent,
-	NavbarComponent, NotFoundPageComponent, OnlineLessonComponent,
-	OnlineLessonsComponent, QuizComponent, QuizzesComponent, WorksheetsComponent
+	AboutComponent, AdminDashboardComponent, AdminOverviewComponent,
+	AdminSidebarNavComponent, AdminStudentsComponent, CurriculumComponent,
+	ContactComponent, FooterComponent, HeaderComponent, HomeComponent,
+	LoginComponent, NavbarComponent, NotFoundPageComponent,
+	OnlineLessonComponent, OnlineLessonsComponent, QuizComponent,
+	QuizzesComponent, WorksheetsComponent
 } from './components';
 import {
 	SelectedLessonPageComponent, ViewLessonPageComponent,
@@ -46,6 +47,7 @@ import { Ng2TableModule } from 'ng2-table';
 	declarations: [
 		AboutComponent,
 		AdminDashboardComponent,
+		AdminOverviewComponent,
 		AdminSidebarNavComponent,
 		AdminStudentsComponent,
 		AppComponent,
