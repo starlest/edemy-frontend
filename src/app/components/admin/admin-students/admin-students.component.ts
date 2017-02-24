@@ -2,6 +2,7 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { Student } from '../../../models';
+import * as sa from '../../../actions/students.action';
 import * as fromRoot from '../../../reducers';
 
 @Component({
@@ -11,21 +12,19 @@ import * as fromRoot from '../../../reducers';
 })
 export class AdminStudentsComponent {
 	studentsSubscription: Subscription;
-	data: Array<Student> = [
-		{
-			FirstName: 'Edwin',
-			MiddleName: '',
-			LastName: 'Chia'
-		},
-		{
-			FirstName: 'Aloysius',
-			MiddleName: '',
-			LastName: 'Feng'
-		}
-	];
+	data: Array<Student> = [];
 
 	rows: Array<any> = [];
 	columns: Array<any> = [
+		{
+			title: 'Id', name: 'Id',
+			sort: false
+		},
+		{
+			title: 'NRIC', name: 'IdentificationNumber',
+			filtering: { filterString: '', placeholder: 'Filter' },
+			sort: false
+		},
 		{
 			title: 'First Name', name: 'FirstName',
 			filtering: { filterString: '', placeholder: 'Filter' }
@@ -33,6 +32,15 @@ export class AdminStudentsComponent {
 		{ title: 'Middle Name', name: 'MiddleName' },
 		{
 			title: 'Last Name', name: 'LastName',
+			filtering: { filterString: '', placeholder: 'Filter' }
+		},
+		{
+			title: 'Email', name: 'Email',
+			filtering: { filterString: '', placeholder: 'Filter' },
+			sort: false
+		},
+		{
+			title: 'School', name: 'School',
 			filtering: { filterString: '', placeholder: 'Filter' }
 		}
 	];
@@ -57,15 +65,16 @@ export class AdminStudentsComponent {
 
 	ngOnInit() {
 		this.onChangeTable(this.tableConfig);
-		// this.studentsSubscription =
-		//   this.store.select(fromRoot.getFilteredQuizzes)
-		// 	.map(quizzes => {
-		// 		this.data = quizzes;
-		// 		this.paginationConfig.length = quizzes.length;
-		// 		this.onChangeTable(this.tableConfig);
-		// 		this.ref.detectChanges();
-		// 	})
-		// 	.subscribe();
+		this.store.dispatch(new sa.LoadAction);
+		this.studentsSubscription =
+		  this.store.select(fromRoot.getFileteredStudents)
+			.map(students => {
+				this.data = students;
+				this.paginationConfig.length = students.length;
+				this.onChangeTable(this.tableConfig);
+				this.ref.detectChanges();
+			})
+			.subscribe();
 	}
 
 	ngOnDestroy() {

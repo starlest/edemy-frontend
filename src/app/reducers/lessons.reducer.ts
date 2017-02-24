@@ -7,7 +7,7 @@ export interface State {
 	loading: boolean;
 	ids: string[];
 	entities: { [id: string]: Lesson };
-	selectedLessonId: string;
+	selectedId: string;
 	filter: (Lesson) => Lesson;
 }
 
@@ -16,7 +16,7 @@ const initialState: State = {
 	loading: false,
 	ids: [],
 	entities: {},
-	selectedLessonId: null,
+	selectedId: null,
 	filter: lesson => lesson
 };
 
@@ -28,7 +28,6 @@ export function reducer(state = initialState, action: lessons.Actions): State {
 				loading: true,
 				ids: [],
 				entities: {},
-				selectedLessonId: null,
 				filter: lesson => lesson
 			});
 		}
@@ -59,7 +58,7 @@ export function reducer(state = initialState, action: lessons.Actions): State {
 
 		case lessons.ActionTypes.SELECT: {
 			return Object.assign({}, state, {
-				selectedLessonId: action.payload
+				selectedId: action.payload
 			});
 		}
 
@@ -89,7 +88,7 @@ export const getIds = (state: State) => state.ids;
 
 export const getEntities = (state: State) => state.entities;
 
-export const getSelectedId = (state: State) => state.selectedLessonId;
+export const getSelectedId = (state: State) => state.selectedId;
 
 export const getSelected = createSelector(getEntities, getSelectedId,
   (entities, selectedId) => {

@@ -20,7 +20,7 @@ import {
 import { MathJaxDirective } from './directives/mathjax.directive';
 import {
 	AuthService, MessagesService, LessonsService, LevelsService, QuizzesService,
-	SubjectsService, UserService, WorksheetsService
+	StudentsService, SubjectsService, UserService, WorksheetsService
 } from './services';
 import {
 	AdminGuard, LessonExistsGuard, NotLoggedInGuard, QuizExistsGuard
@@ -29,7 +29,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import {
 	AuthEffects, UserEffects, LessonsEffects, LevelsEffects, QuizzesEffects,
-	SubjectsEffects, WorksheetsEffects
+	StudentsEffects, SubjectsEffects, WorksheetsEffects
 } from './effects';
 import { reducer } from './reducers';
 import { RouterStoreModule } from '@ngrx/router-store';
@@ -41,7 +41,6 @@ import {
 } from 'ng2-bootstrap';
 import { SelectModule } from 'ng2-select';
 import { Ng2TableModule } from 'ng2-table';
-
 
 @NgModule({
 	declarations: [
@@ -104,13 +103,15 @@ import { Ng2TableModule } from 'ng2-table';
 		EffectsModule.run(LessonsEffects),
 		EffectsModule.run(LevelsEffects),
 		EffectsModule.run(QuizzesEffects),
+		EffectsModule.run(StudentsEffects),
 		EffectsModule.run(SubjectsEffects),
 		EffectsModule.run(WorksheetsEffects),
 
 		StoreDevtoolsModule.instrumentOnlyWithExtension()
 	],
 	providers: [AuthHttp, AuthService, MessagesService, LessonsService,
-		LevelsService, QuizzesService, UserService, SubjectsService,
+		LevelsService, QuizzesService, UserService, StudentsService,
+		SubjectsService,
 		WorksheetsService, AdminGuard, LessonExistsGuard, NotLoggedInGuard,
 		QuizExistsGuard],
 	bootstrap: [AppComponent]

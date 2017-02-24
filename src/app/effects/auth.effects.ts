@@ -57,14 +57,12 @@ export class AuthEffects {
 	  .switchMap(() => {
 		  if (this.refreshSubscription$) this.refreshSubscription$.unsubscribe();
 		  return this.authService.logout()
-			.map(() => {
-				this.store.dispatch(go(['/']));
-				return new auth.RemoveSuccessAction();
-			})
+			.map(() => new auth.RemoveSuccessAction())
 			.catch(err => {
 				console.log(err);
 				return of(new auth.RemoveFailAction());
-			});
+			})
+			.do(() => this.store.dispatch(go(['/'])));
 	  });
 
 	@Effect()

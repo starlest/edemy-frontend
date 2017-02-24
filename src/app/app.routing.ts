@@ -6,7 +6,7 @@ import {
 	OnlineLessonsComponent, QuizzesComponent, WorksheetsComponent
 } from './components';
 import { ViewLessonPageComponent, ViewQuizPageComponent } from './containers';
-import { LessonExistsGuard, NotLoggedInGuard } from './guards';
+import { LessonExistsGuard, NotLoggedInGuard, QuizExistsGuard } from './guards';
 
 export const appRoutes: Routes = [
 	{
@@ -71,7 +71,8 @@ export const appRoutes: Routes = [
 	},
 	{
 		path: 'quizzes/:Id',
-		component: ViewQuizPageComponent
+		component: ViewQuizPageComponent,
+		canActivate: [QuizExistsGuard]
 	},
 	{
 		path: '404',
