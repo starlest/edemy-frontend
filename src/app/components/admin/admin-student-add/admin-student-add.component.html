@@ -1,0 +1,84 @@
+<div class="container my-5">
+  <h1 class="display-4 mb-5 text-center">Add Student</h1>
+
+  <div class="row">
+    <div class="col-md-4">
+      <form [formGroup]="studentRegistrationForm" (submit)="addStudent()">
+        <div class="form-group">
+          <label for="inputFirstName">First Name</label>
+          <input type="text" class="form-control" id="inputFirstName"
+                 placeholder="Enter first name" maxlength="50"
+                 formControlName="FirstName" required>
+        </div>
+        <div class="form-group">
+          <label for="inputMiddleName">Middle Name</label>
+          <input type="text" class="form-control" id="inputMiddleName"
+                 placeholder="Enter middle name" maxlength="50"
+                 formControlName="MiddleName">
+        </div>
+        <div class="form-group">
+          <label for="inputLastName">Last Name</label>
+          <input type="text" class="form-control" id="inputLastName"
+                 placeholder="Enter last name" maxlength="50"
+                 formControlName="LastName" required>
+        </div>
+        <div class="form-group">
+          <label for="inputNRIC">NRIC</label>
+          <input type="text" class="form-control" id="inputNRIC"
+                 placeholder="Enter NRIC" maxlength="10"
+                 formControlName="NRIC" required>
+        </div>
+        <div class="form-group">
+          <label for="inputBirthDate">Birth Date</label>
+          <input type="date" class="form-control" id="inputBirthDate"
+                 placeholder="Enter birth date" formControlName="BirthDate"
+                 required>
+        </div>
+        <div class="form-group">
+          <label class="d-block">Gender</label>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="genderRadio"
+                     id="genderRadioMale" value="male">
+              Male
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="genderRadio"
+                     id="genderRadioFemale" value="female">
+              Female
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputRace">Race</label>
+          <input type="text" class="form-control" id="inputRace"
+                 placeholder="Enter race" maxlength="50"
+                 formControlName="Race" required>
+        </div>
+        <div class="form-group">
+          <label for="inputAddress">Address</label>
+          <textarea class="form-control" id="inputAddress" rows="3"
+                    placeholder="Enter message"
+                    maxlength="500" formControlName="Address"
+                    required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="inputContactHome">Home Contact No.</label>
+          <input type="tel" class="form-control" id="inputContactHome"
+                 placeholder="Enter home contact number" maxlength="20"
+                 formControlName="ContactHome" required>
+        </div>
+        <div class="form-group">
+          <label for="inputContactMobile">Mobile Contact No.</label>
+          <input type="tel" class="form-control" id="inputContactMobile"
+                 placeholder="Enter mobile contact number" maxlength="20"
+                 formControlName="ContactMobile">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+

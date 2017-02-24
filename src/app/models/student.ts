@@ -6,5 +6,7 @@ export interface Student {
 	LastName: string;
 	Email: string;
 	BirthDate: string;
+	ContactHome: string;
+	ContactMobile: string;
 	School: string;
 }

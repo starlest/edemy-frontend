@@ -7,11 +7,11 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import {
 	AboutComponent, AdminDashboardComponent, AdminOverviewComponent,
-	AdminSidebarNavComponent, AdminStudentsComponent, CurriculumComponent,
-	ContactComponent, FooterComponent, HeaderComponent, HomeComponent,
-	LoginComponent, NavbarComponent, NotFoundPageComponent,
-	OnlineLessonComponent, OnlineLessonsComponent, QuizComponent,
-	QuizzesComponent, WorksheetsComponent
+	AdminSidebarNavComponent, AdminStudentsComponent, AdminStudentAddComponent,
+	AdminStudentEditComponent, CurriculumComponent, ContactComponent,
+	FooterComponent, HeaderComponent, HomeComponent, LoginComponent,
+	NavbarComponent, NotFoundPageComponent, OnlineLessonComponent,
+	OnlineLessonsComponent, QuizComponent, QuizzesComponent, WorksheetsComponent
 } from './components';
 import {
 	SelectedLessonPageComponent, ViewLessonPageComponent,
@@ -36,8 +36,8 @@ import { RouterStoreModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { RecaptchaModule } from 'ng2-recaptcha';
 import {
-	AlertModule, CollapseModule, ModalModule, DropdownModule, PaginationModule,
-	TabsModule
+	AlertModule, CollapseModule, DatepickerModule, DropdownModule, ModalModule,
+	PaginationModule, TabsModule
 } from 'ng2-bootstrap';
 import { SelectModule } from 'ng2-select';
 import { Ng2TableModule } from 'ng2-table';
@@ -49,6 +49,8 @@ import { Ng2TableModule } from 'ng2-table';
 		AdminOverviewComponent,
 		AdminSidebarNavComponent,
 		AdminStudentsComponent,
+		AdminStudentAddComponent,
+		AdminStudentEditComponent,
 		AppComponent,
 		ContactComponent,
 		CurriculumComponent,
@@ -86,6 +88,7 @@ import { Ng2TableModule } from 'ng2-table';
 		 */
 		AlertModule.forRoot(),
 		CollapseModule.forRoot(),
+		DatepickerModule.forRoot(),
 		ModalModule.forRoot(),
 		Ng2TableModule,
 		DropdownModule.forRoot(),

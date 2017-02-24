@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Quiz, QuizQuestionUserAnswer } from '../../models';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
-import { back } from '@ngrx/router-store';
+import { back, go } from '@ngrx/router-store';
 import { QuizQuestionChoice } from '../../models/quiz/quiz-question-choice';
 
 @Component({
@@ -113,7 +113,7 @@ export class QuizComponent {
 	}
 
 	goBack() {
-		this.store.dispatch(back());
+		this.store.dispatch(go(['/quizzes']));
 	}
 
 	resetQuiz() {

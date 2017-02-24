@@ -7,7 +7,6 @@ import { of } from 'rxjs/observable/of';
 import * as fromRoot from '../reducers';
 import * as auth from '../actions/auth.actions';
 import * as user from '../actions/user.actions';
-import * as quizzes from '../actions/quizzes.actions';
 import * as worksheets from '../actions/worksheets.actions';
 
 @Injectable()

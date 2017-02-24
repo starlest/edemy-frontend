@@ -37,7 +37,7 @@ export class NavbarComponent {
 		},
 		{
 			Title: 'Online Lessons',
-			Route: 'onlinelessons',
+			Route: 'online-lessons',
 		},
 		{
 			Title: 'Contact',

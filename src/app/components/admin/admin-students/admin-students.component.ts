@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Student } from '../../../models';
 import * as sa from '../../../actions/students.action';
 import * as fromRoot from '../../../reducers';
+import { go } from '@ngrx/router-store';
 
 @Component({
 	selector: 'ed-students-dashboard',
@@ -17,13 +18,9 @@ export class AdminStudentsComponent {
 	rows: Array<any> = [];
 	columns: Array<any> = [
 		{
-			title: 'Id', name: 'Id',
-			sort: false
-		},
-		{
 			title: 'NRIC', name: 'IdentificationNumber',
 			filtering: { filterString: '', placeholder: 'Filter' },
-			sort: false
+			sort: ''
 		},
 		{
 			title: 'First Name', name: 'FirstName',
@@ -37,6 +34,14 @@ export class AdminStudentsComponent {
 		{
 			title: 'Email', name: 'Email',
 			filtering: { filterString: '', placeholder: 'Filter' },
+			sort: false
+		},
+		{
+			title: 'Home No.', name: 'ContactHome',
+			sort: false
+		},
+		{
+			title: 'Mobile No.', name: 'ContactMobile',
 			sort: false
 		},
 		{
@@ -146,6 +151,6 @@ export class AdminStudentsComponent {
 	}
 
 	public onCellClick(data: any): any {
-		console.log(data);
+		this.store.dispatch(go(['/admin-dashboard/students/edit', data.row.Id]));
 	}
 }
