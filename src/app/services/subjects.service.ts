@@ -1,7 +1,5 @@
-import 'rxjs/add/operator/map';
 import {Injectable} from '@angular/core';
 import {Response} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
 import {Subject} from '../models/subject';
 import {environment} from '../../environments/environment';
 import {AuthHttp} from '../auth.http';

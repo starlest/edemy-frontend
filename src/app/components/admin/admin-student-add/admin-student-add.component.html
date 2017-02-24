@@ -76,6 +76,16 @@
                  placeholder="Enter mobile contact number" maxlength="20"
                  formControlName="ContactMobile">
         </div>
+        <div class="form-group">
+          <label for="inputSchool">School</label>
+          <select class="custom-select d-block" id="inputSchool"
+                  formControlName="School">
+            <option *ngFor="let school of schools$ | async"
+                    value="{{school.Name}}">
+              {{school.Name}}
+            </option>
+          </select>
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>

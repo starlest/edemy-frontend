@@ -7,6 +7,7 @@ import * as fromAuth from './auth.reducer';
 import * as fromLevels from './levels.reducer';
 import * as fromLessons from './lessons.reducer';
 import * as fromRouter from '@ngrx/router-store';
+import * as fromSchools from './schools.reducer';
 import * as fromStudents from './students.reducer';
 import * as fromSubjects from './subjects.reducer';
 import * as fromQuizzes from './quizzes.reducer';
@@ -19,6 +20,7 @@ export interface State {
 	levels: fromLevels.State;
 	quizzes: fromQuizzes.State;
 	router: fromRouter.RouterState;
+	schools: fromSchools.State;
 	students: fromStudents.State;
 	subjects: fromSubjects.State;
 	user: fromUser.State;
@@ -31,6 +33,7 @@ const reducers = {
 	levels: fromLevels.reducer,
 	quizzes: fromQuizzes.reducer,
 	router: fromRouter.routerReducer,
+	schools: fromSchools.reducer,
 	students: fromStudents.reducer,
 	subjects: fromSubjects.reducer,
 	user: fromUser.reducer,
@@ -94,6 +97,13 @@ export const getSelectedQuiz = createSelector(getQuizzesState,
  * Router Reducers
  */
 export const getRouterPath = (state: State) => state.router.path;
+
+/**
+ * Subjects Reducers
+ */
+export const getSchoolsState = (state: State) => state.schools;
+export const getSchools = createSelector(getSchoolsState,
+  fromSchools.getSchools);
 
 /**
  * Students Reducers
