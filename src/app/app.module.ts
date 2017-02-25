@@ -8,20 +8,23 @@ import { AppComponent } from './app.component';
 import {
 	AboutComponent, AdminDashboardComponent, AdminOverviewComponent,
 	AdminSidebarNavComponent, AdminStudentsComponent, AdminStudentAddComponent,
-	AdminStudentEditComponent, CurriculumComponent, ContactComponent,
-	FooterComponent, HeaderComponent, HomeComponent, LoginComponent,
-	NavbarComponent, NotFoundPageComponent, OnlineLessonComponent,
-	OnlineLessonsComponent, QuizComponent, QuizzesComponent, WorksheetsComponent
+	AdminStudentDetailComponent, AdminStudentEditComponent, CurriculumComponent,
+	ContactComponent, FooterComponent, HeaderComponent, HomeComponent,
+	LoginComponent, NavbarComponent, NotFoundPageComponent,
+	OnlineLessonComponent, OnlineLessonsComponent, QuizComponent,
+	QuizzesComponent, WorksheetsComponent
 } from './components';
 import {
-	SelectedLessonPageComponent, ViewLessonPageComponent,
-	SelectedQuizPageComponent, ViewQuizPageComponent
+	SelectedAdminStudentDetailPageComponent,
+	ViewAdminStudentDetailPageComponent, SelectedAdminStudentEditPageComponent,
+	ViewAdminStudentEditPageComponent, SelectedLessonPageComponent,
+	ViewLessonPageComponent, SelectedQuizPageComponent, ViewQuizPageComponent
 } from './containers';
 import { MathJaxDirective } from './directives/mathjax.directive';
 import {
 	AuthService, MessagesService, LessonsService, LevelsService, QuizzesService,
-	SchoolsService,
-	StudentsService, SubjectsService, UserService, WorksheetsService
+	SchoolsService, StudentsService, SubjectsService, UserService,
+	WorksheetsService
 } from './services';
 import {
 	AdminGuard, LessonExistsGuard, NotLoggedInGuard, QuizExistsGuard
@@ -51,6 +54,7 @@ import { Ng2TableModule } from 'ng2-table';
 		AdminSidebarNavComponent,
 		AdminStudentsComponent,
 		AdminStudentAddComponent,
+		AdminStudentDetailComponent,
 		AdminStudentEditComponent,
 		AppComponent,
 		ContactComponent,
@@ -63,12 +67,16 @@ import { Ng2TableModule } from 'ng2-table';
 		NotFoundPageComponent,
 		OnlineLessonComponent,
 		OnlineLessonsComponent,
-		SelectedLessonPageComponent,
-		SelectedQuizPageComponent,
-		ViewQuizPageComponent,
 		QuizComponent,
 		QuizzesComponent,
+		SelectedAdminStudentDetailPageComponent,
+		SelectedAdminStudentEditPageComponent,
+		SelectedLessonPageComponent,
+		SelectedQuizPageComponent,
+		ViewAdminStudentDetailPageComponent,
+		ViewAdminStudentEditPageComponent,
 		ViewLessonPageComponent,
+		ViewQuizPageComponent,
 		WorksheetsComponent,
 
 		/**

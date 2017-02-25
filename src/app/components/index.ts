@@ -1,10 +1,6 @@
+export * from './admin';
+
 export { AboutComponent } from './about/about.component';
-export { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
-export { AdminOverviewComponent } from './admin/admin-overview/admin-overview.component';
-export { AdminSidebarNavComponent } from './admin/admin-sidebar-nav/admin-sidebar-nav.component';
-export { AdminStudentsComponent } from './admin/admin-students/admin-students.component';
-export { AdminStudentAddComponent } from './admin/admin-student-add/admin-student-add.component';
-export { AdminStudentEditComponent } from './admin/admin-student-edit/admin-student-edit.component';
 export { ContactComponent } from './contact/contact.component';
 export { CurriculumComponent } from './curriculum/curriculum.component';
 export { FooterComponent } from './footer/footer.component';

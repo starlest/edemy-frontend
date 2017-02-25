@@ -113,7 +113,7 @@ export const getStudentsLoaded = createSelector(getStudentsState,
   fromStudents.getLoaded);
 export const getStudentEntities = createSelector(getStudentsState,
   fromStudents.getEntities);
-export const getFileteredStudents = createSelector(getStudentsState,
+export const getFilteredStudents = createSelector(getStudentsState,
   fromStudents.getFilteredStudents);
 export const getSelectedStudent = createSelector(getStudentsState,
   fromStudents.getSelected);

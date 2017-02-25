@@ -1,0 +1,64 @@
+<div class="card my-5">
+  <div class="card-header">
+    Details
+  </div>
+  <div class="card-block">
+    <p class="card-text">
+      <span class="font-weight-bold">First Name:</span>
+      {{student.FirstName}}
+    </p>
+    <p class="card-text">
+      <span class="font-weight-bold">Middle Name:</span>
+      {{student.MiddleName}}
+    </p>
+    <p class="card-text">
+      <span class="font-weight-bold">Last Name:</span>
+      {{student.LastName}}
+    </p>
+    <p class="card-text">
+      <span class="font-weight-bold">NRIC:</span>
+      {{student.IdentificationNumber}}
+    </p>
+    <p class="card-text">
+      <span class="font-weight-bold">Email:</span>
+      {{student.Email}}
+    </p>
+    <p class="card-text">
+      <span class="font-weight-bold">Birth date:</span>
+      {{student.BirthDate}}
+    </p>
+    <p class="card-text">
+      <span class="font-weight-bold">Gender:</span>
+      {{student.IsMale ? 'Male' : 'Female'}}
+    </p>
+    <p class="card-text">
+      <span class="font-weight-bold">Race:</span>
+      {{student.Race}}
+    </p>
+    <p class="card-text">
+      <span class="font-weight-bold">Address:</span>
+      {{student.Address}}
+    </p>
+    <p class="card-text">
+      <span class="font-weight-bold">Home Contact No.:</span>
+      {{student.ContactHome}}
+    </p>
+    <p class="card-text">
+      <span class="font-weight-bold">Mobile Contact No.:</span>
+      {{student.ContactMobile}}
+    </p>
+    <p class="card-text">
+      <span class="font-weight-bold">School:</span>
+      {{student.School}}
+    </p>
+
+    <button class="btn btn-warning"
+            routerLink="/admin-dashboard/students/{{student.Id}}/edit">
+      Edit
+    </button>
+    <button class="btn btn-info" routerLink="/admin-dashboard/students/add">
+      Enroll
+    </button>
+
+  </div>
+</div>

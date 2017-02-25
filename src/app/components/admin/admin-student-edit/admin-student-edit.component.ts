@@ -1,8 +1,7 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
 import { Student } from '../../../models';
-import * as sa from '../../../actions/students.action';
+import { FormBuilder } from '@angular/forms';
 import * as fromRoot from '../../../reducers';
 
 @Component({
@@ -11,7 +10,9 @@ import * as fromRoot from '../../../reducers';
 	styleUrls: ['admin-student-edit.component.scss']
 })
 export class AdminStudentEditComponent {
+	@Input() student: Student;
 
-	constructor(private store: Store<fromRoot.State>) {
+	constructor(private store: Store<fromRoot.State>,
+	            private fb: FormBuilder) {
 	}
 }

@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { StudentsService } from '../services';
 import { Student } from '../models';
 import * as students from '../actions/students.action';
+import * as fromRoot from '../reducers';
+import { go } from '@ngrx/router-store';
 
 @Injectable()
 export class StudentsEffects {
-	constructor(private actions$: Actions,
+	constructor(private store: Store<fromRoot.State>,
+	            private actions$: Actions,
 	            private studentsService: StudentsService) {
 	}
 
@@ -32,10 +35,16 @@ export class StudentsEffects {
 	  .map((action: students.AddAction) => action.payload)
 	  .switchMap(student => {
 		  return this.studentsService.add(student)
-		    .map(student => new students.AddSuccessAction(student))
-		    .catch(error => {
-		    	console.log(error);
-		    	return Observable.of(new students.AddFailAction());
-		    })
+			.map(student => {
+				alert('Student has been successfully created.');
+				this.store.dispatch(go(['/admin-dashboard/students', student.Id]));
+				return new students.AddSuccessAction(student);
+			})
+			.catch(error => {
+				alert('Failed to add student. Please try again later.');
+				this.store.dispatch(go(['/admin-dashboard/students']));
+				console.log(error);
+				return Observable.of(new students.AddFailAction());
+			})
 	  });
 }

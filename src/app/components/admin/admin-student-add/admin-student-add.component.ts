@@ -53,7 +53,6 @@ export class AdminStudentAddComponent {
 			ContactMobile: this.studentRegistrationForm.value.ContactMobile,
 			School: this.studentRegistrationForm.value.School,
 		};
-		console.log(student);
 		this.store.dispatch(new sa.AddAction(student));
 	}
 }

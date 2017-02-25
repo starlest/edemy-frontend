@@ -72,7 +72,7 @@ export class AdminStudentsComponent {
 		this.onChangeTable(this.tableConfig);
 		this.store.dispatch(new sa.LoadAction);
 		this.studentsSubscription =
-		  this.store.select(fromRoot.getFileteredStudents)
+		  this.store.select(fromRoot.getFilteredStudents)
 			.map(students => {
 				this.data = students;
 				this.paginationConfig.length = students.length;
@@ -151,6 +151,6 @@ export class AdminStudentsComponent {
 	}
 
 	public onCellClick(data: any): any {
-		this.store.dispatch(go(['/admin-dashboard/students/edit', data.row.Id]));
+		this.store.dispatch(go(['/admin-dashboard/students', data.row.Id]));
 	}
 }

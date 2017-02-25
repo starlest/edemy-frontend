@@ -16,7 +16,8 @@ export class SelectedQuizPageComponent {
 
 	constructor(private store: Store<fromRoot.State>) {
 		this.quiz$ = store.select(fromRoot.getSelectedQuiz).map(quiz => {
-			// Load a placeholder empty quiz first if no quiz is loaded yet
+			// Load a placeholder empty quiz first if there are no quizzes
+			// loaded yet
 			if (!quiz) {
 				const emptyQuiz: Quiz = {
 					Id: -1,

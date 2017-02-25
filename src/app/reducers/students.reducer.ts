@@ -68,7 +68,7 @@ export function reducer(state = initialState, action: students.Actions): State {
 
 		case students.ActionTypes.SELECT: {
 			return Object.assign({}, state, {
-				selectedQuizId: action.payload
+				selectedId: action.payload
 			});
 		}
 

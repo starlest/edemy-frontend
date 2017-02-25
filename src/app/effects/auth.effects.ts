@@ -3,13 +3,13 @@ import { Actions, Effect } from '@ngrx/effects';
 import { AuthService } from '../services/auth.service';
 import { Observable, Subscription } from 'rxjs';
 import { Action, Store } from '@ngrx/store';
-import * as auth from '../actions/auth.actions';
-import * as user from '../actions/user.actions';
-import * as fromRoot from '../reducers';
 import { go } from '@ngrx/router-store';
 import { of } from 'rxjs/observable/of';
 import { environment } from '../../environments/environment';
 import { AuthEntity } from '../models/auth-entity';
+import * as auth from '../actions/auth.actions';
+import * as user from '../actions/user.actions';
+import * as fromRoot from '../reducers';
 
 @Injectable()
 export class AuthEffects {

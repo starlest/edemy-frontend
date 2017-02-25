@@ -6,8 +6,9 @@ import { UserService } from '../services/user.service';
 import { of } from 'rxjs/observable/of';
 import * as fromRoot from '../reducers';
 import * as auth from '../actions/auth.actions';
-import * as user from '../actions/user.actions';
-import * as worksheets from '../actions/worksheets.actions';
+import * as ua from '../actions/user.actions';
+import * as sa from '../actions/students.action';
+import * as wa from '../actions/worksheets.actions';
 
 @Injectable()
 export class UserEffects {
@@ -18,24 +19,26 @@ export class UserEffects {
 
 	@Effect()
 	loadUser$: Observable<Action> = this.actions$
-	  .ofType(user.ActionTypes.LOAD)
+	  .ofType(ua.ActionTypes.LOAD)
 	  .switchMap(() => {
 		  return this.userService.get()
-			.map(result => {
-				this.store.dispatch(new worksheets.LoadAction());
-				return new user.LoadSuccessAction(result);
+			.map(user => {
+				if (user.Role === 'Administrator')
+					this.store.dispatch(new sa.LoadAction());
+				this.store.dispatch(new wa.LoadAction());
+				return new ua.LoadSuccessAction(user);
 			})
 			.catch(err => {
 				console.log(err);
-				return of(new user.LoadFailAction());
+				return of(new ua.LoadFailAction());
 			})
 	  });
 
 	@Effect()
 	loadUserFail$: Observable<Action> = this.actions$
-	  .ofType(user.ActionTypes.LOAD_FAIL)
-	  .map(() =>  {
-		alert('Failed to load user. Please login again later.');
-		return new auth.RemoveAction()
+	  .ofType(ua.ActionTypes.LOAD_FAIL)
+	  .map(() => {
+		  alert('Failed to load user. Please login again later.');
+		  return new auth.RemoveAction()
 	  });
 }
