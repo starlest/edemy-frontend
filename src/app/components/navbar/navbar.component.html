@@ -46,7 +46,7 @@
             [collapse]="isUserMenuCollapsed">
 
           <div class="admin-menu-items"
-               *ngIf="(user$ | async).Role === 'Administrators'">
+               *ngIf="(user$ | async).Role === 'Administrator'">
             <li role="menuitem">
               <a class="dropdown-item" routerLink="admin-dashboard"
                  (click)="closeAllCollapses()">

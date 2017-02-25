@@ -1,9 +1,11 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import * as fromRoot from '../../../reducers';
 import { Observable } from 'rxjs';
-import { School } from '../../../models';
+import { School, Student } from '../../../models';
+import * as fromRoot from '../../../reducers';
+import * as sa from '../../../actions/students.action';
+
 
 @Component({
 	selector: 'ed-admin-student-add',
@@ -21,8 +23,10 @@ export class AdminStudentAddComponent {
 			FirstName: ['', Validators.required],
 			MiddleName: [''],
 			LastName: ['', Validators.required],
+			Email: ['', Validators.required],
 			NRIC: ['', Validators.required],
 			BirthDate: ['', Validators.required],
+			Gender: ['', Validators.required],
 			Race: ['', Validators.required],
 			Address: ['', Validators.required],
 			ContactHome: ['', Validators.required],
@@ -34,6 +38,22 @@ export class AdminStudentAddComponent {
 	}
 
 	addStudent() {
-		console.log(this.studentRegistrationForm.value);
+		const student: Student = {
+			Id: 0,
+			IdentificationNumber: this.studentRegistrationForm.value.NRIC,
+			FirstName: this.studentRegistrationForm.value.FirstName,
+			MiddleName: this.studentRegistrationForm.value.MiddleName,
+			LastName: this.studentRegistrationForm.value.LastName,
+			Email: this.studentRegistrationForm.value.Email,
+			BirthDate: this.studentRegistrationForm.value.BirthDate,
+			IsMale: this.studentRegistrationForm.value.Gender === 'male',
+			Race: this.studentRegistrationForm.value.Race,
+			Address: this.studentRegistrationForm.value.Address,
+			ContactHome: this.studentRegistrationForm.value.ContactHome,
+			ContactMobile: this.studentRegistrationForm.value.ContactMobile,
+			School: this.studentRegistrationForm.value.School,
+		};
+		console.log(student);
+		this.store.dispatch(new sa.AddAction(student));
 	}
 }

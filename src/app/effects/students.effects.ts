@@ -16,13 +16,26 @@ export class StudentsEffects {
 	loadStudents$: Observable<Action> = this.actions$
 	  .ofType(students.ActionTypes.LOAD)
 	  .switchMap(() =>
-		  this.studentsService.get()
-			.map((results: Student[]) => {
-				return new students.LoadSuccessAction(results);
-			})
-			.catch(error => {
-				console.log(error);
-				return Observable.of(new students.LoadFailAction())
-			})
+		this.studentsService.get()
+		  .map((results: Student[]) => {
+			  return new students.LoadSuccessAction(results);
+		  })
+		  .catch(error => {
+			  console.log(error);
+			  return Observable.of(new students.LoadFailAction())
+		  })
 	  );
+
+	@Effect()
+	addstudent$: Observable<Action> = this.actions$
+	  .ofType(students.ActionTypes.ADD)
+	  .map((action: students.AddAction) => action.payload)
+	  .switchMap(student => {
+		  return this.studentsService.add(student)
+		    .map(student => new students.AddSuccessAction(student))
+		    .catch(error => {
+		    	console.log(error);
+		    	return Observable.of(new students.AddFailAction());
+		    })
+	  });
 }

@@ -57,6 +57,15 @@ export function reducer(state = initialState, action: students.Actions): State {
 				loading: false
 			});
 
+		case students.ActionTypes.ADD_SUCCESS:
+			const student = action.payload;
+			return Object.assign({}, state, {
+				ids: [...state.ids, student.Id],
+				entities: Object.assign({}, state.entities, {
+					[student.Id]: student
+				})
+			});
+
 		case students.ActionTypes.SELECT: {
 			return Object.assign({}, state, {
 				selectedQuizId: action.payload
@@ -96,7 +105,8 @@ export const getSelected = createSelector(getEntities, getSelectedId,
 	  return entities[selectedId];
   });
 
-export const getFilteredStudents = createSelector(getEntities, getIds, getFilter,
+export const getFilteredStudents = createSelector(getEntities, getIds,
+  getFilter,
   (entities, ids, filter) => ids.map(id => entities[id]).filter(filter));
 
 
