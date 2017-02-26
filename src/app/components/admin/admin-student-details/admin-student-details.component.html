@@ -1,6 +1,10 @@
-<div class="card my-5">
+<button class="btn btn-danger mb-3" routerLink="/admin-dashboard/students">
+  Back
+</button>
+
+<div class="card mb-5">
   <div class="card-header">
-    Details
+    Student Details
   </div>
   <div class="card-block">
     <p class="card-text">
@@ -52,13 +56,18 @@
       {{student.School}}
     </p>
 
-    <button class="btn btn-warning"
-            routerLink="/admin-dashboard/students/{{student.Id}}/edit">
-      Edit
-    </button>
-    <button class="btn btn-info" routerLink="/admin-dashboard/students/add">
-      Enroll
-    </button>
+    <div class="btn-group">
+      <button class="btn btn-secondary"
+              routerLink="/admin-dashboard/students/{{student.Id}}/edit">
+        Edit
+      </button>
+      <button class="btn btn-secondary">
+        Enroll
+      </button>
+      <button class="btn btn-secondary">
+        Collect Fee
+      </button>
+    </div>
 
   </div>
 </div>

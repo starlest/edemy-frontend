@@ -26,7 +26,7 @@ export class AdminStudentAddComponent {
 			Email: ['', Validators.required],
 			NRIC: ['', Validators.required],
 			BirthDate: ['', Validators.required],
-			Gender: ['', Validators.required],
+			Gender: ['male', Validators.required],
 			Race: ['', Validators.required],
 			Address: ['', Validators.required],
 			ContactHome: ['', Validators.required],

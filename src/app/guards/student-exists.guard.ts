@@ -1,32 +1,32 @@
-import * as fromRoot from '../reducers';
+
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { go } from '@ngrx/router-store';
-
+import * as fromRoot from '../reducers';
 
 @Injectable()
-export class LessonExistsGuard implements CanActivate {
+export class StudentExistsGuard implements CanActivate {
 	constructor(private store: Store<fromRoot.State>) {
 	}
 
 	/**
 	 * This method creates an observable that waits for the `loaded` property
-	 * of the lessons state to turn `true`, emitting one time once loading
+	 * of the students state to turn `true`, emitting one time once loading
 	 * has finished.
 	 */
 	waitForCollectionToLoad(): Observable<boolean> {
-		return this.store.select(fromRoot.getLessonsLoaded)
-		  .filter((loaded: boolean) => loaded)
+		return this.store.select(fromRoot.getStudentsLoaded)
+		  .filter(loaded => loaded)
 		  .take(1);
 	}
 
 	/**
 	 * This method checks if a lesson with the given ID is present in the Store
 	 */
-	hasLessonInStore(id: string): Observable<boolean> {
-		return this.store.select(fromRoot.getLessonEntities)
+	hasStudentInStore(id: string): Observable<boolean> {
+		return this.store.select(fromRoot.getStudentEntities)
 		  .take(1)
 		  .map(entities => {
 			  if (!entities || !entities[id]) {
@@ -39,6 +39,6 @@ export class LessonExistsGuard implements CanActivate {
 
 	canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
 		return this.waitForCollectionToLoad()
-		  .switchMap(() => this.hasLessonInStore(route.params['Id']));
+		  .switchMap(() => this.hasStudentInStore(route.params['Id']));
 	}
 }

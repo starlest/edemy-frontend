@@ -7,17 +7,13 @@ export interface State {
 	loading: boolean;
 	ids: string[];
 	entities: { [id: string]: Student };
-	selectedId: string;
-	filter: (Student) => Student;
 }
 
 const initialState: State = {
 	loaded: false,
 	loading: false,
 	ids: [],
-	entities: {},
-	selectedId: null,
-	filter: student => student
+	entities: {}
 };
 
 export function reducer(state = initialState, action: students.Actions): State {
@@ -66,22 +62,6 @@ export function reducer(state = initialState, action: students.Actions): State {
 				})
 			});
 
-		case students.ActionTypes.SELECT: {
-			return Object.assign({}, state, {
-				selectedId: action.payload
-			});
-		}
-
-		case students.ActionTypes.SET_FILTER:
-			return Object.assign({}, state, {
-				filter: action.payload
-			});
-
-		case students.ActionTypes.REMOVE_FILTER:
-			return Object.assign({}, state, {
-				filter: student => student
-			});
-
 		default: {
 			return state;
 		}
@@ -92,22 +72,15 @@ export const getLoaded = (state: State) => state.loaded;
 
 export const getLoading = (state: State) => state.loading;
 
-export const getFilter = (state: State) => state.filter;
-
 export const getIds = (state: State) => state.ids;
 
 export const getEntities = (state: State) => state.entities;
 
-export const getSelectedId = (state: State) => state.selectedId;
+export const getStudent = (Id: string) => createSelector(getEntities,
+  entities => entities[Id]);
 
-export const getSelected = createSelector(getEntities, getSelectedId,
-  (entities, selectedId) => {
-	  return entities[selectedId];
-  });
-
-export const getFilteredStudents = createSelector(getEntities, getIds,
-  getFilter,
-  (entities, ids, filter) => ids.map(id => entities[id]).filter(filter));
+export const getStudents = createSelector(getEntities, getIds,
+  (entities, ids,) => ids.map(id => entities[id]));
 
 
 

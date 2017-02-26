@@ -8,17 +8,14 @@ import { AppComponent } from './app.component';
 import {
 	AboutComponent, AdminDashboardComponent, AdminOverviewComponent,
 	AdminSidebarNavComponent, AdminStudentsComponent, AdminStudentAddComponent,
-	AdminStudentDetailComponent, AdminStudentEditComponent, CurriculumComponent,
+	AdminStudentDetailsComponent, AdminStudentEditComponent, CurriculumComponent,
 	ContactComponent, FooterComponent, HeaderComponent, HomeComponent,
 	LoginComponent, NavbarComponent, NotFoundPageComponent,
 	OnlineLessonComponent, OnlineLessonsComponent, QuizComponent,
 	QuizzesComponent, WorksheetsComponent
 } from './components';
 import {
-	SelectedAdminStudentDetailPageComponent,
-	ViewAdminStudentDetailPageComponent, SelectedAdminStudentEditPageComponent,
-	ViewAdminStudentEditPageComponent, SelectedLessonPageComponent,
-	ViewLessonPageComponent, SelectedQuizPageComponent, ViewQuizPageComponent
+	SelectedLessonPageComponent, ViewLessonPageComponent, SelectedQuizPageComponent, ViewQuizPageComponent
 } from './containers';
 import { MathJaxDirective } from './directives/mathjax.directive';
 import {
@@ -27,7 +24,7 @@ import {
 	WorksheetsService
 } from './services';
 import {
-	AdminGuard, LessonExistsGuard, NotLoggedInGuard, QuizExistsGuard
+	AdminGuard, LessonExistsGuard, NotLoggedInGuard, QuizExistsGuard, StudentExistsGuard
 } from './guards';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -54,7 +51,7 @@ import { Ng2TableModule } from 'ng2-table';
 		AdminSidebarNavComponent,
 		AdminStudentsComponent,
 		AdminStudentAddComponent,
-		AdminStudentDetailComponent,
+		AdminStudentDetailsComponent,
 		AdminStudentEditComponent,
 		AppComponent,
 		ContactComponent,
@@ -69,12 +66,8 @@ import { Ng2TableModule } from 'ng2-table';
 		OnlineLessonsComponent,
 		QuizComponent,
 		QuizzesComponent,
-		SelectedAdminStudentDetailPageComponent,
-		SelectedAdminStudentEditPageComponent,
 		SelectedLessonPageComponent,
 		SelectedQuizPageComponent,
-		ViewAdminStudentDetailPageComponent,
-		ViewAdminStudentEditPageComponent,
 		ViewLessonPageComponent,
 		ViewQuizPageComponent,
 		WorksheetsComponent,
@@ -125,7 +118,7 @@ import { Ng2TableModule } from 'ng2-table';
 	providers: [AuthHttp, AuthService, MessagesService, LessonsService,
 		LevelsService, QuizzesService, UserService, SchoolsService,
 		StudentsService, SubjectsService, WorksheetsService, AdminGuard,
-		LessonExistsGuard, NotLoggedInGuard, QuizExistsGuard],
+		LessonExistsGuard, NotLoggedInGuard, QuizExistsGuard, StudentExistsGuard],
 	bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -72,7 +72,7 @@ export class AdminStudentsComponent {
 		this.onChangeTable(this.tableConfig);
 		this.store.dispatch(new sa.LoadAction);
 		this.studentsSubscription =
-		  this.store.select(fromRoot.getFilteredStudents)
+		  this.store.select(fromRoot.getStudents)
 			.map(students => {
 				this.data = students;
 				this.paginationConfig.length = students.length;
