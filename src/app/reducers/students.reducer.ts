@@ -53,7 +53,7 @@ export function reducer(state = initialState, action: students.Actions): State {
 				loading: false
 			});
 
-		case students.ActionTypes.ADD_SUCCESS:
+		case students.ActionTypes.ADD_SUCCESS: {
 			const student = action.payload;
 			return Object.assign({}, state, {
 				ids: [...state.ids, student.Id],
@@ -61,6 +61,16 @@ export function reducer(state = initialState, action: students.Actions): State {
 					[student.Id]: student
 				})
 			});
+		}
+
+		case students.ActionTypes.EDIT_SUCCESS: {
+			const editedStudent = action.payload;
+			return Object.assign({}, state, {
+				entities: Object.assign({}, state.entities, {
+					[editedStudent.Id]: Object.assign({}, state.entities[editedStudent.Id], editedStudent)
+				})
+			});
+		}
 
 		default: {
 			return state;

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { School, Student } from '../../../models';
 import { Observable, Subscription } from 'rxjs';
+import * as sa from '../../../actions/students.action';
 import * as fromRoot from '../../../reducers';
 
 @Component({
@@ -38,14 +39,13 @@ export class AdminStudentEditComponent implements OnDestroy {
 		this.schools$ = this.store.select(fromRoot.getSchools);
 		this.studentSubscription =
 		  this.store.select(fromRoot.getStudent(this.studentId))
-			.map(student => {
-				Object.assign(this.editedStudent, student);
-			})
+		    .take(1)
+			.map(student => Object.assign(this.editedStudent, student))
 			.subscribe();
 	}
 
 	editStudent() {
-		console.log(this.editedStudent);
+		this.store.dispatch(new sa.EditAction(this.editedStudent));
 	}
 
 	ngOnDestroy() {

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class StudentsService {
-	private baseUrl: string = environment.apiEndpoint + 'students';
+	private baseUrl: string = environment.apiEndpoint + 'students/';
 
 	constructor(private http: AuthHttp) {
 	}
@@ -25,11 +25,25 @@ export class StudentsService {
 	}
 
 	/**
-	 * 	Calls the [POST] /students Web API method to add a new student
+	 * Calls the [POST] /students Web API method to add a new student
+	 * @returns {Observable<any>} rxjs Observable encapsulating the response's
+	 * result
 	 */
 	add(student: Student) {
 		const url = this.baseUrl;
 		return this.http.post(url, JSON.stringify(student), getRequestOptions())
+		  .map((response: Response) => response.json())
+		  .catch(handleError);
+	}
+
+	/**
+	 * Calls the [PUT] /students Web API method to update a student
+	 * @returns {Observable<any>} rxjs Observable encapsulating the response's
+	 * result
+	 */
+	update(student: Student): Observable<any> {
+		const url = this.baseUrl + student.Id;
+		return this.http.put(url, JSON.stringify(student), getRequestOptions())
 		  .map((response: Response) => response.json())
 		  .catch(handleError);
 	}

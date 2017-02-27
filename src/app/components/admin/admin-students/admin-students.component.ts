@@ -13,20 +13,24 @@ import { go } from '@ngrx/router-store';
 })
 export class AdminStudentsComponent {
 	studentsSubscription: Subscription;
-	data: Array<Student> = [];
 
+	data: Array<Student> = [];
 	rows: Array<any> = [];
+
 	columns: Array<any> = [
 		{
 			title: 'NRIC', name: 'IdentificationNumber',
 			filtering: { filterString: '', placeholder: 'Filter' },
-			sort: ''
+			sort: false
 		},
 		{
 			title: 'First Name', name: 'FirstName',
 			filtering: { filterString: '', placeholder: 'Filter' }
 		},
-		{ title: 'Middle Name', name: 'MiddleName' },
+		{
+			title: 'Middle Name',
+			name: 'MiddleName'
+		},
 		{
 			title: 'Last Name', name: 'LastName',
 			filtering: { filterString: '', placeholder: 'Filter' }
@@ -52,7 +56,7 @@ export class AdminStudentsComponent {
 
 	tableConfig: any = {
 		paging: true,
-		sorting: { columns: this.columns },
+		sorting: { columns: [this.columns[1]] },
 		className: ['table-striped', 'table-bordered', 'table-hover']
 	};
 
@@ -99,8 +103,8 @@ export class AdminStudentsComponent {
 			return data;
 
 		let columns = this.tableConfig.sorting.columns || [];
-		let columnName: string = void 0;
-		let sort: string = void 0;
+		let columnName: string = null;
+		let sort: string = null;
 
 		for (let i = 0; i < columns.length; i++) {
 			if (columns[i].sort !== '' && columns[i].sort !== false) {

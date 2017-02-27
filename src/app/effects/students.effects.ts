@@ -30,7 +30,7 @@ export class StudentsEffects {
 	  );
 
 	@Effect()
-	addstudent$: Observable<Action> = this.actions$
+	addStudent$: Observable<Action> = this.actions$
 	  .ofType(students.ActionTypes.ADD)
 	  .map((action: students.AddAction) => action.payload)
 	  .switchMap(student => {
@@ -45,6 +45,25 @@ export class StudentsEffects {
 				this.store.dispatch(go(['/admin-dashboard/students']));
 				console.log(error);
 				return Observable.of(new students.AddFailAction());
+			})
+	  });
+
+	@Effect()
+	editStudent$: Observable<Action> = this.actions$
+	  .ofType(students.ActionTypes.EDIT)
+	  .map((action: students.EditAction) => action.payload)
+	  .switchMap(student => {
+		  return this.studentsService.update(student)
+			.map(student => {
+				alert('Student has been successfully edited.');
+				this.store.dispatch(go(['/admin-dashboard/students', student.Id]));
+				return new students.EditSuccessAction(student);
+			})
+			.catch(error => {
+				alert('Failed to edit student. Please try again later.');
+				this.store.dispatch(go(['/admin-dashboard/students']));
+				console.log(error);
+				return Observable.of(new students.EditFailAction());
 			})
 	  });
 }
