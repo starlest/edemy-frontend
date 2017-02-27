@@ -25,7 +25,8 @@ export class AdminStudentsComponent {
 		},
 		{
 			title: 'First Name', name: 'FirstName',
-			filtering: { filterString: '', placeholder: 'Filter' }
+			filtering: { filterString: '', placeholder: 'Filter' },
+			sort: 'asc'
 		},
 		{
 			title: 'Middle Name',
@@ -33,19 +34,12 @@ export class AdminStudentsComponent {
 		},
 		{
 			title: 'Last Name', name: 'LastName',
-			filtering: { filterString: '', placeholder: 'Filter' }
+			filtering: { filterString: '', placeholder: 'Filter' },
+			sort: 'asc'
 		},
 		{
 			title: 'Email', name: 'Email',
 			filtering: { filterString: '', placeholder: 'Filter' },
-			sort: false
-		},
-		{
-			title: 'Home No.', name: 'ContactHome',
-			sort: false
-		},
-		{
-			title: 'Mobile No.', name: 'ContactMobile',
 			sort: false
 		},
 		{
@@ -56,7 +50,9 @@ export class AdminStudentsComponent {
 
 	tableConfig: any = {
 		paging: true,
-		sorting: { columns: [this.columns[1]] },
+		sorting: {
+			columns: [this.columns[5], this.columns[3], this.columns[1]]
+		},
 		className: ['table-striped', 'table-bordered', 'table-hover']
 	};
 
@@ -75,15 +71,14 @@ export class AdminStudentsComponent {
 	ngOnInit() {
 		this.onChangeTable(this.tableConfig);
 		this.store.dispatch(new sa.LoadAction);
-		this.studentsSubscription =
-		  this.store.select(fromRoot.getStudents)
-			.map(students => {
-				this.data = students;
-				this.paginationConfig.length = students.length;
-				this.onChangeTable(this.tableConfig);
-				this.ref.detectChanges();
-			})
-			.subscribe();
+		this.studentsSubscription = this.store.select(fromRoot.getStudents)
+		  .map(students => {
+			  this.data = students;
+			  this.paginationConfig.length = students.length;
+			  this.onChangeTable(this.tableConfig);
+			  this.ref.detectChanges();
+		  })
+		  .subscribe();
 	}
 
 	ngOnDestroy() {
@@ -102,7 +97,7 @@ export class AdminStudentsComponent {
 		if (!config.sorting)
 			return data;
 
-		let columns = this.tableConfig.sorting.columns || [];
+		let columns = config.sorting.columns || [];
 		let columnName: string = null;
 		let sort: string = null;
 
@@ -116,7 +111,6 @@ export class AdminStudentsComponent {
 		if (!columnName)
 			return data;
 
-		// simple sorting
 		return data.sort((previous: any, current: any) => {
 			if (previous[columnName] > current[columnName]) {
 				return sort === 'desc' ? -1 : 1;

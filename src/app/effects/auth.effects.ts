@@ -6,14 +6,13 @@ import { Action, Store } from '@ngrx/store';
 import { go } from '@ngrx/router-store';
 import { of } from 'rxjs/observable/of';
 import { environment } from '../../environments/environment';
-import { AuthEntity } from '../models/auth-entity';
 import * as auth from '../actions/auth.actions';
 import * as user from '../actions/user.actions';
 import * as fromRoot from '../reducers';
 
 @Injectable()
 export class AuthEffects {
-	refreshSubscription$: Subscription;
+	refreshSubscription: Subscription;
 
 	constructor(private store: Store<fromRoot.State>,
 	            private actions$: Actions,
@@ -55,7 +54,7 @@ export class AuthEffects {
 	removeAuth$: Observable<Action> = this.actions$
 	  .ofType(auth.ActionTypes.REMOVE)
 	  .switchMap(() => {
-		  if (this.refreshSubscription$) this.refreshSubscription$.unsubscribe();
+		  if (this.refreshSubscription) this.refreshSubscription.unsubscribe();
 		  return this.authService.logout()
 			.map(() => new auth.RemoveSuccessAction())
 			.catch(err => {
@@ -73,38 +72,13 @@ export class AuthEffects {
 	@Effect()
 	loadSuccess$: Observable<Action> = this.actions$
 	  .ofType(auth.ActionTypes.LOAD_SUCCESS)
-	  .map((action: auth.LoadSuccessAction) => {
-		  const authEntity = action.payload;
-		  // Refresh auth if it is expiring in 5 minutes
-		  const expiresIn = +authEntity.expiration_date - new Date().getTime();
-		  const expiresInMinutes = expiresIn / 1000 / 60;
-		  if (expiresInMinutes < 5) return new auth.RefreshAction();
-		  return new auth.ScheduleRefreshAction();
-	  });
+	  .map((action: auth.LoadSuccessAction) => new auth.ScheduleRefreshAction());
 
 	@Effect()
 	scheduleRefresh$: Observable<Action> = this.actions$
 	  .ofType(auth.ActionTypes.SCHEDULE_REFRESH)
 	  .map(() => {
-		  // Figure out the interval to refresh auth
-		  const source = this.store.select(fromRoot.getAuthEntity).take(1)
-			.switchMap((entity: AuthEntity) => {
-				const expiresIn = +entity.expiration_date -
-				  new Date().getTime();
-				console.log('token expiring in (minutes):',
-				  expiresIn / 1000 / 60);
-				const interval = expiresIn / 2;
-				console.log('refreshing in (seconds):',
-				  interval / 1000);
-				return Observable.interval(interval);
-			});
-
-		  // Start the scheduler
-		  if (this.refreshSubscription$) this.refreshSubscription$.unsubscribe();
-		  this.refreshSubscription$ =
-			source.subscribe(
-			  () => this.store.dispatch(new auth.RefreshAction()));
-
+		  this.authService.scheduleRefresh();
 		  return new auth.ScheduleRefreshSuccessAction();
 	  });
 
@@ -113,10 +87,11 @@ export class AuthEffects {
 	  .ofType(auth.ActionTypes.SCHEDULE_REFRESH_SUCCESS)
 	  .switchMap(() => {
 		  // load user only if the user has not been loaded before.
-		  return this.store.select(fromRoot.getUserEntity).take(1)
+		  return this.store.select(fromRoot.getUserEntity)
+		    .take(1)
 			.map(entity => {
 				if (!entity) return new user.LoadAction();
-				return null;
+				return new user.DoNothingAction();
 			});
 	  });
 
@@ -124,7 +99,8 @@ export class AuthEffects {
 	refreshToken$: Observable<Action> = this.actions$
 	  .ofType(auth.ActionTypes.REFRESH)
 	  .switchMap(() => {
-		  return this.store.select(fromRoot.getAuthEntity).take(1)
+		  return this.store.select(fromRoot.getAuthEntity)
+		    .take(1)
 			.switchMap(authEntity => {
 				return this.authService.refreshAuth(authEntity)
 				  .map(result => {

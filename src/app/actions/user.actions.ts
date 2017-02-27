@@ -10,6 +10,7 @@ export const ActionTypes = {
 	REMOVE: type('[User] Remove'),
 	REMOVE_SUCCESS: type('[User] Remove Success'),
 	REMOVE_FAIL: type('[User] Remove Fail'),
+	DO_NOTHING: type('[User] Do Nothing'),
 };
 
 export class LoadAction implements Action {
@@ -44,10 +45,15 @@ export class RemoveFailAction implements Action {
 	type = ActionTypes.REMOVE_FAIL;
 }
 
+export class DoNothingAction implements Action {
+	type = ActionTypes.DO_NOTHING;
+}
+
 export type Actions = LoadAction
   | LoadSuccessAction
   | LoadFailAction
   | StartupLoadFailAction
   | RemoveAction
   | RemoveSuccessAction
-  | RemoveFailAction;
+  | RemoveFailAction
+  | DoNothingAction;

@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Student } from '../../../models/student';
 import { Subscription } from 'rxjs';
@@ -37,9 +37,8 @@ export class AdminStudentDetailsComponent implements OnDestroy {
 		this.studentId = this.route.snapshot.params['Id'];
 		this.studentSubscription =
 		  this.store.select(fromRoot.getStudent(this.studentId))
-			.map(student => {
-				Object.assign(this.student, student);
-			})
+		    .take(1)
+			.map(student => Object.assign(this.student, student))
 			.subscribe();
 	}
 

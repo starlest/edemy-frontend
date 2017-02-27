@@ -1,16 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { RequestOptions, Headers } from '@angular/http';
 import { environment } from '../../environments/environment';
 import { AuthHttp } from '../auth.http';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AuthEntity } from '../models/auth-entity';
 import { toUrlEncodedString } from './util';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../reducers';
+import * as aa from '../actions/auth.actions';
+import * as ua from '../actions/user.actions';
 
 @Injectable()
-export class AuthService {
+export class AuthService implements OnDestroy {
 	authKey = environment.authKey;
+	refreshSubscription: Subscription;
 
-	constructor(private http: AuthHttp) {
+	constructor(private store: Store<fromRoot.State>, private http: AuthHttp) {
 	}
 
 	login(username: string, password: string, rememberUser: boolean): any {
@@ -61,7 +66,6 @@ export class AuthService {
 		// The request for tokens must be x-www-form-urlencoded
 		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
 		let options = new RequestOptions({ headers: headers });
-		if (grantType === 'refresh_token') console.log('refreshing');
 		return this.http.post(url, toUrlEncodedString(data), options)
 		  .map(res => res.json())
 		  .map((authEntity: AuthEntity) => {
@@ -75,19 +79,50 @@ export class AuthService {
 		  .catch(err => Observable.throw(err));
 	}
 
+	scheduleRefresh(): void {
+		let source = this.store.select(fromRoot.getAuthEntity)
+		  .take(1)
+		  .flatMap(entity => {
+			  const expiresIn = +entity.expiration_date -
+				new Date().getTime();
+			  console.log('token expiring in (minutes):',
+				expiresIn / 1000 / 60);
+			  const interval = expiresIn / 2;
+			  console.log('refreshing in (seconds):',
+				interval / 1000);
+			  return Observable.interval(interval);
+		  });
+
+		this.unsubscribeRefresh();
+
+		this.refreshSubscription = source.subscribe(() => {
+			this.store.dispatch(new aa.RefreshAction());
+		});
+	}
+
 	// Refresh auth with the server
 	refreshAuth(entity: AuthEntity): Observable<AuthEntity> {
 		return this.getAuth({ refresh_token: entity.refresh_token },
 		  'refresh_token')
+		  .take(1)
 		  .map(result => result)
 		  // This should only happen if the refresh token has expired
 		  .catch(error => {
 			  // let the app know that we cant refresh the token
 			  // which means something is invalid and they aren't logged in
 			  console.log(error);
-			  return Observable.throw('Session Expired')
+			  return Observable.throw('Session Expired');
 		  });
 	}
 
+	unsubscribeRefresh() {
+		if (this.refreshSubscription) {
+			this.refreshSubscription.unsubscribe();
+		}
+	}
 
+	ngOnDestroy() {
+		if (this.refreshSubscription)
+			this.refreshSubscription.unsubscribe();
+	}
 }

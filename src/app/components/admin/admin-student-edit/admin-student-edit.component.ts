@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { School, Student } from '../../../models';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import * as sa from '../../../actions/students.action';
 import * as fromRoot from '../../../reducers';
 
@@ -13,7 +13,8 @@ import * as fromRoot from '../../../reducers';
 })
 export class AdminStudentEditComponent implements OnDestroy {
 	studentSubscription: Subscription;
-	schools$: Observable<Array<School>>;
+	schoolsSubscription: Subscription;
+	schools: Array<School>;
 	studentId: string;
 
 	// Initialise initial values to prevent template errors
@@ -36,10 +37,15 @@ export class AdminStudentEditComponent implements OnDestroy {
 	constructor(private store: Store<fromRoot.State>,
 	            private route: ActivatedRoute) {
 		this.studentId = this.route.snapshot.params['Id'];
-		this.schools$ = this.store.select(fromRoot.getSchools);
+
+		this.schoolsSubscription = this.store.select(fromRoot.getSchools)
+		  .take(1)
+		  .map(schools => this.schools = schools)
+		  .subscribe();
+
 		this.studentSubscription =
 		  this.store.select(fromRoot.getStudent(this.studentId))
-		    .take(1)
+			.take(1)
 			.map(student => Object.assign(this.editedStudent, student))
 			.subscribe();
 	}
@@ -51,5 +57,7 @@ export class AdminStudentEditComponent implements OnDestroy {
 	ngOnDestroy() {
 		if (this.studentSubscription)
 			this.studentSubscription.unsubscribe();
+		if (this.schoolsSubscription)
+			this.schoolsSubscription.unsubscribe();
 	}
 }

@@ -96,7 +96,7 @@
         <label for="inputSchool">School</label>
         <select class="custom-select d-block" id="inputSchool"
                 name="School" [(ngModel)]="editedStudent.School" required>
-          <option *ngFor="let school of schools$ | async"
+          <option *ngFor="let school of schools"
                   value="{{school.Name}}">
             {{school.Name}}
           </option>
