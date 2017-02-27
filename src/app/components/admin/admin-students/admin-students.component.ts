@@ -69,8 +69,6 @@ export class AdminStudentsComponent {
 	}
 
 	ngOnInit() {
-		this.onChangeTable(this.tableConfig);
-		this.store.dispatch(new sa.LoadAction);
 		this.studentsSubscription = this.store.select(fromRoot.getStudents)
 		  .map(students => {
 			  this.data = students;

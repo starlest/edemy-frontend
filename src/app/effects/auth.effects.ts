@@ -86,10 +86,10 @@ export class AuthEffects {
 	scheduleRefreshSuccess$: Observable<Action> = this.actions$
 	  .ofType(auth.ActionTypes.SCHEDULE_REFRESH_SUCCESS)
 	  .switchMap(() => {
-		  // load user only if the user has not been loaded before.
 		  return this.store.select(fromRoot.getUserEntity)
 		    .take(1)
 			.map(entity => {
+				// load user only if the user has not been loaded before.
 				if (!entity) return new user.LoadAction();
 				return new user.DoNothingAction();
 			});

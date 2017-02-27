@@ -8,7 +8,6 @@ import { toUrlEncodedString } from './util';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../reducers';
 import * as aa from '../actions/auth.actions';
-import * as ua from '../actions/user.actions';
 
 @Injectable()
 export class AuthService implements OnDestroy {
@@ -87,10 +86,14 @@ export class AuthService implements OnDestroy {
 				new Date().getTime();
 			  console.log('token expiring in (minutes):',
 				expiresIn / 1000 / 60);
-			  const interval = expiresIn / 2;
+
+			  // refresh when there are 5 minutes left
+			  let nextRefresh = expiresIn - (5 * 1000 * 60);
+
 			  console.log('refreshing in (seconds):',
-				interval / 1000);
-			  return Observable.interval(interval);
+			    nextRefresh / 1000 / 60);
+
+			  return Observable.timer(nextRefresh);
 		  });
 
 		this.unsubscribeRefresh();
