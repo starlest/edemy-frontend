@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MathJaxDirective } from '../../directives/mathjax.directive';
+import { Modal } from 'angular2-modal/plugins/bootstrap';
 
 @Component({
 	selector: 'ed-home',
@@ -7,6 +7,4 @@ import { MathJaxDirective } from '../../directives/mathjax.directive';
 	styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-	constructor() {
-	}
 }

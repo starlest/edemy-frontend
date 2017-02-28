@@ -16,6 +16,7 @@ import * as sa from '../../../actions/students.action';
 export class AdminStudentAddComponent {
 	studentRegistrationForm: FormGroup;
 	schools$: Observable<Array<School>>;
+	submitted: boolean = false;
 
 	constructor(private store: Store<fromRoot.State>,
 	            private fb: FormBuilder) {
@@ -38,6 +39,7 @@ export class AdminStudentAddComponent {
 	}
 
 	addStudent() {
+		this.submitted = true;
 		const student: Student = {
 			Id: 0,
 			IdentificationNumber: this.studentRegistrationForm.value.NRIC,

@@ -4,9 +4,9 @@ import { Action, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { StudentsService } from '../services';
 import { Student } from '../models';
+import { go } from '@ngrx/router-store';
 import * as students from '../actions/students.action';
 import * as fromRoot from '../reducers';
-import { go } from '@ngrx/router-store';
 
 @Injectable()
 export class StudentsEffects {
@@ -20,9 +20,7 @@ export class StudentsEffects {
 	  .ofType(students.ActionTypes.LOAD)
 	  .switchMap(() =>
 		this.studentsService.get()
-		  .map((results: Student[]) => {
-			  return new students.LoadSuccessAction(results);
-		  })
+		  .map((results: Student[]) => new students.LoadSuccessAction(results))
 		  .catch(error => {
 			  console.log(error);
 			  return Observable.of(new students.LoadFailAction())
@@ -37,7 +35,8 @@ export class StudentsEffects {
 		  return this.studentsService.add(student)
 			.map(student => {
 				alert('Student has been successfully created.');
-				this.store.dispatch(go(['/admin-dashboard/students', student.Id]));
+				this.store.dispatch(
+				  go(['/admin-dashboard/students', student.Id]));
 				return new students.AddSuccessAction(student);
 			})
 			.catch(error => {
@@ -56,7 +55,8 @@ export class StudentsEffects {
 		  return this.studentsService.update(student)
 			.map(student => {
 				alert('Student has been successfully edited.');
-				this.store.dispatch(go(['/admin-dashboard/students', student.Id]));
+				this.store.dispatch(
+				  go(['/admin-dashboard/students', student.Id]));
 				return new students.EditSuccessAction(student);
 			})
 			.catch(error => {

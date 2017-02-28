@@ -14,8 +14,9 @@ import * as fromRoot from '../../../reducers';
 export class AdminStudentEditComponent implements OnDestroy {
 	studentSubscription: Subscription;
 	schoolsSubscription: Subscription;
-	schools: Array<School>;
 	studentId: string;
+	schools: Array<School>;
+	submitted: boolean = false;
 
 	// Initialise initial values to prevent template errors
 	editedStudent: Student = {
@@ -51,6 +52,7 @@ export class AdminStudentEditComponent implements OnDestroy {
 	}
 
 	editStudent() {
+		this.submitted = true;
 		this.store.dispatch(new sa.EditAction(this.editedStudent));
 	}
 

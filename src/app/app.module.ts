@@ -8,14 +8,15 @@ import { AppComponent } from './app.component';
 import {
 	AboutComponent, AdminDashboardComponent, AdminOverviewComponent,
 	AdminSidebarNavComponent, AdminStudentsComponent, AdminStudentAddComponent,
-	AdminStudentDetailsComponent, AdminStudentEditComponent, CurriculumComponent,
-	ContactComponent, FooterComponent, HeaderComponent, HomeComponent,
-	LoginComponent, NavbarComponent, NotFoundPageComponent,
+	AdminStudentDetailsComponent, AdminStudentEditComponent,
+	CurriculumComponent, ContactComponent, FooterComponent, HeaderComponent,
+	HomeComponent, LoginComponent, NavbarComponent, NotFoundPageComponent,
 	OnlineLessonComponent, OnlineLessonsComponent, QuizComponent,
 	QuizzesComponent, WorksheetsComponent
 } from './components';
 import {
-	SelectedLessonPageComponent, ViewLessonPageComponent, SelectedQuizPageComponent, ViewQuizPageComponent
+	SelectedLessonPageComponent, ViewLessonPageComponent,
+	SelectedQuizPageComponent, ViewQuizPageComponent
 } from './containers';
 import { MathJaxDirective } from './directives/mathjax.directive';
 import {
@@ -24,7 +25,8 @@ import {
 	WorksheetsService
 } from './services';
 import {
-	AdminGuard, LessonExistsGuard, NotLoggedInGuard, QuizExistsGuard, StudentExistsGuard
+	AdminGuard, LessonExistsGuard, NotLoggedInGuard, QuizExistsGuard,
+	StudentExistsGuard
 } from './guards';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -118,7 +120,8 @@ import { Ng2TableModule } from 'ng2-table';
 	providers: [AuthHttp, AuthService, MessagesService, LessonsService,
 		LevelsService, QuizzesService, UserService, SchoolsService,
 		StudentsService, SubjectsService, WorksheetsService, AdminGuard,
-		LessonExistsGuard, NotLoggedInGuard, QuizExistsGuard, StudentExistsGuard],
+		LessonExistsGuard, NotLoggedInGuard, QuizExistsGuard,
+		StudentExistsGuard],
 	bootstrap: [AppComponent]
 })
 export class AppModule {

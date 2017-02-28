@@ -3,7 +3,6 @@ import {
 	FormGroup, FormBuilder, Validators, AbstractControl
 } from '@angular/forms';
 import { MessagesService } from '../../services/';
-import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'ed-contact',
