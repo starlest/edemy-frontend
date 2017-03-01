@@ -1,34 +1,56 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import {
+	Component, ChangeDetectionStrategy, OnDestroy, OnInit
+} from '@angular/core';
 import { Quiz, QuizQuestionUserAnswer } from '../../models';
 import { Store } from '@ngrx/store';
-import * as fromRoot from '../../reducers';
 import { go } from '@ngrx/router-store';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { QuizQuestionChoice } from '../../models/quiz/quiz-question-choice';
+import * as quizQuestionTypes from '../../models/quiz/quiz-question-types';
+import * as fromRoot from '../../reducers';
 
 @Component({
 	selector: 'ed-quiz',
-	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './quiz.component.html',
 	styleUrls: ['./quiz.component.scss']
 })
-export class QuizComponent {
-	@Input() quiz: Quiz;
-
-	submitted: boolean = false;
+export class QuizComponent implements OnDestroy {
+	quizSubscription: Subscription;
+	quizId: string;
 	userAnswers: {[questionId: string]: QuizQuestionUserAnswer} = {};
 	results: {[questionId: string]: boolean} = {};
 	totalCorrect: number = 0;
+	submitted: boolean = false;
 
-	MCQSA: string = 'Multiple Choice Single Answer';
-	MCQMA: string = 'Multiple Choice Multiple Answers';
-	OE: string = 'Open Ended';
+	// Initialise initial values to prevent template errors
+	quiz: Quiz = {
+		Id: -1,
+		Title: '',
+		Levels: [],
+		Subject: '',
+		Tutor: '',
+		Questions: []
+	};
 
-	constructor(private store: Store<fromRoot.State>) {
+	constructor(private store: Store<fromRoot.State>,
+	            private route: ActivatedRoute) {
+		this.quizId = this.route.snapshot.params['Id'];
+		this.quizSubscription =
+		  this.store.select(fromRoot.getQuiz(this.quizId))
+			.take(1)
+			.map(quiz => Object.assign(this.quiz, quiz))
+			.subscribe();
+	}
+
+	ngOnDestroy() {
+		if (this.quizSubscription)
+			this.quizSubscription.unsubscribe();
 	}
 
 	onRadioChoiceChange(questionId: number, choiceId: number) {
 		this.userAnswers[questionId] = {
-			QuestionType: this.MCQSA,
+			QuestionType: quizQuestionTypes.MCQSA,
 			SelectedChoices: [choiceId]
 		};
 	}
@@ -37,7 +59,7 @@ export class QuizComponent {
 	                       checked: boolean) {
 		if (!this.userAnswers[questionId])
 			this.userAnswers[questionId] = {
-				QuestionType: this.MCQMA,
+				QuestionType: quizQuestionTypes.MCQMA,
 				SelectedChoices: [choiceId]
 			};
 
@@ -52,7 +74,7 @@ export class QuizComponent {
 
 	onTextInputChange(questionId, value) {
 		this.userAnswers[questionId] = {
-			QuestionType: this.OE,
+			QuestionType: quizQuestionTypes.OE,
 			SelectedChoices: [value]
 		};
 	}
@@ -64,7 +86,7 @@ export class QuizComponent {
 			  choice => choice.IsAnswer);
 			let isUserAnswerCorrect: boolean = false;
 
-			if (question.Type === this.MCQSA) {
+			if (question.Type === quizQuestionTypes.MCQSA) {
 				const userChoiceId = userAnswer ?
 				  userAnswer.SelectedChoices[0] :
 				  null;
@@ -73,7 +95,7 @@ export class QuizComponent {
 					userChoiceId, correctAnswerChoices[0].Id);
 			}
 
-			else if (question.Type === this.MCQMA) {
+			else if (question.Type === quizQuestionTypes.MCQMA) {
 				const userChoiceIds = userAnswer ? userAnswer.SelectedChoices :
 				  null;
 				isUserAnswerCorrect =

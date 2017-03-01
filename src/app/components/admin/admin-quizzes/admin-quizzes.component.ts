@@ -1,37 +1,55 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Quiz } from '../../models';
-import { go } from '@ngrx/router-store';
-import * as fromRoot from '../../reducers';
+import { Quiz } from '../../../models';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../../reducers';
 
 @Component({
-	selector: 'ed-quizzes',
-	templateUrl: './quizzes.component.html',
-	styleUrls: ['./quizzes.component.scss']
+	selector: 'ed-admin-quizzes',
+	templateUrl: 'admin-quizzes.component.html',
+	styleUrls: ['admin-quizzes.component.scss']
 })
-export class QuizzesComponent implements OnInit, OnDestroy {
+export class AdminQuizzesComponent {
 	quizzesSubscription: Subscription;
-	data: Array<Quiz> = [];
 
+	data: Array<Quiz> = [];
 	rows: Array<any> = [];
+
 	columns: Array<any> = [
-		{ title: 'Subject', name: 'Subject' },
-		{ title: 'Levels', name: 'Levels' },
-		{ title: 'Title', name: 'Title' },
+		{
+			title: 'Subject',
+			name: 'Subject',
+			filtering: { filterString: '', placeholder: 'Filter' }
+		},
+		{
+			title: 'Levels',
+			name: 'Levels',
+			filtering: { filterString: '', placeholder: 'Filter' }
+		},
+		{
+			title: 'Title',
+			name: 'Title',
+			filtering: { filterString: '', placeholder: 'Filter' }
+		},
 		{
 			title: 'Description',
 			name: 'Description',
 			sort: false
 		},
-		{ title: 'Tutor', name: 'Tutor' }
+		{
+			title: 'Tutor',
+			name: 'Tutor',
+			filtering: { filterString: '', placeholder: 'Filter' }
+		}
 	];
 
 	tableConfig: any = {
 		paging: true,
-		sorting: { columns: this.columns },
-		filtering: { filterString: '' },
-		className: ['table-striped', 'table-bordered', 'table-hover', 'thead-inverse']
+		sorting: {
+			columns: [this.columns[4], this.columns[1], this.columns[0],
+				this.columns[2]]
+		},
+		className: ['table-striped', 'table-bordered', 'table-hover']
 	};
 
 	paginationConfig: any = {
@@ -74,9 +92,9 @@ export class QuizzesComponent implements OnInit, OnDestroy {
 		if (!config.sorting)
 			return data;
 
-		let columns = this.tableConfig.sorting.columns || [];
-		let columnName: string = void 0;
-		let sort: string = void 0;
+		let columns = config.sorting.columns || [];
+		let columnName: string = null;
+		let sort: string = null;
 
 		for (let i = 0; i < columns.length; i++) {
 			if (columns[i].sort !== '' && columns[i].sort !== false) {
@@ -88,7 +106,6 @@ export class QuizzesComponent implements OnInit, OnDestroy {
 		if (!columnName)
 			return data;
 
-		// simple sorting
 		return data.sort((previous: any, current: any) => {
 			if (previous[columnName] > current[columnName]) {
 				return sort === 'desc' ? -1 : 1;
@@ -99,42 +116,16 @@ export class QuizzesComponent implements OnInit, OnDestroy {
 		});
 	}
 
-	changeFilter(data: any, config: any): any {
+	changeFilter(data: any): any {
 		let filteredData: Array<any> = data;
 		this.columns.forEach((column: any) => {
 			if (column.filtering) {
-				filteredData = filteredData.filter((item: any) => {
-					return item[column.name].match(
-					  column.filtering.filterString);
-				});
+				filteredData = filteredData.filter(
+				  (item: any) => String(item[column.name]).match(
+					column.filtering.filterString)
+				);
 			}
 		});
-
-		if (!config.filtering) {
-			return filteredData;
-		}
-
-		if (config.filtering.columnName) {
-			return filteredData.filter((item: any) =>
-			  item[config.filtering.columnName].match(
-				this.tableConfig.filtering.filterString));
-		}
-
-		let tempArray: Array<any> = [];
-		filteredData.forEach((item: any) => {
-			let flag = false;
-			this.columns.forEach((column: any) => {
-				if (item[column.name].toString()
-					.match(this.tableConfig.filtering.filterString)) {
-					flag = true;
-				}
-			});
-			if (flag) {
-				tempArray.push(item);
-			}
-		});
-		filteredData = tempArray;
-
 		return filteredData;
 	}
 
@@ -142,13 +133,10 @@ export class QuizzesComponent implements OnInit, OnDestroy {
 		page: this.paginationConfig.page,
 		itemsPerPage: this.paginationConfig.itemsPerPage
 	}): any {
-		if (config.filtering)
-			Object.assign(this.tableConfig.filtering, config.filtering);
-
 		if (config.sorting)
 			Object.assign(this.tableConfig.sorting, config.sorting);
 
-		let filteredData = this.changeFilter(this.data, this.tableConfig);
+		let filteredData = this.changeFilter(this.data);
 		let sortedData = this.changeSort(filteredData, this.tableConfig);
 		this.rows = page && config.paging ? this.changePage(page, sortedData) :
 		  sortedData;
@@ -156,6 +144,6 @@ export class QuizzesComponent implements OnInit, OnDestroy {
 	}
 
 	public onCellClick(data: any): any {
-		this.store.dispatch(go(['/quizzes', data.row.Id]));
+		// this.store.dispatch(go(['/admin-dashboard/quizzes', data.row.Id]));
 	}
 }

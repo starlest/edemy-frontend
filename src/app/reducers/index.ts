@@ -88,10 +88,11 @@ export const getQuizzesLoaded = createSelector(getQuizzesState,
   fromQuizzes.getLoaded);
 export const getQuizEntities = createSelector(getQuizzesState,
   fromQuizzes.getEntities);
-export const getFilteredQuizzes = createSelector(getQuizzesState,
-  fromQuizzes.getFilteredQuizzes);
-export const getSelectedQuiz = createSelector(getQuizzesState,
-  fromQuizzes.getSelected);
+export const getQuizzes = createSelector(getQuizzesState,
+  fromQuizzes.getQuizzes);
+export const getQuiz = (Id: string) => createSelector(getQuizzesState,
+  fromQuizzes.getQuiz(Id));
+
 
 /**
  * Router Reducers

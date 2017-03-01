@@ -21,6 +21,10 @@ export class AdminSidebarNavComponent {
 		{
 			Title: 'Students',
 			Route: 'students',
+		},
+		{
+			Title: 'Quizzes',
+			Route: 'quizzes',
 		}
 	];
 

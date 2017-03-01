@@ -1,0 +1,35 @@
+<button class="btn btn-danger mb-3" routerLink="/admin-dashboard/students">
+  Back
+</button>
+
+<div class="card mb-5">
+  <div class="card-header">
+    Add Quiz
+  </div>
+  <div class="card-block">
+    <form [formGroup]="addQuizForm" (submit)="addQuiz()">
+      <div class="form-group">
+        <label for="inputTitle">First Name</label>
+        <input type="text" class="form-control"
+               id="inputTitle"
+               placeholder="Enter title" maxlength="50"
+               formControlName="Title" required>
+      </div>
+      <div class="form-group">
+        <label for="inputSubject">Subject</label>
+        <select class="custom-select d-block" id="inputSubject"
+                formControlName="Subject" required>
+          <option *ngFor="let subject of subjects$ | async"
+                  value="{{subject.Title}}">
+            {{subject.Title}}
+          </option>
+        </select>
+      </div>
+      <button type="submit" [disabled]="submitted"
+              class="btn btn-success">Submit
+      </button>
+    </form>
+  </div>
+</div>
+
+

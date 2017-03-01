@@ -2,9 +2,8 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { Student } from '../../../models';
-import * as sa from '../../../actions/students.action';
-import * as fromRoot from '../../../reducers';
 import { go } from '@ngrx/router-store';
+import * as fromRoot from '../../../reducers';
 
 @Component({
 	selector: 'ed-students-dashboard',
@@ -19,12 +18,14 @@ export class AdminStudentsComponent {
 
 	columns: Array<any> = [
 		{
-			title: 'NRIC', name: 'IdentificationNumber',
+			title: 'NRIC',
+			name: 'IdentificationNumber',
 			filtering: { filterString: '', placeholder: 'Filter' },
 			sort: false
 		},
 		{
-			title: 'First Name', name: 'FirstName',
+			title: 'First Name',
+			name: 'FirstName',
 			filtering: { filterString: '', placeholder: 'Filter' },
 			sort: 'asc'
 		},
@@ -33,17 +34,20 @@ export class AdminStudentsComponent {
 			name: 'MiddleName'
 		},
 		{
-			title: 'Last Name', name: 'LastName',
+			title: 'Last Name',
+			name: 'LastName',
 			filtering: { filterString: '', placeholder: 'Filter' },
 			sort: 'asc'
 		},
 		{
-			title: 'Email', name: 'Email',
+			title: 'Email',
+			name: 'Email',
 			filtering: { filterString: '', placeholder: 'Filter' },
 			sort: false
 		},
 		{
-			title: 'School', name: 'School',
+			title: 'School',
+			name: 'School',
 			filtering: { filterString: '', placeholder: 'Filter' }
 		}
 	];

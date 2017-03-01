@@ -6,17 +6,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import {
-	AboutComponent, AdminDashboardComponent, AdminOverviewComponent,
-	AdminSidebarNavComponent, AdminStudentsComponent, AdminStudentAddComponent,
+	AboutComponent, AdminDashboardComponent, AdminOverviewComponent, AdminQuizAddComponent,
+	AdminQuizzesComponent, AdminSidebarNavComponent, AdminStudentAddComponent,
 	AdminStudentDetailsComponent, AdminStudentEditComponent,
-	CurriculumComponent, ContactComponent, FooterComponent, HeaderComponent,
-	HomeComponent, LoginComponent, NavbarComponent, NotFoundPageComponent,
-	OnlineLessonComponent, OnlineLessonsComponent, QuizComponent,
-	QuizzesComponent, WorksheetsComponent
+	AdminStudentsComponent, CurriculumComponent, ContactComponent,
+	FooterComponent, HeaderComponent, HomeComponent, LoginComponent,
+	NavbarComponent, NotFoundPageComponent, OnlineLessonComponent,
+	OnlineLessonsComponent, QuizComponent, QuizzesComponent, WorksheetsComponent
 } from './components';
 import {
-	SelectedLessonPageComponent, ViewLessonPageComponent,
-	SelectedQuizPageComponent, ViewQuizPageComponent
+	SelectedLessonPageComponent, ViewLessonPageComponent
 } from './containers';
 import { MathJaxDirective } from './directives/mathjax.directive';
 import {
@@ -50,6 +49,8 @@ import { Ng2TableModule } from 'ng2-table';
 		AboutComponent,
 		AdminDashboardComponent,
 		AdminOverviewComponent,
+		AdminQuizAddComponent,
+		AdminQuizzesComponent,
 		AdminSidebarNavComponent,
 		AdminStudentsComponent,
 		AdminStudentAddComponent,
@@ -69,9 +70,7 @@ import { Ng2TableModule } from 'ng2-table';
 		QuizComponent,
 		QuizzesComponent,
 		SelectedLessonPageComponent,
-		SelectedQuizPageComponent,
 		ViewLessonPageComponent,
-		ViewQuizPageComponent,
 		WorksheetsComponent,
 
 		/**

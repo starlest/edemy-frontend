@@ -1,11 +1,11 @@
 import { Routes, RouterModule } from '@angular/router';
 import {
-	AboutComponent, AdminDashboardComponent, AdminOverviewComponent,
+	AboutComponent, AdminDashboardComponent, AdminOverviewComponent,AdminQuizAddComponent, AdminQuizzesComponent,
 	AdminStudentsComponent, AdminStudentAddComponent, AdminStudentDetailsComponent, AdminStudentEditComponent, ContactComponent,
 	CurriculumComponent, HomeComponent, NotFoundPageComponent,
-	OnlineLessonsComponent, QuizzesComponent, WorksheetsComponent
+	OnlineLessonsComponent, QuizComponent, QuizzesComponent, WorksheetsComponent
 } from './components';
-import { ViewLessonPageComponent, ViewQuizPageComponent } from './containers';
+import { ViewLessonPageComponent } from './containers';
 import { LessonExistsGuard, NotLoggedInGuard, QuizExistsGuard, StudentExistsGuard } from './guards';
 
 export const appRoutes: Routes = [
@@ -62,6 +62,14 @@ export const appRoutes: Routes = [
 				component: AdminStudentEditComponent,
 				canActivate: [StudentExistsGuard]
 			},
+			{
+				path: 'quizzes',
+				component: AdminQuizzesComponent
+			},
+			{
+				path: 'quizzes/add',
+				component: AdminQuizAddComponent
+			},
 		]
 	},
 	{
@@ -85,7 +93,7 @@ export const appRoutes: Routes = [
 	},
 	{
 		path: 'quizzes/:Id',
-		component: ViewQuizPageComponent,
+		component: QuizComponent,
 		canActivate: [QuizExistsGuard]
 	},
 	{

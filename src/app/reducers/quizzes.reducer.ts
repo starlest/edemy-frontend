@@ -7,17 +7,13 @@ export interface State {
 	loading: boolean;
 	ids: string[];
 	entities: { [id: string]: Quiz };
-	selectedId: string;
-	filter: (Quiz) => Quiz;
 }
 
 const initialState: State = {
 	loaded: false,
 	loading: false,
 	ids: [],
-	entities: {},
-	selectedId: null,
-	filter: quiz => quiz
+	entities: {}
 };
 
 export function reducer(state = initialState, action: quizzes.Actions): State {
@@ -27,8 +23,7 @@ export function reducer(state = initialState, action: quizzes.Actions): State {
 				loaded: false,
 				loading: true,
 				ids: [],
-				entities: {},
-				filter: quiz => quiz
+				entities: {}
 			});
 		}
 
@@ -47,7 +42,6 @@ export function reducer(state = initialState, action: quizzes.Actions): State {
 				loading: false,
 				ids: quizIds,
 				entities: quizEntities,
-				filter: quiz => quiz
 			});
 		}
 
@@ -55,22 +49,6 @@ export function reducer(state = initialState, action: quizzes.Actions): State {
 			return Object.assign({}, state, {
 				loaded: true,
 				loading: false
-			});
-
-		case quizzes.ActionTypes.SELECT: {
-			return Object.assign({}, state, {
-				selectedId: action.payload
-			});
-		}
-
-		case quizzes.ActionTypes.SET_FILTER:
-			return Object.assign({}, state, {
-				filter: action.payload
-			});
-
-		case quizzes.ActionTypes.REMOVE_FILTER:
-			return Object.assign({}, state, {
-				filter: lesson => lesson
 			});
 
 		default: {
@@ -83,21 +61,14 @@ export const getLoaded = (state: State) => state.loaded;
 
 export const getLoading = (state: State) => state.loading;
 
-export const getFilter = (state: State) => state.filter;
-
 export const getIds = (state: State) => state.ids;
 
 export const getEntities = (state: State) => state.entities;
 
-export const getSelectedId = (state: State) => state.selectedId;
+export const getQuizzes = createSelector(getEntities, getIds,
+  (entities, ids) => ids.map(id => entities[id]));
 
-export const getSelected = createSelector(getEntities, getSelectedId,
-  (entities, selectedId) => {
-	  return entities[selectedId];
-  });
-
-export const getFilteredQuizzes = createSelector(getEntities, getIds, getFilter,
-  (entities, ids, filter) => ids.map(id => entities[id]).filter(filter));
-
+export const getQuiz = (Id: string) => createSelector(getEntities,
+  entities => entities[Id]);
 
 
